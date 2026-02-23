@@ -1,7 +1,7 @@
 #include <uuv_control/interface/DynamicsBase.h>
 #include <pluginlib/class_list_macros.h>
 #include <tf2/LinearMath/Quaternion.h>
-#include <cmath> // 引入数学库
+#include <cmath> 
 
 namespace uuv_control {
 
@@ -11,73 +11,90 @@ private:
     double mass_;
     double drag_;
 
+    // 记录诊断力矩
+    Eigen::VectorXd last_cmd_force_ = Eigen::VectorXd::Zero(6);
+    Eigen::VectorXd last_damping_force_ = Eigen::VectorXd::Zero(6);
+    Eigen::VectorXd last_total_force_ = Eigen::VectorXd::Zero(6);
+
 public:
-    void initialize(ros::NodeHandle& nh) override {
-        state_ = Eigen::VectorXd::Zero(12);
-        // 从参数服务器读取简单的物理参数
-        nh.param("mass", mass_, 50.0); // 质量
-        nh.param("drag", drag_, 10.0); // 阻力系数
-        ROS_INFO("FirstOrderDynamics initialized with Mass=%.1f, Drag=%.1f", mass_, drag_);
+    // ==========================================
+    // 物理诊断接口
+    // ==========================================
+    virtual Eigen::VectorXd getCommandedForce() const override { return last_cmd_force_; }
+    
+    // 【修改核心】：实际执行力绝对、完美地等于大脑的期望力！没有任何硬件束缚！
+    virtual Eigen::VectorXd getActuatorForce() const override { return last_cmd_force_; }
+    
+    virtual Eigen::VectorXd getDampingForce() const override { return last_damping_force_; }
+    virtual Eigen::VectorXd getTotalForce() const override { return last_total_force_; }
+    
+    // 理想刚体没有舵机，返回全 0 的空指令
+    virtual uuv_control::ControlAllocator::ActuatorCmd getActuatorCmd() const override { 
+        return uuv_control::ControlAllocator::ActuatorCmd(); 
     }
 
-    uuv_control::State3D update(double dt, const Eigen::VectorXd& tau) override {
-        // 1. 获取当前体坐标系速度 (Body Velocity)
-        // vel = [u, v, w, p, q, r]
+    void initialize(ros::NodeHandle& nh) override {
+        state_ = Eigen::VectorXd::Zero(12);
+        
+        nh.param("mass", mass_, 50.0); 
+        nh.param("drag", drag_, 10.0); 
+        
+        ROS_INFO("FirstOrderDynamics initialized with Mass=%.1f, Drag=%.1f (Ideal Actuator Mode)", mass_, drag_);
+
+        // 注册基类的可视化发布器
+        initDebugPublishers(nh);
+    }
+
+    uuv_control::State3D update(double dt, const Eigen::VectorXd& tau_cmd) override {
+        // 1. 获取当前体坐标系速度
         Eigen::VectorXd vel = state_.segment(6, 6);
 
-        // 2. 一阶惯性动力学公式 (仅更新速度)
-        // F = ma + dv  =>  a = (F - dv) / m
-        // 这里的 tau 是施加在【体坐标系】下的力/力矩
-        Eigen::VectorXd acc = (tau - drag_ * vel) / mass_;
+        // 2. 纯粹的理想力赋值
+        last_cmd_force_ = tau_cmd;
 
-        // 3. 积分更新体坐标系速度
+        // 3. 计算阻力 (简单的线性阻力)
+        Eigen::VectorXd damping_force = drag_ * vel;
+        last_damping_force_ = -damping_force; 
+        
+        // 4. 计算总净力矩 (期望推力 - 阻力)
+        last_total_force_ = tau_cmd - damping_force; 
+
+        // 5. 计算加速度 (a = F_net / m)
+        Eigen::VectorXd acc = last_total_force_ / mass_;
+
+        // 6. 速度积分
         vel += acc * dt;
         state_.segment(6, 6) = vel;
 
-        // 4. 【关键修正】运动学更新 (Body Velocity -> World Position)
-        // 使用完整的 3D 旋转矩阵将体坐标系速度转换为世界坐标系速度
-        double phi = state_(3);   // Roll
-        double theta = state_(4); // Pitch
-        double psi = state_(5);   // Yaw
-        
-        double u = vel(0); // Surge
-        double v = vel(1); // Sway
-        double w = vel(2); // Heave
+        // 7. 运动学解算 (机体速度 -> 世界系坐标)
+        double phi = state_(3), theta = state_(4), psi = state_(5);
+        double u = vel(0), v = vel(1), w = vel(2);
 
-        // 预计算三角函数
-        double c_phi = cos(phi); double s_phi = sin(phi);
-        double c_theta = cos(theta); double s_theta = sin(theta);
-        double c_psi = cos(psi); double s_psi = sin(psi);
+        double c_phi = cos(phi), s_phi = sin(phi);
+        double c_theta = cos(theta), s_theta = sin(theta);
+        double c_psi = cos(psi), s_psi = sin(psi);
 
-        // === 核心修复开始：3D 旋转矩阵 (R_nb) ===
-        // 将体坐标系速度 (u,v,w) 投影到 世界坐标系 (dx, dy, dz)
-        
-        // World X_dot
         double dx = u * (c_psi * c_theta) + 
                     v * (c_psi * s_theta * s_phi - s_psi * c_phi) + 
                     w * (c_psi * s_theta * c_phi + s_psi * s_phi);
         
-        // World Y_dot
         double dy = u * (s_psi * c_theta) + 
                     v * (s_psi * s_theta * s_phi + c_psi * c_phi) + 
                     w * (s_psi * s_theta * c_phi - c_psi * s_phi);
         
-        // World Z_dot
         double dz = u * (-s_theta) + 
                     v * (c_theta * s_phi) + 
                     w * (c_theta * c_phi);
-        // === 核心修复结束 ===
 
-        // 更新位置
         state_(0) += dx * dt;
         state_(1) += dy * dt;
         state_(2) += dz * dt;
 
-        // 5. 姿态角更新
-        // 注意：严格来说这里应该用欧拉角速率转换矩阵 (J2)，但对于简单仿真，
-        // 且非大角度俯仰(接近90度)的情况下，直接积分角速度是可以接受的近似。
-        // 为了体验更好，这里暂时保持直接积分，防止引入万向节死锁问题导致新手困惑。
+        // 8. 姿态角积分
         state_.segment(3, 3) += vel.segment(3, 3) * dt;
+
+        // 9. 调用基类在 RViz 中绘制绚丽的受力对抗箭头！
+        publishDebugWrenches(ros::Time::now());
 
         return getState();
     }

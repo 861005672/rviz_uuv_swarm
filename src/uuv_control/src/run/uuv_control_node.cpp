@@ -2,7 +2,6 @@
 #include <pluginlib/class_loader.h>
 #include <uuv_control/interface/DynamicsBase.h>
 #include <uuv_control/interface/ControllerBase.h>
-#include <geometry_msgs/Wrench.h>
 #include <tf2_ros/transform_broadcaster.h>
 #include <tf2/LinearMath/Quaternion.h>
 #include <geometry_msgs/TransformStamped.h>
@@ -25,7 +24,6 @@ private:
 
     // 发布与广播
     // 删除: ros::Publisher pub_marker_; <-- 不需要了
-    ros::Publisher pub_wrench_; 
     ros::Publisher pub_state_;
     ros::Publisher pub_odom_;
     ros::Publisher pub_joint_;
@@ -36,7 +34,6 @@ private:
     double controller_freq_; // 控制器频率 (Hz)
     
     Eigen::VectorXd current_tau_cmd_; // 当前由控制算法（如手柄或APF）期望输出的指令合力
-    uuv_control::ControlAllocator allocator_;  // 硬件控制分配器
 
 public:
     UUVControlNode() : 
@@ -51,14 +48,12 @@ public:
 
         loadPlugins();
         
-        pub_wrench_ = nh_.advertise<geometry_msgs::Wrench>("debug_wrench", 1);
         pub_state_ = nh_.advertise<uuv_control::State3D>("state", 10);
         pub_odom_  = nh_.advertise<nav_msgs::Odometry>("odom", 10);
         pub_joint_ = nh_.advertise<sensor_msgs::JointState>("joint_states", 10);
+
         // 初始化控制力为0
         current_tau_cmd_ = Eigen::VectorXd::Zero(6);
-        // 初始化硬件分配器
-        allocator_.initialize(nh_, "lauv_dynamics/actuators/");
     }
 
     void loadPlugins() {
@@ -113,33 +108,17 @@ public:
                 current_tau_cmd_ = controller_->compute();
                 // 更新时间戳
                 last_control_time = now;
-                // 调试输出当前指令
-                publishDebugWrench(current_tau_cmd_);
             }
             // === 2. 动力学层更新逻辑 ===
             // 检查是否达到了动力学的触发时间
             double dt_since_last_dyn = (now - last_dynamics_time).toSec();
             if (dt_since_last_dyn >= dt_dynamics) {
-                // 2.1 获取当前真实航速和姿态 (用于动压计算)
-                uuv_control::State3D state_curr = dynamics_->getState();
-                double current_u = state_curr.u;
-                
-                // 将 6 个速度分量打包成 VectorXd
-                Eigen::VectorXd current_nu(6);
-                current_nu << state_curr.u, state_curr.v, state_curr.w, 
-                              state_curr.p, state_curr.q, state_curr.r;
-                // 2.2 ★硬件模拟：分配器将期望力映射为物理舵角与转速 (限幅在此发生)
-                uuv_control::ControlAllocator::ActuatorCmd act_cmd = allocator_.allocate(current_tau_cmd_, current_u);
-                // 2.3 ★硬件模拟：正向解算，根据此时的物理舵角和速度，产生真实的受力 tau_actual
-                Eigen::VectorXd tau_actual = allocator_.computeActualTau(act_cmd, current_nu);
-                // 可选：为了监控，发布真实输出的物理受力
-                publishDebugWrench(tau_actual);
-                // 2.4 ★物理引擎：将真实力矩喂入刚体动力学解算位置
-                uuv_control::State3D state = dynamics_->update(dt_since_last_dyn, tau_actual);
+                // 将期望力/力矩（控制输入）喂入Dynamics层，由动力学模型和执行器模型解算位置
+                uuv_control::State3D state = dynamics_->update(dt_since_last_dyn, current_tau_cmd_);
                 // 2.5 更新可视化
                 publishTF(state);
                 publishStateAndOdom(state);
-                publishJointStates(act_cmd, dt_since_last_dyn); // RViz舵机旋转
+                publishJointStates(dynamics_->getActuatorCmd(), dt_since_last_dyn); // RViz舵机旋转
                 last_dynamics_time = now;
             }
             ros::spinOnce(); 
@@ -178,7 +157,9 @@ public:
         ros::Time current_time = ros::Time::now();
 
         // 1. 发布自定义 State3D 消息
-        uuv_control::State3D state_msg = state; 
+        uuv_control::State3D state_msg = state;
+        state_msg.header.stamp = current_time; 
+        state_msg.header.frame_id = "ned";
         pub_state_.publish(state_msg);
 
         // 2. 发布 Odometry 里程计消息
@@ -229,12 +210,7 @@ public:
         tf_broadcaster_.sendTransform(t);
     }
 
-    void publishDebugWrench(const Eigen::VectorXd& tau) {
-        geometry_msgs::Wrench msg;
-        msg.force.x = tau(0); msg.force.y = tau(1); msg.force.z = tau(2);
-        msg.torque.x = tau(3); msg.torque.y = tau(4); msg.torque.z = tau(5);
-        pub_wrench_.publish(msg);
-    }
+
 };
 
 int main(int argc, char** argv) {

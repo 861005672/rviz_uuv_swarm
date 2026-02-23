@@ -21,6 +21,21 @@ public:
     virtual uuv_control::State3D update(double dt, const Eigen::VectorXd& tau) override;
     virtual uuv_control::State3D getState() override;
 
+       // 获取由上层控制器输出的期望受力/力矩
+       virtual Eigen::VectorXd getCommandedForce() const override { return last_cmd_force_; }
+       // 获取执行器产生的实际力/力矩
+       virtual Eigen::VectorXd getActuatorForce() const override { return last_actuator_force_; }
+       // 获取UUV受到的刚体科里奥利力/力矩（包含munk力矩）
+       virtual Eigen::VectorXd getCoriolisForce() const override { return last_coriolis_force_; }
+       // 获取UUV受到的水流阻力/力矩
+       virtual Eigen::VectorXd getDampingForce() const override { return last_damping_force_; }
+       // 获取UUV受到的恢复力/力矩
+       virtual Eigen::VectorXd getRestoringForce() const override { return last_restore_force_; }
+       // 获取UUV受到的合力/力矩
+       virtual Eigen::VectorXd getTotalForce() const override { return last_total_force_; }
+       // 获取UUV执行器的指令，用于让Rviz动画模型的更新
+       virtual uuv_control::ControlAllocator::ActuatorCmd getActuatorCmd() const override { return last_actuator_cmd_; }
+
 private:
     // 辅助工具函数
     Eigen::MatrixXd loadMatrixFromParam(ros::NodeHandle& nh, const std::string& param_name, int rows, int cols);
@@ -46,6 +61,12 @@ private:
     Eigen::MatrixXd D_quad_;    // 二次阻尼系数矩阵
     Eigen::VectorXd g_;         // 恢复力/力矩向量 g(eta)
 
+    // 受力/执行器相关变量
+    uuv_control::ControlAllocator allocator_;
+    uuv_control::ControlAllocator::ActuatorCmd last_actuator_cmd_;
+    Eigen::VectorXd last_cmd_force_, last_actuator_force_, last_coriolis_force_,
+    last_damping_force_, last_restore_force_, last_total_force_ = Eigen::VectorXd::Zero(6);
+
     // 物理参数
     double mass_;
     double volume_;
@@ -59,6 +80,8 @@ private:
     Eigen::Vector3d cob_; // 浮心位置 (Center of Buoyancy)
 
     uuv_control::State3D current_state_;
+
+    bool publish_debug_visuals_;
 };
 
 // ==========================================
@@ -130,6 +153,16 @@ void FossenDynamics::initialize(ros::NodeHandle& nh) {
     nh.param(ns + "fluid_density", fluid_density_, 1028.0);
     nh.param(ns + "gravity", gravity_, 9.81);
     nh.param(ns + "neutrally_buoyant", neutrally_buoyant_, false);
+
+    // 从私有句柄中读取可视化开关参数 (对应 launch 文件里的配置)
+    ros::NodeHandle pnh("~");
+    pnh.param("publish_debug_visuals", publish_debug_visuals_, true);
+    // 调用调试力发布函数
+    if (publish_debug_visuals_) {
+        initDebugPublishers(nh);
+    }
+    // 初始化执行器
+    allocator_.initialize(nh, ns + "actuators/");
     
     W_ = mass_ * gravity_;
     if (neutrally_buoyant_) {
@@ -214,7 +247,13 @@ void FossenDynamics::updateRestoringForces(const Eigen::VectorXd& eta) {
     g_.tail<3>() = -(skew(cog_) * fg + skew(cob_) * fb);
 }
 
-uuv_control::State3D FossenDynamics::update(double dt, const Eigen::VectorXd& tau) {
+uuv_control::State3D FossenDynamics::update(double dt, const Eigen::VectorXd& tau_cmd) {
+    // 0. 记录上层控制大脑发来的期望力 并且计算UUV的执行力，力矩
+    last_cmd_force_ = tau_cmd;
+    last_actuator_cmd_ = allocator_.allocate(tau_cmd, nu_(0));
+    Eigen::VectorXd tau_actuator = allocator_.computeActualTau(last_actuator_cmd_, nu_);
+    last_actuator_force_ = tau_actuator;
+    
     // 1. 更新三大依赖状态的矩阵/向量
     updateCoriolisMatrix(nu_);
     updateDampingMatrix(nu_);
@@ -225,8 +264,13 @@ uuv_control::State3D FossenDynamics::update(double dt, const Eigen::VectorXd& ta
     // 因为我们的阻尼矩阵提取的参数带有负号 (即 D_ = -D_fossen)，所以我们在等号右边用加法： + D_ * nu
     Eigen::VectorXd coriolis_force = C_ * nu_;
     Eigen::VectorXd damping_force = D_ * nu_;
+
+    last_coriolis_force_ = -coriolis_force;
+    last_damping_force_ = damping_force; 
+    last_restore_force_ = -g_;
+    last_total_force_ = tau_actuator - coriolis_force + damping_force - g_;
     
-    Eigen::VectorXd nu_dot = M_inv_ * (tau - coriolis_force + damping_force - g_);
+    Eigen::VectorXd nu_dot = M_inv_ * last_total_force_;
 
     // 3. 速度积分 (机体系下)
     nu_ += nu_dot * dt;
@@ -257,6 +301,10 @@ uuv_control::State3D FossenDynamics::update(double dt, const Eigen::VectorXd& ta
     current_state_.phi = eta_(3); current_state_.theta = eta_(4); current_state_.psi = eta_(5);
     current_state_.u = nu_(0); current_state_.v = nu_(1); current_state_.w = nu_(2);
     current_state_.p = nu_(3); current_state_.q = nu_(4); current_state_.r = nu_(5);
+
+    if (publish_debug_visuals_) {
+        publishDebugWrenches(ros::Time::now());
+    }
 
     return current_state_;
 }

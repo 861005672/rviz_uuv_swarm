@@ -84,7 +84,7 @@ lauv_dynamics:
     fluid_density: 1028.0       # 流体密度
     lift_coefficient: 3.0       # 升力系数
     drag_coefficient: 1.98      # 阻力系数
-    max_fin_angle: 1.5708       # 最大打舵角 (弧度制, 1.5708约等于90度)
+    max_fin_angle: 0.5237       # 最大打舵角 (弧度制, 1.5708约等于90度)
     
     # 几何位置参数 (参考 actuators.xacro)
     x_fin: -0.4                 # 尾翼距离重心的 X 轴偏移量 (m)

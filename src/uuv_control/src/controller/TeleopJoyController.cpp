@@ -16,7 +16,7 @@ public:
     void initialize(ros::NodeHandle& nh) override {
         // 1. 读取参数
         nh.param("max_thrust", max_thrust_, 100.0);
-        nh.param("max_torque", max_torque_, 30.0);
+        nh.param("max_torque", max_torque_, 60.0);
 
         // 2. 初始化输出
         current_tau_ = Eigen::VectorXd::Zero(6);

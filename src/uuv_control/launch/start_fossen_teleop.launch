@@ -7,12 +7,12 @@
     <group ns="uuv_0">
         <rosparam command="load" file="$(find uuv_control)/config/dynamics/lauv_fossen_params.yaml" />
         <param name="max_thrust" value="150.0" />
-        <param name="max_torque" value="1.3" />
+        <param name="max_torque" value="10" />
         
         <node pkg="uuv_control" type="uuv_control_node" name="simulation_core" output="screen">
             <param name="dynamics_plugin" value="uuv_control/FossenDynamics" />
             <param name="controller_plugin" value="uuv_control/TeleopController" />
-
+            <param name="publish_debug_visuals" value="true" />
             <param name="dynamics_frequency" value="100.0" /> 
             <param name="controller_frequency" value="10.0" />  
 

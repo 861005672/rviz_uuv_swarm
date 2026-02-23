@@ -7,6 +7,8 @@ Panels:
         - /RobotModel1
         - /TF1/Frames1
         - /Odometry1
+        - /WrenchStamped1
+        - /WrenchStamped2
       Splitter Ratio: 0.5
     Tree Height: 719
   - Class: rviz/Selection
@@ -140,7 +142,7 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: true
-      Enabled: true
+      Enabled: false
       Keep: 3000
       Name: Odometry
       Position Tolerance: 1
@@ -156,6 +158,36 @@ Visualization Manager:
         Shaft Radius: 0.05000000074505806
         Value: Arrow
       Topic: /uuv_0/odom
+      Unreliable: false
+      Value: false
+    - Alpha: 1
+      Arrow Width: 0.5
+      Class: rviz/WrenchStamped
+      Enabled: true
+      Force Arrow Scale: 2
+      Force Color: 204; 51; 51
+      Hide Small Values: true
+      History Length: 1
+      Name: WrenchStamped
+      Queue Size: 10
+      Topic: /uuv_0/total_wrench
+      Torque Arrow Scale: 2
+      Torque Color: 204; 204; 51
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Arrow Width: 0.5
+      Class: rviz/WrenchStamped
+      Enabled: true
+      Force Arrow Scale: 2
+      Force Color: 78; 154; 6
+      Hide Small Values: true
+      History Length: 1
+      Name: WrenchStamped
+      Queue Size: 10
+      Topic: /uuv_0/coriolis_wrench
+      Torque Arrow Scale: 2
+      Torque Color: 117; 80; 123
       Unreliable: false
       Value: true
   Enabled: true
@@ -186,7 +218,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 55.48942947387695
+      Distance: 72.8285903930664
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -194,17 +226,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 32.961368560791016
-        Y: 5.259896278381348
-        Z: -17.047513961791992
+        X: -35.21693420410156
+        Y: 21.823307037353516
+        Z: -41.45945739746094
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4702030420303345
+      Pitch: 0.764796793460846
       Target Frame: <Fixed Frame>
-      Yaw: 3.298609733581543
+      Yaw: 5.75179386138916
     Saved: ~
 Window Geometry:
   Displays:
