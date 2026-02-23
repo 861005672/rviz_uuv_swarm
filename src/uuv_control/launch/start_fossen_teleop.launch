@@ -1,0 +1,30 @@
+<launch>
+    <include file="$(find uuv_environment)/launch/start_env.launch" />
+    
+    <param name="robot_description" 
+           command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_0" />
+
+    <group ns="uuv_0">
+        <rosparam command="load" file="$(find uuv_control)/config/dynamics/lauv_fossen_params.yaml" />
+        <param name="max_thrust" value="150.0" />
+        <param name="max_torque" value="1.3" />
+        
+        <node pkg="uuv_control" type="uuv_control_node" name="simulation_core" output="screen">
+            <param name="dynamics_plugin" value="uuv_control/FossenDynamics" />
+            <param name="controller_plugin" value="uuv_control/TeleopController" />
+
+            <param name="dynamics_frequency" value="100.0" /> 
+            <param name="controller_frequency" value="10.0" />  
+
+        </node>
+
+        <node pkg="joy" type="joy_node" name="joy_node">
+            <param name="dev" value="/dev/input/js0"/>
+        </node>
+    </group>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+        <remap from="joint_states" to="/uuv_0/joint_states" />
+    </node>
+    
+</launch>

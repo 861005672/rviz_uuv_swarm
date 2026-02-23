@@ -1,0 +1,8 @@
+prefix=/home/zx567/rvizuuv3d/install
+
+Name: uuv_control
+Description: Description of uuv_control
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: geometry_msgs message_runtime roscpp rospy sensor_msgs std_msgs tf2 tf2_geometry_msgs tf2_ros visualization_msgs nav_msgs

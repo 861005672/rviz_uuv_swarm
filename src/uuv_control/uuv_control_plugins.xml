@@ -1,0 +1,21 @@
+<library path="lib/libuuv_control_plugins">
+
+    <class name="uuv_control/FirstOrderDynamics" 
+           type="uuv_control::FirstOrderDynamics" 
+           base_class_type="uuv_control::DynamicsBase">
+        <description>Simple First Order Inertia Model.</description>
+    </class>
+    <class name="uuv_control/FossenDynamics" 
+           type="uuv_control::FossenDynamics" 
+           base_class_type="uuv_control::DynamicsBase">
+        <description>Realistic 3D Fossen Dynamics Model for UUV.</description>
+    </class>
+
+    <class name="uuv_control/TeleopController" 
+           type="uuv_control::TeleopController" 
+           base_class_type="uuv_control::ControllerBase">
+        <description>Direct Joystick Teleop Controller.</description>
+    </class>
+
+
+</library>

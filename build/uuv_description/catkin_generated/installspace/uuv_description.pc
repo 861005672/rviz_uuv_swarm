@@ -1,0 +1,8 @@
+prefix=/home/zx567/rvizuuv3d/install
+
+Name: uuv_description
+Description: Description of uuv_description
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

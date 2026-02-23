@@ -1,0 +1,24 @@
+obstacles:
+  # 1. 这是一个红色的球体
+  - name: "obs_sphere_1"
+    ref_coord: "NED"
+    type: "sphere"
+    position: [10.0, 10.0, -5.0]  # [x, y, z] 中心坐标
+    scale: [4.0, 4.0, 4.0]        # 对于球体：x,y,z代表各个方向的直径
+    color: [1.0, 0.0, 0.0, 0.8]   # [R, G, B, Alpha透明度]，1.0为最大值
+
+  # 2. 这是一个绿色的圆柱体 (比如模拟海底桩柱)
+  - name: "obs_cylinder_1"
+    ref_coord: "NED"
+    type: "cylinder"
+    position: [-10.0, 5.0, -10.0]
+    scale: [3.0, 3.0, 20.0]       # 对于圆柱体：x和y代表底面直径，z代表高度
+    color: [0.0, 1.0, 0.0, 0.8]
+
+  # 3. 这是一个蓝色的长方体 (比如模拟海底礁石或墙壁)
+  - name: "obs_box_1"
+    ref_coord: "NED"
+    type: "box"
+    position: [0.0, -15.0, -5.0]
+    scale: [10.0, 2.0, 10.0]      # 对于长方体：x,y,z代表长宽高
+    color: [0.0, 0.5, 1.0, 0.9]

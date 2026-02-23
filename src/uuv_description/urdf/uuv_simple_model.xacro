@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot name="uuv_simple_model" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="color" value="1.0 0.8 0.0 1.0"/> 
+  <xacro:property name="length" value="1.5"/> 
+  <xacro:property name="radius" value="0.15"/> 
+  <link name="uuv_0/base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 1.5707 0"/>
+      <geometry>
+        <cylinder length="${length}" radius="${radius}"/>
+      </geometry>
+      <material name="yellow">
+        <color rgba="${color}"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 1.5707 0"/>
+      <geometry>
+        <cylinder length="${length}" radius="${radius}"/>
+      </geometry>
+    </collision>
+  </link>
+
+</robot>
