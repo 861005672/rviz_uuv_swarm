@@ -28,11 +28,6 @@ public:
     virtual Eigen::VectorXd getDampingForce() const override { return last_damping_force_; }
     virtual Eigen::VectorXd getTotalForce() const override { return last_total_force_; }
     
-    // 理想刚体没有舵机，返回全 0 的空指令
-    virtual uuv_control::ControlAllocator::ActuatorCmd getActuatorCmd() const override { 
-        return uuv_control::ControlAllocator::ActuatorCmd(); 
-    }
-
     void initialize(ros::NodeHandle& nh) override {
         state_ = Eigen::VectorXd::Zero(12);
         

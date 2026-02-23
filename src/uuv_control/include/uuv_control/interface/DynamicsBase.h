@@ -4,7 +4,6 @@
 #include <ros/ros.h>
 #include <Eigen/Dense>
 #include <uuv_control/State3D.h>
-#include <uuv_control/actuator/ActuatorModels.h>
 #include <geometry_msgs/WrenchStamped.h>
 
 namespace uuv_control {
@@ -35,10 +34,7 @@ public:
     virtual Eigen::VectorXd getRestoringForce() const { return Eigen::VectorXd::Zero(6); }
     // 获取UUV受到的合力/力矩
     virtual Eigen::VectorXd getTotalForce() const { return Eigen::VectorXd::Zero(6); }
-    // 获取UUV执行器的指令，用于让Rviz动画模型的更新
-    virtual uuv_control::ControlAllocator::ActuatorCmd getActuatorCmd() const { 
-        return uuv_control::ControlAllocator::ActuatorCmd(); 
-    }
+
 
 protected:
     ros::Publisher pub_cmd_wrench_;

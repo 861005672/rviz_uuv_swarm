@@ -6,8 +6,6 @@
 #include <tf2/LinearMath/Quaternion.h>
 #include <geometry_msgs/TransformStamped.h>
 #include <nav_msgs/Odometry.h>
-#include <sensor_msgs/JointState.h>
-#include <uuv_control/actuator/ActuatorModels.h>
 
 class UUVControlNode {
 private:
@@ -50,7 +48,6 @@ public:
         
         pub_state_ = nh_.advertise<uuv_control::State3D>("state", 10);
         pub_odom_  = nh_.advertise<nav_msgs::Odometry>("odom", 10);
-        pub_joint_ = nh_.advertise<sensor_msgs::JointState>("joint_states", 10);
 
         // 初始化控制力为0
         current_tau_cmd_ = Eigen::VectorXd::Zero(6);
@@ -118,39 +115,11 @@ public:
                 // 2.5 更新可视化
                 publishTF(state);
                 publishStateAndOdom(state);
-                publishJointStates(dynamics_->getActuatorCmd(), dt_since_last_dyn); // RViz舵机旋转
                 last_dynamics_time = now;
             }
             ros::spinOnce(); 
             rate.sleep();
         }
-    }
-
-    void publishJointStates(const uuv_control::ControlAllocator::ActuatorCmd& cmd, double dt) {
-        sensor_msgs::JointState joint_msg;
-        joint_msg.header.stamp = ros::Time::now();
-        
-        joint_msg.name = {
-            "uuv_0/thruster_0_joint",
-            "uuv_0/fin_0_joint",  // 顶舵
-            "uuv_0/fin_1_joint",  // 左舵
-            "uuv_0/fin_2_joint",  // 底舵
-            "uuv_0/fin_3_joint"   // 右舵
-        };
-
-        static double prop_angle = 0;
-        prop_angle += cmd.omega * dt;
-
-        // 直接填入修复好 URDF 符号陷阱的独立关节角
-        joint_msg.position = {
-            prop_angle, 
-            cmd.fin0_joint, 
-            cmd.fin1_joint, 
-            cmd.fin2_joint, 
-            cmd.fin3_joint  
-        };
-
-        pub_joint_.publish(joint_msg);
     }
 
     void publishStateAndOdom(const uuv_control::State3D& state) {

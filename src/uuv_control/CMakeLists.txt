@@ -133,6 +133,8 @@ include
 
 ## Declare a C++ library
 add_library(uuv_control_plugins
+  src/actuator/LauvActuator.cpp
+
   src/dynamics/FirstOrderDynamics.cpp
   src/dynamics/FossenDynamics.cpp
 

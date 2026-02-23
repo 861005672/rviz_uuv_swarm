@@ -1,5 +1,11 @@
 <library path="lib/libuuv_control_plugins">
 
+    <!-- 执行器层 -->
+    <class name="uuv_control/LauvActuator" type="uuv_control::LauvActuator" base_class_type="uuv_control::ActuatorBase">
+          <description>LAUV actuator logic with 1 thruster and 4 fins.</description>
+    </class>
+
+    <!-- 动力学模拟层 -->
     <class name="uuv_control/FirstOrderDynamics" 
            type="uuv_control::FirstOrderDynamics" 
            base_class_type="uuv_control::DynamicsBase">
@@ -11,6 +17,7 @@
         <description>Realistic 3D Fossen Dynamics Model for UUV.</description>
     </class>
 
+    <!-- 运动控制层 -->
     <class name="uuv_control/TeleopController" 
            type="uuv_control::TeleopController" 
            base_class_type="uuv_control::ControllerBase">

@@ -73,18 +73,3 @@ lauv_dynamics:
      0.0,   0.0,   0.0,   0.0,   0.0,   0.0   # N_v_u =  25.0, N_r_u = -15.0 (偏航抗打转)
   ]
 
-   # [新增] 执行器与分配器物理参数
-  actuators:
-    # 推进器参数 (参考 snippets.xacro)
-    rotor_constant: 0.0002      
-    max_rpm: 3000.0             # 最大转速 (RPM)，为了16节你可以把它改得更大
-    
-    # 舵面(Fin)参数 (参考 snippets.xacro)
-    fin_area: 0.0064            # 单片尾翼面积
-    fluid_density: 1028.0       # 流体密度
-    lift_coefficient: 3.0       # 升力系数
-    drag_coefficient: 1.98      # 阻力系数
-    max_fin_angle: 0.5237       # 最大打舵角 (弧度制, 1.5708约等于90度)
-    
-    # 几何位置参数 (参考 actuators.xacro)
-    x_fin: -0.4                 # 尾翼距离重心的 X 轴偏移量 (m)
