@@ -1,8 +1,0 @@
-prefix=/home/zx567/rvizuuv3d/devel
-
-Name: uuv_environment
-Description: Description of uuv_environment
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

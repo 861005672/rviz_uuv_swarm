@@ -1,0 +1,15 @@
+# 忽略编译生成的文件夹
+build/
+devel/
+install/
+
+# 忽略 Python 编译缓存
+__pycache__/
+*.pyc
+
+# 忽略日志文件
+logs/
+
+# 忽略 ROS 相关的临时文件
+.catkin_workspace
+.item_id
