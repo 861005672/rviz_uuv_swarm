@@ -1,6 +1,7 @@
 #include <uuv_control/interface/ActuatorBase.h>
 #include <pluginlib/class_list_macros.h>
 #include <sensor_msgs/JointState.h>
+#include <uuv_control/LauvActuatorState.h>
 #include <cmath>
 #include <algorithm>
 
@@ -10,93 +11,123 @@ namespace uuv_control {
 class LauvActuator : public ActuatorBase {
 private:
     ros::Publisher pub_joint_;
+    ros::Publisher pub_actuator_;
     
     Thruster thruster;
-    Fin fin;
+    Fin fin_vertical;    // 垂直舵 (偏航)
+    Fin fin_horizontal;  // 水平舵 (俯仰)
     double x_fin;
 
     double cmd_omega_ = 0.0;         // 推进器转速
-    double cmd_delta_r_ = 0.0;       // 垂直舵角
-    double cmd_delta_s_ = 0.0;       // 水平舵角
+    double cmd_delta_v_ = 0.0;       // 垂直舵角
+    double cmd_delta_h_ = 0.0;       // 水平舵角
     double prop_angle_ = 0.0;        // 推进器角度
+    double prop_force_ = 0.0;        // 推进器推力
+
+    ros::Time last_time_;
+    bool is_first_run_ = true;
 
 public:
-    void initialize(ros::NodeHandle& nh) override {
-        std::string ns = "actuators/";
+    void initialize(ros::NodeHandle& gnh) override {
+        std::string ns = "/LauvActuator/";
         
-        nh.param(ns+"thruster/rotor_constant", thruster.rotor_constant, 0.0002);
-        nh.param(ns+"thruster/max_omega", thruster.max_omega, 3000.0);
-        nh.param(ns+"fin/fluid_density", fin.fluid_density, 1028.0);
-        nh.param(ns+"fin/fin_area", fin.fin_area, 0.0064);
-        nh.param(ns+"fin/lift_coefficient", fin.lift_coefficient, 3.0);
-        nh.param(ns+"fin/drag_coefficient", fin.drag_coefficient, 1.98);
-
-        double max_deg = 30.0;
-        nh.param(ns+"fin/max_angle_deg", max_deg, 30.0); 
-        fin.max_angle = max_deg * M_PI / 180.0;
+        gnh.param(ns+"thruster/rotor_constant", thruster.rotor_constant, 0.0002);
+        gnh.param(ns+"thruster/max_rpm", thruster.max_rpm, 3000.0);
+        gnh.param(ns+"thruster/time_constant", thruster.time_constant, 0.6); // 加载时间常数
+        double density, area, lift_c, drag_c, max_deg, fin_tc;
+        gnh.param(ns+"fin/fluid_density", density, 1028.0);
+        gnh.param(ns+"fin/fin_area", area, 0.0064);
+        gnh.param(ns+"fin/lift_coefficient", lift_c, 3.0);
+        gnh.param(ns+"fin/drag_coefficient", drag_c, 1.98);
+        gnh.param(ns+"fin/max_deg", max_deg, 30.0); 
+        gnh.param(ns+"fin/x_fin", x_fin, -0.4);
+        gnh.param(ns+"fin/time_constant", fin_tc, 0.2); // 加载时间常数
+        double max_rad = max_deg * M_PI / 180.0;
         
-        nh.param(ns+"fin/x_fin", x_fin, -0.4);
+        fin_vertical.fluid_density = density; fin_vertical.fin_area = area;
+        fin_vertical.lift_coefficient = lift_c; fin_vertical.drag_coefficient = drag_c;
+        fin_vertical.max_angle = max_rad; fin_vertical.time_constant = fin_tc;
+        fin_horizontal.fluid_density = density; fin_horizontal.fin_area = area;
+        fin_horizontal.lift_coefficient = lift_c; fin_horizontal.drag_coefficient = drag_c;
+        fin_horizontal.max_angle = max_rad; fin_horizontal.time_constant = fin_tc;
 
-        pub_joint_ = nh.advertise<sensor_msgs::JointState>("joint_states", 10);
+        ROS_INFO_STREAM("[LauvActuator] Parameter Loaded: thruster/rotor_constant=\n"<<thruster.rotor_constant
+            <<" \nthruster/max_rpm=\n"<<thruster.max_rpm<<" \nthruster/time_constant=\n"<<thruster.time_constant<<" \nfin/fluid_density=\n"<<density<<" \nfin/fin_area=\n"<<area
+            <<" \nfin/lift_coefficient=\n"<<lift_c<<" \nfin/drag_coefficient=\n"<<drag_c<<" \nfin/max_deg=\n"<<max_deg
+            <<" \nfin/x_fin=\n"<<x_fin<<" \nfin/time_constant=\n"<<fin_tc);
 
-        ROS_INFO("[LauvActuator] Plugin Initialized. \n\
-            thruster: rotor_constant:%.6f, max_omega:%.2f, fin: fluid_density:%.2f, fin_area:%.5f, lift_coefficient:%.2f, drag_coefficient:%.2f, max_angle_deg:%.2f, x_fin:%.2f"
-            , thruster.rotor_constant, thruster.max_omega, fin.fluid_density, fin.fin_area, fin.lift_coefficient, fin.drag_coefficient, max_deg, x_fin);
+        // 创建 joint 关节状态发布器
+        pub_joint_ = gnh.advertise<sensor_msgs::JointState>("joint_states", 10);
+        pub_actuator_ = gnh.advertise<uuv_control::LauvActuatorState>("actuator_states", 10);
+        last_time_ = ros::Time::now();
     }
 
-    // 完全等价于原版的 allocate，没有任何前馈补偿作弊
+    // 分配器
     void allocate(const Eigen::VectorXd& tau_cmd, const Eigen::VectorXd& nu) override {
         double u_safe = std::max(std::abs(nu(0)), 0.5);
 
         double tau_X = tau_cmd(0);
         double omega_sq = std::abs(tau_X) / thruster.rotor_constant;
         cmd_omega_ = std::copysign(std::sqrt(omega_sq), tau_X);
-        cmd_omega_ = std::max(-thruster.max_omega, std::min(cmd_omega_, thruster.max_omega));
+        cmd_omega_ = std::max(-thruster.max_rpm, std::min(cmd_omega_, thruster.max_rpm));
 
-        double total_lift_coeff = 2.0 * fin.getLiftConstant() * u_safe * u_safe;
+        double total_lift_coeff = 2.0 * fin_vertical.getLiftConstant() * u_safe * u_safe;
         
         double tau_N = tau_cmd(5);
         double desired_Y = tau_N / x_fin; 
-        cmd_delta_r_ = desired_Y / total_lift_coeff;
-        cmd_delta_r_ = std::max(-fin.max_angle, std::min(cmd_delta_r_, fin.max_angle));
+        cmd_delta_v_ = desired_Y / total_lift_coeff;
+        cmd_delta_v_ = std::max(-fin_vertical.max_angle, std::min(cmd_delta_v_, fin_vertical.max_angle));
 
         double tau_M = tau_cmd(4);
         double desired_Z = tau_M / (-x_fin);
-        cmd_delta_s_ = desired_Z / total_lift_coeff;
-        cmd_delta_s_ = std::max(-fin.max_angle, std::min(cmd_delta_s_, fin.max_angle));
+        cmd_delta_h_ = desired_Z / total_lift_coeff;
+        cmd_delta_h_ = std::max(-fin_horizontal.max_angle, std::min(cmd_delta_h_, fin_horizontal.max_angle));
     }
 
-    // 完全等价于原版 computeActualTau 与 computeLiftForce 的物理法则
+    // 计算执行器产生的实际力/力矩
     Eigen::VectorXd computeActualTau(const Eigen::VectorXd& nu) override {
+        ros::Time now = ros::Time::now();
+        double dt = (now - last_time_).toSec();
+        last_time_ = now;
+        if (is_first_run_ || dt <= 0.0 || dt > 1.0) { dt = 0.0; is_first_run_ = false; }
+
         double u = nu(0); double v = nu(1); double w = nu(2);
         double p = nu(3); double q = nu(4); double r = nu(5);
+
+        // 1. 获取平滑后的真实推进器推力 (封装好的极简接口)
+        double X_force_prop = thruster.computeThrust(cmd_omega_, dt);
+        // 2. 获取平滑后的真实舵面升力与阻力 (封装好的极简接口，内部自带有效攻角计算与限幅)
+        FinForces vert_forces = fin_vertical.computeForces(cmd_delta_v_, u, v+x_fin*r, dt);
+        FinForces horz_forces = fin_horizontal.computeForces(cmd_delta_h_, u, w-x_fin*q, dt);
         
-        // 1. 局部水流速度 (保护除零奇点)
-        double u_safe = std::max(std::abs(u), 0.1);
-        double v_fin = v + x_fin * r;
-        double w_fin = w - x_fin * q;
-        
-        // 2. 真实有效攻角
-        double alpha_r = cmd_delta_r_ - std::atan2(v_fin, u_safe); 
-        double alpha_s = cmd_delta_s_ - std::atan2(w_fin, u_safe); 
+        // 3. 计算合力 (上下左右共4个舵面，所以 * 2.0)
+        double Y_force = 2.0 * vert_forces.lift;
+        double Z_force = 2.0 * horz_forces.lift;
 
-        // 3. 计算真实升力 (使用真实的 u 作为系数，保证静止时力绝对为 0)
-        double Y_force = 2.0 * fin.computeLiftForce(u, alpha_r);
-        double Z_force = 2.0 * fin.computeLiftForce(u, alpha_s);
+        double drag_r = 2.0 * vert_forces.drag;
+        double drag_s = 2.0 * horz_forces.drag;
 
-        double drag_r = 2.0 * fin.computeDragForce(u, alpha_r);
-        double drag_s = 2.0 * fin.computeDragForce(u, alpha_s);
-        double X_force = thruster.computeThrust(cmd_omega_) - (drag_r + drag_s);
-
+        double X_force = X_force_prop - (drag_r + drag_s);
+        prop_force_ = X_force + (drag_r + drag_s); // 用于调试记录纯推力
 
         // 4. 计算反馈到重心的力矩
         double M_torque = -x_fin * Z_force;
         double N_torque = x_fin * Y_force;
-
         Eigen::VectorXd tau_actual = Eigen::VectorXd::Zero(6);
         tau_actual << X_force, Y_force, Z_force, 0, M_torque, N_torque;
 
         return tau_actual;
+    }
+
+    void publishActuatorStates(const ros::Time& time, double dt) override {
+        if (pub_actuator_.getNumSubscribers() == 0) return;
+        uuv_control::LauvActuatorState msg;
+        msg.header.stamp = time;
+        msg.fin_horizontal_deg = fin_horizontal.actual_angle/M_PI*180.0;
+        msg.fin_vertical_deg = fin_vertical.actual_angle / M_PI * 180.0;
+        msg.thruster_rpm = thruster.actual_rpm;
+        msg.thruster_force = prop_force_;
+        pub_actuator_.publish(msg);
     }
 
     // URDF 动画映射逻辑，严格等价于原版
@@ -112,10 +143,11 @@ public:
             "uuv_0/fin_2_joint", "uuv_0/fin_3_joint"
         };
 
-        prop_angle_ += cmd_omega_ * dt;
+        prop_angle_ += thruster.actual_rpm * dt;
         msg.position = {
             prop_angle_, 
-            cmd_delta_r_, cmd_delta_s_, -cmd_delta_r_, -cmd_delta_s_
+            fin_vertical.actual_angle, fin_horizontal.actual_angle, 
+            -fin_vertical.actual_angle, -fin_horizontal.actual_angle
         };
 
         pub_joint_.publish(msg);

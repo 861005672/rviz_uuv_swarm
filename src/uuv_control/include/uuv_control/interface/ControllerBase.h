@@ -12,7 +12,7 @@ public:
     virtual ~ControllerBase() {}
 
     // 初始化
-    virtual void initialize(ros::NodeHandle& nh) = 0;
+    virtual void initialize(ros::NodeHandle& gnh) = 0;
 
     // 核心计算函数：输出控制力/力矩
     virtual Eigen::VectorXd compute() = 0;

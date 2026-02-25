@@ -1,0 +1,6 @@
+# UUV 目标控制指令 (CmdSetpoint.msg)
+std_msgs/Header header
+
+float64 target_u       # 目标前向航速 (m/s)
+float64 target_pitch   # 目标俯仰角 (rad)
+float64 target_yaw     # 目标偏航角 (rad)

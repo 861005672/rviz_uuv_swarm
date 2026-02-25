@@ -13,7 +13,7 @@ public:
     virtual ~DynamicsBase() {}
 
     // 初始化：加载参数
-    virtual void initialize(ros::NodeHandle& nh) = 0;
+    virtual void initialize(ros::NodeHandle& gnh) = 0;
 
     // 核心步进函数：输入推力(tau)，输出下一时刻的状态
     // dt: 时间步长, tau: [Fx, Fy, Fz, Tx, Ty, Tz]
@@ -45,14 +45,14 @@ protected:
     ros::Publisher pub_total_wrench_;
 
     // 基类统一初始化发布器
-    void initDebugPublishers(ros::NodeHandle& nh) {
+    void initDebugPublishers(ros::NodeHandle& gnh) {
 
-        pub_cmd_wrench_ = nh.advertise<geometry_msgs::WrenchStamped>("cmd_wrench", 10);
-        pub_actuator_wrench_ = nh.advertise<geometry_msgs::WrenchStamped>("actuator_wrench", 10);
-        pub_coriolis_wrench_ = nh.advertise<geometry_msgs::WrenchStamped>("coriolis_wrench", 10);
-        pub_damping_wrench_ = nh.advertise<geometry_msgs::WrenchStamped>("damping_wrench", 10);
-        pub_restoring_wrench_ = nh.advertise<geometry_msgs::WrenchStamped>("restoring_wrench", 10);
-        pub_total_wrench_ = nh.advertise<geometry_msgs::WrenchStamped>("total_wrench", 10);
+        pub_cmd_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("cmd_wrench", 10);
+        pub_actuator_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("actuator_wrench", 10);
+        pub_coriolis_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("coriolis_wrench", 10);
+        pub_damping_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("damping_wrench", 10);
+        pub_restoring_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("restoring_wrench", 10);
+        pub_total_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("total_wrench", 10);
     }
 
     // 基类统一执行发布操作

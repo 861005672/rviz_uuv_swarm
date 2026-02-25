@@ -1,4 +1,4 @@
-<library path="lib/libuuv_control_plugins">
+<library path="lib/libControlPlugins">
 
     <!-- 执行器层 -->
     <class name="uuv_control/LauvActuator" type="uuv_control::LauvActuator" base_class_type="uuv_control::ActuatorBase">
@@ -18,10 +18,15 @@
     </class>
 
     <!-- 运动控制层 -->
-    <class name="uuv_control/TeleopController" 
-           type="uuv_control::TeleopController" 
+    <class name="uuv_control/TeleopJoyController" 
+           type="uuv_control::TeleopJoyController" 
            base_class_type="uuv_control::ControllerBase">
         <description>Direct Joystick Teleop Controller.</description>
+    </class>
+    <class name="uuv_control/PidController" 
+           type="uuv_control::PidController" 
+           base_class_type="uuv_control::ControllerBase">
+        <description>PID Controller tracking target u, pitch, and yaw.</description>
     </class>
 
 

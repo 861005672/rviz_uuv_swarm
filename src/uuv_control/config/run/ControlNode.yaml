@@ -1,0 +1,9 @@
+ControlNode:
+  dynamics_plugin: "uuv_control/FossenDynamics"
+  actuator_plugin: "uuv_control/LauvActuator"
+  controller_plugin: "uuv_control/PidController"
+  sensor_plugins: 
+    - "uuv_sensor/Simple2DSonar"
+
+  dynamics_frequency: 100.0
+  controller_frequency: 10.0

@@ -1,0 +1,5 @@
+<library path="lib/libUuvSensorPlugins">
+  <class name="uuv_sensor/Simple2DSonar" type="uuv_sensor::Simple2DSonar" base_class_type="uuv_sensor::SensorBase">
+    <description>A high-performance 2D forward-looking sonar using 3D ray-casting geometry.</description>
+  </class>
+</library>

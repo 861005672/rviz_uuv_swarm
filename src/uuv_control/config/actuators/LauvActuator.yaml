@@ -1,0 +1,13 @@
+LauvActuator:
+  thruster:
+    rotor_constant: 0.0002
+    max_omega: 1500.0
+    time_constant: 0.6
+  fin:
+    fluid_density: 1028.0
+    fin_area: 0.0064
+    lift_coefficient: 3.0
+    drag_coefficient: 0.0
+    max_deg: 30.0
+    x_fin: -0.4
+    time_constant: 0.2

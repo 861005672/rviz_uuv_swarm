@@ -1,11 +1,13 @@
-# lauv_fossen_params.yaml
-lauv_dynamics:
+FossenDynamics:
   # 物理属性
   mass: 18.0
   volume: 0.017551374956865266
   fluid_density: 1028.0
   gravity: 9.81
   neutrally_buoyant: true
+
+  publish_debug_visuals: false
+  actuator_plugin: uuv_control/LauvActuator
   
   # 重心(cog)和浮心(cob)
   cog: [0.0, 0.0, 0.0]

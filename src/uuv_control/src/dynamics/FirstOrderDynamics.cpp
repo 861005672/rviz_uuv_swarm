@@ -2,6 +2,7 @@
 #include <pluginlib/class_list_macros.h>
 #include <tf2/LinearMath/Quaternion.h>
 #include <cmath> 
+#include <uuv_control/utils/utils.h>
 
 namespace uuv_control {
 
@@ -62,24 +63,24 @@ public:
         state_.segment(6, 6) = vel;
 
         // 7. 运动学解算 (机体速度 -> 世界系坐标)
-        double phi = state_(3), theta = state_(4), psi = state_(5);
+        double roll = state_(3), pitch = state_(4), yaw = state_(5);
         double u = vel(0), v = vel(1), w = vel(2);
 
-        double c_phi = cos(phi), s_phi = sin(phi);
-        double c_theta = cos(theta), s_theta = sin(theta);
-        double c_psi = cos(psi), s_psi = sin(psi);
+        double c_roll = cos(roll), s_roll = sin(roll);
+        double c_pitch = cos(pitch), s_pitch = sin(pitch);
+        double c_yaw = cos(yaw), s_yaw = sin(yaw);
 
-        double dx = u * (c_psi * c_theta) + 
-                    v * (c_psi * s_theta * s_phi - s_psi * c_phi) + 
-                    w * (c_psi * s_theta * c_phi + s_psi * s_phi);
+        double dx = u * (c_yaw * c_pitch) + 
+                    v * (c_yaw * s_pitch * s_roll - s_yaw * c_roll) + 
+                    w * (c_yaw * s_pitch * c_roll + s_yaw * s_roll);
         
-        double dy = u * (s_psi * c_theta) + 
-                    v * (s_psi * s_theta * s_phi + c_psi * c_phi) + 
-                    w * (s_psi * s_theta * c_phi - c_psi * s_phi);
+        double dy = u * (s_yaw * c_pitch) + 
+                    v * (s_yaw * s_pitch * s_roll + c_yaw * c_roll) + 
+                    w * (s_yaw * s_pitch * c_roll - c_yaw * s_roll);
         
-        double dz = u * (-s_theta) + 
-                    v * (c_theta * s_phi) + 
-                    w * (c_theta * c_phi);
+        double dz = u * (-s_pitch) + 
+                    v * (c_pitch * s_roll) + 
+                    w * (c_pitch * c_roll);
 
         state_(0) += dx * dt;
         state_(1) += dy * dt;
@@ -87,6 +88,10 @@ public:
 
         // 8. 姿态角积分
         state_.segment(3, 3) += vel.segment(3, 3) * dt;
+
+        state_(3) = uuv_control::wrapAngle(state_(3));
+        state_(4) = uuv_control::wrapAngle(state_(4));
+        state_(5) = uuv_control::wrapAngle(state_(5));
 
         // 9. 调用基类在 RViz 中绘制绚丽的受力对抗箭头！
         publishDebugWrenches(ros::Time::now());
@@ -99,7 +104,7 @@ public:
         msg.header.stamp = ros::Time::now();
         msg.header.frame_id = "ned";
         msg.x = state_(0); msg.y = state_(1); msg.z = state_(2);
-        msg.phi = state_(3); msg.theta = state_(4); msg.psi = state_(5);
+        msg.roll = state_(3); msg.pitch = state_(4); msg.yaw = state_(5);
         msg.u = state_(6); msg.v = state_(7); msg.w = state_(8);
         msg.p = state_(9); msg.q = state_(10); msg.r = state_(11);
         return msg;

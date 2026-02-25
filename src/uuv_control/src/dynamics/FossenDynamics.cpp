@@ -8,6 +8,7 @@
 #include <uuv_control/State3D.h>
 #include <pluginlib/class_list_macros.h>
 #include <pluginlib/class_loader.h>
+#include <uuv_control/utils/utils.h>
 
 namespace uuv_control {
 
@@ -38,7 +39,7 @@ public:
 
 private:
     // 辅助工具函数
-    Eigen::MatrixXd loadMatrixFromParam(ros::NodeHandle& nh, const std::string& param_name, int rows, int cols);
+    Eigen::MatrixXd loadMatrixFromParam(ros::NodeHandle& gnh, const std::string& param_name, int rows, int cols);
     Eigen::Matrix3d skew(const Eigen::Vector3d& vec); // 计算三维向量的斜对称矩阵
     Eigen::Vector3d transformWorldToBody(const Eigen::Vector3d& vec_world, const Eigen::VectorXd& eta);    // 世界坐标系到体坐标系的转换
 
@@ -48,7 +49,7 @@ private:
     void updateRestoringForces(const Eigen::VectorXd& eta);
 
     // 状态向量
-    Eigen::VectorXd eta_; // [x, y, z, phi, theta, psi] (世界系位姿)
+    Eigen::VectorXd eta_; // [x, y, z, roll, pitch, yaw] (世界系位姿)
     Eigen::VectorXd nu_;  // [u, v, w, p, q, r] (机体系速度)
 
     // Fossen 模型动力学矩阵
@@ -84,6 +85,8 @@ private:
     bool publish_debug_visuals_;
 };
 
+
+
 // ==========================================
 // 2. 类实现
 // ==========================================
@@ -108,35 +111,35 @@ Eigen::Matrix3d FossenDynamics::skew(const Eigen::Vector3d& vec) {
     return S;
 }
 
-Eigen::MatrixXd FossenDynamics::loadMatrixFromParam(ros::NodeHandle& nh, const std::string& param_name, int rows, int cols) {
+Eigen::MatrixXd FossenDynamics::loadMatrixFromParam(ros::NodeHandle& gnh, const std::string& param_name, int rows, int cols) {
     std::vector<double> vec;
     Eigen::MatrixXd mat = Eigen::MatrixXd::Zero(rows, cols);
-    if (nh.getParam(param_name, vec) && vec.size() == rows * cols) {
+    if (gnh.getParam(param_name, vec) && vec.size() == rows * cols) {
         for (int i = 0; i < rows; ++i) {
             for (int j = 0; j < cols; ++j) {
                 mat(i, j) = vec[i * cols + j];
             }
         }
     } else {
-        ROS_ERROR_STREAM("[FossenDynamics] 无法加载参数或维度不匹配: " << param_name);
+        ROS_ERROR_STREAM("[FossenDynamics] Unable to load parameters or dimension mismatch: " << param_name);
     }
     return mat;
 }
 
 Eigen::Vector3d FossenDynamics::transformWorldToBody(const Eigen::Vector3d& vec_world, const Eigen::VectorXd& eta) {
-    double phi = eta(3);   // 横滚 Roll
-    double theta = eta(4); // 俯仰 Pitch
-    double psi = eta(5);   // 偏航 Yaw
+    double roll = eta(3);   // 横滚 Roll
+    double pitch = eta(4); // 俯仰 Pitch
+    double yaw = eta(5);   // 偏航 Yaw
 
-    double c_phi = cos(phi), s_phi = sin(phi);
-    double c_theta = cos(theta), s_theta = sin(theta);
-    double c_psi = cos(psi), s_psi = sin(psi);
+    double c_roll = cos(roll), s_roll = sin(roll);
+    double c_pitch = cos(pitch), s_pitch = sin(pitch);
+    double c_yaw = cos(yaw), s_yaw = sin(yaw);
 
     // 构建从机体系到世界系的旋转矩阵 R_b^n (Z-Y-X 顺序)
     Eigen::Matrix3d R_b_n;
-    R_b_n << c_psi*c_theta, -s_psi*c_phi + c_psi*s_theta*s_phi,  s_psi*s_phi + c_psi*c_phi*s_theta,
-             s_psi*c_theta,  c_psi*c_phi + s_phi*s_theta*s_psi, -c_psi*s_phi + s_theta*s_psi*c_phi,
-            -s_theta,        c_theta*s_phi,                      c_theta*c_phi;
+    R_b_n << c_yaw*c_pitch, -s_yaw*c_roll + c_yaw*s_pitch*s_roll,  s_yaw*s_roll + c_yaw*c_roll*s_pitch,
+             s_yaw*c_pitch,  c_yaw*c_roll + s_roll*s_pitch*s_yaw, -c_yaw*s_roll + s_pitch*s_yaw*c_roll,
+            -s_pitch,        c_pitch*s_roll,                      c_pitch*c_roll;
 
     // 世界系到机体系的转换矩阵是 R_b_n 的转置 (R_n^b)
     Eigen::Matrix3d R_n_b = R_b_n.transpose();
@@ -145,48 +148,21 @@ Eigen::Vector3d FossenDynamics::transformWorldToBody(const Eigen::Vector3d& vec_
     return R_n_b * vec_world;
 }
 
-void FossenDynamics::initialize(ros::NodeHandle& nh) {
-    std::string ns = "lauv_dynamics/";
-    
-    nh.param(ns + "mass", mass_, 18.0);
-    nh.param(ns + "volume", volume_, 0.01755);
-    nh.param(ns + "fluid_density", fluid_density_, 1028.0);
-    nh.param(ns + "gravity", gravity_, 9.81);
-    nh.param(ns + "neutrally_buoyant", neutrally_buoyant_, false);
-
-    // 从私有句柄中读取可视化开关参数 (对应 launch 文件里的配置)
-    ros::NodeHandle pnh("~");
-    pnh.param("publish_debug_visuals", publish_debug_visuals_, true);
-    // 调用调试力发布函数
-    if (publish_debug_visuals_) {
-        initDebugPublishers(nh);
-    }
-
-    // 初始化执行器
+void FossenDynamics::initialize(ros::NodeHandle& gnh) {
+    std::string ns = "/FossenDynamics/";
     std::string actuator_plugin;
-    pnh.param<std::string>("actuator_plugin", actuator_plugin, std::string("uuv_control/LauvActuator"));
-    try {
-        actuator_ = actuator_loader_.createInstance(actuator_plugin);
-        actuator_->initialize(nh);
-        ROS_INFO("[FossenDynamics] 成功挂载执行器外设: %s", actuator_plugin.c_str());
-    } catch(pluginlib::PluginlibException& ex) {
-        ROS_ERROR("[FossenDynamics] 执行器外设加载失败: %s", ex.what());
-    }
-    
-    W_ = mass_ * gravity_;
-    if (neutrally_buoyant_) {
-        // 如果开启强制中性浮力，无视真实的 volume，直接让浮力等于重力
-        B_ = W_;
-        ROS_INFO("[FossenDynamics] 已开启强制中性浮力 (neutrally_buoyant=true)，重力与浮力已自动绝对配平！");
-    } else {
-        B_ = fluid_density_ * volume_ * gravity_;
-        ROS_INFO("[FossenDynamics] 未开启中性浮力，真实浮力计算为: %.2f N", B_);
-    }
-
     std::vector<double> cog_vec, cob_vec, inertia_vec;
-    nh.getParam(ns + "cog", cog_vec);
-    nh.getParam(ns + "cob", cob_vec);
-    nh.getParam(ns + "inertia", inertia_vec);
+
+    gnh.param(ns + "mass", mass_, 18.0);
+    gnh.param(ns + "volume", volume_, 0.01755);
+    gnh.param(ns + "fluid_density", fluid_density_, 1028.0);
+    gnh.param(ns + "gravity", gravity_, 9.81);
+    gnh.param(ns + "neutrally_buoyant", neutrally_buoyant_, false);
+    gnh.param(ns + "publish_debug_visuals", publish_debug_visuals_, true);
+    gnh.param<std::string>(ns + "actuator_plugin", actuator_plugin, std::string("uuv_control/LauvActuator"));
+    gnh.getParam(ns + "cog", cog_vec);
+    gnh.getParam(ns + "cob", cob_vec);
+    gnh.getParam(ns + "inertia", inertia_vec);
     
     cog_ << cog_vec[0], cog_vec[1], cog_vec[2];
     cob_ << cob_vec[0], cob_vec[1], cob_vec[2];
@@ -199,16 +175,40 @@ void FossenDynamics::initialize(ros::NodeHandle& nh) {
     M_rb(4,4) = inertia_vec[1];
     M_rb(5,5) = inertia_vec[2];
     
-    Eigen::MatrixXd M_added = loadMatrixFromParam(nh, ns + "added_mass", 6, 6);
-    D_lin_ = loadMatrixFromParam(nh, ns + "linear_damping", 6, 6);
-    D_lin_forward_speed_ = loadMatrixFromParam(nh, ns + "linear_damping_forward_speed", 6, 6);
-    D_quad_ = loadMatrixFromParam(nh, ns + "quadratic_damping", 6, 6);
+    Eigen::MatrixXd M_added = loadMatrixFromParam(gnh, ns + "added_mass", 6, 6);
+    D_lin_ = loadMatrixFromParam(gnh, ns + "linear_damping", 6, 6);
+    D_lin_forward_speed_ = loadMatrixFromParam(gnh, ns + "linear_damping_forward_speed", 6, 6);
+    D_quad_ = loadMatrixFromParam(gnh, ns + "quadratic_damping", 6, 6);
 
     // 总质量矩阵 = 刚体质量矩阵 + 附加质量矩阵
     M_ = M_rb + M_added; 
     M_inv_ = M_.inverse();
+    // 计算重力和浮力
+    W_ = mass_ * gravity_;
+    if (neutrally_buoyant_) {
+        // 如果开启强制中性浮力，无视真实的 volume，直接让浮力等于重力
+        B_ = W_;
+    } else {
+        B_ = fluid_density_ * volume_ * gravity_;
+    }
 
-    ROS_INFO("[FossenDynamics] 真实的 3D Fossen 模型初始化完成. 质量: %.2f, 浮力: %.2f", mass_, B_);
+    ROS_INFO_STREAM("[FossenDynamics] Parameter Loaded: mass=\n"<<mass_<<" \nvolume=\n"<<volume_<<" \nfluid_density=\n"<<fluid_density_
+    <<" \ngravity=\n"<<gravity_<<" \nneutrally_buoyant=\n"<<neutrally_buoyant_<<" \npublish_debug_visuals=\n"<<publish_debug_visuals_
+    <<" \nactuator_plugin=\n"<<actuator_plugin<<" \ncog=\n"<<cog_<<" \ncob=\n"<<cob_<<" \nM_rb=\n"<<M_rb<<" \nM_added=\n"<<M_added<<" \nD_lin=\n"<<D_lin_
+    <<" \nD_lin_forward_speed=\n"<<D_lin_forward_speed_<<" \nD_quad=\n"<<D_quad_<<" \nM=\n"<<M_<<" \nW=\n"<<W_<<" \nB=\n"<<B_);
+
+    // 调用调试力发布函数
+    if (publish_debug_visuals_) {
+        initDebugPublishers(gnh);
+    }
+    try {
+        actuator_ = actuator_loader_.createInstance(actuator_plugin);
+        actuator_->initialize(gnh);
+        ROS_INFO("[FossenDynamics] Successfully loaded actuator plugin: %s", actuator_plugin.c_str());
+    } catch(pluginlib::PluginlibException& ex) {
+        ROS_ERROR("[FossenDynamics] Failed to load actuator plugin: %s", ex.what());
+    }
+
 }
 
 void FossenDynamics::updateCoriolisMatrix(const Eigen::VectorXd& nu) {
@@ -263,7 +263,6 @@ uuv_control::State3D FossenDynamics::update(double dt, const Eigen::VectorXd& ta
         actuator_->allocate(tau_cmd, nu_);
         last_actuator_force_ = actuator_->computeActualTau(nu_);
     } else {
-        ROS_INFO("DDD");
         last_actuator_force_ = tau_cmd; // 兜底保护
     }
     // 1. 更新三大依赖状态的矩阵/向量
@@ -288,36 +287,45 @@ uuv_control::State3D FossenDynamics::update(double dt, const Eigen::VectorXd& ta
     nu_ += nu_dot * dt;
 
     // 4. 运动学：机体系速度向世界系速度的转移矩阵 J(eta)
-    double phi = eta_(3), theta = eta_(4), psi = eta_(5);
-    double c_phi = cos(phi), s_phi = sin(phi);
-    double c_theta = cos(theta), s_theta = sin(theta), t_theta = tan(theta);
-    double c_psi = cos(psi), s_psi = sin(psi);
+    double roll = eta_(3), pitch = eta_(4), yaw = eta_(5);
+    double c_roll = cos(roll), s_roll = sin(roll);
+    double c_pitch = cos(pitch), s_pitch = sin(pitch), t_pitch = tan(pitch);
+    double c_yaw = cos(yaw), s_yaw = sin(yaw);
 
     Eigen::MatrixXd J = Eigen::MatrixXd::Zero(6, 6);
     // J1: 旋转矩阵 R(eta)
-    J.block<3,3>(0,0) << c_psi*c_theta, -s_psi*c_phi + c_psi*s_theta*s_phi, s_psi*s_phi + c_psi*c_phi*s_theta,
-                         s_psi*c_theta,  c_psi*c_phi + s_phi*s_theta*s_psi, -c_psi*s_phi + s_theta*s_psi*c_phi,
-                        -s_theta,        c_theta*s_phi,                     c_theta*c_phi;
+    J.block<3,3>(0,0) << c_yaw*c_pitch, -s_yaw*c_roll + c_yaw*s_pitch*s_roll, s_yaw*s_roll + c_yaw*c_roll*s_pitch,
+                         s_yaw*c_pitch,  c_yaw*c_roll + s_roll*s_pitch*s_yaw, -c_yaw*s_roll + s_pitch*s_yaw*c_roll,
+                        -s_pitch,        c_pitch*s_roll,                     c_pitch*c_roll;
                          
     // J2: 角速度转换矩阵 T(eta)
-    J.block<3,3>(3,3) << 1.0, s_phi*t_theta, c_phi*t_theta,
-                         0.0, c_phi,         -s_phi,
-                         0.0, s_phi/c_theta, c_phi/c_theta;
+    J.block<3,3>(3,3) << 1.0, s_roll*t_pitch, c_roll*t_pitch,
+                         0.0, c_roll,         -s_roll,
+                         0.0, s_roll/c_pitch, c_roll/c_pitch;
 
     // 5. 位姿积分 (世界系下)
     Eigen::VectorXd eta_dot = J * nu_;
     eta_ += eta_dot * dt;
 
+    // 将欧拉角限制在 -PI 到 PI 之间
+    eta_(3) = uuv_control::wrapAngle(eta_(3));
+    eta_(4) = uuv_control::wrapAngle(eta_(4));
+    eta_(5) = uuv_control::wrapAngle(eta_(5));
+
     // 6. 发布状态
     current_state_.x = eta_(0); current_state_.y = eta_(1); current_state_.z = eta_(2);
-    current_state_.phi = eta_(3); current_state_.theta = eta_(4); current_state_.psi = eta_(5);
+    current_state_.roll = eta_(3); current_state_.pitch = eta_(4); current_state_.yaw = eta_(5);
     current_state_.u = nu_(0); current_state_.v = nu_(1); current_state_.w = nu_(2);
     current_state_.p = nu_(3); current_state_.q = nu_(4); current_state_.r = nu_(5);
 
-    if (actuator_) actuator_->publishJointStates(ros::Time::now(), dt);
+    ros::Time cur_time = ros::Time::now();
+    if (actuator_) {
+        actuator_->publishJointStates(cur_time, dt);
+        actuator_->publishActuatorStates(cur_time, dt);
+    }
     
     if (publish_debug_visuals_) {
-        publishDebugWrenches(ros::Time::now());
+        publishDebugWrenches(cur_time);
     }
 
     return current_state_;
