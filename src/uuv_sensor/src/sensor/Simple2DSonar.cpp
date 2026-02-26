@@ -1,23 +1,68 @@
-#include <uuv_sensor/sensor/Simple2DSonar.h>
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2/LinearMath/Matrix3x3.h>
 #include <XmlRpcValue.h>
 #include <algorithm>
+#include <uuv_interface/SensorBase.h>
+#include <uuv_interface/utils/XmlParamReader.h>
+#include <sensor_msgs/LaserScan.h>
+#include <Eigen/Dense>
+#include <vector>
+#include <string>
 
 namespace uuv_sensor {
 
-void Simple2DSonar::initialize(ros::NodeHandle& nh) {
-    uuv_name_ = nh.getNamespace();
-    update_rate_ = 10.0;
-    last_update_time_ = ros::Time::now();
+struct Obstacle {
+    std::string name;
+    std::string type;
+    Eigen::Vector3d pos;
+    Eigen::Vector3d scale;
+};
+
+
+class Simple2DSonar : public uuv_interface::SensorBase {
+    private:
+        ros::Publisher pub_scan_;
+        
+        // 声纳参数
+        int beams_;
+        double fov_;
+        double max_range_;
+        
+        // 环境障碍物容器
+        std::vector<Obstacle> obstacles_;
     
-    // 声纳基本参数设置
-    beams_ = 30;                   // 256线
-    fov_ = 150.0 * M_PI / 180.0;    // 水平120度开角
-    max_range_ = 200.0;             // 200米探测距离
+        void loadEnvironment(ros::NodeHandle& nh);
+        double checkIntersection(const Eigen::Vector3d& ray_origin, const Eigen::Vector3d& ray_dir);
+    
+    protected:
+        void generateData(const uuv_interface::SensorState& current_state) override;
+    
+    public:
+        Simple2DSonar() = default;
+        ~Simple2DSonar() override = default;
+    
+        void initialize(ros::NodeHandle& nh, const std::string& robot_description) override;
+    };
+    
+
+void Simple2DSonar::initialize(ros::NodeHandle& nh, const std::string& plugin_xml) {
+    uuv_name_ = nh.getNamespace();
+    uuv_interface::XmlParamReader reader(plugin_xml);
+    
+    reader.param("update_rate", update_rate_, 10.0);
+    reader.param("beams", beams_, 30);
+    reader.param("max_range", max_range_, 200.0);
+    double fov_deg;
+    reader.param("fov_deg", fov_deg, 150.0);
+    fov_ = fov_deg * M_PI / 180.0;
+
+    last_update_time_ = ros::Time::now();
 
     pub_scan_ = nh.advertise<sensor_msgs::LaserScan>("sonar_scan", 10);
     
+    ROS_INFO_STREAM("[Simple2DSonar] Xml Params Loaded: " << "\n update_rate=\n" << update_rate_ << "\n beams=\n" 
+                    << beams_ << "\n max_range=\n" << max_range_ << "\n fov_deg=\n" << fov_deg);
+
     loadEnvironment(nh);
 }
 
@@ -49,7 +94,7 @@ void Simple2DSonar::loadEnvironment(ros::NodeHandle& nh) {
     }
 }
 
-void Simple2DSonar::generateData(const SensorState& state) {
+void Simple2DSonar::generateData(const uuv_interface::SensorState& state) {
     sensor_msgs::LaserScan scan;
     scan.header.stamp = ros::Time::now();
     std::string frame_id = uuv_name_;
@@ -169,4 +214,4 @@ double Simple2DSonar::checkIntersection(const Eigen::Vector3d& origin, const Eig
 } // namespace uuv_sensor
 
 #include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS(uuv_sensor::Simple2DSonar, uuv_sensor::SensorBase)
+PLUGINLIB_EXPORT_CLASS(uuv_sensor::Simple2DSonar, uuv_interface::SensorBase)

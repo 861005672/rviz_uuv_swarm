@@ -1,0 +1,6 @@
+# src/uuv_interface/srv/SetWaypoint.srv
+float64 target_n
+float64 target_e
+float64 target_d
+---
+bool success

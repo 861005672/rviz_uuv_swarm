@@ -1,16 +1,19 @@
-#include <uuv_control/interface/DynamicsBase.h>
+#include <uuv_interface/DynamicsBase.h>
 #include <pluginlib/class_list_macros.h>
 #include <tf2/LinearMath/Quaternion.h>
 #include <cmath> 
-#include <uuv_control/utils/utils.h>
+#include <uuv_interface/utils/XmlParamReader.h>
+#include <uuv_interface/utils/utils.h>
 
 namespace uuv_control {
 
-class FirstOrderDynamics : public DynamicsBase {
+class FirstOrderDynamics : public uuv_interface::DynamicsBase {
 private:
     Eigen::VectorXd state_; // [x, y, z, phi, theta, psi, u, v, w, p, q, r]
     double mass_;
     double drag_;
+
+    ros::Time last_time_;
 
     // 记录诊断力矩
     Eigen::VectorXd last_cmd_force_ = Eigen::VectorXd::Zero(6);
@@ -29,19 +32,30 @@ public:
     virtual Eigen::VectorXd getDampingForce() const override { return last_damping_force_; }
     virtual Eigen::VectorXd getTotalForce() const override { return last_total_force_; }
     
-    void initialize(ros::NodeHandle& nh) override {
+    void initialize(ros::NodeHandle& nh, const std::string& plugin_xml) override {
         state_ = Eigen::VectorXd::Zero(12);
         
-        nh.param("mass", mass_, 50.0); 
-        nh.param("drag", drag_, 10.0); 
+        uuv_interface::XmlParamReader reader(plugin_xml);
+        reader.param("update_rate", update_rate_, 100.0);
+        reader.param("mass", mass_, 50.0);
+        reader.param("drag", drag_, 10.0);
         
-        ROS_INFO("FirstOrderDynamics initialized with Mass=%.1f, Drag=%.1f (Ideal Actuator Mode)", mass_, drag_);
+        last_time_ = ros::Time::now();
 
         // 注册基类的可视化发布器
         initDebugPublishers(nh);
+
+        ROS_INFO("[FirstOrderDynamics] XML Params Loaded: Mass=%.1f, Drag=%.1f (Ideal Actuator Mode)", mass_, drag_);
     }
 
-    uuv_control::State3D update(double dt, const Eigen::VectorXd& tau_cmd) override {
+    uuv_interface::State3D update(const Eigen::VectorXd& tau_cmd) override {
+
+        ros::Time now = ros::Time::now();
+        double dt = (now - last_time_).toSec();
+
+        // 频率拦截
+        if (dt <= 0.0 || dt < (1.0 / this->update_rate_) * 0.95) return getState();
+        last_time_ = now;
         // 1. 获取当前体坐标系速度
         Eigen::VectorXd vel = state_.segment(6, 6);
 
@@ -89,9 +103,9 @@ public:
         // 8. 姿态角积分
         state_.segment(3, 3) += vel.segment(3, 3) * dt;
 
-        state_(3) = uuv_control::wrapAngle(state_(3));
-        state_(4) = uuv_control::wrapAngle(state_(4));
-        state_(5) = uuv_control::wrapAngle(state_(5));
+        state_(3) = uuv_interface::wrapAngle(state_(3));
+        state_(4) = uuv_interface::wrapAngle(state_(4));
+        state_(5) = uuv_interface::wrapAngle(state_(5));
 
         // 9. 调用基类在 RViz 中绘制绚丽的受力对抗箭头！
         publishDebugWrenches(ros::Time::now());
@@ -99,8 +113,8 @@ public:
         return getState();
     }
 
-    uuv_control::State3D getState() override {
-        uuv_control::State3D msg;
+    uuv_interface::State3D getState() override {
+        uuv_interface::State3D msg;
         msg.header.stamp = ros::Time::now();
         msg.header.frame_id = "ned";
         msg.x = state_(0); msg.y = state_(1); msg.z = state_(2);
@@ -113,4 +127,4 @@ public:
 
 }
 
-PLUGINLIB_EXPORT_CLASS(uuv_control::FirstOrderDynamics, uuv_control::DynamicsBase)
+PLUGINLIB_EXPORT_CLASS(uuv_control::FirstOrderDynamics, uuv_interface::DynamicsBase)

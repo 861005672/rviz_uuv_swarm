@@ -3,26 +3,27 @@
 #include <vector>
 #include <string>
 #include <cmath>
-#include <uuv_control/interface/DynamicsBase.h>
-#include <uuv_control/interface/ActuatorBase.h>
-#include <uuv_control/State3D.h>
+#include <uuv_interface/DynamicsBase.h>
+#include <uuv_interface/ActuatorBase.h>
+#include <uuv_interface/State3D.h>
 #include <pluginlib/class_list_macros.h>
 #include <pluginlib/class_loader.h>
-#include <uuv_control/utils/utils.h>
+#include <uuv_interface/utils/utils.h>
+#include <uuv_interface/utils/XmlParamReader.h>
 
 namespace uuv_control {
 
 // ==========================================
 // 1. 类定义 (直接在CPP文件中声明)
 // ==========================================
-class FossenDynamics : public DynamicsBase {
+class FossenDynamics : public uuv_interface::DynamicsBase {
 public:
     FossenDynamics();
     virtual ~FossenDynamics() = default;
 
-    virtual void initialize(ros::NodeHandle& nh) override;
-    virtual uuv_control::State3D update(double dt, const Eigen::VectorXd& tau) override;
-    virtual uuv_control::State3D getState() override;
+    virtual void initialize(ros::NodeHandle& nh, const std::string& plugin_xml) override;
+    virtual uuv_interface::State3D update(const Eigen::VectorXd& tau) override;
+    virtual uuv_interface::State3D getState() override;
 
        // 获取由上层控制器输出的期望受力/力矩
        virtual Eigen::VectorXd getCommandedForce() const override { return last_cmd_force_; }
@@ -39,14 +40,16 @@ public:
 
 private:
     // 辅助工具函数
-    Eigen::MatrixXd loadMatrixFromParam(ros::NodeHandle& gnh, const std::string& param_name, int rows, int cols);
-    Eigen::Matrix3d skew(const Eigen::Vector3d& vec); // 计算三维向量的斜对称矩阵
-    Eigen::Vector3d transformWorldToBody(const Eigen::Vector3d& vec_world, const Eigen::VectorXd& eta);    // 世界坐标系到体坐标系的转换
+    Eigen::Matrix3d skew(const Eigen::Vector3d& vec) const; // 计算三维向量的斜对称矩阵
+    Eigen::Vector3d transformWorldToBody(const Eigen::Vector3d& vec_world, const Eigen::Quaterniond& quat) const;
 
     // 核心动力学更新模块
-    void updateCoriolisMatrix(const Eigen::VectorXd& nu);
-    void updateDampingMatrix(const Eigen::VectorXd& nu);
-    void updateRestoringForces(const Eigen::VectorXd& eta);
+    Eigen::MatrixXd computeCoriolisMatrix(const Eigen::VectorXd& nu) const;
+    Eigen::MatrixXd computeDampingMatrix(const Eigen::VectorXd& nu) const;
+    Eigen::VectorXd computeRestoringForces(const Eigen::Quaterniond& quat) const;
+
+    Eigen::VectorXd getDerivatives(const Eigen::VectorXd& math_state, const Eigen::VectorXd& tau);
+    void rk4Step(const Eigen::VectorXd& tau_cmd, double dt);
 
     // 状态向量
     Eigen::VectorXd eta_; // [x, y, z, roll, pitch, yaw] (世界系位姿)
@@ -63,8 +66,8 @@ private:
     Eigen::VectorXd g_;         // 恢复力/力矩向量 g(eta)
 
     // 受力/执行器相关变量
-    pluginlib::ClassLoader<uuv_control::ActuatorBase> actuator_loader_;
-    boost::shared_ptr<uuv_control::ActuatorBase> actuator_;
+    pluginlib::ClassLoader<uuv_interface::ActuatorBase> actuator_loader_;
+    boost::shared_ptr<uuv_interface::ActuatorBase> actuator_;
     Eigen::VectorXd last_cmd_force_, last_actuator_force_, last_coriolis_force_,
     last_damping_force_, last_restore_force_, last_total_force_ = Eigen::VectorXd::Zero(6);
 
@@ -80,9 +83,14 @@ private:
     Eigen::Vector3d cog_; // 重心位置 (Center of Gravity)
     Eigen::Vector3d cob_; // 浮心位置 (Center of Buoyancy)
 
-    uuv_control::State3D current_state_;
+    uuv_interface::State3D current_state_;
 
     bool publish_debug_visuals_;
+
+    ros::Time last_time_;
+
+    Eigen::Quaterniond quat_;
+
 };
 
 
@@ -91,9 +99,10 @@ private:
 // 2. 类实现
 // ==========================================
 
-FossenDynamics::FossenDynamics() : actuator_loader_("uuv_control", "uuv_control::ActuatorBase"){
+FossenDynamics::FossenDynamics() : actuator_loader_("uuv_interface", "uuv_interface::ActuatorBase"){
     eta_ = Eigen::VectorXd::Zero(6);
     nu_ = Eigen::VectorXd::Zero(6);
+    quat_ = Eigen::Quaterniond::Identity(); // 【新增】初始化为单位四元数（0度旋转）
     
     M_ = Eigen::MatrixXd::Identity(6, 6);
     M_inv_ = Eigen::MatrixXd::Identity(6, 6);
@@ -103,7 +112,7 @@ FossenDynamics::FossenDynamics() : actuator_loader_("uuv_control", "uuv_control:
 }
 
 // 三维向量的斜对称矩阵 (Skew-symmetric matrix)，用于计算叉乘和科氏力矩阵
-Eigen::Matrix3d FossenDynamics::skew(const Eigen::Vector3d& vec) {
+Eigen::Matrix3d FossenDynamics::skew(const Eigen::Vector3d& vec) const{
     Eigen::Matrix3d S;
     S <<  0,      -vec(2),  vec(1),
           vec(2),  0,      -vec(0),
@@ -111,58 +120,35 @@ Eigen::Matrix3d FossenDynamics::skew(const Eigen::Vector3d& vec) {
     return S;
 }
 
-Eigen::MatrixXd FossenDynamics::loadMatrixFromParam(ros::NodeHandle& gnh, const std::string& param_name, int rows, int cols) {
-    std::vector<double> vec;
-    Eigen::MatrixXd mat = Eigen::MatrixXd::Zero(rows, cols);
-    if (gnh.getParam(param_name, vec) && vec.size() == rows * cols) {
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < cols; ++j) {
-                mat(i, j) = vec[i * cols + j];
-            }
-        }
-    } else {
-        ROS_ERROR_STREAM("[FossenDynamics] Unable to load parameters or dimension mismatch: " << param_name);
-    }
-    return mat;
+Eigen::Vector3d FossenDynamics::transformWorldToBody(const Eigen::Vector3d& vec_world, const Eigen::Quaterniond& quat) const {
+    return quat.inverse() * vec_world;
 }
 
-Eigen::Vector3d FossenDynamics::transformWorldToBody(const Eigen::Vector3d& vec_world, const Eigen::VectorXd& eta) {
-    double roll = eta(3);   // 横滚 Roll
-    double pitch = eta(4); // 俯仰 Pitch
-    double yaw = eta(5);   // 偏航 Yaw
+void FossenDynamics::initialize(ros::NodeHandle& gnh, const std::string& plugin_xml) {
 
-    double c_roll = cos(roll), s_roll = sin(roll);
-    double c_pitch = cos(pitch), s_pitch = sin(pitch);
-    double c_yaw = cos(yaw), s_yaw = sin(yaw);
+    uuv_interface::XmlParamReader reader(plugin_xml);
 
-    // 构建从机体系到世界系的旋转矩阵 R_b^n (Z-Y-X 顺序)
-    Eigen::Matrix3d R_b_n;
-    R_b_n << c_yaw*c_pitch, -s_yaw*c_roll + c_yaw*s_pitch*s_roll,  s_yaw*s_roll + c_yaw*c_roll*s_pitch,
-             s_yaw*c_pitch,  c_yaw*c_roll + s_roll*s_pitch*s_yaw, -c_yaw*s_roll + s_pitch*s_yaw*c_roll,
-            -s_pitch,        c_pitch*s_roll,                      c_pitch*c_roll;
+    reader.param("update_rate", update_rate_, 100.0);
+    reader.param("mass", mass_, 18.0);
+    reader.param("volume", volume_, 0.01755);
+    reader.param("fluid_density", fluid_density_, 1028.0);
+    reader.param("gravity", gravity_, 9.81);
+    reader.param("neutrally_buoyant", neutrally_buoyant_, false);
+    reader.param("publish_debug_visuals", publish_debug_visuals_, true);
 
-    // 世界系到机体系的转换矩阵是 R_b_n 的转置 (R_n^b)
-    Eigen::Matrix3d R_n_b = R_b_n.transpose();
-
-    // 进行坐标系转换
-    return R_n_b * vec_world;
-}
-
-void FossenDynamics::initialize(ros::NodeHandle& gnh) {
-    std::string ns = "/FossenDynamics/";
-    std::string actuator_plugin;
     std::vector<double> cog_vec, cob_vec, inertia_vec;
+    reader.param("cog", cog_vec, {0.0, 0.0, 0.0});
+    reader.param("cob", cob_vec, {0.0, 0.0, 0.0});
+    reader.param("inertia", inertia_vec, {0.1, 0.1, 0.1});
 
-    gnh.param(ns + "mass", mass_, 18.0);
-    gnh.param(ns + "volume", volume_, 0.01755);
-    gnh.param(ns + "fluid_density", fluid_density_, 1028.0);
-    gnh.param(ns + "gravity", gravity_, 9.81);
-    gnh.param(ns + "neutrally_buoyant", neutrally_buoyant_, false);
-    gnh.param(ns + "publish_debug_visuals", publish_debug_visuals_, true);
-    gnh.param<std::string>(ns + "actuator_plugin", actuator_plugin, std::string("uuv_control/LauvActuator"));
-    gnh.getParam(ns + "cog", cog_vec);
-    gnh.getParam(ns + "cob", cob_vec);
-    gnh.getParam(ns + "inertia", inertia_vec);
+    Eigen::MatrixXd M_added = Eigen::MatrixXd::Zero(6,6);
+    D_lin_ = Eigen::MatrixXd::Zero(6,6);
+    D_lin_forward_speed_ = Eigen::MatrixXd::Zero(6,6);
+    D_quad_ = Eigen::MatrixXd::Zero(6,6);
+    reader.paramMatrix("added_mass", M_added, 6, 6);
+    reader.paramMatrix("linear_damping", D_lin_, 6, 6);
+    reader.paramMatrix("linear_damping_forward_speed", D_lin_forward_speed_, 6, 6);
+    reader.paramMatrix("quadratic_damping", D_quad_, 6, 6);
     
     cog_ << cog_vec[0], cog_vec[1], cog_vec[2];
     cob_ << cob_vec[0], cob_vec[1], cob_vec[2];
@@ -175,88 +161,170 @@ void FossenDynamics::initialize(ros::NodeHandle& gnh) {
     M_rb(4,4) = inertia_vec[1];
     M_rb(5,5) = inertia_vec[2];
     
-    Eigen::MatrixXd M_added = loadMatrixFromParam(gnh, ns + "added_mass", 6, 6);
-    D_lin_ = loadMatrixFromParam(gnh, ns + "linear_damping", 6, 6);
-    D_lin_forward_speed_ = loadMatrixFromParam(gnh, ns + "linear_damping_forward_speed", 6, 6);
-    D_quad_ = loadMatrixFromParam(gnh, ns + "quadratic_damping", 6, 6);
 
     // 总质量矩阵 = 刚体质量矩阵 + 附加质量矩阵
     M_ = M_rb + M_added; 
     M_inv_ = M_.inverse();
     // 计算重力和浮力
     W_ = mass_ * gravity_;
-    if (neutrally_buoyant_) {
-        // 如果开启强制中性浮力，无视真实的 volume，直接让浮力等于重力
-        B_ = W_;
-    } else {
-        B_ = fluid_density_ * volume_ * gravity_;
+    B_ = neutrally_buoyant_ ? W_ : (fluid_density_ * volume_ * gravity_);
+
+    std::string actuator_type = "uuv_control/LauvActuator";
+    std::string actuator_snippet = "";
+
+    TiXmlDocument doc;
+    doc.Parse(plugin_xml.c_str());
+    TiXmlElement* cfg = doc.RootElement();
+
+    if (cfg) {
+        // 在 dynamics 标签内部遍历寻找 layer="actuator" 的子 plugin 标签
+        for (TiXmlElement* act_elem = cfg->FirstChildElement("plugin"); 
+             act_elem != nullptr; 
+             act_elem = act_elem->NextSiblingElement("plugin")) {
+            if (std::string(act_elem->Attribute("layer") ? act_elem->Attribute("layer") : "") == "actuator") {
+                if (act_elem->Attribute("type")) {
+                    actuator_type = act_elem->Attribute("type");
+                }
+                // 使用打印机截取这段嵌套的 XML 作为独立字符串
+                TiXmlPrinter printer;
+                act_elem->Accept(&printer);
+                actuator_snippet = printer.CStr();
+                break; // 找到了就跳出
+            }
+        }
     }
 
-    ROS_INFO_STREAM("[FossenDynamics] Parameter Loaded: mass=\n"<<mass_<<" \nvolume=\n"<<volume_<<" \nfluid_density=\n"<<fluid_density_
+
+    ROS_INFO_STREAM("[FossenDynamics] XML Params loaded: mass=\n"<<mass_<<" \nvolume=\n"<<volume_<<" \nfluid_density=\n"<<fluid_density_
     <<" \ngravity=\n"<<gravity_<<" \nneutrally_buoyant=\n"<<neutrally_buoyant_<<" \npublish_debug_visuals=\n"<<publish_debug_visuals_
-    <<" \nactuator_plugin=\n"<<actuator_plugin<<" \ncog=\n"<<cog_<<" \ncob=\n"<<cob_<<" \nM_rb=\n"<<M_rb<<" \nM_added=\n"<<M_added<<" \nD_lin=\n"<<D_lin_
+    <<" \ncog=\n"<<cog_<<" \ncob=\n"<<cob_<<" \nM_rb=\n"<<M_rb<<" \nM_added=\n"<<M_added<<" \nD_lin=\n"<<D_lin_
     <<" \nD_lin_forward_speed=\n"<<D_lin_forward_speed_<<" \nD_quad=\n"<<D_quad_<<" \nM=\n"<<M_<<" \nW=\n"<<W_<<" \nB=\n"<<B_);
+
+    last_time_ = ros::Time::now();
 
     // 调用调试力发布函数
     if (publish_debug_visuals_) {
         initDebugPublishers(gnh);
     }
     try {
-        actuator_ = actuator_loader_.createInstance(actuator_plugin);
-        actuator_->initialize(gnh);
-        ROS_INFO("[FossenDynamics] Successfully loaded actuator plugin: %s", actuator_plugin.c_str());
+        actuator_ = actuator_loader_.createInstance(actuator_type);
+        actuator_->initialize(gnh, actuator_snippet);
+        ROS_INFO("[FossenDynamics] Successfully loaded actuator plugin: %s", actuator_type.c_str());
     } catch(pluginlib::PluginlibException& ex) {
         ROS_ERROR("[FossenDynamics] Failed to load actuator plugin: %s", ex.what());
     }
 
 }
 
-void FossenDynamics::updateCoriolisMatrix(const Eigen::VectorXd& nu) {
-    // 严谨计算3D科氏力矩阵 C(nu)：包含 C_RB (刚体) 和 C_A (附加质量)
-    // 根据 Fossen 理论，总科氏力可以由总质量矩阵 M 统一且优雅地求出
-    Eigen::Vector3d nu_1 = nu.head<3>(); // 线速度 [u, v, w]
-    Eigen::Vector3d nu_2 = nu.tail<3>(); // 角速度 [p, q, r]
 
-    // 提取广义动量
-    Eigen::Vector3d a_1 = M_.block<3,3>(0,0) * nu_1 + M_.block<3,3>(0,3) * nu_2;    // 系统在机体坐标系下的【总线动量】 包含由平移和旋转所引发的线动量变化
-    Eigen::Vector3d a_2 = M_.block<3,3>(3,0) * nu_1 + M_.block<3,3>(3,3) * nu_2;    // 系统在机体坐标系下的【总角动量】 包含了平移和旋转所引发的角动量变化
 
-    C_.setZero();
-    C_.block<3,3>(0,3) = -skew(a_1);
-    C_.block<3,3>(3,0) = -skew(a_1);
-    C_.block<3,3>(3,3) = -skew(a_2);
+void FossenDynamics::rk4Step(const Eigen::VectorXd& tau_cmd, double dt) {
+    // 1. 打包：将当前的物理状态组装成 13 维数学向量
+    // math_state = [x, y, z, qw, qx, qy, qz, u, v, w, p, q, r]
+    Eigen::VectorXd y0 = Eigen::VectorXd::Zero(13);
+    y0.segment<3>(0) = eta_.head<3>(); // 位置 x, y, z
+    y0(3) = quat_.w(); y0(4) = quat_.x(); y0(5) = quat_.y(); y0(6) = quat_.z(); // 四元数
+    y0.segment<6>(7) = nu_; // 机体系速度向量
+
+    // 2. RK4 核心迭代求解 (四次采样)
+    Eigen::VectorXd k1 = getDerivatives(y0, tau_cmd);
+    Eigen::VectorXd k2 = getDerivatives(y0 + 0.5 * dt * k1, tau_cmd);
+    Eigen::VectorXd k3 = getDerivatives(y0 + 0.5 * dt * k2, tau_cmd);
+    Eigen::VectorXd k4 = getDerivatives(y0 + dt * k3, tau_cmd);
+
+    // 加权平均求取下一时刻状态
+    Eigen::VectorXd y_next = y0 + (dt / 6.0) * (k1 + 2.0 * k2 + 2.0 * k3 + k4);
+
+    // 3. 拆包：将算出的新一帧状态完美赋值回我们的物理变量
+    eta_.head<3>() = y_next.segment<3>(0);
+    quat_.w() = y_next(3); 
+    quat_.x() = y_next(4); 
+    quat_.y() = y_next(5); 
+    quat_.z() = y_next(6);
+    quat_.normalize(); // 极其重要：积分后的四元数必须重新归一化，防止变形
+    nu_ = y_next.segment<6>(7);
 }
 
-void FossenDynamics::updateDampingMatrix(const Eigen::VectorXd& nu) {
-    D_.setZero();
-    // 获取当前前向速度绝对值 (通常只在前进 u>0 时尾翼升力最有效，这里取绝对值兼顾倒车)
+
+Eigen::VectorXd FossenDynamics::getDerivatives(const Eigen::VectorXd& math_state, const Eigen::VectorXd& tau) {
+    Eigen::VectorXd dot = Eigen::VectorXd::Zero(13);
+
+    // 1. 解包纯数学状态向量
+    // math_state = [x(0), y(1), z(2), qw(3), qx(4), qy(5), qz(6), u(7), v(8), w(9), p(10), q(11), r(12)]
+    Eigen::Quaterniond quat(math_state(3), math_state(4), math_state(5), math_state(6)); 
+    quat.normalize(); // 保证计算导数时四元数的合法性
+    Eigen::VectorXd nu = math_state.segment<6>(7);
+
+    // =====================================
+    // 2. 运动学：计算位置与姿态的导数
+    // =====================================
+    dot.segment<3>(0) = quat * nu.head<3>(); // 机器速度转世界速度
+
+    // 四元数导数计算公式: q_dot = 0.5 * q \otimes [0, \omega]
+    Eigen::Quaterniond omega(0, nu(3), nu(4), nu(5));
+    Eigen::Quaterniond q_dot;
+    q_dot.w() = 0.5 * (-quat.x()*omega.x() - quat.y()*omega.y() - quat.z()*omega.z());
+    q_dot.x() = 0.5 * ( quat.w()*omega.x() + quat.y()*omega.z() - quat.z()*omega.y());
+    q_dot.y() = 0.5 * ( quat.w()*omega.y() - quat.x()*omega.z() + quat.z()*omega.x());
+    q_dot.z() = 0.5 * ( quat.w()*omega.z() + quat.x()*omega.y() - quat.y()*omega.x());
+    dot(3) = q_dot.w(); dot(4) = q_dot.x(); dot(5) = q_dot.y(); dot(6) = q_dot.z();
+
+    // =====================================
+    // 3. 动力学：计算速度与角速度的导数 (nu_dot)
+    // =====================================
+    Eigen::MatrixXd C = computeCoriolisMatrix(nu);
+    Eigen::MatrixXd D = computeDampingMatrix(nu);
+    Eigen::VectorXd g = computeRestoringForces(quat);
+
+    // 汇总求加速度: M^{-1} * (tau - C*nu + D*nu - g)
+    dot.segment<6>(7) = M_inv_ * (tau - C * nu + D * nu - g);
+
+    return dot;
+}
+
+Eigen::MatrixXd FossenDynamics::computeCoriolisMatrix(const Eigen::VectorXd& nu) const {
+    Eigen::Vector3d nu_1 = nu.head<3>(); 
+    Eigen::Vector3d nu_2 = nu.tail<3>(); 
+    Eigen::Vector3d a_1 = M_.block<3,3>(0,0) * nu_1 + M_.block<3,3>(0,3) * nu_2;    
+    Eigen::Vector3d a_2 = M_.block<3,3>(3,0) * nu_1 + M_.block<3,3>(3,3) * nu_2;    
+    
+    Eigen::MatrixXd C = Eigen::MatrixXd::Zero(6, 6);
+    // 注意：如果在类的最前面加上了 #include <uuv_interface/utils/utils.h> ，这可以直接调 skew 
+    // 如果 skew 是当前类的成员函数，建议把 skew 的声明也加上 const
+    C.block<3,3>(0,3) = -skew(a_1);
+    C.block<3,3>(3,0) = -skew(a_1);
+    C.block<3,3>(3,3) = -skew(a_2);
+    return C;
+}
+
+Eigen::MatrixXd FossenDynamics::computeDampingMatrix(const Eigen::VectorXd& nu) const {
+    Eigen::MatrixXd D = Eigen::MatrixXd::Zero(6, 6);
     double u_abs = std::abs(nu(0)); 
     for (int i = 0; i < 6; ++i) {
         for (int j = 0; j < 6; ++j) {
-            // 【核心物理逻辑】：
-            // 真实阻尼 = 常数线性阻尼 + (前向速度 * 耦合阻尼系数) + (绝对速度 * 二次阻尼系数)
-            double dynamic_lin_damping = D_lin_(i, j) + u_abs * D_lin_forward_speed_(i, j);
-            
-            D_(i, j) = dynamic_lin_damping + D_quad_(i, j) * std::abs(nu(j));
+            D(i, j) = D_lin_(i, j) + u_abs * D_lin_forward_speed_(i, j) + D_quad_(i, j) * std::abs(nu(j));
         }
     }
+    return D;
 }
 
-void FossenDynamics::updateRestoringForces(const Eigen::VectorXd& eta) {
-    // 世界系下的重力与浮力向量 (NED 坐标系，Z 轴向下)
+Eigen::VectorXd FossenDynamics::computeRestoringForces(const Eigen::Quaterniond& quat) const {
     Eigen::Vector3d W_world(0.0, 0.0, W_);
     Eigen::Vector3d B_world(0.0, 0.0, -B_);
-
-    // 显式调用：将世界系力转换到机体系
-    Eigen::Vector3d fg = transformWorldToBody(W_world, eta);
-    Eigen::Vector3d fb = transformWorldToBody(B_world, eta);
+    Eigen::Vector3d fg = transformWorldToBody(W_world, quat);
+    Eigen::Vector3d fb = transformWorldToBody(B_world, quat);
     
-    g_.setZero();
-    g_.head<3>() = -(fg + fb);
-    g_.tail<3>() = -(skew(cog_) * fg + skew(cob_) * fb);
+    Eigen::VectorXd g = Eigen::VectorXd::Zero(6);
+    g.head<3>() = -(fg + fb);
+    g.tail<3>() = -(skew(cog_) * fg + skew(cob_) * fb);
+    return g;
 }
 
-uuv_control::State3D FossenDynamics::update(double dt, const Eigen::VectorXd& tau_cmd) {
+uuv_interface::State3D FossenDynamics::update(const Eigen::VectorXd& tau_cmd) {
+    ros::Time now = ros::Time::now();
+    double dt = (now - last_time_).toSec();
+    if (dt <= 0.0 || dt < (1.0 / this->update_rate_) * 0.95) return current_state_;
+    last_time_ = now;
     // 0. 记录上层控制大脑发来的期望力 并且计算UUV的执行力，力矩
     last_cmd_force_ = tau_cmd;
     if (actuator_) {
@@ -265,52 +333,34 @@ uuv_control::State3D FossenDynamics::update(double dt, const Eigen::VectorXd& ta
     } else {
         last_actuator_force_ = tau_cmd; // 兜底保护
     }
-    // 1. 更新三大依赖状态的矩阵/向量
-    updateCoriolisMatrix(nu_);
-    updateDampingMatrix(nu_);
-    updateRestoringForces(eta_);
 
     // 2. 动力学核心：求解线加速度与角加速度
     // Fossen 方程: M * nu_dot + C * nu + D_fossen * nu + g = tau
     // 因为我们的阻尼矩阵提取的参数带有负号 (即 D_ = -D_fossen)，所以我们在等号右边用加法： + D_ * nu
-    Eigen::VectorXd coriolis_force = C_ * nu_;
-    Eigen::VectorXd damping_force = D_ * nu_;
-
-    last_coriolis_force_ = -coriolis_force;
-    last_damping_force_ = damping_force; 
-    last_restore_force_ = -g_;
-    last_total_force_ = last_actuator_force_ - coriolis_force + damping_force - g_;
     
-    Eigen::VectorXd nu_dot = M_inv_ * last_total_force_;
+    rk4Step(last_actuator_force_, dt);
 
-    // 3. 速度积分 (机体系下)
-    nu_ += nu_dot * dt;
+    last_coriolis_force_ = -(computeCoriolisMatrix(nu_) * nu_);
+    last_damping_force_  = computeDampingMatrix(nu_) * nu_;
+    last_restore_force_  = -computeRestoringForces(quat_);
+    last_total_force_    = last_actuator_force_ + last_coriolis_force_ + last_damping_force_ + last_restore_force_;
 
-    // 4. 运动学：机体系速度向世界系速度的转移矩阵 J(eta)
-    double roll = eta_(3), pitch = eta_(4), yaw = eta_(5);
-    double c_roll = cos(roll), s_roll = sin(roll);
-    double c_pitch = cos(pitch), s_pitch = sin(pitch), t_pitch = tan(pitch);
-    double c_yaw = cos(yaw), s_yaw = sin(yaw);
 
-    Eigen::MatrixXd J = Eigen::MatrixXd::Zero(6, 6);
-    // J1: 旋转矩阵 R(eta)
-    J.block<3,3>(0,0) << c_yaw*c_pitch, -s_yaw*c_roll + c_yaw*s_pitch*s_roll, s_yaw*s_roll + c_yaw*c_roll*s_pitch,
-                         s_yaw*c_pitch,  c_yaw*c_roll + s_roll*s_pitch*s_yaw, -c_yaw*s_roll + s_pitch*s_yaw*c_roll,
-                        -s_pitch,        c_pitch*s_roll,                     c_pitch*c_roll;
-                         
-    // J2: 角速度转换矩阵 T(eta)
-    J.block<3,3>(3,3) << 1.0, s_roll*t_pitch, c_roll*t_pitch,
-                         0.0, c_roll,         -s_roll,
-                         0.0, s_roll/c_pitch, c_roll/c_pitch;
+    // 4.3 从安全的四元数中提取出欧拉角，供其他模块或消息发布使用
+    double sinr_cosp = 2.0 * (quat_.w() * quat_.x() + quat_.y() * quat_.z());
+    double cosr_cosp = 1.0 - 2.0 * (quat_.x() * quat_.x() + quat_.y() * quat_.y());
+    eta_(3) = std::atan2(sinr_cosp, cosr_cosp); // Roll
 
-    // 5. 位姿积分 (世界系下)
-    Eigen::VectorXd eta_dot = J * nu_;
-    eta_ += eta_dot * dt;
+    double sinp = 2.0 * (quat_.w() * quat_.y() - quat_.z() * quat_.x());
+    if (std::abs(sinp) >= 1.0)
+        eta_(4) = std::copysign(M_PI / 2.0, sinp); // Pitch 极限保护 (严防超出 [-90, 90] 度)
+    else
+        eta_(4) = std::asin(sinp);
 
-    // 将欧拉角限制在 -PI 到 PI 之间
-    eta_(3) = uuv_control::wrapAngle(eta_(3));
-    eta_(4) = uuv_control::wrapAngle(eta_(4));
-    eta_(5) = uuv_control::wrapAngle(eta_(5));
+    double siny_cosp = 2.0 * (quat_.w() * quat_.z() + quat_.x() * quat_.y());
+    double cosy_cosp = 1.0 - 2.0 * (quat_.y() * quat_.y() + quat_.z() * quat_.z());
+    eta_(5) = std::atan2(siny_cosp, cosy_cosp); // Yaw
+
 
     // 6. 发布状态
     current_state_.x = eta_(0); current_state_.y = eta_(1); current_state_.z = eta_(2);
@@ -318,23 +368,22 @@ uuv_control::State3D FossenDynamics::update(double dt, const Eigen::VectorXd& ta
     current_state_.u = nu_(0); current_state_.v = nu_(1); current_state_.w = nu_(2);
     current_state_.p = nu_(3); current_state_.q = nu_(4); current_state_.r = nu_(5);
 
-    ros::Time cur_time = ros::Time::now();
     if (actuator_) {
-        actuator_->publishJointStates(cur_time, dt);
-        actuator_->publishActuatorStates(cur_time, dt);
+        actuator_->publishJointStates(now, dt);
+        actuator_->publishActuatorStates(now, dt);
     }
     
     if (publish_debug_visuals_) {
-        publishDebugWrenches(cur_time);
+        publishDebugWrenches(now);
     }
 
     return current_state_;
 }
 
-uuv_control::State3D FossenDynamics::getState() {
+uuv_interface::State3D FossenDynamics::getState() {
     return current_state_;
 }
 
 } // namespace uuv_control
 
-PLUGINLIB_EXPORT_CLASS(uuv_control::FossenDynamics, uuv_control::DynamicsBase)
+PLUGINLIB_EXPORT_CLASS(uuv_control::FossenDynamics, uuv_interface::DynamicsBase)

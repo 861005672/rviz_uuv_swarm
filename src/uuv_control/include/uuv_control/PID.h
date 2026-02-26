@@ -3,6 +3,8 @@
 
 #include <cmath>
 #include <algorithm>
+#include <string>
+#include <ros/ros.h>
 
 namespace uuv_control {
 

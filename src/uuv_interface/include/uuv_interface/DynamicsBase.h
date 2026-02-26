@@ -3,24 +3,25 @@
 
 #include <ros/ros.h>
 #include <Eigen/Dense>
-#include <uuv_control/State3D.h>
+#include <uuv_interface/State3D.h>
 #include <geometry_msgs/WrenchStamped.h>
+#include <uuv_interface/PluginBase.h>
 
-namespace uuv_control {
+namespace uuv_interface {
 
-class DynamicsBase {
+class DynamicsBase : public PluginBase {
 public:
     virtual ~DynamicsBase() {}
 
     // 初始化：加载参数
-    virtual void initialize(ros::NodeHandle& gnh) = 0;
+    virtual void initialize(ros::NodeHandle& gnh, const std::string& robot_description) = 0;
 
     // 核心步进函数：输入推力(tau)，输出下一时刻的状态
     // dt: 时间步长, tau: [Fx, Fy, Fz, Tx, Ty, Tz]
-    virtual uuv_control::State3D update(double dt, const Eigen::VectorXd& tau_cmd) = 0;
+    virtual uuv_interface::State3D update(const Eigen::VectorXd& tau_cmd) = 0;
 
     // 获取当前状态
-    virtual uuv_control::State3D getState() = 0;
+    virtual uuv_interface::State3D getState() = 0;
 
     // 获取由上层控制器输出的期望受力/力矩
     virtual Eigen::VectorXd getCommandedForce() const { return Eigen::VectorXd::Zero(6); }

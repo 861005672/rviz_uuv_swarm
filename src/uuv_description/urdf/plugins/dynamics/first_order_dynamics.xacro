@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="insert_first_order_dynamics" params="update_rate:=100.0">
+        <plugin layer="dynamics" name="first_order_model" type="uuv_control/FirstOrderDynamics">
+            <update_rate>${update_rate}</update_rate>
+            <mass>18.0</mass>
+            <drag>10.0</drag>
+        </plugin>
+    </xacro:macro>
+</robot>

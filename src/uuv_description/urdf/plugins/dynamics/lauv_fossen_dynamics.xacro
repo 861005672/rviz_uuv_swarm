@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="insert_fossen_dynamics" params="update_rate:=100.0">
+        <plugin layer="dynamics" name="fossen_model" type="uuv_control/FossenDynamics">
+            <update_rate>${update_rate}</update_rate>
+            <mass>18.0</mass>
+            <volume>0.01755137</volume>
+            <fluid_density>1028.0</fluid_density>
+            <gravity>9.81</gravity>
+            <neutrally_buoyant>true</neutrally_buoyant>
+            <publish_debug_visuals>true</publish_debug_visuals>
+            
+            <cog>0.0 0.0 0.0</cog>
+            <cob>0.0 0.0 -0.01</cob>
+            <inertia>0.050625 1.7749125 1.7749125</inertia>
+            
+            <added_mass>
+                1.0  0.0  0.0  0.0  0.0  0.0
+                0.0 16.0  0.0  0.0  0.0  0.0
+                0.0  0.0 16.0  0.0  0.0  0.0
+                0.0  0.0  0.0  0.005 0.0 0.0
+                0.0  0.0  0.0  0.0  1.3  0.0
+                0.0  0.0  0.0  0.0  0.0  1.3
+            </added_mass>
+
+            <linear_damping>
+               -2.4  0.0   0.0   0.0   0.0   0.0
+                0.0 -23.0  0.0   0.0   0.0  11.5
+                0.0  0.0 -23.0   0.0 -11.5   0.0
+                0.0  0.0   0.0  -0.3   0.0   0.0
+                0.0  0.0   3.1   0.0  -9.7   0.0
+                0.0 -3.1   0.0   0.0   0.0  -9.7
+            </linear_damping>
+
+            <quadratic_damping>
+               -2.4   0.0   0.0      0.0   0.0   0.0
+                0.0 -80.0   0.0      0.0   0.0   0.3
+                0.0   0.0 -80.0      0.0  -0.3   0.0
+                0.0   0.0   0.0  -0.0006   0.0   0.0
+                0.0   0.0   1.5      0.0  -9.1   0.0
+                0.0  -1.5   0.0      0.0   0.0  -9.1
+            </quadratic_damping>
+
+            <!-- <linear_damping_forward_speed>
+                0.0  0.0   0.0  0.0   0.0   0.0
+                0.0  0.0   0.0  0.0   0.0   0.0
+                0.0  0.0   0.0  0.0   0.0   0.0
+                0.0  0.0   0.0  0.0   0.0   0.0
+                0.0  0.0 -18.0  0.0 -15.0   0.0
+                0.0 18.0   0.0  0.0   0.0 -15.0
+            </linear_damping_forward_speed> -->
+
+            <linear_damping_forward_speed>
+                0.0  0.0   0.0  0.0   0.0   0.0
+                0.0  0.0   0.0  0.0   0.0   0.0
+                0.0  0.0   0.0  0.0   0.0   0.0
+                0.0  0.0   0.0  0.0   0.0   0.0
+                0.0  0.0   0.0  0.0   0.0   0.0
+                0.0  0.0   0.0  0.0   0.0   0.0
+            </linear_damping_forward_speed>
+
+            <xacro:insert_lauv_actuator />
+            
+        </plugin>
+    </xacro:macro>
+    
+</robot>

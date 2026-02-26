@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(uuv_control)
+project(uuv_interface)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,23 +8,9 @@ project(uuv_control)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  geometry_msgs
   roscpp
-  rospy
-  sensor_msgs
-  std_msgs
-  tf2
-  tf2_geometry_msgs
-  tf2_ros
-  visualization_msgs
-  pluginlib
-  nav_msgs
-  dynamic_reconfigure
-  uuv_sensor
-  uuv_interface
+  message_generation
 )
-
-find_package(Eigen3 REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -60,18 +46,20 @@ find_package(Eigen3 REQUIRED)
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   State3D.msg
-#   Cmd3D.msg
-#   LauvActuatorState.msg
-# )
+add_message_files(
+  FILES
+  State3D.msg
+  Cmd3D.msg
+  LauvActuatorState.msg
+  TargetPoint3D.msg
+)
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   SetCmd3D.srv
-# )
+add_service_files(
+  FILES
+  SetCmd3D.srv
+  SetTargetPoint3D.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -81,10 +69,10 @@ find_package(Eigen3 REQUIRED)
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   geometry_msgs#   sensor_msgs#   std_msgs#   tf2_geometry_msgs#   visualization_msgs
-# )
+generate_messages(
+  DEPENDENCIES
+  std_msgs  # Or other packages containing msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -101,9 +89,10 @@ find_package(Eigen3 REQUIRED)
 ##     and list every .cfg file to be processed
 
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
-generate_dynamic_reconfigure_options(
-  cfg/PidController.cfg
-)
+# generate_dynamic_reconfigure_options(
+#   cfg/DynReconf1.cfg
+#   cfg/DynReconf2.cfg
+# )
 
 ###################################
 ## catkin specific configuration ##
@@ -116,8 +105,8 @@ generate_dynamic_reconfigure_options(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
  INCLUDE_DIRS include
-#  LIBRARIES uuv_control
- CATKIN_DEPENDS geometry_msgs roscpp rospy sensor_msgs std_msgs tf2 tf2_geometry_msgs tf2_ros visualization_msgs nav_msgs uuv_sensor
+#  LIBRARIES uuv_interface
+ CATKIN_DEPENDS roscpp message_runtime
 #  DEPENDS system_lib
 )
 
@@ -128,28 +117,14 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-include
+# include
   ${catkin_INCLUDE_DIRS}
-  ${EIGEN3_INCLUDE_DIRS}
 )
-
-
 
 ## Declare a C++ library
-add_library(ControlPlugins
-  src/actuator/LauvActuator.cpp
-
-  src/dynamics/FirstOrderDynamics.cpp
-  src/dynamics/FossenDynamics.cpp
-
-  src/controller/TeleopJoyController.cpp
-  src/controller/PidController.cpp
-
-  src/guidance/ToGoalGuidance.cpp
-)
-
-add_dependencies(ControlPlugins ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
+# add_library(${PROJECT_NAME}
+#   src/${PROJECT_NAME}/uuv_interface.cpp
+# )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -159,9 +134,7 @@ add_dependencies(ControlPlugins ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXP
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(ControlNode src/run/ControlNode.cpp)
-
-add_dependencies(ControlNode ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_executable(${PROJECT_NAME}_node src/uuv_interface_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -174,14 +147,9 @@ add_dependencies(ControlNode ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORT
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(ControlPlugins
-  ${catkin_LIBRARIES}
-)
-target_link_libraries(ControlNode
-  ${catkin_LIBRARIES}
-  tinyxml
-)
-
+# target_link_libraries(${PROJECT_NAME}_node
+#   ${catkin_LIBRARIES}
+# )
 
 #############
 ## Install ##
@@ -230,7 +198,7 @@ target_link_libraries(ControlNode
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_uuv_control.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_uuv_interface.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

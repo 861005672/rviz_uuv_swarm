@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="insert_lauv_actuator">
+        <plugin layer="actuator" name="lauv_actuator" type="uuv_control/LauvActuator">
+            <thruster>
+                <rotor_constant>0.0002</rotor_constant>
+                <max_rpm>1500.0</max_rpm>
+                <time_constant>0.6</time_constant>
+            </thruster>
+            <fin>
+                <fluid_density>1028.0</fluid_density>
+                <fin_area>0.0064</fin_area>
+                <lift_coefficient>3.0</lift_coefficient>
+                <drag_coefficient>0.0</drag_coefficient>
+                <max_deg>30.0</max_deg>
+                <x_fin>-0.4</x_fin>
+                <time_constant>0.2</time_constant>
+            </fin>
+        </plugin>
+    </xacro:macro>
+    
+</robot>

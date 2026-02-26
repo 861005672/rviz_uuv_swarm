@@ -2,7 +2,42 @@
 <robot name="lauv" xmlns:xacro="http://www.ros.org/wiki/xacro">
   
   <xacro:arg name="namespace" default="uuv_0"/>
+  <xacro:arg name="controller_type" default="pid" />
+  <xacro:arg name="dynamics_type" default="fossen" />
+  <xacro:arg name="guidance_type" default="to_goal" />
+
   <xacro:property name="ns" value="$(arg namespace)"/>
+
+  <xacro:include filename="$(find uuv_description)/urdf/plugins/actuators/lauv_actuator.xacro" />
+  <xacro:include filename="$(find uuv_description)/urdf/plugins/dynamics/lauv_fossen_dynamics.xacro" />
+  <xacro:include filename="$(find uuv_description)/urdf/plugins/dynamics/first_order_dynamics.xacro" />
+  <xacro:include filename="$(find uuv_description)/urdf/plugins/controllers/pid_controller.xacro" />
+  <xacro:include filename="$(find uuv_description)/urdf/plugins/controllers/teleop_joy_controller.xacro" />
+  <xacro:include filename="$(find uuv_description)/urdf/plugins/sensors/simple_2d_sonar.xacro" />
+  <xacro:include filename="$(find uuv_description)/urdf/plugins/guidances/to_goal_guidance.xacro" />
+
+
+  <xacro:if value="${'$(arg dynamics_type)' == 'fossen'}">
+      <xacro:insert_fossen_dynamics update_rate="100.0" />
+  </xacro:if>
+  <xacro:if value="${'$(arg dynamics_type)' == 'first_order'}">
+      <xacro:insert_first_order_dynamics update_rate="100.0" />
+  </xacro:if>
+
+  <xacro:if value="${'$(arg controller_type)' == 'pid'}">
+      <xacro:insert_pid_controller update_rate="10.0" enable_dyn="true" use_local_cmd="true" />
+  </xacro:if>
+  <xacro:if value="${'$(arg controller_type)' == 'teleop'}">
+      <xacro:insert_teleop_controller update_rate="10.0" />
+  </xacro:if>
+
+  <xacro:if value="${'$(arg guidance_type)' == 'to_goal'}">
+      <xacro:insert_to_goal_guidance update_rate="10.0" use_local_tp="false" cruise_speed="7" acceptance_radius="4.0" max_pitch_deg="40.0" />
+  </xacro:if>
+
+  <xacro:insert_simple_2d_sonar name="forward_looking_sonar" update_rate="10.0" beams="30" fov="150.0" max_range="200.0" />
+
+
 
   <link name="${ns}/base_link">
     <visual>

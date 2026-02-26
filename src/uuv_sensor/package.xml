@@ -67,10 +67,10 @@
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>tf2</exec_depend>
   <exec_depend>tf2_geometry_msgs</exec_depend>
-
+  <depend>uuv_interface</depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
-    <uuv_sensor plugin="${prefix}/uuv_sensor_plugins.xml" />
+    <uuv_interface plugin="${prefix}/uuv_sensor_plugins.xml" />
   </export>
 </package>

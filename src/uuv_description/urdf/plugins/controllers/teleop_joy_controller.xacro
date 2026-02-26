@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="insert_teleop_controller" params="update_rate:=10.0">
+        <plugin layer="controller" name="teleop_ctrl" type="uuv_control/TeleopJoyController">
+            <update_rate>${update_rate}</update_rate>
+            <max_thrust>200.0</max_thrust>
+            <max_torque_Z>100.0</max_torque_Z>
+            <max_torque_Y>30.0</max_torque_Y>
+        </plugin>
+    </xacro:macro>
+</robot>

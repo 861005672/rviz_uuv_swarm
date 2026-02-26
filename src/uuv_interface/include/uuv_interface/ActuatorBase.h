@@ -1,11 +1,11 @@
-#ifndef UUV_CONTROL_ACTUATOR_BASE_H
-#define UUV_CONTROL_ACTUATOR_BASE_H
+#ifndef ACTUATORBASE_H
+#define ACTUATORBASE_H
 
 #include <ros/ros.h>
 #include <Eigen/Dense>
+#include <uuv_interface/PluginBase.h>
 
-namespace uuv_control {
-
+namespace uuv_interface {
 
 // ==========================================
 // 1. 推进器类 (Thruster)
@@ -88,12 +88,9 @@ public:
     }
 };
 
-class ActuatorBase {
+class ActuatorBase : public PluginBase {
 public:
     virtual ~ActuatorBase() = default;
-
-    // 1. 初始化：读取执行器专有参数，并注册自己的 JointState 发布器
-    virtual void initialize(ros::NodeHandle& gnh) = 0;
 
     // 2. 核心分配：输入大脑的期望力与当前流速，计算物理舵角/转速并保存在内部
     virtual void allocate(const Eigen::VectorXd& tau_cmd, const Eigen::VectorXd& nu) = 0;

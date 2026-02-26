@@ -1,33 +1,39 @@
 <library path="lib/libControlPlugins">
 
     <!-- 执行器层 -->
-    <class name="uuv_control/LauvActuator" type="uuv_control::LauvActuator" base_class_type="uuv_control::ActuatorBase">
+    <class name="uuv_control/LauvActuator" type="uuv_control::LauvActuator" base_class_type="uuv_interface::ActuatorBase">
           <description>LAUV actuator logic with 1 thruster and 4 fins.</description>
     </class>
 
     <!-- 动力学模拟层 -->
     <class name="uuv_control/FirstOrderDynamics" 
            type="uuv_control::FirstOrderDynamics" 
-           base_class_type="uuv_control::DynamicsBase">
+           base_class_type="uuv_interface::DynamicsBase">
         <description>Simple First Order Inertia Model.</description>
     </class>
     <class name="uuv_control/FossenDynamics" 
            type="uuv_control::FossenDynamics" 
-           base_class_type="uuv_control::DynamicsBase">
+           base_class_type="uuv_interface::DynamicsBase">
         <description>Realistic 3D Fossen Dynamics Model for UUV.</description>
     </class>
 
     <!-- 运动控制层 -->
     <class name="uuv_control/TeleopJoyController" 
            type="uuv_control::TeleopJoyController" 
-           base_class_type="uuv_control::ControllerBase">
+           base_class_type="uuv_interface::ControllerBase">
         <description>Direct Joystick Teleop Controller.</description>
     </class>
     <class name="uuv_control/PidController" 
            type="uuv_control::PidController" 
-           base_class_type="uuv_control::ControllerBase">
+           base_class_type="uuv_interface::ControllerBase">
         <description>PID Controller tracking target u, pitch, and yaw.</description>
     </class>
 
+    <!-- 制导层 -->
+    <class name="uuv_control/ToGoalGuidance" 
+           type="uuv_control::ToGoalGuidance" 
+           base_class_type="uuv_interface::GuidanceBase">
+        <description>Simple LOS Guidance</description>
+    </class>
 
 </library>

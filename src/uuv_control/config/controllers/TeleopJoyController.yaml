@@ -1,4 +1,0 @@
-TeleopJoyController:
-  max_thrust: 200.0
-  max_torque_Z: 100.0
-  max_torque_Y: 30.0

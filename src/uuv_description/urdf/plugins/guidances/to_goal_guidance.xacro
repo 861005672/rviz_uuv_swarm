@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="insert_to_goal_guidance" params="update_rate:=10.0 use_local_tp:=false cruise_speed:=7.7 acceptance_radius:=2.0 max_pitch_deg:=30.0">
+        <plugin layer="guidance" name="to_goal_guidance" type="uuv_control/ToGoalGuidance">
+            <update_rate>${update_rate}</update_rate>
+            <use_local_targetpoint_>${use_local_tp}</use_local_targetpoint_>
+            <cruise_speed>${cruise_speed}</cruise_speed>
+            <acceptance_radius>${acceptance_radius}</acceptance_radius>
+            <max_pitch_deg>${max_pitch_deg}</max_pitch_deg>
+        </plugin>
+    </xacro:macro>
+</robot>

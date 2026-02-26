@@ -1,21 +1,22 @@
-#include <uuv_control/interface/ActuatorBase.h>
+#include <uuv_interface/ActuatorBase.h>
 #include <pluginlib/class_list_macros.h>
 #include <sensor_msgs/JointState.h>
-#include <uuv_control/LauvActuatorState.h>
+#include <uuv_interface/LauvActuatorState.h>
 #include <cmath>
 #include <algorithm>
+#include <uuv_interface/utils/XmlParamReader.h>
 
 namespace uuv_control {
 
 
-class LauvActuator : public ActuatorBase {
+class LauvActuator : public uuv_interface::ActuatorBase {
 private:
     ros::Publisher pub_joint_;
     ros::Publisher pub_actuator_;
     
-    Thruster thruster;
-    Fin fin_vertical;    // 垂直舵 (偏航)
-    Fin fin_horizontal;  // 水平舵 (俯仰)
+    uuv_interface::Thruster thruster;
+    uuv_interface::Fin fin_vertical;    // 垂直舵 (偏航)
+    uuv_interface::Fin fin_horizontal;  // 水平舵 (俯仰)
     double x_fin;
 
     double cmd_omega_ = 0.0;         // 推进器转速
@@ -28,20 +29,25 @@ private:
     bool is_first_run_ = true;
 
 public:
-    void initialize(ros::NodeHandle& gnh) override {
-        std::string ns = "/LauvActuator/";
+    void initialize(ros::NodeHandle& gnh, const std::string& plugin_xml) override {
         
-        gnh.param(ns+"thruster/rotor_constant", thruster.rotor_constant, 0.0002);
-        gnh.param(ns+"thruster/max_rpm", thruster.max_rpm, 3000.0);
-        gnh.param(ns+"thruster/time_constant", thruster.time_constant, 0.6); // 加载时间常数
+        uuv_interface::XmlParamReader reader(plugin_xml);
+        
+        // 使用 getChild 获取内嵌标签读取器！
+        uuv_interface::XmlParamReader t_reader = reader.getChild("thruster");
+        t_reader.param("rotor_constant", thruster.rotor_constant, 0.0002);
+        t_reader.param("max_rpm", thruster.max_rpm, 3000.0);
+        t_reader.param("time_constant", thruster.time_constant, 0.6);
+
         double density, area, lift_c, drag_c, max_deg, fin_tc;
-        gnh.param(ns+"fin/fluid_density", density, 1028.0);
-        gnh.param(ns+"fin/fin_area", area, 0.0064);
-        gnh.param(ns+"fin/lift_coefficient", lift_c, 3.0);
-        gnh.param(ns+"fin/drag_coefficient", drag_c, 1.98);
-        gnh.param(ns+"fin/max_deg", max_deg, 30.0); 
-        gnh.param(ns+"fin/x_fin", x_fin, -0.4);
-        gnh.param(ns+"fin/time_constant", fin_tc, 0.2); // 加载时间常数
+        uuv_interface::XmlParamReader f_reader = reader.getChild("fin");
+        f_reader.param("fluid_density", density, 1028.0);
+        f_reader.param("fin_area", area, 0.0064);
+        f_reader.param("lift_coefficient", lift_c, 3.0);
+        f_reader.param("drag_coefficient", drag_c, 1.98);
+        f_reader.param("max_deg", max_deg, 30.0);
+        f_reader.param("x_fin", x_fin, -0.4);
+        f_reader.param("time_constant", fin_tc, 0.2);
         double max_rad = max_deg * M_PI / 180.0;
         
         fin_vertical.fluid_density = density; fin_vertical.fin_area = area;
@@ -51,14 +57,14 @@ public:
         fin_horizontal.lift_coefficient = lift_c; fin_horizontal.drag_coefficient = drag_c;
         fin_horizontal.max_angle = max_rad; fin_horizontal.time_constant = fin_tc;
 
-        ROS_INFO_STREAM("[LauvActuator] Parameter Loaded: thruster/rotor_constant=\n"<<thruster.rotor_constant
+        ROS_INFO_STREAM("[LauvActuator] Xml Params Loaded: thruster/rotor_constant=\n"<<thruster.rotor_constant
             <<" \nthruster/max_rpm=\n"<<thruster.max_rpm<<" \nthruster/time_constant=\n"<<thruster.time_constant<<" \nfin/fluid_density=\n"<<density<<" \nfin/fin_area=\n"<<area
             <<" \nfin/lift_coefficient=\n"<<lift_c<<" \nfin/drag_coefficient=\n"<<drag_c<<" \nfin/max_deg=\n"<<max_deg
             <<" \nfin/x_fin=\n"<<x_fin<<" \nfin/time_constant=\n"<<fin_tc);
 
         // 创建 joint 关节状态发布器
         pub_joint_ = gnh.advertise<sensor_msgs::JointState>("joint_states", 10);
-        pub_actuator_ = gnh.advertise<uuv_control::LauvActuatorState>("actuator_states", 10);
+        pub_actuator_ = gnh.advertise<uuv_interface::LauvActuatorState>("actuator_states", 10);
         last_time_ = ros::Time::now();
     }
 
@@ -97,8 +103,8 @@ public:
         // 1. 获取平滑后的真实推进器推力 (封装好的极简接口)
         double X_force_prop = thruster.computeThrust(cmd_omega_, dt);
         // 2. 获取平滑后的真实舵面升力与阻力 (封装好的极简接口，内部自带有效攻角计算与限幅)
-        FinForces vert_forces = fin_vertical.computeForces(cmd_delta_v_, u, v+x_fin*r, dt);
-        FinForces horz_forces = fin_horizontal.computeForces(cmd_delta_h_, u, w-x_fin*q, dt);
+        uuv_interface::FinForces vert_forces = fin_vertical.computeForces(cmd_delta_v_, u, v+x_fin*r, dt);
+        uuv_interface::FinForces horz_forces = fin_horizontal.computeForces(cmd_delta_h_, u, w-x_fin*q, dt);
         
         // 3. 计算合力 (上下左右共4个舵面，所以 * 2.0)
         double Y_force = 2.0 * vert_forces.lift;
@@ -121,7 +127,7 @@ public:
 
     void publishActuatorStates(const ros::Time& time, double dt) override {
         if (pub_actuator_.getNumSubscribers() == 0) return;
-        uuv_control::LauvActuatorState msg;
+        uuv_interface::LauvActuatorState msg;
         msg.header.stamp = time;
         msg.fin_horizontal_deg = fin_horizontal.actual_angle/M_PI*180.0;
         msg.fin_vertical_deg = fin_vertical.actual_angle / M_PI * 180.0;
@@ -156,4 +162,4 @@ public:
 
 } // namespace uuv_control
 
-PLUGINLIB_EXPORT_CLASS(uuv_control::LauvActuator, uuv_control::ActuatorBase)
+PLUGINLIB_EXPORT_CLASS(uuv_control::LauvActuator, uuv_interface::ActuatorBase)

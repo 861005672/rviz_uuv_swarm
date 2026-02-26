@@ -75,7 +75,7 @@ Visualization Manager:
           Show Trail: false
           Value: true
       Name: RobotModel
-      Robot Description: robot_description
+      Robot Description: uuv_0/robot_description
       TF Prefix: ""
       Update Interval: 0
       Value: true
@@ -140,7 +140,7 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: true
-      Enabled: false
+      Enabled: true
       Keep: 3000
       Name: Odometry
       Position Tolerance: 1
@@ -157,7 +157,7 @@ Visualization Manager:
         Value: Arrow
       Topic: /uuv_0/odom
       Unreliable: false
-      Value: false
+      Value: true
     - Alpha: 1
       Arrow Width: 0.5
       Class: rviz/WrenchStamped
@@ -243,8 +243,8 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz/Orbit
-      Distance: 2.6231272220611572
+      Class: rviz/ThirdPersonFollower
+      Distance: 7.928867340087891
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -252,17 +252,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.23842187225818634
-        Y: -0.2451259195804596
-        Z: 0.0855330228805542
-      Focal Shape Fixed Size: true
+        X: -0.33363908529281616
+        Y: 0.015179641544818878
+        Z: 5.960464477539063e-08
+      Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.3347971439361572
+      Pitch: 0.3503986597061157
       Target Frame: uuv_0/base_link
-      Yaw: 4.516796588897705
+      Yaw: 3.1304140090942383
     Saved: ~
 Window Geometry:
   Displays:
@@ -280,5 +280,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1401
-  X: 110
-  Y: 29
+  X: 173
+  Y: 27

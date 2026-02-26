@@ -8,9 +8,11 @@
       "includePath": [
         "/opt/ros/noetic/include/**",
         "/usr/include/**",
-        "${workspaceFolder}/devel/include/**",
+        "${workspaceFolder}/devel/include/uuv_control/**",
+        "${workspaceFolder}/devel/include/uuv_interface/**",
         "${workspaceFolder}/src/uuv_control/include/**",
-        "${workspaceFolder}/src/uuv_sensor/include/**"
+        "${workspaceFolder}/src/uuv_sensor/include/**",
+        "${workspaceFolder}/src/uuv_interface/include/**"
       ],
       "name": "ROS",
       "intelliSenseMode": "gcc-x64",
