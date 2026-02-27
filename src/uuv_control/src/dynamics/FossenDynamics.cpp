@@ -22,7 +22,7 @@ public:
     virtual ~FossenDynamics() = default;
 
     virtual void initialize(ros::NodeHandle& nh, const std::string& plugin_xml) override;
-    virtual uuv_interface::State3D update(const Eigen::VectorXd& tau) override;
+    virtual uuv_interface::State3D update(const Eigen::VectorXd& tau, const ros::Time& current_time) override;
     virtual uuv_interface::State3D getState() override;
 
        // 获取由上层控制器输出的期望受力/力矩
@@ -37,6 +37,8 @@ public:
        virtual Eigen::VectorXd getRestoringForce() const override { return last_restore_force_; }
        // 获取UUV受到的合力/力矩
        virtual Eigen::VectorXd getTotalForce() const override { return last_total_force_; }
+
+       virtual void publishVisuals(const ros::Time& current_time) override;
 
 private:
     // 辅助工具函数
@@ -86,8 +88,10 @@ private:
     uuv_interface::State3D current_state_;
 
     bool publish_debug_visuals_;
+    bool is_pub_actuator_state_ = false;
 
-    ros::Time last_time_;
+    ros::Time last_update_time_;
+    ros::Time last_joint_pub_time_;
 
     Eigen::Quaterniond quat_;
 
@@ -149,6 +153,8 @@ void FossenDynamics::initialize(ros::NodeHandle& gnh, const std::string& plugin_
     reader.paramMatrix("linear_damping", D_lin_, 6, 6);
     reader.paramMatrix("linear_damping_forward_speed", D_lin_forward_speed_, 6, 6);
     reader.paramMatrix("quadratic_damping", D_quad_, 6, 6);
+
+    reader.param("is_pub_actuator_state", is_pub_actuator_state_, false);
     
     cog_ << cog_vec[0], cog_vec[1], cog_vec[2];
     cob_ << cob_vec[0], cob_vec[1], cob_vec[2];
@@ -200,7 +206,8 @@ void FossenDynamics::initialize(ros::NodeHandle& gnh, const std::string& plugin_
     <<" \ncog=\n"<<cog_<<" \ncob=\n"<<cob_<<" \nM_rb=\n"<<M_rb<<" \nM_added=\n"<<M_added<<" \nD_lin=\n"<<D_lin_
     <<" \nD_lin_forward_speed=\n"<<D_lin_forward_speed_<<" \nD_quad=\n"<<D_quad_<<" \nM=\n"<<M_<<" \nW=\n"<<W_<<" \nB=\n"<<B_);
 
-    last_time_ = ros::Time::now();
+    last_update_time_ =  ros::Time(0);
+    last_joint_pub_time_ = ros::Time(0);
 
     // 调用调试力发布函数
     if (publish_debug_visuals_) {
@@ -320,11 +327,17 @@ Eigen::VectorXd FossenDynamics::computeRestoringForces(const Eigen::Quaterniond&
     return g;
 }
 
-uuv_interface::State3D FossenDynamics::update(const Eigen::VectorXd& tau_cmd) {
-    ros::Time now = ros::Time::now();
-    double dt = (now - last_time_).toSec();
+uuv_interface::State3D FossenDynamics::update(const Eigen::VectorXd& tau_cmd, const ros::Time& current_time) {
+    // 首次滴答对齐：如果时间为0，强制与主控节点的第一帧时间完美绑定
+    if (last_update_time_.isZero()) {
+        last_update_time_ = current_time;
+        last_joint_pub_time_ = current_time;
+        return current_state_; // 第一帧只对齐时钟，不积分
+    }
+
+    double dt = (current_time - last_update_time_).toSec();
     if (dt <= 0.0 || dt < (1.0 / this->update_rate_) * 0.95) return current_state_;
-    last_time_ = now;
+    last_update_time_ = current_time;
     // 0. 记录上层控制大脑发来的期望力 并且计算UUV的执行力，力矩
     last_cmd_force_ = tau_cmd;
     if (actuator_) {
@@ -368,16 +381,23 @@ uuv_interface::State3D FossenDynamics::update(const Eigen::VectorXd& tau_cmd) {
     current_state_.u = nu_(0); current_state_.v = nu_(1); current_state_.w = nu_(2);
     current_state_.p = nu_(3); current_state_.q = nu_(4); current_state_.r = nu_(5);
 
+    return current_state_;
+}
+
+void FossenDynamics::publishVisuals(const ros::Time& current_time) {
     if (actuator_) {
-        actuator_->publishJointStates(now, dt);
-        actuator_->publishActuatorStates(now, dt);
+        // 时间差只管向后算，无需再做频率拦截，因为主控会严格把关！
+        double joint_pub_dt = (current_time - last_joint_pub_time_).toSec();
+        if (joint_pub_dt > 0.0) {
+            actuator_->publishJointStates(current_time, joint_pub_dt);
+            if (is_pub_actuator_state_) actuator_->publishActuatorStates(current_time, joint_pub_dt);
+            last_joint_pub_time_ = current_time;
+        }
     }
     
     if (publish_debug_visuals_) {
-        publishDebugWrenches(now);
+        publishDebugWrenches(current_time);
     }
-
-    return current_state_;
 }
 
 uuv_interface::State3D FossenDynamics::getState() {

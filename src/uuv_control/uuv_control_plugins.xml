@@ -37,3 +37,16 @@
     </class>
 
 </library>
+
+<library path="lib/libControlNodelet">
+        <class name="uuv_control/ControlNodelet" 
+               type="uuv_control::UUVControlNodelet" 
+               base_class_type="nodelet::Nodelet">
+            <description>Nodelet for UUV control execution</description>
+        </class>
+        <class name="uuv_control/StateAggregatorNodelet" 
+               type="uuv_control::StateAggregatorNodelet" 
+               base_class_type="nodelet::Nodelet">
+            <description>Nodelet for aggregating multi-UUV states</description>
+        </class>
+</library>

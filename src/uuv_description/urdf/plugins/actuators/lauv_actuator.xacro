@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <xacro:macro name="insert_lauv_actuator">
+    <xacro:macro name="insert_lauv_actuator" >
         <plugin layer="actuator" name="lauv_actuator" type="uuv_control/LauvActuator">
             <thruster>
                 <rotor_constant>0.0002</rotor_constant>

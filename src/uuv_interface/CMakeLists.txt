@@ -52,6 +52,7 @@ add_message_files(
   Cmd3D.msg
   LauvActuatorState.msg
   TargetPoint3D.msg
+  State3DArray.msg
 )
 
 ## Generate services in the 'srv' folder

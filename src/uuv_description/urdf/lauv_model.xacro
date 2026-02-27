@@ -18,7 +18,7 @@
 
 
   <xacro:if value="${'$(arg dynamics_type)' == 'fossen'}">
-      <xacro:insert_fossen_dynamics update_rate="100.0" />
+      <xacro:insert_fossen_dynamics update_rate="100.0" is_pub_actuator_state="false" />
   </xacro:if>
   <xacro:if value="${'$(arg dynamics_type)' == 'first_order'}">
       <xacro:insert_first_order_dynamics update_rate="100.0" />

@@ -5,8 +5,8 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /RobotModel1
+        - /RobotModel2
         - /TF1/Frames1
-        - /LaserScan1
       Splitter Ratio: 0.5
     Tree Height: 455
   - Class: rviz/Selection
@@ -26,7 +26,7 @@ Panels:
   - Class: rviz/Time
     Name: Time
     SyncMode: 0
-    SyncSource: LaserScan
+    SyncSource: ""
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -44,38 +44,84 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        uuv_0/base_link:
+        groupA/0/base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        uuv_0/fin_0:
+        groupA/0/fin_0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        uuv_0/fin_1:
+        groupA/0/fin_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        uuv_0/fin_2:
+        groupA/0/fin_2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        uuv_0/fin_3:
+        groupA/0/fin_3:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        uuv_0/thruster_0:
+        groupA/0/thruster_0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
       Name: RobotModel
-      Robot Description: uuv_0/robot_description
+      Robot Description: groupA/0/robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        groupA/1/base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        groupA/1/fin_0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        groupA/1/fin_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        groupA/1/fin_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        groupA/1/fin_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        groupA/1/thruster_0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: groupA/1/robot_description
       TF Prefix: ""
       Update Interval: 0
       Value: true
@@ -159,36 +205,6 @@ Visualization Manager:
       Unreliable: false
       Value: true
     - Alpha: 1
-      Arrow Width: 0.5
-      Class: rviz/WrenchStamped
-      Enabled: false
-      Force Arrow Scale: 2
-      Force Color: 204; 51; 51
-      Hide Small Values: true
-      History Length: 1
-      Name: WrenchStamped
-      Queue Size: 10
-      Topic: /uuv_0/total_wrench
-      Torque Arrow Scale: 2
-      Torque Color: 204; 204; 51
-      Unreliable: false
-      Value: false
-    - Alpha: 1
-      Arrow Width: 0.5
-      Class: rviz/WrenchStamped
-      Enabled: false
-      Force Arrow Scale: 2
-      Force Color: 78; 154; 6
-      Hide Small Values: true
-      History Length: 1
-      Name: WrenchStamped
-      Queue Size: 10
-      Topic: /uuv_0/coriolis_wrench
-      Torque Arrow Scale: 2
-      Torque Color: 117; 80; 123
-      Unreliable: false
-      Value: false
-    - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
         Max Value: -9999
@@ -244,7 +260,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/ThirdPersonFollower
-      Distance: 7.928867340087891
+      Distance: 1.16533625125885
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -252,18 +268,58 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.33363908529281616
-        Y: 0.015179641544818878
-        Z: 5.960464477539063e-08
+        X: -0.1048702597618103
+        Y: 0.009693197906017303
+        Z: 2.0727801697262294e-08
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.3503986597061157
-      Target Frame: uuv_0/base_link
-      Yaw: 3.1304140090942383
-    Saved: ~
+      Pitch: -0.06960117816925049
+      Target Frame: groupA/0/base_link
+      Yaw: 3.1554107666015625
+    Saved:
+      - Class: rviz/ThirdPersonFollower
+        Distance: 1.16533625125885
+        Enable Stereo Rendering:
+          Stereo Eye Separation: 0.05999999865889549
+          Stereo Focal Distance: 1
+          Swap Stereo Eyes: false
+          Value: false
+        Field of View: 0.7853981852531433
+        Focal Point:
+          X: -0.1048702597618103
+          Y: 0.009693197906017303
+          Z: 2.0727801697262294e-08
+        Focal Shape Fixed Size: false
+        Focal Shape Size: 0.05000000074505806
+        Invert Z Axis: false
+        Name: groupA/0
+        Near Clip Distance: 0.009999999776482582
+        Pitch: -0.06960117816925049
+        Target Frame: groupA/0/base_link
+        Yaw: 3.1554107666015625
+      - Class: rviz/ThirdPersonFollower
+        Distance: 1.2678582668304443
+        Enable Stereo Rendering:
+          Stereo Eye Separation: 0.05999999865889549
+          Stereo Focal Distance: 1
+          Swap Stereo Eyes: false
+          Value: false
+        Field of View: 0.7853981852531433
+        Focal Point:
+          X: -0.22903352975845337
+          Y: 0.026386894285678864
+          Z: -2.9802322387695312e-08
+        Focal Shape Fixed Size: false
+        Focal Shape Size: 0.05000000074505806
+        Invert Z Axis: false
+        Name: groupA/1
+        Near Clip Distance: 0.009999999776482582
+        Pitch: 0.010398751124739647
+        Target Frame: groupA/1/base_link
+        Yaw: 4.100406169891357
 Window Geometry:
   Displays:
     collapsed: false
@@ -280,5 +336,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1401
-  X: 173
-  Y: 27
+  X: 461
+  Y: 69

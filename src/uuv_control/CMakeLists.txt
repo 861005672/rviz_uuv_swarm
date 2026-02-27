@@ -22,6 +22,7 @@ find_package(catkin REQUIRED COMPONENTS
   dynamic_reconfigure
   uuv_sensor
   uuv_interface
+  nodelet
 )
 
 find_package(Eigen3 REQUIRED)
@@ -149,6 +150,17 @@ add_library(ControlPlugins
 )
 
 add_dependencies(ControlPlugins ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+
+add_library(ControlNodelet 
+            src/run/ControlNodelet.cpp
+            src/run/StateAggregatorNodelet.cpp
+            )
+target_link_libraries(ControlNodelet
+  ${catkin_LIBRARIES}
+  tinyxml
+)
+add_dependencies(ControlNodelet ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 
 ## Add cmake target dependencies of the library

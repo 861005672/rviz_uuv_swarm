@@ -18,7 +18,7 @@ public:
 
     // 核心步进函数：输入推力(tau)，输出下一时刻的状态
     // dt: 时间步长, tau: [Fx, Fy, Fz, Tx, Ty, Tz]
-    virtual uuv_interface::State3D update(const Eigen::VectorXd& tau_cmd) = 0;
+    virtual uuv_interface::State3D update(const Eigen::VectorXd& tau_cmd, const ros::Time& current_time) = 0;
 
     // 获取当前状态
     virtual uuv_interface::State3D getState() = 0;
@@ -36,7 +36,8 @@ public:
     // 获取UUV受到的合力/力矩
     virtual Eigen::VectorXd getTotalForce() const { return Eigen::VectorXd::Zero(6); }
 
-
+    virtual void publishVisuals(const ros::Time& time) {}
+    
 protected:
     ros::Publisher pub_cmd_wrench_;
     ros::Publisher pub_actuator_wrench_;

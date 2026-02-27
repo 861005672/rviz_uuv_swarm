@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <xacro:macro name="insert_fossen_dynamics" params="update_rate:=100.0">
+    <xacro:macro name="insert_fossen_dynamics" params="update_rate:=100.0 is_pub_actuator_state:=false">
         <plugin layer="dynamics" name="fossen_model" type="uuv_control/FossenDynamics">
             <update_rate>${update_rate}</update_rate>
             <mass>18.0</mass>
@@ -10,6 +10,7 @@
             <gravity>9.81</gravity>
             <neutrally_buoyant>true</neutrally_buoyant>
             <publish_debug_visuals>true</publish_debug_visuals>
+            <is_pub_actuator_state>${is_pub_actuator_state}</is_pub_actuator_state>
             
             <cog>0.0 0.0 0.0</cog>
             <cob>0.0 0.0 -0.01</cob>

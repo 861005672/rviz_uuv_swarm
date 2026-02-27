@@ -27,12 +27,23 @@ private:
 
     ros::Time last_time_;
     bool is_first_run_ = true;
+    std::string uuv_name_;
 
 public:
     void initialize(ros::NodeHandle& gnh, const std::string& plugin_xml) override {
-        
+
+        std::string ns = gnh.getNamespace();
+    
+        // 剔除可能存在的开头斜杠，转换为纯净前缀 "uuv_0"
+        if (!ns.empty() && ns.front() == '/') {
+            uuv_name_ = ns.substr(1);
+        } else {
+            uuv_name_ = ns;
+        }
+            
         uuv_interface::XmlParamReader reader(plugin_xml);
-        
+
+
         // 使用 getChild 获取内嵌标签读取器！
         uuv_interface::XmlParamReader t_reader = reader.getChild("thruster");
         t_reader.param("rotor_constant", thruster.rotor_constant, 0.0002);
@@ -129,7 +140,7 @@ public:
         if (pub_actuator_.getNumSubscribers() == 0) return;
         uuv_interface::LauvActuatorState msg;
         msg.header.stamp = time;
-        msg.fin_horizontal_deg = fin_horizontal.actual_angle/M_PI*180.0;
+        msg.fin_horizontal_deg = fin_horizontal.actual_angle / M_PI*180.0;
         msg.fin_vertical_deg = fin_vertical.actual_angle / M_PI * 180.0;
         msg.thruster_rpm = thruster.actual_rpm;
         msg.thruster_force = prop_force_;
@@ -144,9 +155,9 @@ public:
         msg.header.stamp = time;
         
         msg.name = {
-            "uuv_0/thruster_0_joint",
-            "uuv_0/fin_0_joint", "uuv_0/fin_1_joint", 
-            "uuv_0/fin_2_joint", "uuv_0/fin_3_joint"
+            uuv_name_+"/thruster_0_joint",
+            uuv_name_+"/fin_0_joint", uuv_name_+"/fin_1_joint", 
+            uuv_name_+"/fin_2_joint", uuv_name_+"/fin_3_joint"
         };
 
         prop_angle_ += thruster.actual_rpm * dt;

@@ -48,7 +48,7 @@ public:
         ROS_INFO("[FirstOrderDynamics] XML Params Loaded: Mass=%.1f, Drag=%.1f (Ideal Actuator Mode)", mass_, drag_);
     }
 
-    uuv_interface::State3D update(const Eigen::VectorXd& tau_cmd) override {
+    uuv_interface::State3D update(const Eigen::VectorXd& tau_cmd, const ros::Time& current_time) override {
 
         ros::Time now = ros::Time::now();
         double dt = (now - last_time_).toSec();

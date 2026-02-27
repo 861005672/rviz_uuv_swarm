@@ -1,0 +1,50 @@
+<launch>
+    <arg name="dynamics_type" default="fossen" />
+    <arg name="controller_type" default="pid" />
+    <arg name="guidance_type" default="to_goal" />
+    <arg name="visual_rate" default="10.0" />
+
+    <include file="$(find uuv_environment)/launch/start_env.launch" />
+
+    <node pkg="nodelet" type="nodelet" name="groupA_manager" args="manager" output="screen" />
+    
+    <node pkg="nodelet" type="nodelet" name="groupA_aggregator" args="load uuv_control/StateAggregatorNodelet /groupA_manager" output="screen">
+        <param name="group_name" value="groupA"/>
+        <param name="uuv_count" value="2"/>
+    </node>
+
+    <group ns="groupA/0">  
+        <param name="robot_description" 
+           command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' 
+                    namespace:='groupA/0' 
+                    dynamics_type:=$(arg dynamics_type)
+                    controller_type:=$(arg controller_type) 
+                    guidance_type:=$(arg guidance_type)" />  
+
+        <node pkg="nodelet" type="nodelet" name="control" args="load uuv_control/ControlNodelet /groupA_manager" output="screen">
+            <param name="visual_rate" value="$(arg visual_rate)" />
+
+        </node>
+        
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    </group>
+
+    <group ns="groupA/1">  
+        <param name="robot_description" 
+           command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' 
+                    namespace:='groupA/1' 
+                    dynamics_type:=$(arg dynamics_type)
+                    controller_type:=$(arg controller_type) 
+                    guidance_type:=$(arg guidance_type)" />          
+
+        <node pkg="nodelet" type="nodelet" name="control" args="load uuv_control/ControlNodelet /groupA_manager" output="screen">
+            <param name="visual_rate" value="$(arg visual_rate)" />
+
+        </node>
+        
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    </group>
+
+    <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" output="screen" if="$(eval arg('controller_type') == 'pid')"/>
+
+</launch>

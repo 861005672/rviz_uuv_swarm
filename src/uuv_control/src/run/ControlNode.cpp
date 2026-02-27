@@ -36,7 +36,6 @@ private:
     // 发布与广播
     ros::Publisher pub_state_;
     ros::Publisher pub_odom_;
-    ros::Publisher pub_joint_;
     tf2_ros::TransformBroadcaster tf_broadcaster_;
     
     // 当前由控制算法（如手柄或APF）期望输出的指令合力
@@ -137,13 +136,14 @@ public:
         ROS_INFO("[ControlNode] ControlNode Loop running at %.1f Hz (Plugins will self-regulate)", loop_freq);
 
         while(ros::ok()) {
+            ros::Time current_time = ros::Time::now();
             // === 1. 制导层 ===
             uuv_interface::Cmd3D g_out = guidance_->compute();
             controller_->setCommand(g_out);
             // === 2. 控制层 ===
             current_tau_cmd_ = controller_->compute();
             // === 3. 动力学层更新逻辑 ===
-            current_state_ = dynamics_->update(current_tau_cmd_);
+            current_state_ = dynamics_->update(current_tau_cmd_, current_time);
             // === 4. 更新传感器插件 === 
             updateSensor();
             // === 4. 更新可视化 ===Z
