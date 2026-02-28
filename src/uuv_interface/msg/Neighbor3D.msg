@@ -1,0 +1,3 @@
+string uuv_name
+float64 distance
+uuv_interface/State3D state

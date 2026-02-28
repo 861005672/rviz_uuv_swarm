@@ -72,11 +72,17 @@ public:
         }
         // 允许单独配置世界坐标系，默认保持为 "ned"
         pnh_.param<std::string>("world_frame", world_frame_, "ned");
+        double init_x = 0.0, init_y = 0.0, init_z = 0.0, init_yaw = 0.0;
+        pnh_.param("init_x", init_x, 0.0);
+        pnh_.param("init_y", init_y, 0.0);
+        pnh_.param("init_z", init_z, 0.0);
+        pnh_.param("init_yaw", init_yaw, 0.0);
+
+        pnh_.param<double>("visual_rate", visual_rate_, 20.0);
         // 组合UUV的命名空间
         // 自动推导该 UUV 的基座标系
         base_frame_ = uuv_ns_ + "/base_link";
 
-        pnh_.param<double>("visual_rate", visual_rate_, 20.0);
         visual_period_ = 1.0 / visual_rate_;
         last_visual_time_ = ros::Time(0);
 
@@ -103,6 +109,15 @@ public:
 
         // 使用 Timer 替代原有的阻塞式死循环
         control_timer_ = gnh_.createTimer(ros::Duration(1.0 / loop_freq), &UUVControlNodelet::timerCallback, this);
+
+        // 解析初始状态
+        uuv_interface::State3D init_state;
+        init_state.x = init_x; init_state.y = init_y; init_state.z = init_z;
+        init_state.roll = 0.0; init_state.pitch = 0.0; init_state.yaw = init_yaw;
+        init_state.u = 0.0; init_state.v = 0.0; init_state.w = 0.0;
+        init_state.p = 0.0; init_state.q = 0.0; init_state.r = 0.0;
+        dynamics_->setState(init_state);
+        current_state_ = dynamics_->getState(); // 同步状态
     }
 
     void loadPluginsFromXML() {

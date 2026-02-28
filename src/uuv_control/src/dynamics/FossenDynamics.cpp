@@ -39,6 +39,7 @@ public:
        virtual Eigen::VectorXd getTotalForce() const override { return last_total_force_; }
 
        virtual void publishVisuals(const ros::Time& current_time) override;
+       virtual void setState(const uuv_interface::State3D& state) override;
 
 private:
     // 辅助工具函数
@@ -382,6 +383,25 @@ uuv_interface::State3D FossenDynamics::update(const Eigen::VectorXd& tau_cmd, co
     current_state_.p = nu_(3); current_state_.q = nu_(4); current_state_.r = nu_(5);
 
     return current_state_;
+}
+
+
+void FossenDynamics::setState(const uuv_interface::State3D& state) {
+    // 覆盖位姿
+    eta_ << state.x, state.y, state.z, state.roll, state.pitch, state.yaw;
+    // 清零速度
+    nu_.setZero();
+    
+    // 欧拉角转四元数以供内部物理计算
+    Eigen::AngleAxisd rollAngle(state.roll, Eigen::Vector3d::UnitX());
+    Eigen::AngleAxisd pitchAngle(state.pitch, Eigen::Vector3d::UnitY());
+    Eigen::AngleAxisd yawAngle(state.yaw, Eigen::Vector3d::UnitZ());
+    quat_ = yawAngle * pitchAngle * rollAngle;
+    
+    // 更新当前状态结构体
+    current_state_ = state;
+    current_state_.u = current_state_.v = current_state_.w = 0.0;
+    current_state_.p = current_state_.q = current_state_.r = 0.0;
 }
 
 void FossenDynamics::publishVisuals(const ros::Time& current_time) {

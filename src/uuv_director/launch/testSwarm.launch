@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find uuv_environment)/launch/start_env.launch" />
+
+    <node pkg="uuv_director" type="uuv_loader.py" name="uuv_loader_node" output="screen" />
+
+    <node pkg="uuv_director" type="neighborhood_calculator.py" name="uuv_neighbor_calculator" output="screen">
+        <param name="nb_sense_radius" value="30" />
+    </node>
+
+    <node pkg="rqt_service_caller" type="rqt_service_caller" name="rqt_service_caller" output="screen" />
+
+</launch>

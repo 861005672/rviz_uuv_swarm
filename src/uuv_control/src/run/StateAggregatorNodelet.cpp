@@ -25,6 +25,7 @@ private:
 
     std::string group_name_;
     int uuv_count_;
+    int start_global_id_;
 
     void stateCallback(const uuv_interface::State3D::ConstPtr& msg, int uuv_id) {
         std::lock_guard<std::mutex> lock(mutex_);
@@ -53,6 +54,7 @@ public:
         // 核心变更：读取组名和数量
         pnh_.param<std::string>("group_name", group_name_, "groupA");
         pnh_.param<int>("uuv_count", uuv_count_, 0);
+        pnh_.param<int>("start_global_id", start_global_id_, 0);
 
         if (uuv_count_ <= 0) {
             NODELET_WARN("[StateAggregatorNodelet] 'uuv_count' is 0. Aggregator is idle.");
@@ -61,7 +63,8 @@ public:
 
         // 自动根据数量批量生成订阅的 Topic： /groupA/0/state, /groupA/1/state ...
         for (int id = 0; id < uuv_count_; ++id) {
-            std::string topic = "/" + group_name_ + "/" + std::to_string(id) + "/state";
+            int current_global_id = start_global_id_ + id;
+            std::string topic = "/uuv_" + std::to_string(current_global_id) + "/state";
             subs_.push_back(nh_.subscribe<uuv_interface::State3D>(
                 topic, 10, 
                 boost::bind(&StateAggregatorNodelet::stateCallback, this, boost::placeholders::_1, id)

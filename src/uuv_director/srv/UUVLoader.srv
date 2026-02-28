@@ -1,0 +1,12 @@
+int32 total_uuvs
+int32 group_size
+string init_type
+float64[] center
+float64 radius
+float64 min_dist
+string dynamics_type
+string controller_type
+string guidance_type
+---
+bool success
+string message

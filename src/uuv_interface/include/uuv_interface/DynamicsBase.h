@@ -37,6 +37,7 @@ public:
     virtual Eigen::VectorXd getTotalForce() const { return Eigen::VectorXd::Zero(6); }
 
     virtual void publishVisuals(const ros::Time& time) {}
+    virtual void setState(const uuv_interface::State3D& state) {}
     
 protected:
     ros::Publisher pub_cmd_wrench_;
@@ -48,7 +49,6 @@ protected:
 
     // 基类统一初始化发布器
     void initDebugPublishers(ros::NodeHandle& gnh) {
-
         pub_cmd_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("cmd_wrench", 10);
         pub_actuator_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("actuator_wrench", 10);
         pub_coriolis_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("coriolis_wrench", 10);

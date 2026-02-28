@@ -4,8 +4,6 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /RobotModel1
-        - /RobotModel2
         - /TF1/Frames1
       Splitter Ratio: 0.5
     Tree Height: 455
@@ -44,38 +42,38 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        groupA/0/base_link:
+        uuv_0/base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        groupA/0/fin_0:
+        uuv_0/fin_0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        groupA/0/fin_1:
+        uuv_0/fin_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        groupA/0/fin_2:
+        uuv_0/fin_2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        groupA/0/fin_3:
+        uuv_0/fin_3:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        groupA/0/thruster_0:
+        uuv_0/thruster_0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
       Name: RobotModel
-      Robot Description: groupA/0/robot_description
+      Robot Description: uuv_0/robot_description
       TF Prefix: ""
       Update Interval: 0
       Value: true
@@ -90,38 +88,130 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        groupA/1/base_link:
+        uuv_1/base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        groupA/1/fin_0:
+        uuv_1/fin_0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        groupA/1/fin_1:
+        uuv_1/fin_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        groupA/1/fin_2:
+        uuv_1/fin_2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        groupA/1/fin_3:
+        uuv_1/fin_3:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        groupA/1/thruster_0:
+        uuv_1/thruster_0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
       Name: RobotModel
-      Robot Description: groupA/1/robot_description
+      Robot Description: uuv_1/robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        uuv_2/base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        uuv_2/fin_0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        uuv_2/fin_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        uuv_2/fin_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        uuv_2/fin_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        uuv_2/thruster_0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: uuv_2/robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        uuv_3/base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        uuv_3/fin_0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        uuv_3/fin_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        uuv_3/fin_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        uuv_3/fin_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        uuv_3/thruster_0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: uuv_3/robot_description
       TF Prefix: ""
       Update Interval: 0
       Value: true
@@ -204,33 +294,110 @@ Visualization Manager:
       Topic: /uuv_0/odom
       Unreliable: false
       Value: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: -9999
-        Min Value: 9999
+    - Angle Tolerance: 1
+      Class: rviz/Odometry
+      Covariance:
+        Orientation:
+          Alpha: 0.5
+          Color: 255; 255; 127
+          Color Style: Unique
+          Frame: Local
+          Offset: 1
+          Scale: 1
+          Value: true
+        Position:
+          Alpha: 0.30000001192092896
+          Color: 204; 51; 204
+          Scale: 1
+          Value: true
         Value: true
-      Axis: X
-      Channel Name: intensity
-      Class: rviz/LaserScan
-      Color: 255; 255; 255
-      Color Transformer: AxisColor
-      Decay Time: 0
       Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Min Color: 0; 0; 0
-      Name: LaserScan
-      Position Transformer: XYZ
+      Keep: 3000
+      Name: Odometry
+      Position Tolerance: 1
       Queue Size: 10
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 10
-      Style: Points
-      Topic: /uuv_0/sonar_scan
+      Shape:
+        Alpha: 1
+        Axes Length: 1
+        Axes Radius: 0.10000000149011612
+        Color: 255; 25; 0
+        Head Length: 0.30000001192092896
+        Head Radius: 0.10000000149011612
+        Shaft Length: 1
+        Shaft Radius: 0.05000000074505806
+        Value: Arrow
+      Topic: /uuv_1/odom
       Unreliable: false
-      Use Fixed Frame: true
-      Use rainbow: true
+      Value: true
+    - Angle Tolerance: 1
+      Class: rviz/Odometry
+      Covariance:
+        Orientation:
+          Alpha: 0.5
+          Color: 255; 255; 127
+          Color Style: Unique
+          Frame: Local
+          Offset: 1
+          Scale: 1
+          Value: true
+        Position:
+          Alpha: 0.30000001192092896
+          Color: 204; 51; 204
+          Scale: 1
+          Value: true
+        Value: true
+      Enabled: true
+      Keep: 3000
+      Name: Odometry
+      Position Tolerance: 1
+      Queue Size: 10
+      Shape:
+        Alpha: 1
+        Axes Length: 1
+        Axes Radius: 0.10000000149011612
+        Color: 255; 25; 0
+        Head Length: 0.30000001192092896
+        Head Radius: 0.10000000149011612
+        Shaft Length: 1
+        Shaft Radius: 0.05000000074505806
+        Value: Arrow
+      Topic: /uuv_2/odom
+      Unreliable: false
+      Value: true
+    - Angle Tolerance: 1
+      Class: rviz/Odometry
+      Covariance:
+        Orientation:
+          Alpha: 0.5
+          Color: 255; 255; 127
+          Color Style: Unique
+          Frame: Local
+          Offset: 1
+          Scale: 1
+          Value: true
+        Position:
+          Alpha: 0.30000001192092896
+          Color: 204; 51; 204
+          Scale: 1
+          Value: true
+        Value: true
+      Enabled: true
+      Keep: 3000
+      Name: Odometry
+      Position Tolerance: 1
+      Queue Size: 10
+      Shape:
+        Alpha: 1
+        Axes Length: 1
+        Axes Radius: 0.10000000149011612
+        Color: 255; 25; 0
+        Head Length: 0.30000001192092896
+        Head Radius: 0.10000000149011612
+        Shaft Length: 1
+        Shaft Radius: 0.05000000074505806
+        Value: Arrow
+      Topic: /uuv_3/odom
+      Unreliable: false
       Value: true
   Enabled: true
   Global Options:
@@ -268,16 +435,16 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.1048702597618103
-        Y: 0.009693197906017303
-        Z: 2.0727801697262294e-08
+        X: 0
+        Y: 0
+        Z: 0
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
       Pitch: -0.06960117816925049
-      Target Frame: groupA/0/base_link
+      Target Frame: uuv_0/base_link
       Yaw: 3.1554107666015625
     Saved:
       - Class: rviz/ThirdPersonFollower
@@ -289,19 +456,19 @@ Visualization Manager:
           Value: false
         Field of View: 0.7853981852531433
         Focal Point:
-          X: -0.1048702597618103
-          Y: 0.009693197906017303
-          Z: 2.0727801697262294e-08
+          X: 0
+          Y: 0
+          Z: 0
         Focal Shape Fixed Size: false
         Focal Shape Size: 0.05000000074505806
         Invert Z Axis: false
-        Name: groupA/0
+        Name: uuv_0
         Near Clip Distance: 0.009999999776482582
         Pitch: -0.06960117816925049
-        Target Frame: groupA/0/base_link
+        Target Frame: uuv_0/base_link
         Yaw: 3.1554107666015625
       - Class: rviz/ThirdPersonFollower
-        Distance: 1.2678582668304443
+        Distance: 1.16533625125885
         Enable Stereo Rendering:
           Stereo Eye Separation: 0.05999999865889549
           Stereo Focal Distance: 1
@@ -309,17 +476,57 @@ Visualization Manager:
           Value: false
         Field of View: 0.7853981852531433
         Focal Point:
-          X: -0.22903352975845337
-          Y: 0.026386894285678864
-          Z: -2.9802322387695312e-08
+          X: 0
+          Y: 0
+          Z: 0
         Focal Shape Fixed Size: false
         Focal Shape Size: 0.05000000074505806
         Invert Z Axis: false
-        Name: groupA/1
+        Name: uuv_1
         Near Clip Distance: 0.009999999776482582
-        Pitch: 0.010398751124739647
-        Target Frame: groupA/1/base_link
-        Yaw: 4.100406169891357
+        Pitch: -0.06960117816925049
+        Target Frame: uuv_1/base_link
+        Yaw: 3.1554107666015625
+      - Class: rviz/ThirdPersonFollower
+        Distance: 1.16533625125885
+        Enable Stereo Rendering:
+          Stereo Eye Separation: 0.05999999865889549
+          Stereo Focal Distance: 1
+          Swap Stereo Eyes: false
+          Value: false
+        Field of View: 0.7853981852531433
+        Focal Point:
+          X: 0
+          Y: 0
+          Z: 0
+        Focal Shape Fixed Size: false
+        Focal Shape Size: 0.05000000074505806
+        Invert Z Axis: false
+        Name: uuv_2
+        Near Clip Distance: 0.009999999776482582
+        Pitch: -0.06960117816925049
+        Target Frame: uuv_2/base_link
+        Yaw: 3.1554107666015625
+      - Class: rviz/ThirdPersonFollower
+        Distance: 1.16533625125885
+        Enable Stereo Rendering:
+          Stereo Eye Separation: 0.05999999865889549
+          Stereo Focal Distance: 1
+          Swap Stereo Eyes: false
+          Value: false
+        Field of View: 0.7853981852531433
+        Focal Point:
+          X: 0
+          Y: 0
+          Z: 0
+        Focal Shape Fixed Size: false
+        Focal Shape Size: 0.05000000074505806
+        Invert Z Axis: false
+        Name: uuv_3
+        Near Clip Distance: 0.009999999776482582
+        Pitch: -0.06960117816925049
+        Target Frame: uuv_3/base_link
+        Yaw: 3.1554107666015625
 Window Geometry:
   Displays:
     collapsed: false
@@ -337,4 +544,4 @@ Window Geometry:
     collapsed: false
   Width: 1401
   X: 461
-  Y: 69
+  Y: 27

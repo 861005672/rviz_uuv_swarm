@@ -25,7 +25,7 @@
   </xacro:if>
 
   <xacro:if value="${'$(arg controller_type)' == 'pid'}">
-      <xacro:insert_pid_controller update_rate="10.0" enable_dyn="true" use_local_cmd="true" />
+      <xacro:insert_pid_controller update_rate="10.0" enable_dyn="false" use_local_cmd="true" />
   </xacro:if>
   <xacro:if value="${'$(arg controller_type)' == 'teleop'}">
       <xacro:insert_teleop_controller update_rate="10.0" />

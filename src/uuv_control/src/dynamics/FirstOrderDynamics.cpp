@@ -48,6 +48,16 @@ public:
         ROS_INFO("[FirstOrderDynamics] XML Params Loaded: Mass=%.1f, Drag=%.1f (Ideal Actuator Mode)", mass_, drag_);
     }
 
+    virtual void setState(const uuv_interface::State3D& state) override {
+        state_.setZero(); // 全局清零，包含速度段
+        state_(0) = state.x;
+        state_(1) = state.y;
+        state_(2) = state.z;
+        state_(3) = state.roll;
+        state_(4) = state.pitch;
+        state_(5) = state.yaw;
+    }
+
     uuv_interface::State3D update(const Eigen::VectorXd& tau_cmd, const ros::Time& current_time) override {
 
         ros::Time now = ros::Time::now();

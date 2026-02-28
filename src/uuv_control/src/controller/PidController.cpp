@@ -112,7 +112,7 @@ public:
         last_tau_ = Eigen::VectorXd::Zero(6);
 
         if (enable_dynamic_reconfigure) {
-            ros::NodeHandle pid_nh("~PidController");
+            ros::NodeHandle pid_nh(gnh, "PidController");
             dyn_server_ = std::make_unique<dynamic_reconfigure::Server<uuv_control::PidControllerConfig>>(pid_nh);
             dyn_f_ = boost::bind(&PidController::reconfigCallback, this, _1, _2);
             dyn_server_->setCallback(dyn_f_); // 绑定后会自动触发一次回调加载当前参数服务器上的值

@@ -18,14 +18,17 @@ private:
     // 模式切换标志
     bool use_local_targetpoint_ = false;
 
-    // 目标位置
+    // 目标位置与触发标志
     uuv_interface::TargetPoint3D target_point_;
+    bool has_target_ = false; // 【新增】标记是否收到过目标点
 
     double max_pitch_deg_ = 40.0;
     double max_pitch_rad_ = 0.2;
 
     // 当前状态 (NED坐标系)
     geometry_msgs::Point current_point_;
+    double current_yaw_ = 0.0;   // 【新增】记录当前偏航角
+    double current_pitch_ = 0.0; // 【新增】记录当前俯仰角
 
     // 制导参数
     double cruise_speed_ = 7.7;     // 默认高速巡航速度 (约 15 节)
@@ -68,6 +71,7 @@ public:
     void setTargetPoint(const uuv_interface::TargetPoint3D& target) override {
         if (use_local_targetpoint_) {
             target_point_ = target;
+            has_target_ = true; // 【新增】标记已收到目标点
         }
     }
 
@@ -75,12 +79,15 @@ public:
         current_point_.x = msg->x;
         current_point_.y = msg->y;
         current_point_.z = msg->z;
+        current_yaw_ = msg->yaw;     // 【新增】实时更新当前朝向
+        current_pitch_ = msg->pitch; // 【新增】实时更新当前俯仰
     }
 
     bool targetPointServiceCallback(uuv_interface::SetTargetPoint3D::Request &req, uuv_interface::SetTargetPoint3D::Response &res) {
         target_point_.n = req.target_n;
         target_point_.e = req.target_e;
         target_point_.d = req.target_d;
+        has_target_ = true; // 【新增】服务被调用，激活运动
         res.success = true;
         ROS_INFO("[ToGoalGuidance] Target Updated! X:%.1f, Y:%.1f, Z:%.1f", target_point_.n, target_point_.e, target_point_.d);
         return true;
@@ -92,14 +99,23 @@ public:
         if (dt <= 0.0 || dt < (1.0 / this->update_rate_) * 0.95) return last_output_;
         last_time_ = now;
 
+        uuv_interface::Cmd3D out;
+
+        // 【新增拦截逻辑】如果没有收到过目标点，则保持静止不动
+        if (!has_target_) {
+            out.target_u = 0.0;                 // 速度设为0
+            out.target_pitch = current_pitch_;  // 保持当前俯仰角
+            out.target_yaw = current_yaw_;      // 保持当前偏航角（极其重要，防止原地打转）
+            last_output_ = out;
+            return out;
+        }
+
         double dx = target_point_.n - current_point_.x;
         double dy = target_point_.e - current_point_.y;
-        double dz = target_point_.d - current_point_.z; // NED中 z 朝下，目标更深则 dz > 0
+        double dz = target_point_.d - current_point_.z; 
         
         double dist_xy = std::sqrt(dx * dx + dy * dy);
         double distance = std::sqrt(dist_xy * dist_xy + dz * dz);
-
-        uuv_interface::Cmd3D out;
 
         if (distance < acceptance_radius_) {
             // 已抵达目标半径内，航速设为0，保持最后一次的偏航角
@@ -110,9 +126,6 @@ public:
             // 标准 3D 视线法 (LOS) 制导
             out.target_u = cruise_speed_;
             out.target_yaw = std::atan2(dy, dx);
-            
-            // 俯仰角：由于 NED 坐标系下 z 轴向下，Pitch 正值代表“低头”(即朝向 Z 轴正方向)。
-            // 如果 dz > 0（需要往下潜），此时 atan2(dz, dist_xy) 结果为正，完美符合右手法则。
             out.target_pitch = std::atan2(-dz, dist_xy); 
             out.target_pitch = std::max(-max_pitch_rad_, std::min(out.target_pitch, max_pitch_rad_));
         }
@@ -123,5 +136,4 @@ public:
 
 } // namespace uuv_control
 
-// 注册为 GuidanceBase 插件
 PLUGINLIB_EXPORT_CLASS(uuv_control::ToGoalGuidance, uuv_interface::GuidanceBase)

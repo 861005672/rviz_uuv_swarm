@@ -13,3 +13,6 @@ logs/
 # 忽略 ROS 相关的临时文件
 .catkin_workspace
 .item_id
+
+# 忽略代码生成的一些日志/缓存文件夹
+dynamic_launches
