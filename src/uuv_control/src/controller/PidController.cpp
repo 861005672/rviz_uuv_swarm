@@ -2,7 +2,6 @@
 #include <pluginlib/class_list_macros.h>
 #include <uuv_interface/State3D.h>
 #include <uuv_interface/Cmd3D.h>  
-#include <uuv_interface/SetCmd3D.h>
 #include <uuv_control/PID.h> // 引入封装好的 PID 类和工具函数
 #include <uuv_interface/utils/utils.h>
 #include <cmath>
@@ -10,28 +9,15 @@
 #include <dynamic_reconfigure/server.h>
 #include <uuv_control/PidControllerConfig.h>
 #include <uuv_interface/utils/XmlParamReader.h>
-#include <uuv_interface/State3D.h>
 
 
 namespace uuv_control {
 
 class PidController : public uuv_interface::ControllerBase {
 private:
-    ros::Subscriber sub_state_;
-    ros::ServiceServer srv_cmd_;
-    ros::Publisher pub_cmd_;
-
-    // 当前状态 (来自于 State3D)
-    uuv_interface::State3D current_state_;
-
-    // 目标指令 (来自于 Cmd3D)
-    uuv_interface::Cmd3D cmd_;
-
-    // 是否使用本地制导层传递的指令，若否，则开启setCmd服务，外部可通过服务设置期望姿态
-    bool use_local_cmd_ = false;
 
     ros::Time last_time_;
-    Eigen::VectorXd last_tau_ = Eigen::VectorXd::Zero(6); // 缓存上一次计算出的力矩
+    Eigen::VectorXd last_tau_;
 
     // 使用 utils.h 中独立封装的 PID 类
     uuv_control::PID pid_u_;
@@ -56,12 +42,14 @@ private:
 
 public:
     void initialize(ros::NodeHandle& gnh, const std::string& plugin_xml) override {
+        initializePlugin(gnh);
+        initControllerLevel();
+
         uuv_interface::XmlParamReader reader(plugin_xml);
         
         bool enable_dynamic_reconfigure = false;
         reader.param("enable_dynamic_reconfigure", enable_dynamic_reconfigure, true);
         reader.param("update_rate", this->update_rate_, 10.0);
-        reader.param("use_local_cmd", use_local_cmd_, false);
 
         // 临时变量与读取 (语法极简！)
         double kp_u, ki_u, kd_u, max_output_u, max_integral_u;
@@ -99,16 +87,7 @@ public:
             <<" \nkp_r=\n"<<kp_r<<" \nki_r=\n"<<ki_r<<" \nkd_r=\n"<<kd_r<<" \nmax_output_r=\n"<<max_output_r<<" \nmax_integral_r=\n"<<max_integral_r
         );
 
-        // 订阅状态与指令
-        sub_state_ = gnh.subscribe("state", 1, &PidController::stateCallback, this);
-        if (!use_local_cmd_) {
-            srv_cmd_ = gnh.advertiseService("setcmd", &PidController::cmdServiceCallback, this);
-            ROS_INFO("[PidController] Command Input Mode: SERVICE (Advertised 'setcmd')");
-        } else {
-            ROS_INFO("[PidController] Command Input Mode: LOCAL MEMORY (Managed by Guidance Layer)");
-        }
-        pub_cmd_ = gnh.advertise<uuv_interface::Cmd3D>("cmd", 10);
-        last_time_ = ros::Time::now();
+        last_time_ = ros::Time(0);
         last_tau_ = Eigen::VectorXd::Zero(6);
 
         if (enable_dynamic_reconfigure) {
@@ -120,62 +99,40 @@ public:
         }
     }
 
-    // 供制导层通过 ControlNode.cpp 在本地内存直接设置期望指令
-    void setCommand(const uuv_interface::Cmd3D& cmd) override {
-        if (use_local_cmd_) {
-            cmd_ = cmd;
-        }
-    }
 
-    void stateCallback(const uuv_interface::State3D::ConstPtr& msg) {
-        current_state_.u = msg->u;
-        current_state_.pitch = msg->pitch;
-        current_state_.yaw = msg->yaw;
-        current_state_.q = msg->q;
-        current_state_.r = msg->r;
-    }
-
-    bool cmdServiceCallback(uuv_interface::SetCmd3D::Request &req, uuv_interface::SetCmd3D::Response &res) {
-        cmd_.target_u = req.target_u;
-        cmd_.target_pitch = uuv_interface::wrapAngle(req.target_pitch);
-        cmd_.target_yaw = uuv_interface::wrapAngle(req.target_yaw);
-        
-        res.success = true;
-        ROS_INFO("[PidController] Received cmd3D service request! u=%.2f, pitch=%.2f, yaw=%.2f", cmd_.target_u, cmd_.target_pitch, cmd_.target_yaw);
-        return true;
-    }
-
-    Eigen::VectorXd compute() override {        
+    Eigen::VectorXd update(const uuv_interface::Cmd3D& cmd, const uuv_interface::State3D& state) override {        
+        // 拦截器，解析出当前的输入是上层本地传输还是采用服务接收的输入
+        auto actual_cmd = resolveInput(cmd);
+        // 频率控制
         ros::Time now = ros::Time::now();
+        if (last_time_.isZero()) {
+            last_time_ = now;
+            return last_tau_; // 第一帧只对齐时钟，不计算
+        }
         double dt = (now - last_time_).toSec();
-        if (dt <= 0.0 || dt < (1.0 / this->update_rate_) * 0.95) return last_tau_; 
+        if (dt <= 0.0 || dt < (1.0 / this->update_rate_) * 0.95) {
+            return last_tau_; // 没到更新时间，直接返回上一次的计算结果
+        }
         last_time_ = now;
 
-        uuv_interface::Cmd3D cmd_msg;
-        cmd_msg.header.stamp = now;
-        cmd_msg.target_u = cmd_.target_u;
-        cmd_msg.target_pitch = cmd_.target_pitch;
-        cmd_msg.target_yaw = cmd_.target_yaw;
-        pub_cmd_.publish(cmd_msg);
-
         // ================= 1. 航速 PID (Surge u) =================
-        double err_u = cmd_.target_u - current_state_.u;
+        double err_u = actual_cmd.target_u - state.u;
         double force_x = pid_u_.compute(err_u, dt);
 
         // ================= 2. 串级俯仰 PID (Pitch theta) =================
         // 外环: 计算期望俯仰角速度
-        double err_pitch = uuv_interface::wrapAngle(cmd_.target_pitch - current_state_.pitch);
+        double err_pitch = uuv_interface::wrapAngle(actual_cmd.target_pitch - state.pitch);
         double cmd_q = pid_pitch_.compute(err_pitch, dt);
         // 内环: 跟踪期望角速度,输出物理力矩
-        double err_q = cmd_q - current_state_.q;
+        double err_q = cmd_q - state.q;
         double torque_y = pid_q_.compute(err_q, dt);
 
         // ================= 3. 串级偏航 PID (Yaw psi) =================
         // 外环: 计算期望偏航角速度
-        double err_yaw = uuv_interface::wrapAngle(cmd_.target_yaw - current_state_.yaw);
+        double err_yaw = uuv_interface::wrapAngle(actual_cmd.target_yaw - state.yaw);
         double cmd_r = pid_yaw_.compute(err_yaw, dt);
         // 内环: 跟踪期望偏航叫速度，输出物理力矩
-        double err_r = cmd_r - current_state_.r;
+        double err_r = cmd_r - state.r;
         double torque_z = pid_r_.compute(err_r, dt);
 
         // 映射到 6 自由度推力向量

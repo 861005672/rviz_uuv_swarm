@@ -140,10 +140,8 @@ include
 add_library(ControlPlugins
   src/actuator/LauvActuator.cpp
 
-  src/dynamics/FirstOrderDynamics.cpp
   src/dynamics/FossenDynamics.cpp
 
-  src/controller/TeleopJoyController.cpp
   src/controller/PidController.cpp
 
   src/guidance/ToGoalGuidance.cpp
@@ -171,9 +169,7 @@ add_dependencies(ControlNodelet ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXP
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(ControlNode src/run/ControlNode.cpp)
 
-add_dependencies(ControlNode ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -189,10 +185,7 @@ add_dependencies(ControlNode ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORT
 target_link_libraries(ControlPlugins
   ${catkin_LIBRARIES}
 )
-target_link_libraries(ControlNode
-  ${catkin_LIBRARIES}
-  tinyxml
-)
+
 
 
 #############

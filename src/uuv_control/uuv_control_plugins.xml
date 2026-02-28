@@ -6,11 +6,6 @@
     </class>
 
     <!-- 动力学模拟层 -->
-    <class name="uuv_control/FirstOrderDynamics" 
-           type="uuv_control::FirstOrderDynamics" 
-           base_class_type="uuv_interface::DynamicsBase">
-        <description>Simple First Order Inertia Model.</description>
-    </class>
     <class name="uuv_control/FossenDynamics" 
            type="uuv_control::FossenDynamics" 
            base_class_type="uuv_interface::DynamicsBase">
@@ -18,11 +13,6 @@
     </class>
 
     <!-- 运动控制层 -->
-    <class name="uuv_control/TeleopJoyController" 
-           type="uuv_control::TeleopJoyController" 
-           base_class_type="uuv_interface::ControllerBase">
-        <description>Direct Joystick Teleop Controller.</description>
-    </class>
     <class name="uuv_control/PidController" 
            type="uuv_control::PidController" 
            base_class_type="uuv_interface::ControllerBase">

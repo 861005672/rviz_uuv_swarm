@@ -11,6 +11,7 @@
 #include <nav_msgs/Odometry.h>
 #include <uuv_interface/SensorBase.h>
 #include <uuv_interface/Cmd3D.h>
+#include <uuv_interface/TargetPoint3D.h>
 #include <tinyxml.h>
 #include <memory>
 
@@ -49,6 +50,7 @@ private:
     std::string uuv_ns_;
     std::string base_frame_;
     std::string world_frame_;
+    uuv_interface::TargetPoint3D current_target_;
     Eigen::VectorXd current_tau_cmd_; 
     uuv_interface::State3D current_state_;
 
@@ -93,6 +95,7 @@ public:
         guidance_loader_.reset(new pluginlib::ClassLoader<uuv_interface::GuidanceBase>("uuv_interface", "uuv_interface::GuidanceBase"));
         tf_broadcaster_.reset(new tf2_ros::TransformBroadcaster());
         current_tau_cmd_ = Eigen::VectorXd::Zero(6);
+        current_target_.n = 0.0; current_target_.e = 0.0; current_target_.d = 0.0;
         
         pub_state_ = gnh_.advertise<uuv_interface::State3D>("state", 10);
         pub_odom_  = gnh_.advertise<nav_msgs::Odometry>("odom", 10);
@@ -118,6 +121,10 @@ public:
         init_state.p = 0.0; init_state.q = 0.0; init_state.r = 0.0;
         dynamics_->setState(init_state);
         current_state_ = dynamics_->getState(); // 同步状态
+
+        current_target_.n = init_x; 
+        current_target_.e = init_y; 
+        current_target_.d = init_z;
     }
 
     void loadPluginsFromXML() {
@@ -188,12 +195,11 @@ public:
             last_visual_time_ = current_time;
         }
         // === 1. 制导层 ===
-        uuv_interface::Cmd3D g_out = guidance_->compute();
-        controller_->setCommand(g_out);
+        uuv_interface::Cmd3D g_out = guidance_->update(current_target_, current_state_);
         // === 2. 控制层 ===
-        current_tau_cmd_ = controller_->compute();
+        current_tau_cmd_ = controller_->update(g_out, current_state_);
         // === 3. 动力学层 ===
-        current_state_ = dynamics_->update(current_tau_cmd_, current_time);
+        current_state_ = dynamics_->update(current_tau_cmd_);
         // === 4. 更新传感器 === 
         updateSensor();
 
@@ -202,9 +208,13 @@ public:
         if ((current_time - last_visual_time_).toSec() >= visual_period_ * 0.95) {
             publishTF(current_state_, current_time);
             publishOdom(current_state_, current_time);
-            dynamics_->publishVisuals(current_time);
+            guidance_->publishDebug(current_time);
+            controller_->publishDebug(current_time);
+            dynamics_->publishDebug(current_time);
+            dynamics_->publishActuator(current_time);
             last_visual_time_ = current_time;
         }
+
     }
 
     void updateSensor() {

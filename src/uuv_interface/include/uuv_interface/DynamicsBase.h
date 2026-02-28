@@ -3,80 +3,91 @@
 
 #include <ros/ros.h>
 #include <Eigen/Dense>
+#include <memory>
 #include <uuv_interface/State3D.h>
+#include <pluginlib/class_loader.h>
 #include <geometry_msgs/WrenchStamped.h>
 #include <uuv_interface/PluginBase.h>
+#include <uuv_interface/ActuatorBase.h> // 引入执行器基类，支持 publishActuator
+// #include <uuv_interface/SetWrench.h> // 假设的用于设置力的服务
 
 namespace uuv_interface {
 
 class DynamicsBase : public PluginBase {
+protected:
+    // 层级拦截机制（核心）
+    bool is_overridden_ = false;
+    Eigen::VectorXd override_input_ = Eigen::VectorXd::Zero(6); // 默认6自由度力矩
+    ros::ServiceServer override_srv_;
+
+    // 基类托管的状态与执行器组件
+    uuv_interface::State3D state_;
+    boost::shared_ptr<uuv_interface::ActuatorBase> actuator_;
+    pluginlib::ClassLoader<uuv_interface::ActuatorBase> actuator_loader_;
+
+    // 发布配置标志
+    bool publish_actuator_state_ = false;
+    ros::Time last_actuator_pub_time_;
+
+    // ROS 服务回调函数（伪代码演示：假设使用类似 SetWrench 的服务来拦截底层推力指令）
+    // bool overrideCallback(uuv_interface::SetWrench::Request &req,
+    //                       uuv_interface::SetWrench::Response &res) {
+    //     override_input_(0) = req.wrench.force.x;  override_input_(1) = req.wrench.force.y;  override_input_(2) = req.wrench.force.z;
+    //     override_input_(3) = req.wrench.torque.x; override_input_(4) = req.wrench.torque.y; override_input_(5) = req.wrench.torque.z;
+    //     res.success = true;
+    //     return true;
+    // }
+
+
 public:
+    DynamicsBase() : actuator_loader_("uuv_interface", "uuv_interface::ActuatorBase") {}
     virtual ~DynamicsBase() {}
 
-    // 初始化：加载参数
+    // 基类层级初始化
+    void initDynamicsLevel() {
+        if (control_level_ == "dynamics") {
+            // override_srv_ = nh_.advertiseService("set_dynamic_input", &DynamicsBase::overrideCallback, this);
+            is_overridden_ = true;
+        }
+    }
+
+    // 实现在基类的状态获取函数
+    uuv_interface::State3D getState() const {
+        return state_;
+    }
+
+    // 实现在基类的状态设置函数
+    virtual void setState(const uuv_interface::State3D& state) {
+        state_ = state;
+    }
+
+    // 实现在基类的执行器及可视化发布函数
+    void publishActuator(const ros::Time& current_time) {
+        if (actuator_) {
+            // 时间差只管向后算，无需再做频率拦截，主控会严格把关
+            double actuator_pub_dt = (current_time - last_actuator_pub_time_).toSec();
+            if (actuator_pub_dt > 0.0) {
+                actuator_->publishJointStates(current_time, actuator_pub_dt);
+                if (publish_actuator_state_) {
+                    actuator_->publishActuatorStates(current_time, actuator_pub_dt);
+                }
+                last_actuator_pub_time_ = current_time;
+            }
+        }
+    }
+
+    // 解析当前层级实际应使用的输入
+    Eigen::VectorXd resolveInput(const Eigen::VectorXd& upper_input) {
+        return is_overridden_ ? override_input_ : upper_input;
+    }
+
+    // 统一的初始化：加载参数
     virtual void initialize(ros::NodeHandle& gnh, const std::string& robot_description) = 0;
 
-    // 核心步进函数：输入推力(tau)，输出下一时刻的状态
-    // dt: 时间步长, tau: [Fx, Fy, Fz, Tx, Ty, Tz]
-    virtual uuv_interface::State3D update(const Eigen::VectorXd& tau_cmd, const ros::Time& current_time) = 0;
+    // 严格按照需求定义的更新函数
+    virtual uuv_interface::State3D update(const Eigen::VectorXd& tau_cmd) = 0;
 
-    // 获取当前状态
-    virtual uuv_interface::State3D getState() = 0;
-
-    // 获取由上层控制器输出的期望受力/力矩
-    virtual Eigen::VectorXd getCommandedForce() const { return Eigen::VectorXd::Zero(6); }
-    // 获取执行器产生的实际力/力矩
-    virtual Eigen::VectorXd getActuatorForce() const { return Eigen::VectorXd::Zero(6); }
-    // 获取UUV受到的刚体科里奥利力/力矩（包含munk力矩）
-    virtual Eigen::VectorXd getCoriolisForce() const { return Eigen::VectorXd::Zero(6); }
-    // 获取UUV受到的水流阻力/力矩
-    virtual Eigen::VectorXd getDampingForce() const { return Eigen::VectorXd::Zero(6); }
-    // 获取UUV受到的恢复力/力矩
-    virtual Eigen::VectorXd getRestoringForce() const { return Eigen::VectorXd::Zero(6); }
-    // 获取UUV受到的合力/力矩
-    virtual Eigen::VectorXd getTotalForce() const { return Eigen::VectorXd::Zero(6); }
-
-    virtual void publishVisuals(const ros::Time& time) {}
-    virtual void setState(const uuv_interface::State3D& state) {}
-    
-protected:
-    ros::Publisher pub_cmd_wrench_;
-    ros::Publisher pub_actuator_wrench_;
-    ros::Publisher pub_coriolis_wrench_;
-    ros::Publisher pub_damping_wrench_;
-    ros::Publisher pub_restoring_wrench_;
-    ros::Publisher pub_total_wrench_;
-
-    // 基类统一初始化发布器
-    void initDebugPublishers(ros::NodeHandle& gnh) {
-        pub_cmd_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("cmd_wrench", 10);
-        pub_actuator_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("actuator_wrench", 10);
-        pub_coriolis_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("coriolis_wrench", 10);
-        pub_damping_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("damping_wrench", 10);
-        pub_restoring_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("restoring_wrench", 10);
-        pub_total_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("total_wrench", 10);
-    }
-
-    // 基类统一执行发布操作
-    void publishDebugWrenches(const ros::Time& time, const std::string& frame_id = "uuv_0/base_link") {
-        auto pubWrench = [&](ros::Publisher& pub, const Eigen::VectorXd& f) {
-            geometry_msgs::WrenchStamped msg;
-            msg.header.stamp = time;
-            msg.header.frame_id = frame_id;
-            msg.wrench.force.x = f(0); msg.wrench.force.y = f(1); msg.wrench.force.z = f(2);
-            msg.wrench.torque.x = f(3); msg.wrench.torque.y = f(4); msg.wrench.torque.z = f(5);
-            pub.publish(msg);
-        };
-
-        // 极其优雅：通过虚函数获取子类计算出的真实物理力
-        pubWrench(pub_cmd_wrench_, getCommandedForce());
-        pubWrench(pub_actuator_wrench_, getActuatorForce());
-        pubWrench(pub_coriolis_wrench_, getCoriolisForce());
-        pubWrench(pub_damping_wrench_, getDampingForce());
-        pubWrench(pub_restoring_wrench_, getRestoringForce());
-        pubWrench(pub_total_wrench_, getTotalForce());
-    }
 };
 
-}
+} // namespace uuv_interface
 #endif
