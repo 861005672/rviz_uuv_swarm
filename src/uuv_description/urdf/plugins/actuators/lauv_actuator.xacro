@@ -1,8 +1,14 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <xacro:macro name="insert_lauv_actuator" >
+    <xacro:macro name="insert_lauv_actuator"  params="update_rate:=100.0 publish_debug:=true publish_debug_rate:=5.0">
         <plugin layer="actuator" name="lauv_actuator" type="uuv_control/LauvActuator">
+            <!-- ControlPluginBase的参数 -->
+            <update_rate>${update_rate}</update_rate>
+            <publish_debug>${publish_debug}</publish_debug>
+            <publish_debug_rate>${publish_debug_rate}</publish_debug_rate>
+            
+            <!-- LauvActuator 特有的参数 -->
             <thruster>
                 <rotor_constant>0.0002</rotor_constant>
                 <max_rpm>1500.0</max_rpm>

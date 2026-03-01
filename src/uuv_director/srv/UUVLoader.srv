@@ -7,6 +7,7 @@ float64 min_dist
 string dynamics_type
 string controller_type
 string guidance_type
+string control_level
 ---
 bool success
 string message

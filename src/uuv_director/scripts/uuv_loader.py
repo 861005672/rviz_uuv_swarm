@@ -17,7 +17,6 @@ class UUVLoaderNode:
         self.all_spawned_poses = []
         self.current_group_idx = 0   # 专门用于区分计算资源 (Manager)
         self.global_uuv_idx = 0      # 【核心新增】专门用于全局唯一递增的 UUV ID
-        self.launch_count = 0
         self.rospack = rospkg.RosPack()
         
         self.srv = rospy.Service('uuv_loader', UUVLoader, self.handle_loader_request)
@@ -66,7 +65,7 @@ class UUVLoaderNode:
                 return None
         return poses
 
-    def generate_xml_launch(self, poses, group_size, dyn_type, ctrl_type, gui_type):
+    def generate_xml_launch(self, poses, group_size, dyn_type, ctrl_type, gui_type, control_level, log_dir):
         xml_lines = ['<?xml version="1.0"?>', '<launch>']
         total_uuvs = len(poses)
         num_managers = math.ceil(total_uuvs / group_size)
@@ -99,15 +98,15 @@ class UUVLoaderNode:
                 
                 xml_lines.append(f'  <group ns="{uuv_ns}">')
                 xml_lines.append(f'    <param name="robot_description" command="$(find xacro)/xacro \'$(find uuv_description)/urdf/lauv_model.xacro\' namespace:={uuv_ns} dynamics_type:={dyn_type} controller_type:={ctrl_type} guidance_type:={gui_type}"/>')
-                
+                xml_lines.append(f'    <param name="init_x" value="{x:.3f}"/>')
+                xml_lines.append(f'    <param name="init_y" value="{y:.3f}"/>')
+                xml_lines.append(f'    <param name="init_z" value="{z:.3f}"/>')
+                xml_lines.append(f'    <param name="init_yaw" value="{yaw:.3f}"/>')
+                xml_lines.append(f'    <param name="control_level" value="{control_level}"/>')
+                xml_lines.append(f'    <param name="log_dir" value="{log_dir}"/>')
+                xml_lines.append('    <param name="visual_rate" value="20.0"/>')
                 # 控制节点直接跨命名空间加载到对应 group 的 Manager 中
-                xml_lines.append(f'    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /{group_name}/{group_name}_manager">')
-                xml_lines.append(f'      <param name="init_x" value="{x:.3f}"/>')
-                xml_lines.append(f'      <param name="init_y" value="{y:.3f}"/>')
-                xml_lines.append(f'      <param name="init_z" value="{z:.3f}"/>')
-                xml_lines.append(f'      <param name="init_yaw" value="{yaw:.3f}"/>')
-                xml_lines.append('      <param name="visual_rate" value="20.0"/>')
-                xml_lines.append('    </node>')
+                xml_lines.append(f'    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /{group_name}/{group_name}_manager" />')
                 
                 xml_lines.append('    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />')
                 xml_lines.append('  </group>')
@@ -120,42 +119,76 @@ class UUVLoaderNode:
         return "\n".join(xml_lines)
 
     def handle_loader_request(self, req):
-        if req.init_type == "deterministic":
+
+        
+        total_uuvs = req.total_uuvs if req.total_uuvs!=0 else 1
+        group_size = req.group_size if req.group_size!=0 else 10
+        init_type = req.init_type if req.init_type!='' else 'random'
+        center = req.center if len(req.center)==3 else [0,0,0]
+        radius = req.radius if req.radius!=0 else 5
+        min_dist = req.min_dist if req.min_dist!=0 else 2
+        dynamics_type = req.dynamics_type if req.dynamics_type!='' else 'fossen'
+        controller_type = req.controller_type if req.controller_type!='' else 'pid'
+        guidance_type = req.guidance_type if req.guidance_type!='' else 'to_goal'
+        control_level = req.control_level if req.control_level!='' else 'guidance'
+
+        if init_type == "deterministic":
             return UUVLoaderResponse(False, "Deterministic mode is not implemented yet.")
-            
-        rospy.loginfo(f"Generating {req.total_uuvs} appended UUVs in random mode...")
-        poses = self.generate_random_poses(req.total_uuvs, req.center, req.radius, req.min_dist)
+
+        rospy.loginfo(f"Generating {total_uuvs} appended UUVs in random mode...")
+        poses = self.generate_random_poses(total_uuvs, center, radius, min_dist)
         
         if poses is None:
             return UUVLoaderResponse(False, "Failed to generate collision-free poses. Space is too crowded.")
             
+
         self.all_spawned_poses.extend(poses) 
-        
-        xml_content = self.generate_xml_launch(poses, req.group_size, req.dynamics_type, req.controller_type, req.guidance_type)
-        
+        # 1. 生成时间戳与批次文件(夹)名称
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        default_filename = f'./dynamic_launches/swarm_{timestamp}_batch_{self.launch_count}.launch'
-        raw_path = rospy.get_param('~launch_save_path', default_filename)
-        self.launch_count += 1
-        save_path = self.resolve_path(raw_path)
+        batch_name = f"swarm_{timestamp}_count_{total_uuvs}"
+
+        # 2. 解析 Launch 文件的绝对路径与所属目录 (dynamic_launches)
+        default_launch_rel_path = f'./adynamic_launches/{batch_name}.launch'
+        raw_launch_path = rospy.get_param('~launch_save_path', default_launch_rel_path)
         
+        launch_file_path = self.resolve_path(raw_launch_path)
+        dynamic_launch_dir = os.path.dirname(launch_file_path)  
+
+        # 3. 推导工作空间根目录，并生成同级的专属日志目录 (uuv_logs)
+        ws_root = os.path.dirname(dynamic_launch_dir)
+        log_dir = os.path.join(ws_root, "auuv_logs", batch_name)
+
+        # 4. 确保日志目录存在
+        if not os.path.exists(log_dir):
+            os.makedirs(log_dir)
+            rospy.loginfo(f"[LogManager] Created exclusive log directory: {log_dir}")
+        
+        # 5. 生成 XML 内容 (注入专属日志路径供 C++ 读取)
+        xml_content = self.generate_xml_launch(poses, group_size, dynamics_type, controller_type, guidance_type, control_level, log_dir)
+        
+        # 6. 确保 Launch 目录存在并写入文件
         try:
-            # 【修改核心】提取文件夹路径，如果不存在则自动创建
-            save_dir = os.path.dirname(save_path)
-            if not os.path.exists(save_dir):
-                os.makedirs(save_dir)
-                rospy.loginfo(f"Created new directory for launch files at: {save_dir}")
+            if not os.path.exists(dynamic_launch_dir):
+                os.makedirs(dynamic_launch_dir)
+                rospy.loginfo(f"[LaunchManager] Created launch directory: {dynamic_launch_dir}")
                 
-            with open(save_path, 'w') as f:
+            with open(launch_file_path, 'w') as f:
                 f.write(xml_content)
         except Exception as e:
             return UUVLoaderResponse(False, f"Failed to save launch file: {str(e)}")
             
-        rospy.loginfo(f"Appending new UUV swarm batch {self.launch_count-1}...")
-        proc = subprocess.Popen(["roslaunch", save_path])
+        # 7. 打印极其清晰的路径指引并启动进程
+        rospy.loginfo(f"Appending new UUV swarm with {total_uuvs} UUVs...")
+        rospy.loginfo(f"--> [LAUNCH] configuration saved in: {dynamic_launch_dir}")
+        rospy.loginfo(f"--> [LOGS] will be async recorded in: {log_dir}")
+        
+        proc = subprocess.Popen(["roslaunch", launch_file_path])
         self.active_processes.append(proc)
         
-        return UUVLoaderResponse(True, f"Successfully appended {req.total_uuvs} UUVs.")
+        return UUVLoaderResponse(True, f"Success ({total_uuvs} UUVs). Launch dir: {dynamic_launch_dir} | Log dir: {log_dir}")
+
+
+
 
 if __name__ == '__main__':
     try:

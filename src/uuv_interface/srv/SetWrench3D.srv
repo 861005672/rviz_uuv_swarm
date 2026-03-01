@@ -1,0 +1,9 @@
+# 期望注入的 6 自由度推力/力矩
+float64 force_x
+float64 force_y
+float64 force_z
+float64 torque_x
+float64 torque_y
+float64 torque_z
+---
+bool success

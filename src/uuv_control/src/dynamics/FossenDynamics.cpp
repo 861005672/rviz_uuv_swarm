@@ -10,234 +10,15 @@
 #include <pluginlib/class_loader.h>
 #include <uuv_interface/utils/utils.h>
 #include <uuv_interface/utils/XmlParamReader.h>
+#include <geometry_msgs/WrenchStamped.h>
 
 namespace uuv_control {
 
-// ==========================================
-// 1. 类定义 (直接在CPP文件中声明)
-// ==========================================
+
 class FossenDynamics : public uuv_interface::DynamicsBase {
-public:
-    FossenDynamics(){
-        eta_ = Eigen::VectorXd::Zero(6);
-        nu_ = Eigen::VectorXd::Zero(6);
-        quat_ = Eigen::Quaterniond::Identity(); // 【新增】初始化为单位四元数（0度旋转）
-        
-        M_ = Eigen::MatrixXd::Identity(6, 6);
-        M_inv_ = Eigen::MatrixXd::Identity(6, 6);
-        C_ = Eigen::MatrixXd::Zero(6, 6);
-        D_ = Eigen::MatrixXd::Zero(6, 6);
-        g_ = Eigen::VectorXd::Zero(6);
-    }
-    virtual ~FossenDynamics() = default;
 
-    virtual void initialize(ros::NodeHandle& nh, const std::string& plugin_xml) override {
-
-        initializePlugin(nh);
-        initDynamicsLevel();
-
-        uuv_interface::XmlParamReader reader(plugin_xml);
-
-        reader.param("update_rate", update_rate_, 100.0);
-        reader.param("mass", mass_, 18.0);
-        reader.param("volume", volume_, 0.01755);
-        reader.param("fluid_density", fluid_density_, 1028.0);
-        reader.param("gravity", gravity_, 9.81);
-        reader.param("neutrally_buoyant", neutrally_buoyant_, false);
-        reader.param("publish_debug", publish_debug_, true);
-
-        std::vector<double> cog_vec, cob_vec, inertia_vec;
-        reader.param("cog", cog_vec, {0.0, 0.0, 0.0});
-        reader.param("cob", cob_vec, {0.0, 0.0, 0.0});
-        reader.param("inertia", inertia_vec, {0.1, 0.1, 0.1});
-
-        Eigen::MatrixXd M_added = Eigen::MatrixXd::Zero(6,6);
-        D_lin_ = Eigen::MatrixXd::Zero(6,6);
-        D_lin_forward_speed_ = Eigen::MatrixXd::Zero(6,6);
-        D_quad_ = Eigen::MatrixXd::Zero(6,6);
-        reader.paramMatrix("added_mass", M_added, 6, 6);
-        reader.paramMatrix("linear_damping", D_lin_, 6, 6);
-        reader.paramMatrix("linear_damping_forward_speed", D_lin_forward_speed_, 6, 6);
-        reader.paramMatrix("quadratic_damping", D_quad_, 6, 6);
-
-        reader.param("publish_actuator_state", publish_actuator_state_, false);
-        
-        cog_ << cog_vec[0], cog_vec[1], cog_vec[2];
-        cob_ << cob_vec[0], cob_vec[1], cob_vec[2];
-
-        // 构建刚体质量矩阵 M_RB (包含质量和转动惯量)
-        Eigen::MatrixXd M_rb = Eigen::MatrixXd::Zero(6, 6);
-        M_rb.block<3,3>(0,0) = mass_ * Eigen::Matrix3d::Identity();
-        // 假设质心与原点重合(cog=[0,0,0])的简化，如果有偏移需加上 -m*S(r_g) 等耦合项
-        M_rb(3,3) = inertia_vec[0];
-        M_rb(4,4) = inertia_vec[1];
-        M_rb(5,5) = inertia_vec[2];
-        
-
-        // 总质量矩阵 = 刚体质量矩阵 + 附加质量矩阵
-        M_ = M_rb + M_added; 
-        M_inv_ = M_.inverse();
-        // 计算重力和浮力
-        W_ = mass_ * gravity_;
-        B_ = neutrally_buoyant_ ? W_ : (fluid_density_ * volume_ * gravity_);
-
-        std::string actuator_type = "uuv_control/LauvActuator";
-        std::string actuator_snippet = "";
-
-        TiXmlDocument doc;
-        doc.Parse(plugin_xml.c_str());
-        TiXmlElement* cfg = doc.RootElement();
-
-        if (cfg) {
-            // 在 dynamics 标签内部遍历寻找 layer="actuator" 的子 plugin 标签
-            for (TiXmlElement* act_elem = cfg->FirstChildElement("plugin"); 
-                act_elem != nullptr; 
-                act_elem = act_elem->NextSiblingElement("plugin")) {
-                if (std::string(act_elem->Attribute("layer") ? act_elem->Attribute("layer") : "") == "actuator") {
-                    if (act_elem->Attribute("type")) {
-                        actuator_type = act_elem->Attribute("type");
-                    }
-                    // 使用打印机截取这段嵌套的 XML 作为独立字符串
-                    TiXmlPrinter printer;
-                    act_elem->Accept(&printer);
-                    actuator_snippet = printer.CStr();
-                    break; // 找到了就跳出
-                }
-            }
-        }
-
-
-        ROS_INFO_STREAM("[FossenDynamics] XML Params loaded: mass=\n"<<mass_<<" \nvolume=\n"<<volume_<<" \nfluid_density=\n"<<fluid_density_
-        <<" \ngravity=\n"<<gravity_<<" \nneutrally_buoyant=\n"<<neutrally_buoyant_<<" \n publish_debug=\n"<<publish_debug_
-        <<" \ncog=\n"<<cog_<<" \ncob=\n"<<cob_<<" \nM_rb=\n"<<M_rb<<" \nM_added=\n"<<M_added<<" \nD_lin=\n"<<D_lin_
-        <<" \nD_lin_forward_speed=\n"<<D_lin_forward_speed_<<" \nD_quad=\n"<<D_quad_<<" \nM=\n"<<M_<<" \nW=\n"<<W_<<" \nB=\n"<<B_);
-
-        last_update_time_ =  ros::Time(0);
-
-        // 调用调试力发布函数
-        if (publish_debug_) {
-            initDebugPublishers(nh_);
-        }
-        try {
-            actuator_ = actuator_loader_.createInstance(actuator_type);
-            actuator_->initialize(nh_, actuator_snippet);
-            ROS_INFO("[FossenDynamics] Successfully loaded actuator plugin: %s", actuator_type.c_str());
-        } catch(pluginlib::PluginlibException& ex) {
-            ROS_ERROR("[FossenDynamics] Failed to load actuator plugin: %s", ex.what());
-        }
-
-    }
-
-    virtual void setState(const uuv_interface::State3D& state) override {
-        // 1. 调用大基类方法，更新基类的 state_
-        uuv_interface::DynamicsBase::setState(state);
-
-        // 2. 同步更新 Fossen 内部的积分基准变量 eta_ 和 nu_
-        eta_(0) = state.x; eta_(1) = state.y; eta_(2) = state.z;
-        eta_(3) = state.roll; eta_(4) = state.pitch; eta_(5) = state.yaw;
-
-        nu_(0) = state.u; nu_(1) = state.v; nu_(2) = state.w;
-        nu_(3) = state.p; nu_(4) = state.q; nu_(5) = state.r;
-
-        // 3. 将初始欧拉角转换为四元数 quat_，防止 RK4 第一步积分时姿态错乱
-        Eigen::AngleAxisd rollAngle(state.roll, Eigen::Vector3d::UnitX());
-        Eigen::AngleAxisd pitchAngle(state.pitch, Eigen::Vector3d::UnitY());
-        Eigen::AngleAxisd yawAngle(state.yaw, Eigen::Vector3d::UnitZ());
-        quat_ = yawAngle * pitchAngle * rollAngle;
-    }
-    
-    // 执行调试发布
-    void publishDebug(const ros::Time& time) override {
-        if (!publish_debug_) return;
-        std::string ns = nh_.getNamespace();
-        if (!ns.empty() && ns[0] == '/') {
-            ns = ns.substr(1); // 剥离掉最前面的 '/'，防止 tf 报错
-        }
-        std::string frame = ns.empty() ? "base_link" : ns + "/base_link";
-        auto pubWrench = [&](ros::Publisher& pub, const Eigen::VectorXd& f) {
-            geometry_msgs::WrenchStamped msg;
-            msg.header.stamp = time;
-            msg.header.frame_id = frame;
-            msg.wrench.force.x = f(0); msg.wrench.force.y = f(1); msg.wrench.force.z = f(2);
-            msg.wrench.torque.x = f(3); msg.wrench.torque.y = f(4); msg.wrench.torque.z = f(5);
-            pub.publish(msg);
-        };
-        pubWrench(pub_cmd_wrench_, last_cmd_force_);
-        pubWrench(pub_actuator_wrench_, last_actuator_force_);
-        pubWrench(pub_coriolis_wrench_, last_coriolis_force_);
-        pubWrench(pub_damping_wrench_, last_damping_force_);
-        pubWrench(pub_restoring_wrench_, last_restore_force_);
-        pubWrench(pub_total_wrench_, last_total_force_);
-    }
-
-    virtual uuv_interface::State3D update(const Eigen::VectorXd& tau_cmd) override {
-
-        ros::Time current_time = ros::Time::now();
-        
-        // 首次滴答对齐：如果时间为0，强制与主控节点的第一帧时间完美绑定
-        if (last_update_time_.isZero()) {
-            last_update_time_ = current_time;
-            return state_; // 第一帧只对齐时钟，不积分
-        }
-        auto actual_tau = resolveInput(tau_cmd);
-
-
-        double dt = (current_time - last_update_time_).toSec();
-        if (dt <= 0.0 || dt < (1.0 / this->update_rate_) * 0.95) return state_;
-        last_update_time_ = current_time;
-        // 0. 记录上层控制大脑发来的期望力 并且计算UUV的执行力，力矩
-        last_cmd_force_ = actual_tau;
-        if (actuator_) {
-            actuator_->allocate(actual_tau, nu_);
-            last_actuator_force_ = actuator_->computeActualTau(nu_);
-        } else {
-            last_actuator_force_ = actual_tau; // 兜底保护
-        }
-
-        // 2. 动力学核心：求解线加速度与角加速度
-        // Fossen 方程: M * nu_dot + C * nu + D_fossen * nu + g = tau
-        // 因为我们的阻尼矩阵提取的参数带有负号 (即 D_ = -D_fossen)，所以我们在等号右边用加法： + D_ * nu
-        
-        rk4Step(last_actuator_force_, dt);
-
-        last_coriolis_force_ = -(computeCoriolisMatrix(nu_) * nu_);
-        last_damping_force_  = computeDampingMatrix(nu_) * nu_;
-        last_restore_force_  = -computeRestoringForces(quat_);
-        last_total_force_    = last_actuator_force_ + last_coriolis_force_ + last_damping_force_ + last_restore_force_;
-
-
-        // 4.3 从安全的四元数中提取出欧拉角，供其他模块或消息发布使用
-        double sinr_cosp = 2.0 * (quat_.w() * quat_.x() + quat_.y() * quat_.z());
-        double cosr_cosp = 1.0 - 2.0 * (quat_.x() * quat_.x() + quat_.y() * quat_.y());
-        eta_(3) = std::atan2(sinr_cosp, cosr_cosp); // Roll
-
-        double sinp = 2.0 * (quat_.w() * quat_.y() - quat_.z() * quat_.x());
-        if (std::abs(sinp) >= 1.0)
-            eta_(4) = std::copysign(M_PI / 2.0, sinp); // Pitch 极限保护 (严防超出 [-90, 90] 度)
-        else
-            eta_(4) = std::asin(sinp);
-
-        double siny_cosp = 2.0 * (quat_.w() * quat_.z() + quat_.x() * quat_.y());
-        double cosy_cosp = 1.0 - 2.0 * (quat_.y() * quat_.y() + quat_.z() * quat_.z());
-        eta_(5) = std::atan2(siny_cosp, cosy_cosp); // Yaw
-
-
-        // 6. 发布状态
-        state_.x = eta_(0); state_.y = eta_(1); state_.z = eta_(2);
-        state_.roll = eta_(3); state_.pitch = eta_(4); state_.yaw = eta_(5);
-        state_.u = nu_(0); state_.v = nu_(1); state_.w = nu_(2);
-        state_.p = nu_(3); state_.q = nu_(4); state_.r = nu_(5);
-
-        return state_;
-    }
-
-
+// =============== 子类实现特有的私有属性 =================
 private:
-
-    // 状态向量
-    Eigen::VectorXd eta_; // [x, y, z, roll, pitch, yaw] (世界系位姿)
-    Eigen::VectorXd nu_;  // [u, v, w, p, q, r] (机体系速度)
-
     // Fossen 模型动力学矩阵
     Eigen::MatrixXd M_;         // 总质量矩阵 = M_RB + M_A
     Eigen::MatrixXd M_inv_;     // 质量矩阵的逆
@@ -260,26 +41,142 @@ private:
     Eigen::Vector3d cog_; // 重心位置 (Center of Gravity)
     Eigen::Vector3d cob_; // 浮心位置 (Center of Buoyancy)
 
-    ros::Time last_update_time_;
-
-    Eigen::Quaterniond quat_;
-
     // Fossen 模型专属的受力缓存
-    Eigen::VectorXd last_cmd_force_ = Eigen::VectorXd::Zero(6);
-    Eigen::VectorXd last_actuator_force_ = Eigen::VectorXd::Zero(6);
-    Eigen::VectorXd last_coriolis_force_ = Eigen::VectorXd::Zero(6);
-    Eigen::VectorXd last_damping_force_ = Eigen::VectorXd::Zero(6);
-    Eigen::VectorXd last_restore_force_ = Eigen::VectorXd::Zero(6);
-    Eigen::VectorXd last_total_force_ = Eigen::VectorXd::Zero(6);
+    Eigen::VectorXd last_actuator_tau_ = Eigen::VectorXd::Zero(6);
+    Eigen::VectorXd last_coriolis_tau_ = Eigen::VectorXd::Zero(6);
+    Eigen::VectorXd last_damping_tau_ = Eigen::VectorXd::Zero(6);
+    Eigen::VectorXd last_restore_tau_ = Eigen::VectorXd::Zero(6);
+    Eigen::VectorXd last_total_tau_ = Eigen::VectorXd::Zero(6);
     // Fossen 模型专属的 ROS 调试力发布器
-    ros::Publisher pub_cmd_wrench_;
     ros::Publisher pub_actuator_wrench_;
     ros::Publisher pub_coriolis_wrench_;
     ros::Publisher pub_damping_wrench_;
     ros::Publisher pub_restoring_wrench_;
     ros::Publisher pub_total_wrench_;
 
-    // 辅助工具函数
+private:
+
+    // =============== 爷爷类PluginBase的纯虚函数重写 ================
+    // 初始化自定义插件
+    virtual void initPlugin(ros::NodeHandle& nh, const std::string& plugin_xml) override {
+        // 初始化内部状态为零
+        initInnerState();
+
+        M_ = Eigen::MatrixXd::Identity(6, 6);
+        M_inv_ = Eigen::MatrixXd::Identity(6, 6);
+        C_ = Eigen::MatrixXd::Zero(6, 6);
+        D_ = Eigen::MatrixXd::Zero(6, 6);
+        g_ = Eigen::VectorXd::Zero(6);
+
+        uuv_interface::XmlParamReader reader(plugin_xml);
+
+        reader.param("mass", mass_, 18.0);
+        reader.param("volume", volume_, 0.01755);
+        reader.param("fluid_density", fluid_density_, 1028.0);
+        reader.param("gravity", gravity_, 9.81);
+        reader.param("neutrally_buoyant", neutrally_buoyant_, false);
+
+        std::vector<double> cog_vec, cob_vec, inertia_vec;
+        reader.param("cog", cog_vec, {0.0, 0.0, 0.0});
+        reader.param("cob", cob_vec, {0.0, 0.0, 0.0});
+        reader.param("inertia", inertia_vec, {0.1, 0.1, 0.1});
+
+        Eigen::MatrixXd M_added = Eigen::MatrixXd::Zero(6,6);
+        D_lin_ = Eigen::MatrixXd::Zero(6,6);
+        D_lin_forward_speed_ = Eigen::MatrixXd::Zero(6,6);
+        D_quad_ = Eigen::MatrixXd::Zero(6,6);
+        reader.paramMatrix("added_mass", M_added, 6, 6);
+        reader.paramMatrix("linear_damping", D_lin_, 6, 6);
+        reader.paramMatrix("linear_damping_forward_speed", D_lin_forward_speed_, 6, 6);
+        reader.paramMatrix("quadratic_damping", D_quad_, 6, 6);
+
+        cog_ << cog_vec[0], cog_vec[1], cog_vec[2];
+        cob_ << cob_vec[0], cob_vec[1], cob_vec[2];
+
+        // 构建刚体质量矩阵 M_RB (包含质量和转动惯量)
+        Eigen::MatrixXd M_rb = Eigen::MatrixXd::Zero(6, 6);
+        M_rb.block<3,3>(0,0) = mass_ * Eigen::Matrix3d::Identity();
+        // 假设质心与原点重合(cog=[0,0,0])的简化，如果有偏移需加上 -m*S(r_g) 等耦合项
+        M_rb(3,3) = inertia_vec[0];
+        M_rb(4,4) = inertia_vec[1];
+        M_rb(5,5) = inertia_vec[2];
+
+        // 总质量矩阵 = 刚体质量矩阵 + 附加质量矩阵
+        M_ = M_rb + M_added; 
+        M_inv_ = M_.inverse();
+        // 计算重力和浮力
+        W_ = mass_ * gravity_;
+        B_ = neutrally_buoyant_ ? W_ : (fluid_density_ * volume_ * gravity_);
+
+        UUV_INFO << "[FossenDynamics] XML Params loaded: \n mass=\n"<<mass_<<"\n volume=\n"<<volume_<<"\n fluid_density=\n"<<fluid_density_
+        <<"\n gravity=\n"<<gravity_<<"\n neutrally_buoyant=\n"<<neutrally_buoyant_<<"\n cog=\n"<<cog_<<"\n cob=\n"<<cob_<<"\n M_rb=\n"
+        <<M_rb<<"\n M_added=\n"<<M_added<<"\n D_lin=\n"<<D_lin_<<"\n D_lin_forward_speed=\n"<<D_lin_forward_speed_<<"\n D_quad=\n"<<D_quad_
+        <<"\n M=\n"<<M_<<"\n W=\n"<<W_<<"\n B=\n"<<B_;
+    }
+
+    // 初始化调试发布器
+    void initPublishDebug() override {
+        pub_actuator_wrench_ = get_nh().advertise<geometry_msgs::WrenchStamped>("actuator_wrench", 10);
+        pub_coriolis_wrench_ = get_nh().advertise<geometry_msgs::WrenchStamped>("coriolis_wrench", 10);
+        pub_damping_wrench_ = get_nh().advertise<geometry_msgs::WrenchStamped>("damping_wrench", 10);
+        pub_restoring_wrench_ = get_nh().advertise<geometry_msgs::WrenchStamped>("restoring_wrench", 10);
+        pub_total_wrench_ = get_nh().advertise<geometry_msgs::WrenchStamped>("total_wrench", 10);
+    }
+
+    // 执行调试发布
+    void publishDebug(const ros::Time& time) override {
+        if (!publish_debug_) return;
+        std::string frame = get_ns().empty() ? "base_link" : get_ns() + "/base_link";
+        auto pubWrench = [&](ros::Publisher& pub, const Eigen::VectorXd& f) {
+            geometry_msgs::WrenchStamped msg;
+            msg.header.stamp = time;
+            msg.header.frame_id = frame;
+            msg.wrench.force.x = f(0); msg.wrench.force.y = f(1); msg.wrench.force.z = f(2);
+            msg.wrench.torque.x = f(3); msg.wrench.torque.y = f(4); msg.wrench.torque.z = f(5);
+            pub.publish(msg);
+        };
+        pubWrench(pub_actuator_wrench_, last_actuator_tau_);
+        pubWrench(pub_coriolis_wrench_, last_coriolis_tau_);
+        pubWrench(pub_damping_wrench_, last_damping_tau_);
+        pubWrench(pub_restoring_wrench_, last_restore_tau_);
+        pubWrench(pub_total_wrench_, last_total_tau_);
+    }
+
+    // =============== 爸爸类DynamicsBase的纯虚函数重写 ==============
+    // 自定义插件的更新逻辑
+    virtual uuv_interface::State3D customUpdate(const Eigen::VectorXd& input_tau, const double& dt) override {
+        // 0. 记录上层执行器插件发来的外力
+        last_actuator_tau_ = input_tau;
+
+        // 1. 动力学核心：求解线加速度与角加速度
+        rk4Step(last_actuator_tau_, dt);
+        // 2. 记录几个用于调试显示的力
+        last_coriolis_tau_ = -(computeCoriolisMatrix(nu_) * nu_);
+        last_damping_tau_  = computeDampingMatrix(nu_) * nu_;
+        last_restore_tau_  = -computeRestoringForces(quat_);
+        last_total_tau_    = last_actuator_tau_ + last_coriolis_tau_ + last_damping_tau_ + last_restore_tau_;
+        // 3. 从安全的四元数中提取出欧拉角，供其他模块或消息发布使用
+        double sinr_cosp = 2.0 * (quat_.w() * quat_.x() + quat_.y() * quat_.z());
+        double cosr_cosp = 1.0 - 2.0 * (quat_.x() * quat_.x() + quat_.y() * quat_.y());
+        eta_(3) = std::atan2(sinr_cosp, cosr_cosp); // Roll
+        double sinp = 2.0 * (quat_.w() * quat_.y() - quat_.z() * quat_.x());
+        if (std::abs(sinp) >= 1.0)
+            eta_(4) = std::copysign(M_PI / 2.0, sinp); // Pitch 极限保护 (严防超出 [-90, 90] 度)
+        else
+            eta_(4) = std::asin(sinp);
+        double siny_cosp = 2.0 * (quat_.w() * quat_.z() + quat_.x() * quat_.y());
+        double cosy_cosp = 1.0 - 2.0 * (quat_.y() * quat_.y() + quat_.z() * quat_.z());
+        eta_(5) = std::atan2(siny_cosp, cosy_cosp); // Yaw
+        // 5. 向外界发布状态
+        state_.x = eta_(0); state_.y = eta_(1); state_.z = eta_(2);
+        state_.roll = eta_(3); state_.pitch = eta_(4); state_.yaw = eta_(5);
+        state_.u = nu_(0); state_.v = nu_(1); state_.w = nu_(2);
+        state_.p = nu_(3); state_.q = nu_(4); state_.r = nu_(5);
+        return state_;
+    }
+
+    // =============== 子类实现特有的功能函数 ========================
+private:
     // 计算三维向量的斜对称矩阵
     Eigen::Matrix3d skew(const Eigen::Vector3d& vec) const {
         Eigen::Matrix3d S;
@@ -288,8 +185,8 @@ private:
              -vec(1),  vec(0),  0;
         return S;
     }
-    
 
+    // 将世界坐标系下的向量转移到体坐标系
     Eigen::Vector3d transformWorldToBody(const Eigen::Vector3d& vec_world, const Eigen::Quaterniond& quat) const {
         return quat.inverse() * vec_world;
     }
@@ -399,18 +296,6 @@ private:
         quat_.normalize(); // 极其重要：积分后的四元数必须重新归一化，防止变形
         nu_ = y_next.segment<6>(7);
     }
-
-
-    // 私有辅助：初始化发布器
-    void initDebugPublishers(ros::NodeHandle& gnh) {
-        pub_cmd_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("cmd_wrench", 10);
-        pub_actuator_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("actuator_wrench", 10);
-        pub_coriolis_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("coriolis_wrench", 10);
-        pub_damping_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("damping_wrench", 10);
-        pub_restoring_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("restoring_wrench", 10);
-        pub_total_wrench_ = gnh.advertise<geometry_msgs::WrenchStamped>("total_wrench", 10);
-    }
-
 
 
 };

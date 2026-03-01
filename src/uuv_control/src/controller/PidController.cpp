@@ -15,10 +15,6 @@ namespace uuv_control {
 
 class PidController : public uuv_interface::ControllerBase {
 private:
-
-    ros::Time last_time_;
-    Eigen::VectorXd last_tau_;
-
     // 使用 utils.h 中独立封装的 PID 类
     uuv_control::PID pid_u_;
     uuv_control::PID pid_pitch_;
@@ -29,6 +25,9 @@ private:
     std::unique_ptr<dynamic_reconfigure::Server<uuv_control::PidControllerConfig>> dyn_server_;
     dynamic_reconfigure::Server<uuv_control::PidControllerConfig>::CallbackType dyn_f_;
 
+    uuv_interface::Cmd3D last_cmd_;
+    ros::Publisher pub_last_cmd_;
+
     void reconfigCallback(uuv_control::PidControllerConfig &config, uint32_t level) {
         // 使用 utils.h 中新增的 setParams 方法平滑更新参数
         pid_u_.setParams("pid_u update", config.kp_u, config.ki_u, config.kd_u, config.max_output_u, config.max_integral_u);
@@ -37,20 +36,15 @@ private:
         pid_yaw_.setParams("pid_yaw update", config.kp_yaw, config.ki_yaw, config.kd_yaw, config.max_output_yaw, config.max_integral_yaw);
         pid_r_.setParams("pid_r update", config.kp_r, config.ki_r, config.kd_r, config.max_output_r, config.max_integral_r);
         
-        ROS_INFO("[PidController] PID Parameters dynamically updated!");
+        UUV_INFO << "[PidController] PID Parameters dynamically updated!";
     }
 
 public:
-    void initialize(ros::NodeHandle& gnh, const std::string& plugin_xml) override {
-        initializePlugin(gnh);
-        initControllerLevel();
-
+    void initPlugin(ros::NodeHandle& gnh, const std::string& plugin_xml) override {
         uuv_interface::XmlParamReader reader(plugin_xml);
         
         bool enable_dynamic_reconfigure = false;
         reader.param("enable_dynamic_reconfigure", enable_dynamic_reconfigure, true);
-        reader.param("update_rate", this->update_rate_, 10.0);
-
         // 临时变量与读取 (语法极简！)
         double kp_u, ki_u, kd_u, max_output_u, max_integral_u;
         reader.param("kp_u", kp_u, 50.0); reader.param("ki_u", ki_u, 5.0); reader.param("kd_u", kd_u, 10.0);
@@ -80,48 +74,52 @@ public:
         pid_yaw_.init(kp_yaw, ki_yaw, kd_yaw, max_output_yaw, max_integral_yaw);
         pid_r_.init(kp_r, ki_r, kd_r, max_output_r, max_integral_r);
 
-        ROS_INFO_STREAM("[PidController] Parameter Loaded: \nenable_dynamic_reconfigure=\n"<<enable_dynamic_reconfigure<<"\nkp_u=\n"<<kp_u<<" \nki_u=\n"<<ki_u<<" \nkd_u=\n"<<kd_u<<" \nmax_output_u=\n"<<max_output_u<<" \nmax_integral_u=\n"<<max_integral_u
+        UUV_INFO << "[PidController] Parameter Loaded: \nenable_dynamic_reconfigure=\n"<<enable_dynamic_reconfigure<<"\nkp_u=\n"<<kp_u<<" \nki_u=\n"<<ki_u<<" \nkd_u=\n"<<kd_u<<" \nmax_output_u=\n"<<max_output_u<<" \nmax_integral_u=\n"<<max_integral_u
             <<" \nkp_pitch=\n"<<kp_pitch<<" \nki_pitch=\n"<<ki_pitch<<" \nkd_pitch=\n"<<kd_pitch<<" \nmax_output_pitch=\n"<<max_output_pitch<<" \nmax_integral_pitch=\n"<<max_integral_pitch
             <<" \nkp_q=\n"<<kp_q<<" \nki_q=\n"<<ki_q<<" \nkd_q=\n"<<kd_q<<" \nmax_output_q=\n"<<max_output_q<<" \nmax_integral_q=\n"<<max_integral_q
             <<" \nkp_yaw=\n"<<kp_yaw<<" \nki_yaw=\n"<<ki_yaw<<" \nkd_yaw=\n"<<kd_yaw<<" \nmax_output_yaw=\n"<<max_output_yaw<<" \nmax_integral_yaw=\n"<<max_integral_yaw
-            <<" \nkp_r=\n"<<kp_r<<" \nki_r=\n"<<ki_r<<" \nkd_r=\n"<<kd_r<<" \nmax_output_r=\n"<<max_output_r<<" \nmax_integral_r=\n"<<max_integral_r
-        );
+            <<" \nkp_r=\n"<<kp_r<<" \nki_r=\n"<<ki_r<<" \nkd_r=\n"<<kd_r<<" \nmax_output_r=\n"<<max_output_r<<" \nmax_integral_r=\n"<<max_integral_r;
 
-        last_time_ = ros::Time(0);
-        last_tau_ = Eigen::VectorXd::Zero(6);
 
         if (enable_dynamic_reconfigure) {
             ros::NodeHandle pid_nh(gnh, "PidController");
             dyn_server_ = std::make_unique<dynamic_reconfigure::Server<uuv_control::PidControllerConfig>>(pid_nh);
             dyn_f_ = boost::bind(&PidController::reconfigCallback, this, _1, _2);
             dyn_server_->setCallback(dyn_f_); // 绑定后会自动触发一次回调加载当前参数服务器上的值
-            ROS_INFO("[PidController] Dynamic reconfigure ENABLED.");
+            UUV_INFO << "[PidController] Dynamic reconfigure ENABLED.";
         }
+
+        double init_yaw;
+        gnh.param("init_yaw", init_yaw, 0.0);
+        override_input_.target_yaw = init_yaw;
+    }
+    
+    virtual void initPublishDebug() {
+        pub_last_cmd_ = nh_.advertise<uuv_interface::Cmd3D>("last_cmd", 10);
     }
 
+    void publishDebug(const ros::Time& time) override {
+        if (!publish_debug_) return;
+        last_cmd_.header.stamp = time;
+        pub_last_cmd_.publish(last_cmd_);
+    }
 
-    Eigen::VectorXd update(const uuv_interface::Cmd3D& cmd, const uuv_interface::State3D& state) override {        
-        // 拦截器，解析出当前的输入是上层本地传输还是采用服务接收的输入
-        auto actual_cmd = resolveInput(cmd);
-        // 频率控制
-        ros::Time now = ros::Time::now();
-        if (last_time_.isZero()) {
-            last_time_ = now;
-            return last_tau_; // 第一帧只对齐时钟，不计算
+    Eigen::VectorXd customUpdate(const uuv_interface::Cmd3D& cmd, const uuv_interface::State3D& state, double dt) override {        
+        last_cmd_ = cmd;
+        // 防止静止时积分饱和
+        if (std::abs(state.u) < 0.1 && std::abs(cmd.target_u) < 0.1) {
+            pid_pitch_.reset();
+            pid_q_.reset();
+            pid_yaw_.reset();
+            pid_r_.reset();
         }
-        double dt = (now - last_time_).toSec();
-        if (dt <= 0.0 || dt < (1.0 / this->update_rate_) * 0.95) {
-            return last_tau_; // 没到更新时间，直接返回上一次的计算结果
-        }
-        last_time_ = now;
-
         // ================= 1. 航速 PID (Surge u) =================
-        double err_u = actual_cmd.target_u - state.u;
+        double err_u = cmd.target_u - state.u;
         double force_x = pid_u_.compute(err_u, dt);
 
         // ================= 2. 串级俯仰 PID (Pitch theta) =================
         // 外环: 计算期望俯仰角速度
-        double err_pitch = uuv_interface::wrapAngle(actual_cmd.target_pitch - state.pitch);
+        double err_pitch = uuv_interface::wrapAngle(cmd.target_pitch - state.pitch);
         double cmd_q = pid_pitch_.compute(err_pitch, dt);
         // 内环: 跟踪期望角速度,输出物理力矩
         double err_q = cmd_q - state.q;
@@ -129,7 +127,7 @@ public:
 
         // ================= 3. 串级偏航 PID (Yaw psi) =================
         // 外环: 计算期望偏航角速度
-        double err_yaw = uuv_interface::wrapAngle(actual_cmd.target_yaw - state.yaw);
+        double err_yaw = uuv_interface::wrapAngle(cmd.target_yaw - state.yaw);
         double cmd_r = pid_yaw_.compute(err_yaw, dt);
         // 内环: 跟踪期望偏航叫速度，输出物理力矩
         double err_r = cmd_r - state.r;
@@ -140,7 +138,6 @@ public:
         tau(0) = force_x;   // 赋予 X 推力
         tau(4) = torque_y;  // 赋予 M 扭矩 (控制俯仰)
         tau(5) = torque_z;  // 赋予 N 扭矩 (控制偏航)
-        last_tau_ = tau;
         
         return tau;
     }

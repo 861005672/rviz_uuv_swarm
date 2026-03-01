@@ -138,9 +138,9 @@ include
 
 ## Declare a C++ library
 add_library(ControlPlugins
-  src/actuator/LauvActuator.cpp
-
   src/dynamics/FossenDynamics.cpp
+
+  src/actuator/LauvActuator.cpp
 
   src/controller/PidController.cpp
 

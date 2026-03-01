@@ -23,8 +23,10 @@ namespace uuv_control {
         double integral_;
         double prev_error_;
 
+        bool first_run_;
+
     public:
-        PID() : kp_(0.0), ki_(0.0), kd_(0.0), max_output_(0.0), max_integral_(0.0), integral_(0.0), prev_error_(0.0) {}
+        PID() : kp_(0.0), ki_(0.0), kd_(0.0), max_output_(0.0), max_integral_(0.0), integral_(0.0), prev_error_(0.0), first_run_(true) {}
 
         // 初始化参数
         void init(double kp, double ki, double kd, double max_output, double max_integral) {
@@ -33,15 +35,20 @@ namespace uuv_control {
             kd_ = kd;
             max_output_ = max_output;
             max_integral_ = max_integral;
-            
-            
             integral_ = 0.0;
             prev_error_ = 0.0;
+            first_run_ = true;
         }
 
         // 计算 PID 输出
         double compute(double error, double dt) {
             if (dt <= 0.0) return 0.0;
+
+            // 【核心安全机制】：消除第一帧的微分冲击
+            if (first_run_) {
+                prev_error_ = error; // 强行让第一帧的微分为 0
+                first_run_ = false;
+            }
 
             // 1. 积分项累加
             integral_ += error * dt;
@@ -81,6 +88,7 @@ namespace uuv_control {
         void reset() {
             integral_ = 0.0;
             prev_error_ = 0.0;
+            first_run_ = true; // 【核心新增】
         }
     };
 

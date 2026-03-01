@@ -62,6 +62,7 @@ add_service_files(
   FILES
   SetCmd3D.srv
   SetTargetPoint3D.srv
+  SetWrench3D.srv
 )
 
 ## Generate actions in the 'action' folder

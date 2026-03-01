@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+  <group ns="group0">
+    <node pkg="nodelet" type="nodelet" name="group0_manager" args="manager" output="screen"/>
+    <node pkg="nodelet" type="nodelet" name="state_aggregator" args="load uuv_control/StateAggregatorNodelet group0_manager">
+      <param name="group_name" value="group0"/>
+      <param name="start_global_id" value="0"/>
+      <param name="uuv_count" value="1"/>
+    </node>
+  </group>
+  <group ns="uuv_0">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_0 dynamics_type:=fossen controller_type:=pid guidance_type:=to_goal"/>
+    <param name="init_x" value="-0.020"/>
+    <param name="init_y" value="4.759"/>
+    <param name="init_z" value="1.074"/>
+    <param name="init_yaw" value="1.251"/>
+    <param name="control_level" value="controller"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260302_020115_count_1"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group0/group0_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+</launch>

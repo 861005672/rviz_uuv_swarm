@@ -3,10 +3,11 @@
 
 import os
 import random
+import sys
 
 def generate_rviz_config(total_uuvs, output_file):
     # ==========================================
-    # 1. 基础头部与网格显示 (Grid)
+    # 1. 基础头部、Grid 与 环境 MarkerArray
     # ==========================================
     rviz_content = """Panels:
   - Class: rviz/Displays
@@ -43,31 +44,38 @@ Visualization Manager:
       Class: rviz/Grid
       Color: 160; 160; 164
       Enabled: true
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
       Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
       Plane: XY
       Plane Cell Count: 100
       Reference Frame: <Fixed Frame>
       Value: true
-      
-    # ==========================================
-    # 🏆 总文件夹：Swarm_Cluster 
-    # ==========================================
-    - Class: rviz/Group
+    - Class: rviz/MarkerArray
       Enabled: true
-      Name: Swarm_Cluster
-      Displays:
+      Name: Environment Obstacles (MarkerArray)
+      Marker Topic:
+        Value: /visualization_marker_array
+      Value: true
 """
 
     # ==========================================
-    # 2. 循环生成子文件夹和内部插件 (注意严格的 YAML 缩进)
+    # 2. 生成 Swarm_Models 大文件夹 (RobotModel)
     # ==========================================
+    rviz_content += """    - Class: rviz/Group
+      Enabled: true
+      Name: Swarm_Models
+      Displays:
+"""
     for i in range(total_uuvs):
         ns = f"uuv_{i}"
-        r, g, b = random.randint(50, 255), random.randint(50, 255), random.randint(50, 255)
-        
-        # 8个空格缩进代表这是属于 Swarm_Cluster 内部的元素
-        rviz_content += f"""        # --- 📁 {ns} 子文件夹 ---
-        - Class: rviz/Group
+        rviz_content += f"""        - Class: rviz/Group
           Enabled: true
           Name: {ns}
           Displays:
@@ -77,58 +85,88 @@ Visualization Manager:
               Enabled: true
               Links:
                 All Links Enabled: true
-                Expand Joint Details: false
-                Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-              Name: RobotModel_{ns}
+                Expand Upward: false
+              Name: RobotModel
               Robot Description: /{ns}/robot_description
-              TF Prefix: ""
+              TF Prefix: "" 
+              Update Interval: 0
               Value: true
+              Visual Enabled: true
+"""
 
-            - Angle Tolerance: 0.1
-              Class: rviz/Odometry
-              Covariance:
-                Orientation:
-                  Alpha: 0.5
-                  Color: 255; 255; 127
-                  Color Style: Unique
-                  Frame: Local
-                  Offset: 1
-                  Scale: 1
-                  Value: true
-                Position:
-                  Alpha: 0.3
-                  Color: 204; 51; 204
-                  Scale: 1
-                  Value: true
-                Value: true
+    # ==========================================
+    # 3. 生成 Swarm_Trajectories 大文件夹 (Path)
+    # ==========================================
+    rviz_content += """    - Class: rviz/Group
+      Enabled: true
+      Name: Swarm_Trajectories
+      Displays:
+"""
+    random.seed(42) # 保证每次生成的轨迹颜色不变
+    for i in range(total_uuvs):
+        ns = f"uuv_{i}"
+        r, g, b = random.randint(50, 255), random.randint(50, 255), random.randint(50, 255)
+        # 【核心修复】：Topic 必须是一个包含 Value 的字典！
+        rviz_content += f"""        - Class: rviz/Group
+          Enabled: true
+          Name: {ns}
+          Displays:
+            - Alpha: 1
+              Class: rviz/Path
+              Color: {r}; {g}; {b}
               Enabled: true
-              Keep: 500
-              Name: Odometry_{ns}
-              Position Tolerance: 0.1
-              Shape:
-                Alpha: 1
-                Axes Length: 1
-                Axes Radius: 0.1
-                Color: {r}; {g}; {b}
-                Head Length: 0.3
-                Head Radius: 0.1
-                Shaft Length: 1
-                Shaft Radius: 0.05
-                Value: Arrow
-              Topic: /{ns}/odom
+              Line Style: Lines
+              Line Width: 0.05
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: {r}; {g}; {b}
+              Pose Style: None
+              Topic:
+                Value: /{ns}/trajectory
               Value: true
 """
 
     # ==========================================
-    # 3. 全局选项与相机视角 (加入倒立反转修复)
+    # 4. 生成 Swarm_Sonars 大文件夹 (LaserScan)
     # ==========================================
-    rviz_content += """
-  Enabled: true
+    rviz_content += """    - Class: rviz/Group
+      Enabled: false
+      Name: Swarm_Sonars
+      Displays:
+"""
+    for i in range(total_uuvs):
+        ns = f"uuv_{i}"
+        rviz_content += f"""        - Class: rviz/Group
+          Enabled: true
+          Name: {ns}
+          Displays:
+            - Alpha: 1
+              Class: rviz/LaserScan
+              Color: 255; 255; 255
+              Color Transformer: FlatColor
+              Enabled: true
+              Name: SonarScan
+              Position Transformer: XYZ
+              Selectable: true
+              Size (Pixels): 3
+              Size (m): 0.1
+              Style: Points
+              Topic:
+                Value: /{ns}/sonar_scan
+              Use max range: false
+              Value: true
+"""
+
+    # ==========================================
+    # 5. Global Options 与 视角设置
+    # ==========================================
+    rviz_content += """  Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Default Light: true
     Fixed Frame: ned
     Frame Rate: 30
   Name: root
@@ -138,11 +176,17 @@ Visualization Manager:
     - Class: rviz/MoveCamera
     - Class: rviz/Select
     - Class: rviz/FocusCamera
-  Value: true
+    - Class: rviz/Measure
+    - Class: rviz/SetInitialPose
+      Topic:
+        Value: /initialpose
+    - Class: rviz/SetGoal
+      Topic:
+        Value: /move_base_simple/goal
   Views:
     Current:
       Class: rviz/ThirdPersonFollower
-      Distance: 15.0
+      Distance: 20
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
@@ -153,17 +197,15 @@ Visualization Manager:
         X: 0
         Y: 0
         Z: 0
-      Invert Z Axis: true   # <--- 【修复1】反转Z轴，解决NED环境全局倒立问题
+      Invert Z Axis: false
       Name: Current View
-      Pitch: 0.78
-      Target Frame: ned
-      Yaw: 0.0
+      Near Clip Distance: 0.01
+      Pitch: 0.5
+      Target Frame: uuv_0/base_link
+      Yaw: 0.785
     Saved:
 """
-
-    # ==========================================
-    # 4. 为每个 UUV 生成防倒立的跟随视角
-    # ==========================================
+    # 附加上每个UUV的固定追踪视角
     for i in range(total_uuvs):
         ns = f"uuv_{i}"
         rviz_content += f"""      - Class: rviz/ThirdPersonFollower
@@ -178,7 +220,7 @@ Visualization Manager:
           X: 0
           Y: 0
           Z: 0
-        Invert Z Axis: true   # <--- 【修复2】每个跟随视角也都反转 Z 轴！
+        Invert Z Axis: true
         Name: Track_{ns}
         Near Clip Distance: 0.01
         Pitch: 0.5
@@ -186,9 +228,7 @@ Visualization Manager:
         Yaw: 3.14
 """
 
-    # ==========================================
-    # 5. 结尾窗体配置
-    # ==========================================
+    # 结尾窗体配置
     rviz_content += """Window Geometry:
   Displays:
     collapsed: false
@@ -206,17 +246,16 @@ Visualization Manager:
   Y: 0
 """
 
-    # 写入文件
     with open(output_file, 'w') as f:
         f.write(rviz_content)
-    print(f"[SUCCESS] 成功生成带『文件夹折叠结构』的 RViz 配置文件！共 {total_uuvs} 个 UUV。")
-    print(f"[PATH] 保存路径: {os.path.abspath(output_file)}")
+    print(f"[SUCCESS] 成功生成带『三级模块化分类目录』的 RViz 配置文件！共包含 {total_uuvs} 个 UUV。")
+    print(f"[PATH] 文件保存路径: {output_file}")
 
 if __name__ == '__main__':
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    rviz_dir = os.path.join(base_dir, '..', 'rviz')
-    if not os.path.exists(rviz_dir):
-        os.makedirs(rviz_dir)
-        
-    output_path = os.path.join(rviz_dir, 'dynamic_swarm_50.rviz')
-    generate_rviz_config(total_uuvs=50, output_file=output_path)
+    if len(sys.argv) > 1:
+        total = int(sys.argv[1])
+        output = sys.argv[2] if len(sys.argv) > 2 else f"dynamic_swarm_{total}.rviz"
+    else:
+        total = 50
+        output = "dynamic_swarm_50.rviz"
+    generate_rviz_config(total, output)
