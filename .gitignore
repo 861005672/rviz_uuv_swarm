@@ -15,4 +15,5 @@ logs/
 .item_id
 
 # 忽略代码生成的一些日志/缓存文件夹
-dynamic_launches
+adynamic_launches/
+auuv_logs/

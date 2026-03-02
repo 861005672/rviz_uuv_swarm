@@ -6763,7 +6763,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: 0.020000021904706955
+      Angle: 0
       Class: rviz/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -6773,11 +6773,45 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 8.479462623596191
+      Scale: 10
       Target Frame: ned
-      X: 1.6926072835922241
-      Y: -0.018600985407829285
+      X: 0
+      Y: 0
     Saved:
+      - Angle: 0
+        Class: rviz/TopDownOrtho
+        Enable Stereo Rendering:
+          Stereo Eye Separation: 0.05999999865889549
+          Stereo Focal Distance: 1
+          Swap Stereo Eyes: false
+          Value: false
+        Invert Z Axis: false
+        Name: NED_TopToDown
+        Near Clip Distance: 0.009999999776482582
+        Scale: 10
+        Target Frame: ned
+        X: 0
+        Y: 0
+      - Class: rviz/ThirdPersonFollower
+        Distance: 10
+        Enable Stereo Rendering:
+          Stereo Eye Separation: 0.05999999865889549
+          Stereo Focal Distance: 1
+          Swap Stereo Eyes: false
+          Value: false
+        Field of View: 0.7853981852531433
+        Focal Point:
+          X: 0
+          Y: 0
+          Z: 0
+        Focal Shape Fixed Size: true
+        Focal Shape Size: 0.05000000074505806
+        Invert Z Axis: false
+        Name: NED
+        Near Clip Distance: 0.009999999776482582
+        Pitch: 0.7853981852531433
+        Target Frame: ned
+        Yaw: 0.7853981852531433
       - Class: rviz/ThirdPersonFollower
         Distance: 8
         Enable Stereo Rendering:
@@ -7778,40 +7812,6 @@ Visualization Manager:
         Pitch: 0.5
         Target Frame: uuv_49/base_link
         Yaw: 3.140000104904175
-      - Angle: 0
-        Class: rviz/TopDownOrtho
-        Enable Stereo Rendering:
-          Stereo Eye Separation: 0.05999999865889549
-          Stereo Focal Distance: 1
-          Swap Stereo Eyes: false
-          Value: false
-        Invert Z Axis: false
-        Name: NED_TopToDown
-        Near Clip Distance: 0.009999999776482582
-        Scale: 10
-        Target Frame: ned
-        X: 0
-        Y: 0
-      - Class: rviz/ThirdPersonFollower
-        Distance: 10
-        Enable Stereo Rendering:
-          Stereo Eye Separation: 0.05999999865889549
-          Stereo Focal Distance: 1
-          Swap Stereo Eyes: false
-          Value: false
-        Field of View: 0.7853981852531433
-        Focal Point:
-          X: 0
-          Y: 0
-          Z: 0
-        Focal Shape Fixed Size: true
-        Focal Shape Size: 0.05000000074505806
-        Invert Z Axis: false
-        Name: NED
-        Near Clip Distance: 0.009999999776482582
-        Pitch: 0.7853981852531433
-        Target Frame: ned
-        Yaw: 0.7853981852531433
 Window Geometry:
   Displays:
     collapsed: false
@@ -7826,5 +7826,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1401
-  X: 295
-  Y: 27
+  X: 596
+  Y: 100

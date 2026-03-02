@@ -126,13 +126,13 @@ public:
             
             // 2. 根据级别压入不同的 ANSI 颜色代码与文字标签
             switch(level_) {
-                case LogLevel::INFO:  final_msg << "[INFO] "; break;  // 绿色
-                case LogLevel::WARN:  final_msg << "[WARN] "; break;  // 黄色
-                case LogLevel::ERROR: final_msg << "[ERROR] "; break; // 红色
+                case LogLevel::INFO:  final_msg << "\033[92m" << "[INFO] "; break;  // 绿色
+                case LogLevel::WARN:  final_msg << "\033[93m" << "[WARN] "; break;  // 黄色
+                case LogLevel::ERROR: final_msg << "\033[91m" << "[ERROR] "; break; // 红色
             }
             
             // 3. 压入用户真正打印的内容，并在末尾压入颜色复位码 \033[0m 与换行符
-            final_msg << oss_.str() << "\n"; 
+            final_msg << oss_.str() << "\033[0m\n"; 
             
             // 提交给核心日志器
             logger_->append(final_msg.str());

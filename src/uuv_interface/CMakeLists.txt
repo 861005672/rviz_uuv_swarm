@@ -55,6 +55,9 @@ add_message_files(
   State3DArray.msg
   Neighbor3D.msg
   Neighborhood3D.msg
+  CollisionInfo.msg
+  CollisionInfoArray.msg
+
 )
 
 ## Generate services in the 'srv' folder
