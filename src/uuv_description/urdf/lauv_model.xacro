@@ -43,11 +43,17 @@
         <mesh filename="package://uuv_description/meshes/body.dae"/>
       </geometry>
     </visual>
-    <collision>
+    <!-- <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://uuv_description/meshes/body.stl"/>
       </geometry>
+    </collision> -->
+    <collision>
+        <origin xyz="0 0 0" rpy="0 1.570796 0" />
+        <geometry>
+            <cylinder length="1.1" radius="0.075" /> 
+        </geometry>
     </collision>
   </link>
 
