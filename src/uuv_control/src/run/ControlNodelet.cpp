@@ -143,6 +143,7 @@ public:
 
     void loadPluginsFromXML() {
         if (!gnh_.getParam("robot_description", robot_description_)) {
+            ROS_ERROR("[ControlNodelet] CRITICAL: Cannot find 'robot_description' parameter! Check your Xacro!");
             UUV_ERROR << "[ControlNodelet] Cannot find 'robot_description' parameter!";
             return;
         }
@@ -184,12 +185,14 @@ public:
                 }
                 else if (layer == "controller") {
                     controller_ = ctrl_loader_->createInstance(type);
+                    controller_->setLogger(uuv_logger_);
                     controller_->initialize(gnh_, snippet, "controller");
                     controller_freq_ = controller_->get_rate();
                     UUV_INFO << "[ControlNodelet] Loaded Controller : "<< name.c_str() <<  "[" << type.c_str() << "] @ " << controller_freq_ << " Hz";
                 } 
                 else if (layer == "guidance") {
                     guidance_ = guidance_loader_->createInstance(type);
+                    guidance_->setLogger(uuv_logger_);
                     guidance_->initialize(gnh_, snippet, "guidance");
                     guidance_freq_ = guidance_->get_rate();
                     UUV_INFO << "[ControlNodelet] Loaded Guidance : "<< name.c_str() <<  "[" << type.c_str() << "] @ " << guidance_freq_ << " Hz";
@@ -207,6 +210,7 @@ public:
 
                 }
             } catch(pluginlib::PluginlibException& ex) {
+                ROS_ERROR_STREAM("[ControlNodelet] Failed to load plugin " << name << " of type " << type << ". ERROR: " << ex.what());
                 UUV_ERROR << "[ControlNodelet] Failed to load plugin " << name.c_str() << ": " << ex.what();
             }
         }
@@ -221,9 +225,13 @@ public:
         
         // 目标点默认为自身位置，相当于默认不行动
         uuv_interface::TargetPoint3D dummy_tgt;
-        dummy_tgt.n = current_state_.x;
-        dummy_tgt.e = current_state_.y;
-        dummy_tgt.d = current_state_.z;
+        // dummy_tgt.n = current_state_.x;
+        // dummy_tgt.e = current_state_.y;
+        // dummy_tgt.d = current_state_.z;
+        dummy_tgt.n = 100;
+        dummy_tgt.e = 0;
+        dummy_tgt.d = 0;
+
 
         // === 1. 制导层 ===
         uuv_interface::Cmd3D g_out = guidance_->update(dummy_tgt, current_state_);

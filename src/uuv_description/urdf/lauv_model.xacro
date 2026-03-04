@@ -14,6 +14,7 @@
   <xacro:include filename="$(find uuv_description)/urdf/plugins/controllers/pid_controller.xacro" />
   <xacro:include filename="$(find uuv_description)/urdf/plugins/sensors/simple_2d_sonar.xacro" />
   <xacro:include filename="$(find uuv_description)/urdf/plugins/guidances/to_goal_guidance.xacro" />
+  <xacro:include filename="$(find uuv_description)/urdf/plugins/guidances/spacial_flocking_guidance.xacro" />
 
 
   <xacro:if value="${'$(arg dynamics_type)' == 'fossen'}">
@@ -30,6 +31,12 @@
 
   <xacro:if value="${'$(arg guidance_type)' == 'to_goal'}">
       <xacro:insert_to_goal_guidance update_rate="10.0" publish_debug="true" publish_debug_rate="10.0" cruise_speed="7" acceptance_radius="4.0" max_pitch_deg="40.0" />
+  </xacro:if>
+
+  <xacro:if value="${'$(arg guidance_type)' == 'spacial_flocking'}">
+      <xacro:insert_spacial_flocking_guidance update_rate="10.0" publish_debug="true" publish_debug_rate="20.0" 
+          min_speed="4.0" cruise_speed="8.0" max_speed="10.0" max_pitch_deg="30.0" 
+          zeta_p="1.0" zeta_v="3.0" max_ftotal="20.0" t_ftotal="1.5" />
   </xacro:if>
 
   <xacro:insert_simple_2d_sonar name="forward_looking_sonar" update_rate="10.0" beams="30" fov="150.0" max_range="200.0" />

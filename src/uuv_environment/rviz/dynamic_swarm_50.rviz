@@ -8,15 +8,7 @@ Panels:
         - /TF1
         - /TF1/Frames1
       Splitter Ratio: 0.5
-    Tree Height: 171
-  - Class: rviz/Selection
-    Name: Selection
-  - Class: rviz/Tool Properties
-    Expanded:
-      - /2D Pose Estimate1
-      - /2D Nav Goal1
-    Name: Tool Properties
-    Splitter Ratio: 0.5886790156364441
+    Tree Height: 288
   - Class: rviz/Views
     Expanded:
       - /Current View1
@@ -49,11 +41,493 @@ Visualization Manager:
       Value: true
     - Class: rviz/MarkerArray
       Enabled: true
-      Marker Topic: /env_markers
+      Marker Topic: /visualization_marker_array
       Name: Environment Obstacles (MarkerArray)
       Namespaces:
-        environment_obstacles: true
+        {}
       Queue Size: 100
+      Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Filter (blacklist): ""
+      Filter (whitelist): ""
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        map:
+          Value: false
+        ned:
+          Value: true
+        uuv_0/base_link:
+          Value: false
+        uuv_0/fin_0:
+          Value: false
+        uuv_0/fin_1:
+          Value: false
+        uuv_0/fin_2:
+          Value: false
+        uuv_0/fin_3:
+          Value: false
+        uuv_0/thruster_0:
+          Value: false
+        uuv_1/base_link:
+          Value: false
+        uuv_1/fin_0:
+          Value: false
+        uuv_1/fin_1:
+          Value: false
+        uuv_1/fin_2:
+          Value: false
+        uuv_1/fin_3:
+          Value: false
+        uuv_1/thruster_0:
+          Value: false
+        uuv_10/base_link:
+          Value: false
+        uuv_10/fin_0:
+          Value: false
+        uuv_10/fin_1:
+          Value: false
+        uuv_10/fin_2:
+          Value: false
+        uuv_10/fin_3:
+          Value: false
+        uuv_10/thruster_0:
+          Value: false
+        uuv_11/base_link:
+          Value: false
+        uuv_11/fin_0:
+          Value: false
+        uuv_11/fin_1:
+          Value: false
+        uuv_11/fin_2:
+          Value: false
+        uuv_11/fin_3:
+          Value: false
+        uuv_11/thruster_0:
+          Value: false
+        uuv_12/base_link:
+          Value: false
+        uuv_12/fin_0:
+          Value: false
+        uuv_12/fin_1:
+          Value: false
+        uuv_12/fin_2:
+          Value: false
+        uuv_12/fin_3:
+          Value: false
+        uuv_12/thruster_0:
+          Value: false
+        uuv_13/base_link:
+          Value: false
+        uuv_13/fin_0:
+          Value: false
+        uuv_13/fin_1:
+          Value: false
+        uuv_13/fin_2:
+          Value: false
+        uuv_13/fin_3:
+          Value: false
+        uuv_13/thruster_0:
+          Value: false
+        uuv_14/base_link:
+          Value: false
+        uuv_14/fin_0:
+          Value: false
+        uuv_14/fin_1:
+          Value: false
+        uuv_14/fin_2:
+          Value: false
+        uuv_14/fin_3:
+          Value: false
+        uuv_14/thruster_0:
+          Value: false
+        uuv_15/base_link:
+          Value: false
+        uuv_15/fin_0:
+          Value: false
+        uuv_15/fin_1:
+          Value: false
+        uuv_15/fin_2:
+          Value: false
+        uuv_15/fin_3:
+          Value: false
+        uuv_15/thruster_0:
+          Value: false
+        uuv_16/base_link:
+          Value: false
+        uuv_16/fin_0:
+          Value: false
+        uuv_16/fin_1:
+          Value: false
+        uuv_16/fin_2:
+          Value: false
+        uuv_16/fin_3:
+          Value: false
+        uuv_16/thruster_0:
+          Value: false
+        uuv_17/base_link:
+          Value: false
+        uuv_17/fin_0:
+          Value: false
+        uuv_17/fin_1:
+          Value: false
+        uuv_17/fin_2:
+          Value: false
+        uuv_17/fin_3:
+          Value: false
+        uuv_17/thruster_0:
+          Value: false
+        uuv_18/base_link:
+          Value: false
+        uuv_18/fin_0:
+          Value: false
+        uuv_18/fin_1:
+          Value: false
+        uuv_18/fin_2:
+          Value: false
+        uuv_18/fin_3:
+          Value: false
+        uuv_18/thruster_0:
+          Value: false
+        uuv_19/base_link:
+          Value: false
+        uuv_19/fin_0:
+          Value: false
+        uuv_19/fin_1:
+          Value: false
+        uuv_19/fin_2:
+          Value: false
+        uuv_19/fin_3:
+          Value: false
+        uuv_19/thruster_0:
+          Value: false
+        uuv_2/base_link:
+          Value: false
+        uuv_2/fin_0:
+          Value: false
+        uuv_2/fin_1:
+          Value: false
+        uuv_2/fin_2:
+          Value: false
+        uuv_2/fin_3:
+          Value: false
+        uuv_2/thruster_0:
+          Value: false
+        uuv_3/base_link:
+          Value: false
+        uuv_3/fin_0:
+          Value: false
+        uuv_3/fin_1:
+          Value: false
+        uuv_3/fin_2:
+          Value: false
+        uuv_3/fin_3:
+          Value: false
+        uuv_3/thruster_0:
+          Value: false
+        uuv_4/base_link:
+          Value: false
+        uuv_4/fin_0:
+          Value: false
+        uuv_4/fin_1:
+          Value: false
+        uuv_4/fin_2:
+          Value: false
+        uuv_4/fin_3:
+          Value: false
+        uuv_4/thruster_0:
+          Value: false
+        uuv_5/base_link:
+          Value: false
+        uuv_5/fin_0:
+          Value: false
+        uuv_5/fin_1:
+          Value: false
+        uuv_5/fin_2:
+          Value: false
+        uuv_5/fin_3:
+          Value: false
+        uuv_5/thruster_0:
+          Value: false
+        uuv_6/base_link:
+          Value: false
+        uuv_6/fin_0:
+          Value: false
+        uuv_6/fin_1:
+          Value: false
+        uuv_6/fin_2:
+          Value: false
+        uuv_6/fin_3:
+          Value: false
+        uuv_6/thruster_0:
+          Value: false
+        uuv_7/base_link:
+          Value: false
+        uuv_7/fin_0:
+          Value: false
+        uuv_7/fin_1:
+          Value: false
+        uuv_7/fin_2:
+          Value: false
+        uuv_7/fin_3:
+          Value: false
+        uuv_7/thruster_0:
+          Value: false
+        uuv_8/base_link:
+          Value: false
+        uuv_8/fin_0:
+          Value: false
+        uuv_8/fin_1:
+          Value: false
+        uuv_8/fin_2:
+          Value: false
+        uuv_8/fin_3:
+          Value: false
+        uuv_8/thruster_0:
+          Value: false
+        uuv_9/base_link:
+          Value: false
+        uuv_9/fin_0:
+          Value: false
+        uuv_9/fin_1:
+          Value: false
+        uuv_9/fin_2:
+          Value: false
+        uuv_9/fin_3:
+          Value: false
+        uuv_9/thruster_0:
+          Value: false
+      Marker Alpha: 1
+      Marker Scale: 30
+      Name: TF
+      Show Arrows: false
+      Show Axes: true
+      Show Names: true
+      Tree:
+        map:
+          ned:
+            uuv_0/base_link:
+              uuv_0/fin_0:
+                {}
+              uuv_0/fin_1:
+                {}
+              uuv_0/fin_2:
+                {}
+              uuv_0/fin_3:
+                {}
+              uuv_0/thruster_0:
+                {}
+            uuv_1/base_link:
+              uuv_1/fin_0:
+                {}
+              uuv_1/fin_1:
+                {}
+              uuv_1/fin_2:
+                {}
+              uuv_1/fin_3:
+                {}
+              uuv_1/thruster_0:
+                {}
+            uuv_10/base_link:
+              uuv_10/fin_0:
+                {}
+              uuv_10/fin_1:
+                {}
+              uuv_10/fin_2:
+                {}
+              uuv_10/fin_3:
+                {}
+              uuv_10/thruster_0:
+                {}
+            uuv_11/base_link:
+              uuv_11/fin_0:
+                {}
+              uuv_11/fin_1:
+                {}
+              uuv_11/fin_2:
+                {}
+              uuv_11/fin_3:
+                {}
+              uuv_11/thruster_0:
+                {}
+            uuv_12/base_link:
+              uuv_12/fin_0:
+                {}
+              uuv_12/fin_1:
+                {}
+              uuv_12/fin_2:
+                {}
+              uuv_12/fin_3:
+                {}
+              uuv_12/thruster_0:
+                {}
+            uuv_13/base_link:
+              uuv_13/fin_0:
+                {}
+              uuv_13/fin_1:
+                {}
+              uuv_13/fin_2:
+                {}
+              uuv_13/fin_3:
+                {}
+              uuv_13/thruster_0:
+                {}
+            uuv_14/base_link:
+              uuv_14/fin_0:
+                {}
+              uuv_14/fin_1:
+                {}
+              uuv_14/fin_2:
+                {}
+              uuv_14/fin_3:
+                {}
+              uuv_14/thruster_0:
+                {}
+            uuv_15/base_link:
+              uuv_15/fin_0:
+                {}
+              uuv_15/fin_1:
+                {}
+              uuv_15/fin_2:
+                {}
+              uuv_15/fin_3:
+                {}
+              uuv_15/thruster_0:
+                {}
+            uuv_16/base_link:
+              uuv_16/fin_0:
+                {}
+              uuv_16/fin_1:
+                {}
+              uuv_16/fin_2:
+                {}
+              uuv_16/fin_3:
+                {}
+              uuv_16/thruster_0:
+                {}
+            uuv_17/base_link:
+              uuv_17/fin_0:
+                {}
+              uuv_17/fin_1:
+                {}
+              uuv_17/fin_2:
+                {}
+              uuv_17/fin_3:
+                {}
+              uuv_17/thruster_0:
+                {}
+            uuv_18/base_link:
+              uuv_18/fin_0:
+                {}
+              uuv_18/fin_1:
+                {}
+              uuv_18/fin_2:
+                {}
+              uuv_18/fin_3:
+                {}
+              uuv_18/thruster_0:
+                {}
+            uuv_19/base_link:
+              uuv_19/fin_0:
+                {}
+              uuv_19/fin_1:
+                {}
+              uuv_19/fin_2:
+                {}
+              uuv_19/fin_3:
+                {}
+              uuv_19/thruster_0:
+                {}
+            uuv_2/base_link:
+              uuv_2/fin_0:
+                {}
+              uuv_2/fin_1:
+                {}
+              uuv_2/fin_2:
+                {}
+              uuv_2/fin_3:
+                {}
+              uuv_2/thruster_0:
+                {}
+            uuv_3/base_link:
+              uuv_3/fin_0:
+                {}
+              uuv_3/fin_1:
+                {}
+              uuv_3/fin_2:
+                {}
+              uuv_3/fin_3:
+                {}
+              uuv_3/thruster_0:
+                {}
+            uuv_4/base_link:
+              uuv_4/fin_0:
+                {}
+              uuv_4/fin_1:
+                {}
+              uuv_4/fin_2:
+                {}
+              uuv_4/fin_3:
+                {}
+              uuv_4/thruster_0:
+                {}
+            uuv_5/base_link:
+              uuv_5/fin_0:
+                {}
+              uuv_5/fin_1:
+                {}
+              uuv_5/fin_2:
+                {}
+              uuv_5/fin_3:
+                {}
+              uuv_5/thruster_0:
+                {}
+            uuv_6/base_link:
+              uuv_6/fin_0:
+                {}
+              uuv_6/fin_1:
+                {}
+              uuv_6/fin_2:
+                {}
+              uuv_6/fin_3:
+                {}
+              uuv_6/thruster_0:
+                {}
+            uuv_7/base_link:
+              uuv_7/fin_0:
+                {}
+              uuv_7/fin_1:
+                {}
+              uuv_7/fin_2:
+                {}
+              uuv_7/fin_3:
+                {}
+              uuv_7/thruster_0:
+                {}
+            uuv_8/base_link:
+              uuv_8/fin_0:
+                {}
+              uuv_8/fin_1:
+                {}
+              uuv_8/fin_2:
+                {}
+              uuv_8/fin_3:
+                {}
+              uuv_8/thruster_0:
+                {}
+            uuv_9/base_link:
+              uuv_9/fin_0:
+                {}
+              uuv_9/fin_1:
+                {}
+              uuv_9/fin_2:
+                {}
+              uuv_9/fin_3:
+                {}
+              uuv_9/thruster_0:
+                {}
+      Update Interval: 0
       Value: true
     - Class: rviz/Group
       Displays:
@@ -1068,37 +1542,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_20/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_20/robot_description
               TF Prefix: ""
@@ -1118,37 +1562,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_21/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_21/robot_description
               TF Prefix: ""
@@ -1168,37 +1582,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_22/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_22/robot_description
               TF Prefix: ""
@@ -1218,37 +1602,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_23/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_23/robot_description
               TF Prefix: ""
@@ -1268,37 +1622,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_24/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_24/robot_description
               TF Prefix: ""
@@ -1318,37 +1642,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_25/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_25/robot_description
               TF Prefix: ""
@@ -1368,37 +1662,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_26/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_26/robot_description
               TF Prefix: ""
@@ -1418,37 +1682,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_27/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_27/robot_description
               TF Prefix: ""
@@ -1468,37 +1702,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_28/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_28/robot_description
               TF Prefix: ""
@@ -1518,37 +1722,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_29/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_29/robot_description
               TF Prefix: ""
@@ -1568,37 +1742,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_30/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_30/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_30/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_30/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_30/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_30/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_30/robot_description
               TF Prefix: ""
@@ -1618,37 +1762,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_31/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_31/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_31/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_31/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_31/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_31/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_31/robot_description
               TF Prefix: ""
@@ -1668,37 +1782,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_32/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_32/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_32/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_32/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_32/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_32/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_32/robot_description
               TF Prefix: ""
@@ -1718,37 +1802,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_33/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_33/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_33/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_33/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_33/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_33/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_33/robot_description
               TF Prefix: ""
@@ -1768,37 +1822,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_34/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_34/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_34/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_34/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_34/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_34/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_34/robot_description
               TF Prefix: ""
@@ -1818,37 +1842,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_35/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_35/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_35/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_35/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_35/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_35/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_35/robot_description
               TF Prefix: ""
@@ -1868,37 +1862,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_36/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_36/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_36/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_36/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_36/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_36/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_36/robot_description
               TF Prefix: ""
@@ -1918,37 +1882,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_37/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_37/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_37/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_37/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_37/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_37/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_37/robot_description
               TF Prefix: ""
@@ -1968,37 +1902,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_38/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_38/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_38/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_38/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_38/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_38/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_38/robot_description
               TF Prefix: ""
@@ -2018,37 +1922,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_39/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_39/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_39/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_39/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_39/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_39/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_39/robot_description
               TF Prefix: ""
@@ -2068,37 +1942,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_40/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_40/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_40/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_40/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_40/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_40/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_40/robot_description
               TF Prefix: ""
@@ -2118,37 +1962,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_41/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_41/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_41/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_41/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_41/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_41/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_41/robot_description
               TF Prefix: ""
@@ -2168,37 +1982,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_42/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_42/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_42/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_42/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_42/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_42/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_42/robot_description
               TF Prefix: ""
@@ -2218,37 +2002,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_43/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_43/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_43/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_43/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_43/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_43/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_43/robot_description
               TF Prefix: ""
@@ -2268,37 +2022,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_44/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_44/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_44/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_44/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_44/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_44/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_44/robot_description
               TF Prefix: ""
@@ -2318,37 +2042,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_45/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_45/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_45/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_45/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_45/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_45/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_45/robot_description
               TF Prefix: ""
@@ -2368,37 +2062,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_46/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_46/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_46/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_46/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_46/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_46/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_46/robot_description
               TF Prefix: ""
@@ -2418,37 +2082,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_47/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_47/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_47/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_47/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_47/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_47/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_47/robot_description
               TF Prefix: ""
@@ -2468,37 +2102,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_48/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_48/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_48/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_48/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_48/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_48/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_48/robot_description
               TF Prefix: ""
@@ -2518,37 +2122,7 @@ Visualization Manager:
                 Expand Joint Details: false
                 Expand Link Details: false
                 Expand Tree: false
-                Link Tree Style: Links in Alphabetic Order
-                uuv_49/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_49/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_49/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_49/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_49/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_49/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
+                Link Tree Style: ""
               Name: RobotModel
               Robot Description: /uuv_49/robot_description
               TF Prefix: ""
@@ -5567,1178 +5141,610 @@ Visualization Manager:
           Name: uuv_49
       Enabled: false
       Name: Swarm_Sonars
-    - Class: rviz/TF
-      Enabled: true
-      Filter (blacklist): ""
-      Filter (whitelist): ""
-      Frame Timeout: 15
-      Frames:
-        All Enabled: false
-        map:
-          Value: false
-        ned:
-          Value: true
-        uuv_0/base_link:
-          Value: false
-        uuv_0/fin_0:
-          Value: false
-        uuv_0/fin_1:
-          Value: false
-        uuv_0/fin_2:
-          Value: false
-        uuv_0/fin_3:
-          Value: false
-        uuv_0/thruster_0:
-          Value: false
-        uuv_1/base_link:
-          Value: false
-        uuv_1/fin_0:
-          Value: false
-        uuv_1/fin_1:
-          Value: false
-        uuv_1/fin_2:
-          Value: false
-        uuv_1/fin_3:
-          Value: false
-        uuv_1/thruster_0:
-          Value: false
-        uuv_10/base_link:
-          Value: false
-        uuv_10/fin_0:
-          Value: false
-        uuv_10/fin_1:
-          Value: false
-        uuv_10/fin_2:
-          Value: false
-        uuv_10/fin_3:
-          Value: false
-        uuv_10/thruster_0:
-          Value: false
-        uuv_11/base_link:
-          Value: false
-        uuv_11/fin_0:
-          Value: false
-        uuv_11/fin_1:
-          Value: false
-        uuv_11/fin_2:
-          Value: false
-        uuv_11/fin_3:
-          Value: false
-        uuv_11/thruster_0:
-          Value: false
-        uuv_12/base_link:
-          Value: false
-        uuv_12/fin_0:
-          Value: false
-        uuv_12/fin_1:
-          Value: false
-        uuv_12/fin_2:
-          Value: false
-        uuv_12/fin_3:
-          Value: false
-        uuv_12/thruster_0:
-          Value: false
-        uuv_13/base_link:
-          Value: false
-        uuv_13/fin_0:
-          Value: false
-        uuv_13/fin_1:
-          Value: false
-        uuv_13/fin_2:
-          Value: false
-        uuv_13/fin_3:
-          Value: false
-        uuv_13/thruster_0:
-          Value: false
-        uuv_14/base_link:
-          Value: false
-        uuv_14/fin_0:
-          Value: false
-        uuv_14/fin_1:
-          Value: false
-        uuv_14/fin_2:
-          Value: false
-        uuv_14/fin_3:
-          Value: false
-        uuv_14/thruster_0:
-          Value: false
-        uuv_15/base_link:
-          Value: false
-        uuv_15/fin_0:
-          Value: false
-        uuv_15/fin_1:
-          Value: false
-        uuv_15/fin_2:
-          Value: false
-        uuv_15/fin_3:
-          Value: false
-        uuv_15/thruster_0:
-          Value: false
-        uuv_16/base_link:
-          Value: false
-        uuv_16/fin_0:
-          Value: false
-        uuv_16/fin_1:
-          Value: false
-        uuv_16/fin_2:
-          Value: false
-        uuv_16/fin_3:
-          Value: false
-        uuv_16/thruster_0:
-          Value: false
-        uuv_17/base_link:
-          Value: false
-        uuv_17/fin_0:
-          Value: false
-        uuv_17/fin_1:
-          Value: false
-        uuv_17/fin_2:
-          Value: false
-        uuv_17/fin_3:
-          Value: false
-        uuv_17/thruster_0:
-          Value: false
-        uuv_18/base_link:
-          Value: false
-        uuv_18/fin_0:
-          Value: false
-        uuv_18/fin_1:
-          Value: false
-        uuv_18/fin_2:
-          Value: false
-        uuv_18/fin_3:
-          Value: false
-        uuv_18/thruster_0:
-          Value: false
-        uuv_19/base_link:
-          Value: false
-        uuv_19/fin_0:
-          Value: false
-        uuv_19/fin_1:
-          Value: false
-        uuv_19/fin_2:
-          Value: false
-        uuv_19/fin_3:
-          Value: false
-        uuv_19/thruster_0:
-          Value: false
-        uuv_2/base_link:
-          Value: false
-        uuv_2/fin_0:
-          Value: false
-        uuv_2/fin_1:
-          Value: false
-        uuv_2/fin_2:
-          Value: false
-        uuv_2/fin_3:
-          Value: false
-        uuv_2/thruster_0:
-          Value: false
-        uuv_20/base_link:
-          Value: false
-        uuv_20/fin_0:
-          Value: false
-        uuv_20/fin_1:
-          Value: false
-        uuv_20/fin_2:
-          Value: false
-        uuv_20/fin_3:
-          Value: false
-        uuv_20/thruster_0:
-          Value: false
-        uuv_21/base_link:
-          Value: false
-        uuv_21/fin_0:
-          Value: false
-        uuv_21/fin_1:
-          Value: false
-        uuv_21/fin_2:
-          Value: false
-        uuv_21/fin_3:
-          Value: false
-        uuv_21/thruster_0:
-          Value: false
-        uuv_22/base_link:
-          Value: false
-        uuv_22/fin_0:
-          Value: false
-        uuv_22/fin_1:
-          Value: false
-        uuv_22/fin_2:
-          Value: false
-        uuv_22/fin_3:
-          Value: false
-        uuv_22/thruster_0:
-          Value: false
-        uuv_23/base_link:
-          Value: false
-        uuv_23/fin_0:
-          Value: false
-        uuv_23/fin_1:
-          Value: false
-        uuv_23/fin_2:
-          Value: false
-        uuv_23/fin_3:
-          Value: false
-        uuv_23/thruster_0:
-          Value: false
-        uuv_24/base_link:
-          Value: false
-        uuv_24/fin_0:
-          Value: false
-        uuv_24/fin_1:
-          Value: false
-        uuv_24/fin_2:
-          Value: false
-        uuv_24/fin_3:
-          Value: false
-        uuv_24/thruster_0:
-          Value: false
-        uuv_25/base_link:
-          Value: false
-        uuv_25/fin_0:
-          Value: false
-        uuv_25/fin_1:
-          Value: false
-        uuv_25/fin_2:
-          Value: false
-        uuv_25/fin_3:
-          Value: false
-        uuv_25/thruster_0:
-          Value: false
-        uuv_26/base_link:
-          Value: false
-        uuv_26/fin_0:
-          Value: false
-        uuv_26/fin_1:
-          Value: false
-        uuv_26/fin_2:
-          Value: false
-        uuv_26/fin_3:
-          Value: false
-        uuv_26/thruster_0:
-          Value: false
-        uuv_27/base_link:
-          Value: false
-        uuv_27/fin_0:
-          Value: false
-        uuv_27/fin_1:
-          Value: false
-        uuv_27/fin_2:
-          Value: false
-        uuv_27/fin_3:
-          Value: false
-        uuv_27/thruster_0:
-          Value: false
-        uuv_28/base_link:
-          Value: false
-        uuv_28/fin_0:
-          Value: false
-        uuv_28/fin_1:
-          Value: false
-        uuv_28/fin_2:
-          Value: false
-        uuv_28/fin_3:
-          Value: false
-        uuv_28/thruster_0:
-          Value: false
-        uuv_29/base_link:
-          Value: false
-        uuv_29/fin_0:
-          Value: false
-        uuv_29/fin_1:
-          Value: false
-        uuv_29/fin_2:
-          Value: false
-        uuv_29/fin_3:
-          Value: false
-        uuv_29/thruster_0:
-          Value: false
-        uuv_3/base_link:
-          Value: false
-        uuv_3/fin_0:
-          Value: false
-        uuv_3/fin_1:
-          Value: false
-        uuv_3/fin_2:
-          Value: false
-        uuv_3/fin_3:
-          Value: false
-        uuv_3/thruster_0:
-          Value: false
-        uuv_30/base_link:
-          Value: false
-        uuv_30/fin_0:
-          Value: false
-        uuv_30/fin_1:
-          Value: false
-        uuv_30/fin_2:
-          Value: false
-        uuv_30/fin_3:
-          Value: false
-        uuv_30/thruster_0:
-          Value: false
-        uuv_31/base_link:
-          Value: false
-        uuv_31/fin_0:
-          Value: false
-        uuv_31/fin_1:
-          Value: false
-        uuv_31/fin_2:
-          Value: false
-        uuv_31/fin_3:
-          Value: false
-        uuv_31/thruster_0:
-          Value: false
-        uuv_32/base_link:
-          Value: false
-        uuv_32/fin_0:
-          Value: false
-        uuv_32/fin_1:
-          Value: false
-        uuv_32/fin_2:
-          Value: false
-        uuv_32/fin_3:
-          Value: false
-        uuv_32/thruster_0:
-          Value: false
-        uuv_33/base_link:
-          Value: false
-        uuv_33/fin_0:
-          Value: false
-        uuv_33/fin_1:
-          Value: false
-        uuv_33/fin_2:
-          Value: false
-        uuv_33/fin_3:
-          Value: false
-        uuv_33/thruster_0:
-          Value: false
-        uuv_34/base_link:
-          Value: false
-        uuv_34/fin_0:
-          Value: false
-        uuv_34/fin_1:
-          Value: false
-        uuv_34/fin_2:
-          Value: false
-        uuv_34/fin_3:
-          Value: false
-        uuv_34/thruster_0:
-          Value: false
-        uuv_35/base_link:
-          Value: false
-        uuv_35/fin_0:
-          Value: false
-        uuv_35/fin_1:
-          Value: false
-        uuv_35/fin_2:
-          Value: false
-        uuv_35/fin_3:
-          Value: false
-        uuv_35/thruster_0:
-          Value: false
-        uuv_36/base_link:
-          Value: false
-        uuv_36/fin_0:
-          Value: false
-        uuv_36/fin_1:
-          Value: false
-        uuv_36/fin_2:
-          Value: false
-        uuv_36/fin_3:
-          Value: false
-        uuv_36/thruster_0:
-          Value: false
-        uuv_37/base_link:
-          Value: false
-        uuv_37/fin_0:
-          Value: false
-        uuv_37/fin_1:
-          Value: false
-        uuv_37/fin_2:
-          Value: false
-        uuv_37/fin_3:
-          Value: false
-        uuv_37/thruster_0:
-          Value: false
-        uuv_38/base_link:
-          Value: false
-        uuv_38/fin_0:
-          Value: false
-        uuv_38/fin_1:
-          Value: false
-        uuv_38/fin_2:
-          Value: false
-        uuv_38/fin_3:
-          Value: false
-        uuv_38/thruster_0:
-          Value: false
-        uuv_39/base_link:
-          Value: false
-        uuv_39/fin_0:
-          Value: false
-        uuv_39/fin_1:
-          Value: false
-        uuv_39/fin_2:
-          Value: false
-        uuv_39/fin_3:
-          Value: false
-        uuv_39/thruster_0:
-          Value: false
-        uuv_4/base_link:
-          Value: false
-        uuv_4/fin_0:
-          Value: false
-        uuv_4/fin_1:
-          Value: false
-        uuv_4/fin_2:
-          Value: false
-        uuv_4/fin_3:
-          Value: false
-        uuv_4/thruster_0:
-          Value: false
-        uuv_40/base_link:
-          Value: false
-        uuv_40/fin_0:
-          Value: false
-        uuv_40/fin_1:
-          Value: false
-        uuv_40/fin_2:
-          Value: false
-        uuv_40/fin_3:
-          Value: false
-        uuv_40/thruster_0:
-          Value: false
-        uuv_41/base_link:
-          Value: false
-        uuv_41/fin_0:
-          Value: false
-        uuv_41/fin_1:
-          Value: false
-        uuv_41/fin_2:
-          Value: false
-        uuv_41/fin_3:
-          Value: false
-        uuv_41/thruster_0:
-          Value: false
-        uuv_42/base_link:
-          Value: false
-        uuv_42/fin_0:
-          Value: false
-        uuv_42/fin_1:
-          Value: false
-        uuv_42/fin_2:
-          Value: false
-        uuv_42/fin_3:
-          Value: false
-        uuv_42/thruster_0:
-          Value: false
-        uuv_43/base_link:
-          Value: false
-        uuv_43/fin_0:
-          Value: false
-        uuv_43/fin_1:
-          Value: false
-        uuv_43/fin_2:
-          Value: false
-        uuv_43/fin_3:
-          Value: false
-        uuv_43/thruster_0:
-          Value: false
-        uuv_44/base_link:
-          Value: false
-        uuv_44/fin_0:
-          Value: false
-        uuv_44/fin_1:
-          Value: false
-        uuv_44/fin_2:
-          Value: false
-        uuv_44/fin_3:
-          Value: false
-        uuv_44/thruster_0:
-          Value: false
-        uuv_45/base_link:
-          Value: false
-        uuv_45/fin_0:
-          Value: false
-        uuv_45/fin_1:
-          Value: false
-        uuv_45/fin_2:
-          Value: false
-        uuv_45/fin_3:
-          Value: false
-        uuv_45/thruster_0:
-          Value: false
-        uuv_46/base_link:
-          Value: false
-        uuv_46/fin_0:
-          Value: false
-        uuv_46/fin_1:
-          Value: false
-        uuv_46/fin_2:
-          Value: false
-        uuv_46/fin_3:
-          Value: false
-        uuv_46/thruster_0:
-          Value: false
-        uuv_47/base_link:
-          Value: false
-        uuv_47/fin_0:
-          Value: false
-        uuv_47/fin_1:
-          Value: false
-        uuv_47/fin_2:
-          Value: false
-        uuv_47/fin_3:
-          Value: false
-        uuv_47/thruster_0:
-          Value: false
-        uuv_48/base_link:
-          Value: false
-        uuv_48/fin_0:
-          Value: false
-        uuv_48/fin_1:
-          Value: false
-        uuv_48/fin_2:
-          Value: false
-        uuv_48/fin_3:
-          Value: false
-        uuv_48/thruster_0:
-          Value: false
-        uuv_49/base_link:
-          Value: false
-        uuv_49/fin_0:
-          Value: false
-        uuv_49/fin_1:
-          Value: false
-        uuv_49/fin_2:
-          Value: false
-        uuv_49/fin_3:
-          Value: false
-        uuv_49/thruster_0:
-          Value: false
-        uuv_5/base_link:
-          Value: false
-        uuv_5/fin_0:
-          Value: false
-        uuv_5/fin_1:
-          Value: false
-        uuv_5/fin_2:
-          Value: false
-        uuv_5/fin_3:
-          Value: false
-        uuv_5/thruster_0:
-          Value: false
-        uuv_6/base_link:
-          Value: false
-        uuv_6/fin_0:
-          Value: false
-        uuv_6/fin_1:
-          Value: false
-        uuv_6/fin_2:
-          Value: false
-        uuv_6/fin_3:
-          Value: false
-        uuv_6/thruster_0:
-          Value: false
-        uuv_7/base_link:
-          Value: false
-        uuv_7/fin_0:
-          Value: false
-        uuv_7/fin_1:
-          Value: false
-        uuv_7/fin_2:
-          Value: false
-        uuv_7/fin_3:
-          Value: false
-        uuv_7/thruster_0:
-          Value: false
-        uuv_8/base_link:
-          Value: false
-        uuv_8/fin_0:
-          Value: false
-        uuv_8/fin_1:
-          Value: false
-        uuv_8/fin_2:
-          Value: false
-        uuv_8/fin_3:
-          Value: false
-        uuv_8/thruster_0:
-          Value: false
-        uuv_9/base_link:
-          Value: false
-        uuv_9/fin_0:
-          Value: false
-        uuv_9/fin_1:
-          Value: false
-        uuv_9/fin_2:
-          Value: false
-        uuv_9/fin_3:
-          Value: false
-        uuv_9/thruster_0:
-          Value: false
-      Marker Alpha: 1
-      Marker Scale: 30
-      Name: TF
-      Show Arrows: true
-      Show Axes: true
-      Show Names: true
-      Tree:
-        map:
-          ned:
-            uuv_0/base_link:
-              uuv_0/fin_0:
-                {}
-              uuv_0/fin_1:
-                {}
-              uuv_0/fin_2:
-                {}
-              uuv_0/fin_3:
-                {}
-              uuv_0/thruster_0:
-                {}
-            uuv_1/base_link:
-              uuv_1/fin_0:
-                {}
-              uuv_1/fin_1:
-                {}
-              uuv_1/fin_2:
-                {}
-              uuv_1/fin_3:
-                {}
-              uuv_1/thruster_0:
-                {}
-            uuv_10/base_link:
-              uuv_10/fin_0:
-                {}
-              uuv_10/fin_1:
-                {}
-              uuv_10/fin_2:
-                {}
-              uuv_10/fin_3:
-                {}
-              uuv_10/thruster_0:
-                {}
-            uuv_11/base_link:
-              uuv_11/fin_0:
-                {}
-              uuv_11/fin_1:
-                {}
-              uuv_11/fin_2:
-                {}
-              uuv_11/fin_3:
-                {}
-              uuv_11/thruster_0:
-                {}
-            uuv_12/base_link:
-              uuv_12/fin_0:
-                {}
-              uuv_12/fin_1:
-                {}
-              uuv_12/fin_2:
-                {}
-              uuv_12/fin_3:
-                {}
-              uuv_12/thruster_0:
-                {}
-            uuv_13/base_link:
-              uuv_13/fin_0:
-                {}
-              uuv_13/fin_1:
-                {}
-              uuv_13/fin_2:
-                {}
-              uuv_13/fin_3:
-                {}
-              uuv_13/thruster_0:
-                {}
-            uuv_14/base_link:
-              uuv_14/fin_0:
-                {}
-              uuv_14/fin_1:
-                {}
-              uuv_14/fin_2:
-                {}
-              uuv_14/fin_3:
-                {}
-              uuv_14/thruster_0:
-                {}
-            uuv_15/base_link:
-              uuv_15/fin_0:
-                {}
-              uuv_15/fin_1:
-                {}
-              uuv_15/fin_2:
-                {}
-              uuv_15/fin_3:
-                {}
-              uuv_15/thruster_0:
-                {}
-            uuv_16/base_link:
-              uuv_16/fin_0:
-                {}
-              uuv_16/fin_1:
-                {}
-              uuv_16/fin_2:
-                {}
-              uuv_16/fin_3:
-                {}
-              uuv_16/thruster_0:
-                {}
-            uuv_17/base_link:
-              uuv_17/fin_0:
-                {}
-              uuv_17/fin_1:
-                {}
-              uuv_17/fin_2:
-                {}
-              uuv_17/fin_3:
-                {}
-              uuv_17/thruster_0:
-                {}
-            uuv_18/base_link:
-              uuv_18/fin_0:
-                {}
-              uuv_18/fin_1:
-                {}
-              uuv_18/fin_2:
-                {}
-              uuv_18/fin_3:
-                {}
-              uuv_18/thruster_0:
-                {}
-            uuv_19/base_link:
-              uuv_19/fin_0:
-                {}
-              uuv_19/fin_1:
-                {}
-              uuv_19/fin_2:
-                {}
-              uuv_19/fin_3:
-                {}
-              uuv_19/thruster_0:
-                {}
-            uuv_2/base_link:
-              uuv_2/fin_0:
-                {}
-              uuv_2/fin_1:
-                {}
-              uuv_2/fin_2:
-                {}
-              uuv_2/fin_3:
-                {}
-              uuv_2/thruster_0:
-                {}
-            uuv_20/base_link:
-              uuv_20/fin_0:
-                {}
-              uuv_20/fin_1:
-                {}
-              uuv_20/fin_2:
-                {}
-              uuv_20/fin_3:
-                {}
-              uuv_20/thruster_0:
-                {}
-            uuv_21/base_link:
-              uuv_21/fin_0:
-                {}
-              uuv_21/fin_1:
-                {}
-              uuv_21/fin_2:
-                {}
-              uuv_21/fin_3:
-                {}
-              uuv_21/thruster_0:
-                {}
-            uuv_22/base_link:
-              uuv_22/fin_0:
-                {}
-              uuv_22/fin_1:
-                {}
-              uuv_22/fin_2:
-                {}
-              uuv_22/fin_3:
-                {}
-              uuv_22/thruster_0:
-                {}
-            uuv_23/base_link:
-              uuv_23/fin_0:
-                {}
-              uuv_23/fin_1:
-                {}
-              uuv_23/fin_2:
-                {}
-              uuv_23/fin_3:
-                {}
-              uuv_23/thruster_0:
-                {}
-            uuv_24/base_link:
-              uuv_24/fin_0:
-                {}
-              uuv_24/fin_1:
-                {}
-              uuv_24/fin_2:
-                {}
-              uuv_24/fin_3:
-                {}
-              uuv_24/thruster_0:
-                {}
-            uuv_25/base_link:
-              uuv_25/fin_0:
-                {}
-              uuv_25/fin_1:
-                {}
-              uuv_25/fin_2:
-                {}
-              uuv_25/fin_3:
-                {}
-              uuv_25/thruster_0:
-                {}
-            uuv_26/base_link:
-              uuv_26/fin_0:
-                {}
-              uuv_26/fin_1:
-                {}
-              uuv_26/fin_2:
-                {}
-              uuv_26/fin_3:
-                {}
-              uuv_26/thruster_0:
-                {}
-            uuv_27/base_link:
-              uuv_27/fin_0:
-                {}
-              uuv_27/fin_1:
-                {}
-              uuv_27/fin_2:
-                {}
-              uuv_27/fin_3:
-                {}
-              uuv_27/thruster_0:
-                {}
-            uuv_28/base_link:
-              uuv_28/fin_0:
-                {}
-              uuv_28/fin_1:
-                {}
-              uuv_28/fin_2:
-                {}
-              uuv_28/fin_3:
-                {}
-              uuv_28/thruster_0:
-                {}
-            uuv_29/base_link:
-              uuv_29/fin_0:
-                {}
-              uuv_29/fin_1:
-                {}
-              uuv_29/fin_2:
-                {}
-              uuv_29/fin_3:
-                {}
-              uuv_29/thruster_0:
-                {}
-            uuv_3/base_link:
-              uuv_3/fin_0:
-                {}
-              uuv_3/fin_1:
-                {}
-              uuv_3/fin_2:
-                {}
-              uuv_3/fin_3:
-                {}
-              uuv_3/thruster_0:
-                {}
-            uuv_30/base_link:
-              uuv_30/fin_0:
-                {}
-              uuv_30/fin_1:
-                {}
-              uuv_30/fin_2:
-                {}
-              uuv_30/fin_3:
-                {}
-              uuv_30/thruster_0:
-                {}
-            uuv_31/base_link:
-              uuv_31/fin_0:
-                {}
-              uuv_31/fin_1:
-                {}
-              uuv_31/fin_2:
-                {}
-              uuv_31/fin_3:
-                {}
-              uuv_31/thruster_0:
-                {}
-            uuv_32/base_link:
-              uuv_32/fin_0:
-                {}
-              uuv_32/fin_1:
-                {}
-              uuv_32/fin_2:
-                {}
-              uuv_32/fin_3:
-                {}
-              uuv_32/thruster_0:
-                {}
-            uuv_33/base_link:
-              uuv_33/fin_0:
-                {}
-              uuv_33/fin_1:
-                {}
-              uuv_33/fin_2:
-                {}
-              uuv_33/fin_3:
-                {}
-              uuv_33/thruster_0:
-                {}
-            uuv_34/base_link:
-              uuv_34/fin_0:
-                {}
-              uuv_34/fin_1:
-                {}
-              uuv_34/fin_2:
-                {}
-              uuv_34/fin_3:
-                {}
-              uuv_34/thruster_0:
-                {}
-            uuv_35/base_link:
-              uuv_35/fin_0:
-                {}
-              uuv_35/fin_1:
-                {}
-              uuv_35/fin_2:
-                {}
-              uuv_35/fin_3:
-                {}
-              uuv_35/thruster_0:
-                {}
-            uuv_36/base_link:
-              uuv_36/fin_0:
-                {}
-              uuv_36/fin_1:
-                {}
-              uuv_36/fin_2:
-                {}
-              uuv_36/fin_3:
-                {}
-              uuv_36/thruster_0:
-                {}
-            uuv_37/base_link:
-              uuv_37/fin_0:
-                {}
-              uuv_37/fin_1:
-                {}
-              uuv_37/fin_2:
-                {}
-              uuv_37/fin_3:
-                {}
-              uuv_37/thruster_0:
-                {}
-            uuv_38/base_link:
-              uuv_38/fin_0:
-                {}
-              uuv_38/fin_1:
-                {}
-              uuv_38/fin_2:
-                {}
-              uuv_38/fin_3:
-                {}
-              uuv_38/thruster_0:
-                {}
-            uuv_39/base_link:
-              uuv_39/fin_0:
-                {}
-              uuv_39/fin_1:
-                {}
-              uuv_39/fin_2:
-                {}
-              uuv_39/fin_3:
-                {}
-              uuv_39/thruster_0:
-                {}
-            uuv_4/base_link:
-              uuv_4/fin_0:
-                {}
-              uuv_4/fin_1:
-                {}
-              uuv_4/fin_2:
-                {}
-              uuv_4/fin_3:
-                {}
-              uuv_4/thruster_0:
-                {}
-            uuv_40/base_link:
-              uuv_40/fin_0:
-                {}
-              uuv_40/fin_1:
-                {}
-              uuv_40/fin_2:
-                {}
-              uuv_40/fin_3:
-                {}
-              uuv_40/thruster_0:
-                {}
-            uuv_41/base_link:
-              uuv_41/fin_0:
-                {}
-              uuv_41/fin_1:
-                {}
-              uuv_41/fin_2:
-                {}
-              uuv_41/fin_3:
-                {}
-              uuv_41/thruster_0:
-                {}
-            uuv_42/base_link:
-              uuv_42/fin_0:
-                {}
-              uuv_42/fin_1:
-                {}
-              uuv_42/fin_2:
-                {}
-              uuv_42/fin_3:
-                {}
-              uuv_42/thruster_0:
-                {}
-            uuv_43/base_link:
-              uuv_43/fin_0:
-                {}
-              uuv_43/fin_1:
-                {}
-              uuv_43/fin_2:
-                {}
-              uuv_43/fin_3:
-                {}
-              uuv_43/thruster_0:
-                {}
-            uuv_44/base_link:
-              uuv_44/fin_0:
-                {}
-              uuv_44/fin_1:
-                {}
-              uuv_44/fin_2:
-                {}
-              uuv_44/fin_3:
-                {}
-              uuv_44/thruster_0:
-                {}
-            uuv_45/base_link:
-              uuv_45/fin_0:
-                {}
-              uuv_45/fin_1:
-                {}
-              uuv_45/fin_2:
-                {}
-              uuv_45/fin_3:
-                {}
-              uuv_45/thruster_0:
-                {}
-            uuv_46/base_link:
-              uuv_46/fin_0:
-                {}
-              uuv_46/fin_1:
-                {}
-              uuv_46/fin_2:
-                {}
-              uuv_46/fin_3:
-                {}
-              uuv_46/thruster_0:
-                {}
-            uuv_47/base_link:
-              uuv_47/fin_0:
-                {}
-              uuv_47/fin_1:
-                {}
-              uuv_47/fin_2:
-                {}
-              uuv_47/fin_3:
-                {}
-              uuv_47/thruster_0:
-                {}
-            uuv_48/base_link:
-              uuv_48/fin_0:
-                {}
-              uuv_48/fin_1:
-                {}
-              uuv_48/fin_2:
-                {}
-              uuv_48/fin_3:
-                {}
-              uuv_48/thruster_0:
-                {}
-            uuv_49/base_link:
-              uuv_49/fin_0:
-                {}
-              uuv_49/fin_1:
-                {}
-              uuv_49/fin_2:
-                {}
-              uuv_49/fin_3:
-                {}
-              uuv_49/thruster_0:
-                {}
-            uuv_5/base_link:
-              uuv_5/fin_0:
-                {}
-              uuv_5/fin_1:
-                {}
-              uuv_5/fin_2:
-                {}
-              uuv_5/fin_3:
-                {}
-              uuv_5/thruster_0:
-                {}
-            uuv_6/base_link:
-              uuv_6/fin_0:
-                {}
-              uuv_6/fin_1:
-                {}
-              uuv_6/fin_2:
-                {}
-              uuv_6/fin_3:
-                {}
-              uuv_6/thruster_0:
-                {}
-            uuv_7/base_link:
-              uuv_7/fin_0:
-                {}
-              uuv_7/fin_1:
-                {}
-              uuv_7/fin_2:
-                {}
-              uuv_7/fin_3:
-                {}
-              uuv_7/thruster_0:
-                {}
-            uuv_8/base_link:
-              uuv_8/fin_0:
-                {}
-              uuv_8/fin_1:
-                {}
-              uuv_8/fin_2:
-                {}
-              uuv_8/fin_3:
-                {}
-              uuv_8/thruster_0:
-                {}
-            uuv_9/base_link:
-              uuv_9/fin_0:
-                {}
-              uuv_9/fin_1:
-                {}
-              uuv_9/fin_2:
-                {}
-              uuv_9/fin_3:
-                {}
-              uuv_9/thruster_0:
-                {}
-      Update Interval: 0
-      Value: true
+    - Class: rviz/Group
+      Displays:
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_0/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_0
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_1/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_1
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_2/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_2
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_3/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_3
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_4/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_4
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_5/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_5
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_6/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_6
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_7/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_7
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_8/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_8
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_9/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_9
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_10/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_10
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_11/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_11
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_12/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_12
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_13/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_13
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_14/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_14
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_15/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_15
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_16/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_16
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_17/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_17
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_18/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_18
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_19/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_19
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_20/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_20
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_21/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_21
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_22/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_22
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_23/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_23
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_24/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_24
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_25/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_25
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_26/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_26
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_27/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_27
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_28/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_28
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_29/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_29
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_30/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_30
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_31/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_31
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_32/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_32
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_33/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_33
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_34/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_34
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_35/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_35
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_36/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_36
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_37/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_37
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_38/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_38
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_39/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_39
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_40/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_40
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_41/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_41
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_42/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_42
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_43/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_43
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_44/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_44
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_45/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_45
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_46/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_46
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_47/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_47
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_48/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_48
+        - Class: rviz/Group
+          Displays:
+            - Class: rviz/MarkerArray
+              Enabled: true
+              Marker Topic: /uuv_49/guidance_debug_markers
+              Name: Debug_Markers
+              Namespaces:
+                {}
+              Queue Size: 100
+              Value: true
+          Enabled: true
+          Name: uuv_49
+      Enabled: false
+      Name: Swarm_Guidance_Forces
   Enabled: true
   Global Options:
     Background Color: 211; 215; 207
@@ -6773,7 +5779,7 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 10
+      Scale: 50
       Target Frame: ned
       X: 0
       Y: 0
@@ -6786,14 +5792,14 @@ Visualization Manager:
           Swap Stereo Eyes: false
           Value: false
         Invert Z Axis: false
-        Name: NED_TopToDown
+        Name: 1_TopDown_View
         Near Clip Distance: 0.009999999776482582
-        Scale: 10
+        Scale: 50
         Target Frame: ned
         X: 0
         Y: 0
-      - Class: rviz/ThirdPersonFollower
-        Distance: 10
+      - Class: rviz/Orbit
+        Distance: 40
         Enable Stereo Rendering:
           Stereo Eye Separation: 0.05999999865889549
           Stereo Focal Distance: 1
@@ -6807,11 +5813,11 @@ Visualization Manager:
         Focal Shape Fixed Size: true
         Focal Shape Size: 0.05000000074505806
         Invert Z Axis: false
-        Name: NED
+        Name: 2_Free_Orbit_NED
         Near Clip Distance: 0.009999999776482582
-        Pitch: 0.7853981852531433
+        Pitch: 0.5
         Target Frame: ned
-        Yaw: 0.7853981852531433
+        Yaw: 0.7850000262260437
       - Class: rviz/ThirdPersonFollower
         Distance: 8
         Enable Stereo Rendering:
@@ -7815,16 +6821,12 @@ Visualization Manager:
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 752
+  Height: 800
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd00000001000000000000015800000296fc0200000004fb000000100044006900730070006c006100790073010000003d00000136000000c900fffffffb0000000a0056006900650077007301000001790000015a000000a400fffffffb0000001200530065006c0065006300740069006f006e000000014b000000800000005c00fffffffb0000001e0054006f006f006c002000500072006f0070006500720074006900650073000000018a0000009f0000005c00ffffff0000041b0000029600000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
-  Selection:
-    collapsed: false
-  Tool Properties:
-    collapsed: false
+  QMainWindow State: 000000ff00000000fd000000010000000000000158000002c6fc0200000002fb000000100044006900730070006c006100790073010000003d000001ab000000c900fffffffb0000000a0056006900650077007301000001ee00000115000000a400ffffff00000352000002c600000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: false
-  Width: 1401
-  X: 596
-  Y: 100
+  Width: 1200
+  X: 52
+  Y: 27

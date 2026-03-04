@@ -25,6 +25,11 @@
            base_class_type="uuv_interface::GuidanceBase">
         <description>Simple LOS Guidance</description>
     </class>
+    <class name="uuv_control/SpacialFlockingGuidance" 
+           type="uuv_control::SpacialFlockingGuidance" 
+           base_class_type="uuv_interface::GuidanceBase">
+        <description>Spacial improved flocking+apf Guidance</description>
+    </class>
 
 </library>
 

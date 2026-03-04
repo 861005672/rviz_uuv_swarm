@@ -65,7 +65,7 @@ class UUVLoaderNode:
                 return None
         return poses
 
-    def generate_xml_launch(self, poses, group_size, dyn_type, ctrl_type, gui_type, control_level, log_dir):
+    def generate_xml_launch(self, center, poses, group_size, dyn_type, ctrl_type, gui_type, control_level, log_dir):
         xml_lines = ['<?xml version="1.0"?>', '<launch>']
         total_uuvs = len(poses)
         num_managers = math.ceil(total_uuvs / group_size)
@@ -102,6 +102,9 @@ class UUVLoaderNode:
                 xml_lines.append(f'    <param name="init_y" value="{y:.3f}"/>')
                 xml_lines.append(f'    <param name="init_z" value="{z:.3f}"/>')
                 xml_lines.append(f'    <param name="init_yaw" value="{yaw:.3f}"/>')
+                xml_lines.append(f'    <param name="start_n" value="{center[0]:.3f}"/>')
+                xml_lines.append(f'    <param name="start_e" value="{center[1]:.3f}"/>')
+                xml_lines.append(f'    <param name="start_d" value="{center[2]:.3f}"/>')
                 xml_lines.append(f'    <param name="control_level" value="{control_level}"/>')
                 xml_lines.append(f'    <param name="log_dir" value="{log_dir}"/>')
                 xml_lines.append('    <param name="visual_rate" value="20.0"/>')
@@ -164,7 +167,7 @@ class UUVLoaderNode:
             rospy.loginfo(f"[LogManager] Created exclusive log directory: {log_dir}")
         
         # 5. 生成 XML 内容 (注入专属日志路径供 C++ 读取)
-        xml_content = self.generate_xml_launch(poses, group_size, dynamics_type, controller_type, guidance_type, control_level, log_dir)
+        xml_content = self.generate_xml_launch(center, poses, group_size, dynamics_type, controller_type, guidance_type, control_level, log_dir)
         
         # 6. 确保 Launch 目录存在并写入文件
         try:

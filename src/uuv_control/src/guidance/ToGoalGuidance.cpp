@@ -25,7 +25,7 @@ public:
 
         max_pitch_rad_ = max_pitch_deg_ / 180.0 * M_PI;
 
-        UUV_INFO << "[ToGoalGuidance] Pure Math Model Loaded: \n"
+        UUV_INFO << "[ToGoalGuidance] ToGoalGuidance param Loaded: \n"
             <<"\n cruise_speed=\n"<<cruise_speed_<<"\n acceptance_radius=\n"<<acceptance_radius_
             <<"\n max_pitch_deg=\n"<<max_pitch_deg_;
 

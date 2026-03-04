@@ -18,15 +18,6 @@ def generate_rviz_config(total_uuvs, output_file):
         - /Global Options1
       Splitter Ratio: 0.5
     Tree Height: 455
-  - Class: rviz/Selection
-    Name: Selection
-  - Class: rviz/Tool Properties
-    Expanded:
-      - /2D Pose Estimate1
-      - /2D Nav Goal1
-      - /Publish Point1
-    Name: Tool Properties
-    Splitter Ratio: 0.5886790156364441
   - Class: rviz/Views
     Expanded:
       - /Current View1
@@ -62,6 +53,20 @@ Visualization Manager:
       Name: Environment Obstacles (MarkerArray)
       Marker Topic:
         Value: /visualization_marker_array
+      Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        ned:
+          Value: true
+      Marker Scale: 30
+      Name: TF
+      Show Arrows: false
+      Show Axes: true
+      Show Names: true
+      Update Interval: 0
       Value: true
 """
 
@@ -160,14 +165,40 @@ Visualization Manager:
               Use max range: false
               Value: true
 """
+        
+# ==========================================
+    # 4.5 生成 Swarm_Guidance_Forces 大文件夹 (MarkerArray)
+    # ==========================================
+    # 注意：这里默认将外层 Group 的 Enabled 设为 false，
+    # 防止刚打开 RViz 时 50个UUV x 5个Marker = 250个元素同时渲染导致卡顿。
+    # 需要看的时候在 RViz 左侧勾选对应 UUV 的钩即可。
+    rviz_content += """    - Class: rviz/Group
+      Enabled: false
+      Name: Swarm_Guidance_Forces
+      Displays:
+"""
+    for i in range(total_uuvs):
+        ns = f"uuv_{i}"
+        rviz_content += f"""        - Class: rviz/Group
+          Enabled: true
+          Name: {ns}
+          Displays:
+            - Alpha: 1
+              Class: rviz/MarkerArray
+              Enabled: true
+              Name: Debug_Markers
+              Marker Topic:
+                Value: /{ns}/guidance_debug_markers
+              Value: true
+"""
 
     # ==========================================
     # 5. Global Options 与 视角设置
     # ==========================================
     rviz_content += """  Enabled: true
   Global Options:
-    Background Color: 48; 48; 48
-    Fixed Frame: ned
+    Background Color: 211; 215; 207
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -204,6 +235,25 @@ Visualization Manager:
       Target Frame: uuv_0/base_link
       Yaw: 0.785
     Saved:
+      - Class: rviz/TopDownOrtho
+        Angle: 0
+        Name: 1_TopDown_View
+        Near Clip Distance: 0.01
+        Scale: 50
+        Target Frame: ned
+        X: 0
+        Y: 0
+      - Class: rviz/Orbit
+        Distance: 40
+        Focal Point:
+          X: 0
+          Y: 0
+          Z: 0
+        Name: 2_Free_Orbit_NED
+        Pitch: 0.5
+        Target Frame: ned
+        Yaw: 0.785
+    
 """
     # 附加上每个UUV的固定追踪视角
     for i in range(total_uuvs):
@@ -220,7 +270,7 @@ Visualization Manager:
           X: 0
           Y: 0
           Z: 0
-        Invert Z Axis: true
+        Invert Z Axis: false
         Name: Track_{ns}
         Near Clip Distance: 0.01
         Pitch: 0.5
@@ -235,10 +285,6 @@ Visualization Manager:
   Height: 800
   Hide Left Dock: false
   Hide Right Dock: false
-  Selection:
-    collapsed: false
-  Tool Properties:
-    collapsed: false
   Views:
     collapsed: false
   Width: 1200

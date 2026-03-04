@@ -145,6 +145,7 @@ add_library(ControlPlugins
   src/controller/PidController.cpp
 
   src/guidance/ToGoalGuidance.cpp
+  src/guidance/SpacialFlockingGuidance.cpp
 )
 
 add_dependencies(ControlPlugins ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})

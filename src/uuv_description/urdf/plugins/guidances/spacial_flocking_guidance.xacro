@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="insert_spacial_flocking_guidance" 
+    params="update_rate:=100.0 
+            publish_debug:=true 
+            publish_debug_rate:=5.0 
+
+            min_speed:=4.0 
+            cruise_speed:=8.0
+            max_speed:=10.0
+            max_pitch_deg:=30.0
+
+            zeta_p:=8.0
+            zeta_v:=0.5
+            max_ftotal:=200.0
+            t_ftotal:=10.0
+            "
+    >
+        <plugin layer="guidance" name="spacial_flocking_guidance" type="uuv_control/SpacialFlockingGuidance">
+            <!-- ControlPluginBase的参数 -->
+            <update_rate>${update_rate}</update_rate>
+            <publish_debug>${publish_debug}</publish_debug>
+            <publish_debug_rate>${publish_debug_rate}</publish_debug_rate>
+            <!-- SpacialFlockingGuidance 特有的参数 -->
+            <min_speed>${min_speed}</min_speed>
+            <cruise_speed>${cruise_speed}</cruise_speed>
+            <max_speed>${max_speed}</max_speed>
+            <max_pitch_deg>${max_pitch_deg}</max_pitch_deg>
+            <!-- 导航力部分 -->
+            <zeta_p>${zeta_p}</zeta_p>
+            <zeta_v>${zeta_v}</zeta_v>
+            <max_ftotal>${max_ftotal}</max_ftotal>
+            <t_ftotal>${t_ftotal}</t_ftotal>
+        </plugin>
+    </xacro:macro>
+</robot>

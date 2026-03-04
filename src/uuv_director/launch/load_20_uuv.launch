@@ -1,0 +1,319 @@
+<?xml version="1.0"?>
+<launch>
+  <group ns="group0">
+    <node pkg="nodelet" type="nodelet" name="group0_manager" args="manager" output="screen"/>
+    <node pkg="nodelet" type="nodelet" name="state_aggregator" args="load uuv_control/StateAggregatorNodelet group0_manager">
+      <param name="group_name" value="group0"/>
+      <param name="start_global_id" value="0"/>
+      <param name="uuv_count" value="10"/>
+    </node>
+  </group>
+  <group ns="uuv_0">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_0 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="-8.743"/>
+    <param name="init_y" value="-40.744"/>
+    <param name="init_z" value="6.094"/>
+    <param name="init_yaw" value="-0.312"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group0/group0_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_1">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_1 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="18.324"/>
+    <param name="init_y" value="-5.335"/>
+    <param name="init_z" value="-27.194"/>
+    <param name="init_yaw" value="-2.141"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group0/group0_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_2">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_2 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="17.361"/>
+    <param name="init_y" value="26.799"/>
+    <param name="init_z" value="-30.507"/>
+    <param name="init_yaw" value="-1.606"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group0/group0_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_3">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_3 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="-13.670"/>
+    <param name="init_y" value="6.705"/>
+    <param name="init_z" value="-45.862"/>
+    <param name="init_yaw" value="-1.987"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group0/group0_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_4">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_4 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="-27.110"/>
+    <param name="init_y" value="36.487"/>
+    <param name="init_z" value="-17.836"/>
+    <param name="init_yaw" value="0.820"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group0/group0_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_5">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_5 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="-19.865"/>
+    <param name="init_y" value="16.703"/>
+    <param name="init_z" value="-35.518"/>
+    <param name="init_yaw" value="-2.543"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group0/group0_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_6">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_6 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="24.608"/>
+    <param name="init_y" value="-2.983"/>
+    <param name="init_z" value="40.154"/>
+    <param name="init_yaw" value="-1.853"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group0/group0_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_7">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_7 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="35.110"/>
+    <param name="init_y" value="27.952"/>
+    <param name="init_z" value="7.006"/>
+    <param name="init_yaw" value="1.472"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group0/group0_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_8">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_8 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="-43.350"/>
+    <param name="init_y" value="-18.172"/>
+    <param name="init_z" value="16.473"/>
+    <param name="init_yaw" value="0.958"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group0/group0_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_9">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_9 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="22.179"/>
+    <param name="init_y" value="-7.882"/>
+    <param name="init_z" value="17.208"/>
+    <param name="init_yaw" value="0.761"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group0/group0_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="group1">
+    <node pkg="nodelet" type="nodelet" name="group1_manager" args="manager" output="screen"/>
+    <node pkg="nodelet" type="nodelet" name="state_aggregator" args="load uuv_control/StateAggregatorNodelet group1_manager">
+      <param name="group_name" value="group1"/>
+      <param name="start_global_id" value="10"/>
+      <param name="uuv_count" value="10"/>
+    </node>
+  </group>
+  <group ns="uuv_10">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_10 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="-16.268"/>
+    <param name="init_y" value="29.323"/>
+    <param name="init_z" value="32.486"/>
+    <param name="init_yaw" value="-2.522"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group1/group1_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_11">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_11 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="4.127"/>
+    <param name="init_y" value="31.004"/>
+    <param name="init_z" value="-4.986"/>
+    <param name="init_yaw" value="2.958"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group1/group1_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_12">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_12 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="11.161"/>
+    <param name="init_y" value="-17.830"/>
+    <param name="init_z" value="-20.343"/>
+    <param name="init_yaw" value="-0.685"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group1/group1_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_13">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_13 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="-14.245"/>
+    <param name="init_y" value="-23.215"/>
+    <param name="init_z" value="-34.325"/>
+    <param name="init_yaw" value="0.241"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group1/group1_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_14">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_14 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="1.884"/>
+    <param name="init_y" value="-12.858"/>
+    <param name="init_z" value="21.858"/>
+    <param name="init_yaw" value="-0.613"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group1/group1_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_15">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_15 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="1.402"/>
+    <param name="init_y" value="-25.643"/>
+    <param name="init_z" value="-31.346"/>
+    <param name="init_yaw" value="-0.035"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group1/group1_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_16">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_16 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="-7.936"/>
+    <param name="init_y" value="20.906"/>
+    <param name="init_z" value="15.934"/>
+    <param name="init_yaw" value="2.276"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group1/group1_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_17">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_17 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="-1.376"/>
+    <param name="init_y" value="-23.343"/>
+    <param name="init_z" value="34.946"/>
+    <param name="init_yaw" value="-2.068"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group1/group1_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_18">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_18 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="-2.443"/>
+    <param name="init_y" value="-38.210"/>
+    <param name="init_z" value="-25.745"/>
+    <param name="init_yaw" value="1.548"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group1/group1_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_19">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_19 dynamics_type:=fossen controller_type:=pid guidance_type:=spacial_flocking"/>
+    <param name="init_x" value="-6.763"/>
+    <param name="init_y" value="3.137"/>
+    <param name="init_z" value="-37.603"/>
+    <param name="init_yaw" value="2.399"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="guidance"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/swarm_20260304_122604_count_20"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group1/group1_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+</launch>
