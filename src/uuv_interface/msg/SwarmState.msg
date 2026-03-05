@@ -1,0 +1,3 @@
+Header header
+float32 connectivity
+int32 num_connected

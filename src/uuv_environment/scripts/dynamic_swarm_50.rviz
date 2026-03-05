@@ -5,7 +5,6 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /TF1/Frames1
       Splitter Ratio: 0.5
     Tree Height: 346
   - Class: rviz/Views
@@ -59,366 +58,6 @@ Visualization Manager:
           Value: true
         spectator_link:
           Value: false
-        uuv_0/base_link:
-          Value: false
-        uuv_0/fin_0:
-          Value: false
-        uuv_0/fin_1:
-          Value: false
-        uuv_0/fin_2:
-          Value: false
-        uuv_0/fin_3:
-          Value: false
-        uuv_0/thruster_0:
-          Value: false
-        uuv_1/base_link:
-          Value: false
-        uuv_1/fin_0:
-          Value: false
-        uuv_1/fin_1:
-          Value: false
-        uuv_1/fin_2:
-          Value: false
-        uuv_1/fin_3:
-          Value: false
-        uuv_1/thruster_0:
-          Value: false
-        uuv_10/base_link:
-          Value: false
-        uuv_10/fin_0:
-          Value: false
-        uuv_10/fin_1:
-          Value: false
-        uuv_10/fin_2:
-          Value: false
-        uuv_10/fin_3:
-          Value: false
-        uuv_10/thruster_0:
-          Value: false
-        uuv_11/base_link:
-          Value: false
-        uuv_11/fin_0:
-          Value: false
-        uuv_11/fin_1:
-          Value: false
-        uuv_11/fin_2:
-          Value: false
-        uuv_11/fin_3:
-          Value: false
-        uuv_11/thruster_0:
-          Value: false
-        uuv_12/base_link:
-          Value: false
-        uuv_12/fin_0:
-          Value: false
-        uuv_12/fin_1:
-          Value: false
-        uuv_12/fin_2:
-          Value: false
-        uuv_12/fin_3:
-          Value: false
-        uuv_12/thruster_0:
-          Value: false
-        uuv_13/base_link:
-          Value: false
-        uuv_13/fin_0:
-          Value: false
-        uuv_13/fin_1:
-          Value: false
-        uuv_13/fin_2:
-          Value: false
-        uuv_13/fin_3:
-          Value: false
-        uuv_13/thruster_0:
-          Value: false
-        uuv_14/base_link:
-          Value: false
-        uuv_14/fin_0:
-          Value: false
-        uuv_14/fin_1:
-          Value: false
-        uuv_14/fin_2:
-          Value: false
-        uuv_14/fin_3:
-          Value: false
-        uuv_14/thruster_0:
-          Value: false
-        uuv_15/base_link:
-          Value: false
-        uuv_15/fin_0:
-          Value: false
-        uuv_15/fin_1:
-          Value: false
-        uuv_15/fin_2:
-          Value: false
-        uuv_15/fin_3:
-          Value: false
-        uuv_15/thruster_0:
-          Value: false
-        uuv_16/base_link:
-          Value: false
-        uuv_16/fin_0:
-          Value: false
-        uuv_16/fin_1:
-          Value: false
-        uuv_16/fin_2:
-          Value: false
-        uuv_16/fin_3:
-          Value: false
-        uuv_16/thruster_0:
-          Value: false
-        uuv_17/base_link:
-          Value: false
-        uuv_17/fin_0:
-          Value: false
-        uuv_17/fin_1:
-          Value: false
-        uuv_17/fin_2:
-          Value: false
-        uuv_17/fin_3:
-          Value: false
-        uuv_17/thruster_0:
-          Value: false
-        uuv_18/base_link:
-          Value: false
-        uuv_18/fin_0:
-          Value: false
-        uuv_18/fin_1:
-          Value: false
-        uuv_18/fin_2:
-          Value: false
-        uuv_18/fin_3:
-          Value: false
-        uuv_18/thruster_0:
-          Value: false
-        uuv_19/base_link:
-          Value: false
-        uuv_19/fin_0:
-          Value: false
-        uuv_19/fin_1:
-          Value: false
-        uuv_19/fin_2:
-          Value: false
-        uuv_19/fin_3:
-          Value: false
-        uuv_19/thruster_0:
-          Value: false
-        uuv_2/base_link:
-          Value: false
-        uuv_2/fin_0:
-          Value: false
-        uuv_2/fin_1:
-          Value: false
-        uuv_2/fin_2:
-          Value: false
-        uuv_2/fin_3:
-          Value: false
-        uuv_2/thruster_0:
-          Value: false
-        uuv_20/base_link:
-          Value: false
-        uuv_20/fin_0:
-          Value: false
-        uuv_20/fin_1:
-          Value: false
-        uuv_20/fin_2:
-          Value: false
-        uuv_20/fin_3:
-          Value: false
-        uuv_20/thruster_0:
-          Value: false
-        uuv_21/base_link:
-          Value: false
-        uuv_21/fin_0:
-          Value: false
-        uuv_21/fin_1:
-          Value: false
-        uuv_21/fin_2:
-          Value: false
-        uuv_21/fin_3:
-          Value: false
-        uuv_21/thruster_0:
-          Value: false
-        uuv_22/base_link:
-          Value: false
-        uuv_22/fin_0:
-          Value: false
-        uuv_22/fin_1:
-          Value: false
-        uuv_22/fin_2:
-          Value: false
-        uuv_22/fin_3:
-          Value: false
-        uuv_22/thruster_0:
-          Value: false
-        uuv_23/base_link:
-          Value: false
-        uuv_23/fin_0:
-          Value: false
-        uuv_23/fin_1:
-          Value: false
-        uuv_23/fin_2:
-          Value: false
-        uuv_23/fin_3:
-          Value: false
-        uuv_23/thruster_0:
-          Value: false
-        uuv_24/base_link:
-          Value: false
-        uuv_24/fin_0:
-          Value: false
-        uuv_24/fin_1:
-          Value: false
-        uuv_24/fin_2:
-          Value: false
-        uuv_24/fin_3:
-          Value: false
-        uuv_24/thruster_0:
-          Value: false
-        uuv_25/base_link:
-          Value: false
-        uuv_25/fin_0:
-          Value: false
-        uuv_25/fin_1:
-          Value: false
-        uuv_25/fin_2:
-          Value: false
-        uuv_25/fin_3:
-          Value: false
-        uuv_25/thruster_0:
-          Value: false
-        uuv_26/base_link:
-          Value: false
-        uuv_26/fin_0:
-          Value: false
-        uuv_26/fin_1:
-          Value: false
-        uuv_26/fin_2:
-          Value: false
-        uuv_26/fin_3:
-          Value: false
-        uuv_26/thruster_0:
-          Value: false
-        uuv_27/base_link:
-          Value: false
-        uuv_27/fin_0:
-          Value: false
-        uuv_27/fin_1:
-          Value: false
-        uuv_27/fin_2:
-          Value: false
-        uuv_27/fin_3:
-          Value: false
-        uuv_27/thruster_0:
-          Value: false
-        uuv_28/base_link:
-          Value: false
-        uuv_28/fin_0:
-          Value: false
-        uuv_28/fin_1:
-          Value: false
-        uuv_28/fin_2:
-          Value: false
-        uuv_28/fin_3:
-          Value: false
-        uuv_28/thruster_0:
-          Value: false
-        uuv_29/base_link:
-          Value: false
-        uuv_29/fin_0:
-          Value: false
-        uuv_29/fin_1:
-          Value: false
-        uuv_29/fin_2:
-          Value: false
-        uuv_29/fin_3:
-          Value: false
-        uuv_29/thruster_0:
-          Value: false
-        uuv_3/base_link:
-          Value: false
-        uuv_3/fin_0:
-          Value: false
-        uuv_3/fin_1:
-          Value: false
-        uuv_3/fin_2:
-          Value: false
-        uuv_3/fin_3:
-          Value: false
-        uuv_3/thruster_0:
-          Value: false
-        uuv_4/base_link:
-          Value: false
-        uuv_4/fin_0:
-          Value: false
-        uuv_4/fin_1:
-          Value: false
-        uuv_4/fin_2:
-          Value: false
-        uuv_4/fin_3:
-          Value: false
-        uuv_4/thruster_0:
-          Value: false
-        uuv_5/base_link:
-          Value: false
-        uuv_5/fin_0:
-          Value: false
-        uuv_5/fin_1:
-          Value: false
-        uuv_5/fin_2:
-          Value: false
-        uuv_5/fin_3:
-          Value: false
-        uuv_5/thruster_0:
-          Value: false
-        uuv_6/base_link:
-          Value: false
-        uuv_6/fin_0:
-          Value: false
-        uuv_6/fin_1:
-          Value: false
-        uuv_6/fin_2:
-          Value: false
-        uuv_6/fin_3:
-          Value: false
-        uuv_6/thruster_0:
-          Value: false
-        uuv_7/base_link:
-          Value: false
-        uuv_7/fin_0:
-          Value: false
-        uuv_7/fin_1:
-          Value: false
-        uuv_7/fin_2:
-          Value: false
-        uuv_7/fin_3:
-          Value: false
-        uuv_7/thruster_0:
-          Value: false
-        uuv_8/base_link:
-          Value: false
-        uuv_8/fin_0:
-          Value: false
-        uuv_8/fin_1:
-          Value: false
-        uuv_8/fin_2:
-          Value: false
-        uuv_8/fin_3:
-          Value: false
-        uuv_8/thruster_0:
-          Value: false
-        uuv_9/base_link:
-          Value: false
-        uuv_9/fin_0:
-          Value: false
-        uuv_9/fin_1:
-          Value: false
-        uuv_9/fin_2:
-          Value: false
-        uuv_9/fin_3:
-          Value: false
-        uuv_9/thruster_0:
-          Value: false
       Marker Alpha: 1
       Marker Scale: 30
       Name: TF
@@ -428,336 +67,7 @@ Visualization Manager:
       Tree:
         map:
           ned:
-            uuv_0/base_link:
-              uuv_0/fin_0:
-                {}
-              uuv_0/fin_1:
-                {}
-              uuv_0/fin_2:
-                {}
-              uuv_0/fin_3:
-                {}
-              uuv_0/thruster_0:
-                {}
-            uuv_1/base_link:
-              uuv_1/fin_0:
-                {}
-              uuv_1/fin_1:
-                {}
-              uuv_1/fin_2:
-                {}
-              uuv_1/fin_3:
-                {}
-              uuv_1/thruster_0:
-                {}
-            uuv_10/base_link:
-              uuv_10/fin_0:
-                {}
-              uuv_10/fin_1:
-                {}
-              uuv_10/fin_2:
-                {}
-              uuv_10/fin_3:
-                {}
-              uuv_10/thruster_0:
-                {}
-            uuv_11/base_link:
-              uuv_11/fin_0:
-                {}
-              uuv_11/fin_1:
-                {}
-              uuv_11/fin_2:
-                {}
-              uuv_11/fin_3:
-                {}
-              uuv_11/thruster_0:
-                {}
-            uuv_12/base_link:
-              uuv_12/fin_0:
-                {}
-              uuv_12/fin_1:
-                {}
-              uuv_12/fin_2:
-                {}
-              uuv_12/fin_3:
-                {}
-              uuv_12/thruster_0:
-                {}
-            uuv_13/base_link:
-              uuv_13/fin_0:
-                {}
-              uuv_13/fin_1:
-                {}
-              uuv_13/fin_2:
-                {}
-              uuv_13/fin_3:
-                {}
-              uuv_13/thruster_0:
-                {}
-            uuv_14/base_link:
-              uuv_14/fin_0:
-                {}
-              uuv_14/fin_1:
-                {}
-              uuv_14/fin_2:
-                {}
-              uuv_14/fin_3:
-                {}
-              uuv_14/thruster_0:
-                {}
-            uuv_15/base_link:
-              uuv_15/fin_0:
-                {}
-              uuv_15/fin_1:
-                {}
-              uuv_15/fin_2:
-                {}
-              uuv_15/fin_3:
-                {}
-              uuv_15/thruster_0:
-                {}
-            uuv_16/base_link:
-              uuv_16/fin_0:
-                {}
-              uuv_16/fin_1:
-                {}
-              uuv_16/fin_2:
-                {}
-              uuv_16/fin_3:
-                {}
-              uuv_16/thruster_0:
-                {}
-            uuv_17/base_link:
-              uuv_17/fin_0:
-                {}
-              uuv_17/fin_1:
-                {}
-              uuv_17/fin_2:
-                {}
-              uuv_17/fin_3:
-                {}
-              uuv_17/thruster_0:
-                {}
-            uuv_18/base_link:
-              uuv_18/fin_0:
-                {}
-              uuv_18/fin_1:
-                {}
-              uuv_18/fin_2:
-                {}
-              uuv_18/fin_3:
-                {}
-              uuv_18/thruster_0:
-                {}
-            uuv_19/base_link:
-              uuv_19/fin_0:
-                {}
-              uuv_19/fin_1:
-                {}
-              uuv_19/fin_2:
-                {}
-              uuv_19/fin_3:
-                {}
-              uuv_19/thruster_0:
-                {}
-            uuv_2/base_link:
-              uuv_2/fin_0:
-                {}
-              uuv_2/fin_1:
-                {}
-              uuv_2/fin_2:
-                {}
-              uuv_2/fin_3:
-                {}
-              uuv_2/thruster_0:
-                {}
-            uuv_20/base_link:
-              uuv_20/fin_0:
-                {}
-              uuv_20/fin_1:
-                {}
-              uuv_20/fin_2:
-                {}
-              uuv_20/fin_3:
-                {}
-              uuv_20/thruster_0:
-                {}
-            uuv_21/base_link:
-              uuv_21/fin_0:
-                {}
-              uuv_21/fin_1:
-                {}
-              uuv_21/fin_2:
-                {}
-              uuv_21/fin_3:
-                {}
-              uuv_21/thruster_0:
-                {}
-            uuv_22/base_link:
-              uuv_22/fin_0:
-                {}
-              uuv_22/fin_1:
-                {}
-              uuv_22/fin_2:
-                {}
-              uuv_22/fin_3:
-                {}
-              uuv_22/thruster_0:
-                {}
-            uuv_23/base_link:
-              uuv_23/fin_0:
-                {}
-              uuv_23/fin_1:
-                {}
-              uuv_23/fin_2:
-                {}
-              uuv_23/fin_3:
-                {}
-              uuv_23/thruster_0:
-                {}
-            uuv_24/base_link:
-              uuv_24/fin_0:
-                {}
-              uuv_24/fin_1:
-                {}
-              uuv_24/fin_2:
-                {}
-              uuv_24/fin_3:
-                {}
-              uuv_24/thruster_0:
-                {}
-            uuv_25/base_link:
-              uuv_25/fin_0:
-                {}
-              uuv_25/fin_1:
-                {}
-              uuv_25/fin_2:
-                {}
-              uuv_25/fin_3:
-                {}
-              uuv_25/thruster_0:
-                {}
-            uuv_26/base_link:
-              uuv_26/fin_0:
-                {}
-              uuv_26/fin_1:
-                {}
-              uuv_26/fin_2:
-                {}
-              uuv_26/fin_3:
-                {}
-              uuv_26/thruster_0:
-                {}
-            uuv_27/base_link:
-              uuv_27/fin_0:
-                {}
-              uuv_27/fin_1:
-                {}
-              uuv_27/fin_2:
-                {}
-              uuv_27/fin_3:
-                {}
-              uuv_27/thruster_0:
-                {}
-            uuv_28/base_link:
-              uuv_28/fin_0:
-                {}
-              uuv_28/fin_1:
-                {}
-              uuv_28/fin_2:
-                {}
-              uuv_28/fin_3:
-                {}
-              uuv_28/thruster_0:
-                {}
-            uuv_29/base_link:
-              uuv_29/fin_0:
-                {}
-              uuv_29/fin_1:
-                {}
-              uuv_29/fin_2:
-                {}
-              uuv_29/fin_3:
-                {}
-              uuv_29/thruster_0:
-                {}
-            uuv_3/base_link:
-              uuv_3/fin_0:
-                {}
-              uuv_3/fin_1:
-                {}
-              uuv_3/fin_2:
-                {}
-              uuv_3/fin_3:
-                {}
-              uuv_3/thruster_0:
-                {}
-            uuv_4/base_link:
-              uuv_4/fin_0:
-                {}
-              uuv_4/fin_1:
-                {}
-              uuv_4/fin_2:
-                {}
-              uuv_4/fin_3:
-                {}
-              uuv_4/thruster_0:
-                {}
-            uuv_5/base_link:
-              uuv_5/fin_0:
-                {}
-              uuv_5/fin_1:
-                {}
-              uuv_5/fin_2:
-                {}
-              uuv_5/fin_3:
-                {}
-              uuv_5/thruster_0:
-                {}
-            uuv_6/base_link:
-              uuv_6/fin_0:
-                {}
-              uuv_6/fin_1:
-                {}
-              uuv_6/fin_2:
-                {}
-              uuv_6/fin_3:
-                {}
-              uuv_6/thruster_0:
-                {}
-            uuv_7/base_link:
-              uuv_7/fin_0:
-                {}
-              uuv_7/fin_1:
-                {}
-              uuv_7/fin_2:
-                {}
-              uuv_7/fin_3:
-                {}
-              uuv_7/thruster_0:
-                {}
-            uuv_8/base_link:
-              uuv_8/fin_0:
-                {}
-              uuv_8/fin_1:
-                {}
-              uuv_8/fin_2:
-                {}
-              uuv_8/fin_3:
-                {}
-              uuv_8/thruster_0:
-                {}
-            uuv_9/base_link:
-              uuv_9/fin_0:
-                {}
-              uuv_9/fin_1:
-                {}
-              uuv_9/fin_2:
-                {}
-              uuv_9/fin_3:
-                {}
-              uuv_9/thruster_0:
-                {}
+            {}
           spectator_link:
             {}
       Update Interval: 0
@@ -1380,36 +690,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_0/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_0/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_0/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_0/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_0/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_0/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_0/robot_description
               TF Prefix: ""
@@ -1430,36 +710,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_1/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_1/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_1/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_1/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_1/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_1/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_1/robot_description
               TF Prefix: ""
@@ -1480,36 +730,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_2/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_2/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_2/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_2/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_2/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_2/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_2/robot_description
               TF Prefix: ""
@@ -1530,36 +750,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_3/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_3/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_3/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_3/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_3/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_3/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_3/robot_description
               TF Prefix: ""
@@ -1580,36 +770,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_4/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_4/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_4/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_4/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_4/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_4/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_4/robot_description
               TF Prefix: ""
@@ -1630,36 +790,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_5/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_5/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_5/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_5/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_5/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_5/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_5/robot_description
               TF Prefix: ""
@@ -1680,36 +810,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_6/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_6/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_6/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_6/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_6/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_6/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_6/robot_description
               TF Prefix: ""
@@ -1730,36 +830,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_7/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_7/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_7/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_7/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_7/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_7/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_7/robot_description
               TF Prefix: ""
@@ -1780,36 +850,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_8/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_8/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_8/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_8/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_8/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_8/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_8/robot_description
               TF Prefix: ""
@@ -1830,36 +870,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_9/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_9/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_9/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_9/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_9/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_9/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_9/robot_description
               TF Prefix: ""
@@ -1880,36 +890,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_10/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_10/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_10/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_10/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_10/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_10/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_10/robot_description
               TF Prefix: ""
@@ -1930,36 +910,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_11/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_11/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_11/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_11/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_11/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_11/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_11/robot_description
               TF Prefix: ""
@@ -1980,36 +930,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_12/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_12/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_12/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_12/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_12/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_12/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_12/robot_description
               TF Prefix: ""
@@ -2030,36 +950,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_13/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_13/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_13/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_13/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_13/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_13/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_13/robot_description
               TF Prefix: ""
@@ -2080,36 +970,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_14/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_14/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_14/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_14/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_14/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_14/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_14/robot_description
               TF Prefix: ""
@@ -2130,36 +990,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_15/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_15/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_15/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_15/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_15/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_15/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_15/robot_description
               TF Prefix: ""
@@ -2180,36 +1010,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_16/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_16/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_16/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_16/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_16/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_16/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_16/robot_description
               TF Prefix: ""
@@ -2230,36 +1030,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_17/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_17/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_17/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_17/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_17/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_17/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_17/robot_description
               TF Prefix: ""
@@ -2280,36 +1050,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_18/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_18/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_18/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_18/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_18/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_18/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_18/robot_description
               TF Prefix: ""
@@ -2330,36 +1070,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_19/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_19/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_19/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_19/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_19/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_19/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_19/robot_description
               TF Prefix: ""
@@ -2380,36 +1090,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_20/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_20/robot_description
               TF Prefix: ""
@@ -2430,36 +1110,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_21/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_21/robot_description
               TF Prefix: ""
@@ -2480,36 +1130,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_22/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_22/robot_description
               TF Prefix: ""
@@ -2530,36 +1150,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_23/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_23/robot_description
               TF Prefix: ""
@@ -2580,36 +1170,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_24/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_24/robot_description
               TF Prefix: ""
@@ -2630,36 +1190,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_25/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_25/robot_description
               TF Prefix: ""
@@ -2680,36 +1210,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_26/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_26/robot_description
               TF Prefix: ""
@@ -2730,36 +1230,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_27/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_27/robot_description
               TF Prefix: ""
@@ -2780,36 +1250,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_28/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_28/robot_description
               TF Prefix: ""
@@ -2830,36 +1270,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_29/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_29/robot_description
               TF Prefix: ""
@@ -3274,601 +1684,1401 @@ Visualization Manager:
       Displays:
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 213; 78; 56
               Enabled: true
-              Marker Topic: /uuv_0/trajectory
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
               Name: Path
-              Namespaces:
-                {}
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 213; 78; 56
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_0/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_0
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 239; 120; 112
               Enabled: true
-              Marker Topic: /uuv_1/trajectory
-              Name: Trajectory_uuv_0
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 239; 120; 112
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_1/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_1
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 107; 85; 238
               Enabled: true
-              Marker Topic: /uuv_2/trajectory
-              Name: Trajectory_uuv_1
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 107; 85; 238
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_2/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_2
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 76; 223; 239
               Enabled: true
-              Marker Topic: /uuv_3/trajectory
-              Name: Trajectory_uuv_2
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 76; 223; 239
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_3/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_3
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 189; 72; 201
               Enabled: true
-              Marker Topic: /uuv_4/trajectory
-              Name: Trajectory_uuv_3
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 189; 72; 201
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_4/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_4
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 158; 58; 57
               Enabled: true
-              Marker Topic: /uuv_5/trajectory
-              Name: Trajectory_uuv_4
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 158; 58; 57
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_5/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_5
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 73; 105; 109
               Enabled: true
-              Marker Topic: /uuv_6/trajectory
-              Name: Trajectory_uuv_5
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 73; 105; 109
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_6/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_6
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 179; 204; 56
               Enabled: true
-              Marker Topic: /uuv_7/trajectory
-              Name: Trajectory_uuv_6
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 179; 204; 56
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_7/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_7
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 193; 100; 233
               Enabled: true
-              Marker Topic: /uuv_8/trajectory
-              Name: Trajectory_uuv_7
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 193; 100; 233
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_8/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_8
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 216; 229; 189
               Enabled: true
-              Marker Topic: /uuv_9/trajectory
-              Name: Trajectory_uuv_8
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 216; 229; 189
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_9/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_9
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 157; 106; 164
               Enabled: true
-              Marker Topic: /uuv_10/trajectory
-              Name: Trajectory_uuv_9
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 157; 106; 164
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_10/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_10
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 200; 121; 51
               Enabled: true
-              Marker Topic: /uuv_11/trajectory
-              Name: Trajectory_uuv_10
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 200; 121; 51
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_11/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_11
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 244; 90; 228
               Enabled: true
-              Marker Topic: /uuv_12/trajectory
-              Name: Trajectory_uuv_11
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 244; 90; 228
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_12/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_12
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 158; 137; 121
               Enabled: true
-              Marker Topic: /uuv_13/trajectory
-              Name: Trajectory_uuv_12
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 158; 137; 121
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_13/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_13
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 89; 105; 245
               Enabled: true
-              Marker Topic: /uuv_14/trajectory
-              Name: Trajectory_uuv_13
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 89; 105; 245
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_14/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_14
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 136; 76; 73
               Enabled: true
-              Marker Topic: /uuv_15/trajectory
-              Name: Trajectory_uuv_14
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 136; 76; 73
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_15/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_15
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 147; 74; 141
               Enabled: true
-              Marker Topic: /uuv_16/trajectory
-              Name: Trajectory_uuv_15
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 147; 74; 141
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_16/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_16
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 138; 204; 117
               Enabled: true
-              Marker Topic: /uuv_17/trajectory
-              Name: Trajectory_uuv_16
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 138; 204; 117
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_17/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_17
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 61; 236; 167
               Enabled: true
-              Marker Topic: /uuv_18/trajectory
-              Name: Trajectory_uuv_17
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 61; 236; 167
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_18/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_18
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 187; 81; 146
               Enabled: true
-              Marker Topic: /uuv_19/trajectory
-              Name: Trajectory_uuv_18
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 187; 81; 146
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_19/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_19
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 70; 191; 125
               Enabled: true
-              Marker Topic: /uuv_20/trajectory
-              Name: Trajectory_uuv_19
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 70; 191; 125
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_20/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_20
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 210; 208; 142
               Enabled: true
-              Marker Topic: /uuv_21/trajectory
-              Name: Trajectory_uuv_20
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 210; 208; 142
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_21/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_21
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 197; 99; 230
               Enabled: true
-              Marker Topic: /uuv_22/trajectory
-              Name: Trajectory_uuv_21
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 197; 99; 230
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_22/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_22
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 67; 61; 219
               Enabled: true
-              Marker Topic: /uuv_23/trajectory
-              Name: Trajectory_uuv_22
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 67; 61; 219
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_23/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_23
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 108; 247; 124
               Enabled: true
-              Marker Topic: /uuv_24/trajectory
-              Name: Trajectory_uuv_23
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 108; 247; 124
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_24/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_24
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 70; 109; 75
               Enabled: true
-              Marker Topic: /uuv_25/trajectory
-              Name: Trajectory_uuv_24
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 70; 109; 75
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_25/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_25
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 147; 121; 166
               Enabled: true
-              Marker Topic: /uuv_26/trajectory
-              Name: Trajectory_uuv_25
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 147; 121; 166
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_26/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_26
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 212; 143; 91
               Enabled: true
-              Marker Topic: /uuv_27/trajectory
-              Name: Trajectory_uuv_26
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 212; 143; 91
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_27/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_27
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 144; 140; 103
               Enabled: true
-              Marker Topic: /uuv_28/trajectory
-              Name: Trajectory_uuv_27
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 144; 140; 103
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_28/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_28
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 221; 118; 229
               Enabled: true
-              Marker Topic: /uuv_29/trajectory
-              Name: Trajectory_uuv_28
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 221; 118; 229
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_29/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_29
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 224; 215; 68
               Enabled: true
-              Marker Topic: /uuv_30/trajectory
-              Name: Trajectory_uuv_29
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 224; 215; 68
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_30/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_30
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 205; 212; 93
               Enabled: true
-              Marker Topic: /uuv_31/trajectory
-              Name: Trajectory_uuv_30
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 205; 212; 93
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_31/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_31
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 186; 236; 112
               Enabled: true
-              Marker Topic: /uuv_32/trajectory
-              Name: Trajectory_uuv_31
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 186; 236; 112
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_32/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_32
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 91; 168; 147
               Enabled: true
-              Marker Topic: /uuv_33/trajectory
-              Name: Trajectory_uuv_32
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 91; 168; 147
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_33/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_33
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 119; 213; 226
               Enabled: true
-              Marker Topic: /uuv_34/trajectory
-              Name: Trajectory_uuv_33
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 119; 213; 226
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_34/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_34
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 192; 106; 225
               Enabled: true
-              Marker Topic: /uuv_35/trajectory
-              Name: Trajectory_uuv_34
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 192; 106; 225
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_35/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_35
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 133; 246; 248
               Enabled: true
-              Marker Topic: /uuv_36/trajectory
-              Name: Trajectory_uuv_35
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 133; 246; 248
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_36/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_36
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 64; 108; 58
               Enabled: true
-              Marker Topic: /uuv_37/trajectory
-              Name: Trajectory_uuv_36
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 64; 108; 58
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_37/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_37
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 130; 152; 118
               Enabled: true
-              Marker Topic: /uuv_38/trajectory
-              Name: Trajectory_uuv_37
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 130; 152; 118
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_38/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_38
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 66; 104; 195
               Enabled: true
-              Marker Topic: /uuv_39/trajectory
-              Name: Trajectory_uuv_38
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 66; 104; 195
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_39/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_39
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 233; 130; 104
               Enabled: true
-              Marker Topic: /uuv_40/trajectory
-              Name: Trajectory_uuv_39
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 233; 130; 104
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_40/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_40
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 217; 177; 151
               Enabled: true
-              Marker Topic: /uuv_41/trajectory
-              Name: Trajectory_uuv_40
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 217; 177; 151
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_41/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_41
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 214; 167; 86
               Enabled: true
-              Marker Topic: /uuv_42/trajectory
-              Name: Trajectory_uuv_41
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 214; 167; 86
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_42/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_42
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 117; 85; 113
               Enabled: true
-              Marker Topic: /uuv_43/trajectory
-              Name: Trajectory_uuv_42
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 117; 85; 113
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_43/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_43
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 240; 193; 187
               Enabled: true
-              Marker Topic: /uuv_44/trajectory
-              Name: Trajectory_uuv_43
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 240; 193; 187
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_44/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_44
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 117; 241; 199
               Enabled: true
-              Marker Topic: /uuv_45/trajectory
-              Name: Trajectory_uuv_44
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 117; 241; 199
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_45/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_45
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 159; 199; 152
               Enabled: true
-              Marker Topic: /uuv_46/trajectory
-              Name: Trajectory_uuv_45
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 159; 199; 152
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_46/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_46
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 142; 106; 85
               Enabled: true
-              Marker Topic: /uuv_47/trajectory
-              Name: Trajectory_uuv_46
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 142; 106; 85
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_47/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_47
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 180; 176; 73
               Enabled: true
-              Marker Topic: /uuv_48/trajectory
-              Name: Trajectory_uuv_47
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 180; 176; 73
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_48/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_48
         - Class: rviz/Group
           Displays:
-            - Class: rviz/Marker
+            - Alpha: 1
+              Buffer Length: 1
+              Class: rviz/Path
+              Color: 243; 62; 78
               Enabled: true
-              Marker Topic: /uuv_49/trajectory
-              Name: Trajectory_uuv_48
-              Namespaces:
-                {}
+              Head Diameter: 0.30000001192092896
+              Head Length: 0.20000000298023224
+              Length: 0.30000001192092896
+              Line Style: Lines
+              Line Width: 0.05000000074505806
+              Name: Path
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Pose Color: 243; 62; 78
+              Pose Style: None
               Queue Size: 10
+              Radius: 0.029999999329447746
+              Shaft Diameter: 0.10000000149011612
+              Shaft Length: 0.10000000149011612
+              Topic: /uuv_49/trajectory
+              Unreliable: false
               Value: true
           Enabled: true
           Name: uuv_49
@@ -5486,6 +4696,14 @@ Visualization Manager:
         {}
       Queue Size: 100
       Value: false
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: visualization_marker_array
+      Name: MarkerArray
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 32; 74; 135

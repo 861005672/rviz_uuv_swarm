@@ -80,6 +80,13 @@ public:
     uuv_interface::State3D update(const Eigen::VectorXd& input_tau) {
         // === 1. 更新频率控制
         ros::Time now = ros::Time::now();
+        // === 2. debug发布频率控制
+        if (last_publish_debug_time_.isZero()) { last_publish_debug_time_ = now; }
+        double dt_publish_debug = (now - last_publish_debug_time_).toSec();
+        if (dt_publish_debug > (1.0 / this->publish_debug_rate_) * 0.95) {
+            publishDebug(now);
+            last_publish_debug_time_ = now;
+        }
         // 首次滴答对齐：如果时间为0，强制与主控节点的第一帧时间完美绑定
         if (last_update_time_.isZero()) {
             last_update_time_ = now;
@@ -88,13 +95,6 @@ public:
         double dt_update = (now - last_update_time_).toSec();
         if (dt_update <= 0.0 || dt_update < (1.0 / this->update_rate_) * 0.95) return state_;
         last_update_time_ = now;
-        // === 2. debug发布频率控制
-        if (last_publish_debug_time_.isZero()) { last_publish_debug_time_ = now; }
-        double dt_publish_debug = (now - last_publish_debug_time_).toSec();
-        if (dt_publish_debug > (1.0 / this->publish_debug_rate_) * 0.95) {
-            publishDebug(now);
-            last_publish_debug_time_ = now;
-        }
         // 检测是否覆写控制权，按照is_overridden，分配实际的控制输入
         const Eigen::VectorXd& actual_input_tau = is_overridden_? override_input_ : input_tau;
         return customUpdate(actual_input_tau, dt_update);

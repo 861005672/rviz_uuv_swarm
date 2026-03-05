@@ -53,7 +53,14 @@ public:
     void update(const uuv_interface::State3D& state) {
         ros::Time now = ros::Time::now();
         
-        // 1. 更新频率控制
+        // 1. 调试信息发布控制
+        if (last_publish_debug_time_.isZero()) { last_publish_debug_time_ = now; }
+        double dt_publish_debug = (now - last_publish_debug_time_).toSec();
+        if (dt_publish_debug > (1.0 / this->publish_debug_rate_) * 0.95) {
+            publishDebug(now);
+            last_publish_debug_time_ = now;
+        }
+        // 2. 更新频率控制
         if (last_update_time_.isZero()) {
             last_update_time_ = now;
             return; 
@@ -61,14 +68,6 @@ public:
         double dt_update = (now - last_update_time_).toSec();
         if (dt_update <= 0.0 || dt_update < (1.0 / this->update_rate_) * 0.95) return;
         last_update_time_ = now;
-
-        // 2. 调试信息发布控制
-        if (last_publish_debug_time_.isZero()) { last_publish_debug_time_ = now; }
-        double dt_publish_debug = (now - last_publish_debug_time_).toSec();
-        if (dt_publish_debug > (1.0 / this->publish_debug_rate_) * 0.95) {
-            publishDebug(now);
-            last_publish_debug_time_ = now;
-        }
 
         // 3. 执行纯粹的传感器算法
         customUpdate(state, dt_update);

@@ -29,7 +29,7 @@ public:
     virtual ~ControlPluginBase() = default;
 
     // 大基类托管的基础初始化函数,所有插件初始化时都需要调用这个函数！！！
-    void initialize(ros::NodeHandle& nh, const std::string& plugin_xml, const std::string self_level) {
+    virtual void initialize(ros::NodeHandle& nh, const std::string& plugin_xml, const std::string& self_level) {
         uuv_interface::XmlParamReader reader(plugin_xml);
         reader.param("update_rate", update_rate_, 20.0);
         reader.param("publish_debug", publish_debug_, 10.0);

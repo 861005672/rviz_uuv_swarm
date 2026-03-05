@@ -25,6 +25,8 @@ def create_marker(obs_idx, obs_data):
         marker.header.frame_id = 'ned'
     else:
         marker.header.frame_id = ref_coord # 支持任意自定义 TF 名称
+
+    marker.frame_locked = True
         
     # 解析形状类型
     obs_type = obs_data.get('type', 'box')

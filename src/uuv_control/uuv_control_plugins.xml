@@ -31,6 +31,20 @@
         <description>Spacial improved flocking+apf Guidance</description>
     </class>
 
+    <!-- 规划层 -->
+    <class name="uuv_control/SimplePlanner" 
+           type="uuv_control::SimplePlanner" 
+           base_class_type="uuv_interface::PlannerBase">
+        <description>Simple Planner: Directly passes the global target to the guidance layer without trajectory interpolation.</description>
+    </class>
+
+    <!-- 决策层 -->
+    <class name="uuv_control/VanguardDecision" 
+           type="uuv_control::VanguardDecision" 
+           base_class_type="uuv_interface::DecisionBase">
+        <description>Vanguard Decision: Always assigns the first target from the global mission list to the UUV.</description>
+    </class>
+
 </library>
 
 <library path="lib/libControlNodelet">

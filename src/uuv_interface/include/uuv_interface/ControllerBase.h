@@ -43,7 +43,14 @@ public:
     // 统一的 update 函数 接口
     Eigen::VectorXd update(const uuv_interface::Cmd3D& cmd, const uuv_interface::State3D& state) {
         ros::Time now = ros::Time::now();
-        // 1. 频率控制与 dt 计算
+        // 1. 调试发布拦截
+        if (last_publish_debug_time_.isZero()) { last_publish_debug_time_ = now; }
+        double dt_publish_debug = (now - last_publish_debug_time_).toSec();
+        if (dt_publish_debug > (1.0 / this->publish_debug_rate_) * 0.95) {
+            publishDebug(now);
+            last_publish_debug_time_ = now;
+        }
+        // 2. 频率控制与 dt 计算
         if (last_update_time_.isZero()) {
             last_update_time_ = now;
             return last_output_tau_; // 第一帧不对齐，返回 0
@@ -51,14 +58,6 @@ public:
         double dt_update = (now - last_update_time_).toSec();
         if (dt_update <= 0.0 || dt_update < (1.0 / this->update_rate_) * 0.95) return last_output_tau_;
         last_update_time_ = now;
-
-        // 2. 调试发布拦截
-        if (last_publish_debug_time_.isZero()) { last_publish_debug_time_ = now; }
-        double dt_publish_debug = (now - last_publish_debug_time_).toSec();
-        if (dt_publish_debug > (1.0 / this->publish_debug_rate_) * 0.95) {
-            publishDebug(now);
-            last_publish_debug_time_ = now;
-        }
 
         // 3. 验证输入源 (是上层制导传进来的，还是玩家用手柄接管的？)
         const uuv_interface::Cmd3D& actual_cmd = is_overridden_ ? override_input_ : cmd;

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="insert_vanguard_decision" params="update_rate:=100.0 publish_debug:=true publish_debug_rate:=5.0" >
+        <plugin name="vanguard_decision" layer="decision" type="uuv_control/VanguardDecision">
+            <!-- ControlPluginBase的参数 -->
+            <update_rate>${update_rate}</update_rate>
+            <publish_debug>${publish_debug}</publish_debug>
+            <publish_debug_rate>${publish_debug_rate}</publish_debug_rate>
+        </plugin>
+    </xacro:macro>
+</robot>

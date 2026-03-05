@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="insert_simple_planner" params="update_rate publish_debug publish_debug_rate">
+    <plugin name="simple_planner" layer="planner" type="uuv_control/SimplePlanner">
+      <update_rate>${update_rate}</update_rate>
+      <publish_debug>${publish_debug}</publish_debug>
+      <publish_debug_rate>${publish_debug_rate}</publish_debug_rate>
+    </plugin>
+  </xacro:macro>
+</robot>

@@ -6,6 +6,8 @@
 #include <cmath>
 #include <visualization_msgs/MarkerArray.h>
 #include <visualization_msgs/Marker.h>
+#include <sensor_msgs/LaserScan.h>
+#include <Eigen/Geometry> // 用于计算3D旋转矩阵
 
 namespace uuv_control {
 
@@ -21,18 +23,40 @@ private:
     double cruise_speed_;           // 宏观巡航速度 (集群稳定时的速度)
     double min_speed_;              // 最小机动维持速度
     double max_speed_;              // 物理极限速度 (允许用来追赶队友的最大速度)
-    double max_ftotal_;             // 合力的限幅，他决定了虚拟力的尺度
     double t_ftotal_;               // 合力的平滑限幅窗，值越大越平滑
+    double forward_tendency_;       // 决定对抗侧向力的航向刚度，用于航向/俯仰角的计算
+    double speed_map_scale_;        // 航速映射标尺，决定受到多大纵向分力时，UUV将达到最高航速
+
 
     // --- 极简且完美的物理模型参数 ---
     // 导航力
     double zeta_p_;                 // 导航力位置跟踪系数
     double zeta_v_;                 // 导航力速度阻尼系数
+    double nav_force_limit_;        // 导航力限幅
     // 内力
     double zeta_n_;                 // 排斥力增益
     double delta_n_;                // 平衡距离 (零力点)
     double k_pull_;                 // 吸引力削弱系数
     double r_comm_;                 // 通信/感知半径
+    double force_lp_gain_;          // 低通滤波平滑系数，越小越平滑
+    double flock_force_limit_;      // 内力限幅
+
+
+    // --- 避障力 (Obstacle Avoidance) 模型参数 ---
+    double d_sense_;                // 障碍物感知距离阈值
+    double d_inflation_;            // 膨胀安全距离
+    double zeta_obs_;               // 避障力强度系数
+    double delta_obs_;              // 避障力衰减指数系数
+    double zeta_norm_min_;          // 法向力最小权重
+    double zeta_norm_max_;          // 法向力最大权重
+    double zeta_tan_min_;           // 切向力最小权重
+    double zeta_tan_max_;           // 切向力最大权重
+    int num_sectors_;               // 扇区化池化数量
+    
+
+    std::map<std::string, uuv_interface::LeastSquaresPredictor3D> nb_predictors_;
+
+    Eigen::Vector3d avoid_dir_smooth_{0, 0, 0}; // 平滑绕行轴
 
     VirtualTarget3D vTgt_;
 
@@ -70,31 +94,36 @@ private:
         Eigen::Vector3d vel_body(state.u, 0.0, 0.0); 
         Eigen::Vector3d self_vel = uuv_interface::bodyToWorld(vel_body, state.roll, state.pitch, state.yaw);
         Eigen::Vector3d Fnav_v = zeta_v_ * (vTgt_.vel - self_vel);
-        return uuv_interface::softClampVec(Fnav_v+Fnav_p, max_ftotal_, t_ftotal_);
+        return uuv_interface::softClampVec(Fnav_v+Fnav_p, nav_force_limit_, t_ftotal_, false);
     }
 
 
     // =========================================================
-    // 子函数 2：计算 3D 集群邻居内力 (Flocking Force)
+    // 子函数 2：算 3D 集群邻居内力 (Flocking Force)
     // =========================================================
-    Eigen::Vector3d computeFlockingForce(const uuv_interface::State3D& state) {
+    Eigen::Vector3d computeFlockingForce(const uuv_interface::State3D& state, double dt) {
         Eigen::Vector3d self_pos(state.x, state.y, state.z);
-        double min_dist = 9999.0;
         double total_weight = 0.0;
         Eigen::Vector3d total_force = Eigen::Vector3d::Zero();
 
-        // 假设父类中有 neighbors_ 成员变量 (如果不叫这个请修改)
+        // 若无邻居，则直接返回平滑后的力，这个力将逐渐趋近于0
         const auto& neighbors = this->latest_neighbors_.neighbors; 
-        if (neighbors.empty()) return total_force;
+        if (neighbors.empty()) {
+            if (!std::isnan(latest_f_flock_.x())) {
+                total_force = (1.0 - force_lp_gain_) * latest_f_flock_;
+            }
+            return total_force;
+        }
 
         // A. 第一轮遍历：找到最近邻距离，用于高斯权重注意力机制
+        double min_dist = 9999.0;
         for (const auto& nb : neighbors) {
             if (nb.distance < min_dist) {
                 min_dist = nb.distance;
             }
         }
 
-        // B. 第二轮遍历：计算各邻居作用力及软分配权重
+        // B. 第二轮遍历：计算各邻居作用力及软分配时的权重
         for (const auto& nb : neighbors) {
             double dist = nb.distance;
             if (dist < 0.1) dist = 0.1; // 防除零
@@ -102,6 +131,7 @@ private:
 
             Eigen::Vector3d nb_pos(nb.state.x, nb.state.y, nb.state.z);
             Eigen::Vector3d vec_diff = self_pos - nb_pos; // 指向自身的排斥向量
+
 
             // 完美复刻 2D 版本的连续势场公式
             double f_val = 0.0;
@@ -136,19 +166,161 @@ private:
         }
 
         // C. 低通滤波平滑 (复用 latest_f_flock_ 状态)
-        // if (std::isnan(latest_f_flock_.x())) {
-        //     latest_f_flock_ = total_force;
-        // }
-        // total_force = force_lp_gain_ * total_force + (1.0 - force_lp_gain_) * latest_f_flock_;
+        if (std::isnan(latest_f_flock_.x())) {
+            latest_f_flock_ = total_force;
+        }
+        total_force = force_lp_gain_ * total_force + (1.0 - force_lp_gain_) * latest_f_flock_;
         
         // D. 极其重要的防溢出硬限幅 (基于我们在导航力讨论时的神仙打架原则)
-        // 这个 2000.0 足以在极限逼近时无情碾压 2.0 的导航力，又不会导致 double 崩溃
-        if (total_force.norm() > 2000.0) {
-            total_force = total_force.normalized() * 2000.0;
-        }
+        total_force = uuv_interface::softClampVec(total_force, flock_force_limit_, t_ftotal_, false);
 
         return total_force;
     }
+
+
+    // =========================================================
+    // 子函数 3：基于 2D 声纳的严格共面 3D 避障力 (Strictly Planar Obstacle Avoidance)
+    // =========================================================
+    Eigen::Vector3d computeObstacleForce(const uuv_interface::State3D& state) {
+        Eigen::Vector3d f_obs_total(0, 0, 0);
+        
+        sensor_msgs::LaserScan scan = this->latest_sonar_;
+        int total_rays = scan.ranges.size();
+        if (total_rays == 0 || num_sectors_ <= 0) return f_obs_total;
+
+        int rays_per_sector = total_rays / num_sectors_;
+        double min_dist_global = 9999.0;
+        std::vector<std::pair<double, double>> sector_minima;
+
+        // 1. 扇区化最小池化 (与原逻辑保持一致)
+        for (int i = 0; i < num_sectors_; ++i) {
+            double min_dist = 9999.0;
+            int min_index = -1;
+            for (int j = 0; j < rays_per_sector; ++j) {
+                int idx = i * rays_per_sector + j;
+                if (idx >= total_rays) break;
+                
+                double r = scan.ranges[idx];
+                if (std::isnan(r) || std::isinf(r)) continue;
+                
+                if (r > scan.range_min && r < scan.range_max && r < d_sense_) {
+                    if (r < min_dist) {
+                        min_dist = r;
+                        min_index = idx;
+                    }
+                }
+            }
+            if (min_index != -1) {
+                double angle = scan.angle_min + min_index * scan.angle_increment;
+                sector_minima.push_back({min_dist, angle});
+                if (min_dist < min_dist_global) min_dist_global = min_dist;
+            }
+        }
+
+        if (sector_minima.empty()) {
+            latest_f_obs_ = f_obs_total;
+            return f_obs_total;
+        }
+
+        // 2. 坐标系转换：提取声纳平面特征
+        Eigen::Matrix3d R_body_to_world = (Eigen::AngleAxisd(state.yaw, Eigen::Vector3d::UnitZ()) *
+                                           Eigen::AngleAxisd(state.pitch, Eigen::Vector3d::UnitY()) *
+                                           Eigen::AngleAxisd(state.roll, Eigen::Vector3d::UnitX())).toRotationMatrix();
+        
+        Eigen::Vector3d body_forward(1.0, 0.0, 0.0);
+        Eigen::Vector3d body_z_down(0.0, 0.0, 1.0);
+        
+        // 机体朝向 (在世界坐标系下)
+        Eigen::Vector3d world_heading = R_body_to_world * body_forward;
+        // 【核心修改1】：提取严格垂直于当前声纳平面的法向量 (Sonar Plane Normal)
+        Eigen::Vector3d sonar_plane_normal = R_body_to_world * body_z_down; 
+
+        // 3. 计算群体避让趋势
+        Eigen::Vector3d avoid_trend_sum(0, 0, 0);
+        std::vector<Eigen::Vector3d> world_obs_vectors;
+        std::vector<double> obs_distances;
+
+        for (auto& min_pt : sector_minima) {
+            double dist = min_pt.first;
+            double angle = min_pt.second;
+            
+            Eigen::Vector3d body_obs_dir(cos(angle), sin(angle), 0.0);
+            Eigen::Vector3d world_obs_dir = R_body_to_world * body_obs_dir;
+            
+            world_obs_vectors.push_back(world_obs_dir);
+            obs_distances.push_back(dist);
+
+            double dist_diff = dist - min_dist_global;
+            double weight = std::exp(-(dist_diff * dist_diff) / 100.0); // sigma=10
+            
+            avoid_trend_sum += world_heading.cross(world_obs_dir) * weight;
+        }
+
+        // 平滑绕行趋势
+        double alpha_obs = 0.9;
+        avoid_dir_smooth_ = alpha_obs * avoid_dir_smooth_ + (1.0 - alpha_obs) * avoid_trend_sum;
+
+        // 【核心修改2】：强制将平滑后的趋势投影回当前声纳平面的法向量上！
+        // 这样可以彻底过滤掉由于姿态变化引起的、脱离声纳平面的非物理趋势。
+        double projection = avoid_dir_smooth_.dot(sonar_plane_normal);
+        if (std::abs(projection) < 0.1) {
+            projection = 1.0; // 默认向右侧绕行 (NED坐标系中，Z轴正方向为下，即右手定则的右转)
+        }
+        
+        // 旋转轴被死死锁定为声纳平面的法向量 (要么指下，要么指上)
+        Eigen::Vector3d rotate_axis = (projection > 0) ? sonar_plane_normal : -sonar_plane_normal;
+
+
+        // 4. 计算各个扇区的势场力
+        for (size_t i = 0; i < world_obs_vectors.size(); ++i) {
+            double dist = obs_distances[i];
+            Eigen::Vector3d vec_to_obs = world_obs_vectors[i];
+
+            double abs_cos = std::abs(world_heading.dot(vec_to_obs));
+            double w_norm = zeta_norm_min_ + (zeta_norm_max_ - zeta_norm_min_) * abs_cos;
+            double w_tan  = zeta_tan_min_  + (zeta_tan_max_  - zeta_tan_min_)  * abs_cos;
+
+            double dist_diff = dist - min_dist_global;
+            double w_dist = std::exp(-(dist_diff * dist_diff) / 100.0);
+            w_norm *= w_dist;
+            w_tan *= w_dist;
+
+            // 【核心修改3】：恢复 1.0 的硬限制，彻底消灭指数爆炸！
+            double dist_inflation = dist - d_inflation_;
+            if (dist_inflation < 1.0) dist_inflation = 1.0; 
+            
+            double force_mag = zeta_obs_ * dist_inflation * (std::exp(delta_obs_ / dist_inflation) - std::exp(1.0));
+            if (force_mag < 0.0) force_mag = 0.0;
+            
+            // 为了防止求和前单根射线的力就已经溢出，预先在循环内对其硬限幅 (借用 flock_force_limit_)
+            if (force_mag > flock_force_limit_) force_mag = flock_force_limit_;
+
+            // 法向排斥力 (反向推开)
+            Eigen::Vector3d f_normal = -1.0 * vec_to_obs * force_mag * w_norm;
+            
+            // 【核心修改4】：修复叉乘顺序！ vec_to_obs 叉乘 rotate_axis，产生正确的逃离切向力
+            Eigen::Vector3d t_dir = vec_to_obs.cross(rotate_axis).normalized();
+            Eigen::Vector3d f_tangent = t_dir * force_mag * w_tan;
+
+            f_obs_total += (f_normal + f_tangent);
+        }
+
+        // 5. 非对称滤波平滑
+        double alpha_decay = 0.5;
+        if (f_obs_total.norm() < latest_f_obs_.norm()) {
+            f_obs_total = (1.0 - alpha_decay) * f_obs_total + alpha_decay * latest_f_obs_;
+        }
+        latest_f_obs_ = f_obs_total;
+
+        // 6. 最终安全限幅
+        if (f_obs_total.norm() > flock_force_limit_) {
+            f_obs_total = f_obs_total.normalized() * flock_force_limit_;
+        }
+
+        return f_obs_total;
+    }
+
+
 
 
     // =========================================================
@@ -156,10 +328,20 @@ private:
     // =========================================================
     uuv_interface::Cmd3D mapForceToCmd(const Eigen::Vector3d& f_total, const uuv_interface::State3D& state) {
         uuv_interface::Cmd3D out;
+        Eigen::Vector3d tau = vTgt_.dir.normalized();
+        double f_lon = f_total.dot(tau);
+        Eigen::Vector3d f_lat = f_total - f_lon * tau;
 
-        Eigen::Vector3d V_cmd = f_total;
+        double dynamic_forward = std::max(f_lon, forward_tendency_);
+        
+        Eigen::Vector3d V_cmd = tau * dynamic_forward + f_lat;
+
+        // UUV_INFO << "f_total: " << f_total.norm();
+        // UUV_INFO << "f_total: " << f_total(0) << "," << f_total(1) << "," << f_total(2);
+
+        // Eigen::Vector3d V_cmd = f_total;
         double V_norm = V_cmd.norm();
-        if (V_norm < 1e-4) {  // 极低速保护(防除零保护)
+        if (V_norm < 1e-4) {  // 极低速/零力保护(防除零保护)
             out.target_pitch = 0.0;
             out.target_yaw = state.yaw;
         } else {
@@ -177,15 +359,21 @@ private:
         // 计算合力在当前机头朝向上的投影大小
         double target_speed;
         double f_proj = f_total.dot(heading_vec);
-        if (f_proj <= 0.0) {
-            target_speed = min_speed_; 
+        
+        // 【核心修改】：以 cruise_speed_ 为零力平衡点进行分段线性映射
+        if (f_proj >= 0.0) {
+            // 受正向拉力：在 巡航速度 和 最大速度 之间加速追赶
+            target_speed = cruise_speed_ + (f_proj / speed_map_scale_) * (max_speed_ - cruise_speed_);
         } else {
-            target_speed = min_speed_ + (f_proj / max_ftotal_) * (max_speed_ - min_speed_);
+            // 受反向推力：在 巡航速度 和 最小速度 之间减速等待 (注意 f_proj 是负数，所以相当于减去)
+            target_speed = cruise_speed_ + (f_proj / speed_map_scale_) * (cruise_speed_ - min_speed_);
         }
+        
         out.target_u = uuv_interface::softClampScl(target_speed, min_speed_, max_speed_, 0.4);
 
         return out; 
     }
+    
 
 public:
     void initPlugin(ros::NodeHandle& gnh, const std::string& plugin_xml) override {
@@ -201,16 +389,35 @@ public:
         double max_pitch_deg;
         reader.param("max_pitch_deg", max_pitch_deg, 30.0);
         max_pitch_rad_ = max_pitch_deg / 180.0 * M_PI;
-        reader.param("max_ftotal", max_ftotal_, 2.0);         // 注意：现在的力直接等于速度偏移量。设为2.0意味着最多能提供 ±2.0m/s 的纠偏能力
         reader.param("t_ftotal", t_ftotal_, 0.5);
+        reader.param("forward_tendency", forward_tendency_, 30);
+        reader.param("speed_map_scale", speed_map_scale_, 30);
 
         reader.param("zeta_p", zeta_p_, 1.5);
         reader.param("zeta_v", zeta_v_, 0.6);
+        reader.param("nav_force_limit", nav_force_limit_, 30);
 
         reader.param("zeta_n", zeta_n_, 0.06);
         reader.param("delta_n", delta_n_, 30.0);
         reader.param("k_pull", k_pull_, 0.33);
         reader.param("r_comm", r_comm_, 100.0);
+        reader.param("force_lp_gain", force_lp_gain_, 0.2);
+        reader.param("flock_force_limit", flock_force_limit_, 2001);
+
+
+        reader.param("d_sense", d_sense_, 200.0);
+        reader.param("d_inflation", d_inflation_, 10.0);
+        reader.param("zeta_obs", zeta_obs_, 0.5);
+        reader.param("delta_obs", delta_obs_, 80.0);
+        reader.param("num_sectors", num_sectors_, 8); // 将2D声纳均分为8个扇区处理
+        std::vector<double> range_zeta_norm, range_zeta_tan;
+        reader.param("range_zeta_norm", range_zeta_norm, std::vector<double>{0.4, 1.6});
+        reader.param("range_zeta_tan", range_zeta_tan, std::vector<double>{0.4, 1.6});
+        zeta_norm_min_ = (range_zeta_norm.size() >= 2) ? range_zeta_norm[0] : 0.4;
+        zeta_norm_max_ = (range_zeta_norm.size() >= 2) ? range_zeta_norm[1] : 1.6;
+        zeta_tan_min_ = (range_zeta_tan.size() >= 2) ? range_zeta_tan[0] : 0.4;
+        zeta_tan_max_ = (range_zeta_tan.size() >= 2) ? range_zeta_tan[1] : 1.6;
+
 
         double cn, ce, cd;
         gnh.param("start_n", cn, 0.0);
@@ -222,10 +429,13 @@ public:
         vTgt_.dir = Eigen::Vector3d(1.0, 0.0, 0.0); 
 
         UUV_INFO << "[SpacialFlockingGuidance] SpacialFlockingGuidance param Loaded: \n"
-                 <<"\n min_speed=\n"<<min_speed_<<"\n cruise_speed=\n"<<cruise_speed_
-                 <<"\n max_speed=\n"<<max_speed_<<"\n max_pitch_deg=\n"<<max_pitch_deg
-                 <<"\n zeta_p=\n"<<zeta_p_<<"\n zeta_v=\n"<<zeta_v_<<"\n max_ftotal=\n"
-                 <<max_ftotal_<<"\n t_ftotal=\n"<<t_ftotal_<<"\n start_pos=("<<cn<<","<<ce<<","<<cd<<")";
+                 <<"\n min_speed=\n"<<min_speed_<<"\n cruise_speed=\n"<<cruise_speed_<<"\n max_speed=\n"<<max_speed_<<"\n max_pitch_deg=\n"<<max_pitch_deg
+                 <<"\n t_ftotal=\n"<<t_ftotal_<<"\n forward_tendency=\n"<<forward_tendency_<<"\n speed_map_scale=\n"<<speed_map_scale_
+                 <<"\n zeta_p=\n"<<zeta_p_<<"\n zeta_v=\n"<<zeta_v_<<"\n nav_force_limit=\n"<<nav_force_limit_
+                 <<"\n zeta_n=\n"<<zeta_n_<<"\n delta_n=\n"<<delta_n_<<"\n k_pull=\n"<<k_pull_<<"\n r_comm=\n"<<r_comm_<<"\n force_lp_gain=\n"<<force_lp_gain_<<"\n flock_force_limit=\n"<<flock_force_limit_
+                 <<"\n d_sense=\n"<<d_sense_<<"\n d_inflation=\n"<<d_inflation_<<"\n zeta_obs=\n"<<zeta_obs_<<"\n delta_obs=\n"<<delta_obs_<<"\n num_sectors=\n"<<num_sectors_
+                 <<"\n range_zeta_norm=\n("<<zeta_norm_min_<<","<<zeta_norm_max_<<")\n range_zeta_tan=\n"<<zeta_tan_min_<<","<<zeta_tan_max_<<")"
+                 <<"\n start_pos=("<<cn<<","<<ce<<","<<cd<<")";
     }
 
     virtual void initPublishDebug() override {
@@ -280,8 +490,8 @@ public:
         msg.markers.push_back(make_arrow(1, latest_f_flock_, 0.0, 0.0, 1.0, "Force_Flock"));
         // 3. 发布避障力 (红色 Red)
         msg.markers.push_back(make_arrow(2, latest_f_obs_, 1.0, 0.0, 0.0, "Force_Obs"));
-        // 4. 发布总合力 (黄色 Yellow)
-        msg.markers.push_back(make_arrow(3, latest_f_total_, 1.0, 1.0, 0.0, "Force_Total"));
+        // 4. 发布总合力 (黑色 Black)
+        msg.markers.push_back(make_arrow(3, latest_f_total_, 0.0, 0.0, 0.0, "Force_Total"));
 
         // 发布虚拟领航点 vTgt
         Eigen::Vector3d self_pos(latest_state_.x, latest_state_.y, latest_state_.z);
@@ -326,8 +536,10 @@ public:
 
         // 1. 计算导航力
         Eigen::Vector3d f_nav = computeNavForce(target, state, dt);
-        Eigen::Vector3d f_flocking = computeFlockingForce(state);
-        Eigen::Vector3d f_apf      = Eigen::Vector3d::Zero(); // TODO: 预留给未来
+        Eigen::Vector3d f_flocking = computeFlockingForce(state, dt);
+        // Eigen::Vector3d f_flocking      = Eigen::Vector3d::Zero(); // TODO: 预留给未来
+        // Eigen::Vector3d f_apf      = Eigen::Vector3d::Zero(); // TODO: 预留给未来
+        Eigen::Vector3d f_apf = computeObstacleForce(state);
         Eigen::Vector3d f_total = f_nav + f_flocking + f_apf;
 
         latest_f_nav_   = f_nav;

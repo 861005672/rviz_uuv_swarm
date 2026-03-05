@@ -3,11 +3,12 @@
 
 import rospy
 import math
-from uuv_interface.msg import State3D, Neighbor3D, Neighborhood3D, CollisionInfo, CollisionInfoArray
+from uuv_interface.msg import State3D, Neighbor3D, Neighborhood3D, CollisionInfo, CollisionInfoArray, SwarmState
 from visualization_msgs.msg import MarkerArray, Marker
 import xml.etree.ElementTree as ET
 import numpy as np
 import tf.transformations as tf_trans
+from uuv_interface.srv import SetTargetPoint3D
 
 def check_sat_collision(pos1, R1, size1, pos2, R2, size2):
     """
@@ -48,16 +49,18 @@ def check_sat_collision(pos1, R1, size1, pos2, R2, size2):
     # 如果 15 根轴上都有重叠，说明必然发生物理碰撞
     return True
 
-class UUVManagerNode:
+class UUVManager:
     def __init__(self):
-        rospy.init_node('uuv_manager_node', anonymous=True)
         # 邻居判定半径（默认 30.0 米），可以通过 launch 参数动态调整
         self.nb_sense_radius = rospy.get_param('~nb_sense_radius', 30.0)
+        self.topo_k_nearest = rospy.get_param('~topo_k_nearest', 6)
 
         self.default_uuv_size = np.array([2.0, 0.3, 0.3])
         self.default_uuv_max_radius = np.linalg.norm(self.default_uuv_size) / 2.0
         self.uuv_params = {} # 格式: {uuv_id: {'size': np.array, 'max_radius': float, 'parsed': bool}}
         
+        self.uuv_targets = {}
+
         # 计算与发布频率：10Hz 足够满足底层的平滑度要求
         self.rate = rospy.Rate(10)
         
@@ -67,6 +70,8 @@ class UUVManagerNode:
         self.obstacles = []
         rospy.Subscriber('/env_markers', MarkerArray, self.obstacle_callback)
         self.pub_collisions = rospy.Publisher('/uuv_manager/collisions', CollisionInfoArray, queue_size=5)
+        self.pub_topology = rospy.Publisher('/uuv_manager/swarm_topology', MarkerArray, queue_size=1)
+        self.pub_swarm_state = rospy.Publisher('/uuv_manager/swarm_state', SwarmState, queue_size=1)
 
         # 定时器：每 1 秒扫描一次系统中是否有新加载的 UUV
         self.discover_timer = rospy.Timer(rospy.Duration(1.0), self.discover_uuvs)
@@ -141,7 +146,6 @@ class UUVManagerNode:
             # 打印出真实的异常原因，绝不掩盖错误！
             rospy.logwarn_throttle(2.0, f"\033[93m[UUVManager] Parsing pending for {uuv_id}. Reason: {e}\033[0m")
 
-
     def obstacle_callback(self, msg):
         """解析环境节点发来的 Marker，缓存为 NED 坐标系下的纯数学几何体"""
         parsed_obstacles = []
@@ -177,7 +181,6 @@ class UUVManagerNode:
             })
         self.obstacles = parsed_obstacles
 
-
     def discover_uuvs(self, event):
         """动态发现新的 UUV，并自动为它建立专属的订阅器与发布器"""
         topics = rospy.get_published_topics()
@@ -207,12 +210,6 @@ class UUVManagerNode:
     def state_callback(self, msg, uuv_id):
         # 更新最新状态快照
         self.uuv_states[uuv_id] = msg
-
-    def run(self):
-        # 持续循环计算并发布
-        while not rospy.is_shutdown():
-            self.calculate_and_publish()
-            self.rate.sleep()
 
     def get_relative_info(self, self_state, dx, dy, dz):
         """
@@ -244,7 +241,114 @@ class UUVManagerNode:
         return rel_x, rel_y, rel_z, rel_yaw, rel_pitch
     # ====================================================================
 
-    def calculate_and_publish(self):
+
+    def check_los(self, p1, p2):
+        """
+        【核心新增】：视线遮挡 (Line-Of-Sight, LOS) 检测
+        检测两点 p1 和 p2 之间的直线线段是否被环境中的任何障碍物遮挡
+        :return: True (视线无遮挡), False (被遮挡)
+        """
+        d = p2 - p1
+        d_len = np.linalg.norm(d)
+        if d_len < 1e-5:
+            return True # 距离太近，认为无遮挡
+
+        for obs in self.obstacles:
+            obs_pos = np.array(obs['pos'])
+            sx, sy, sz = obs['scale']
+            # 障碍物的最大外接球半径
+            max_radius = math.sqrt((sx/2.0)**2 + (sy/2.0)**2 + (sz/2.0)**2)
+
+            # 1. 宽相检测 (Broad-Phase)：点到线段的距离测试
+            v_to_obs = obs_pos - p1
+            t_proj = np.dot(v_to_obs, d) / (d_len * d_len)
+            t_proj = max(0.0, min(1.0, t_proj)) # 限制在线段 [0, 1] 内
+            closest_pt = p1 + t_proj * d
+            dist_to_line = np.linalg.norm(obs_pos - closest_pt)
+            
+            # 如果线段离障碍物中心点的最短距离都大于外接球半径，绝对不可能遮挡，直接跳过！
+            if dist_to_line > max_radius:
+                continue
+
+            # 2. 窄相检测 (Narrow-Phase)：将线段转换到障碍物的局部坐标系下
+            R_mat = obs['R']
+            local_p1 = np.dot(R_mat.T, p1 - obs_pos)
+            local_p2 = np.dot(R_mat.T, p2 - obs_pos)
+            local_d = local_p2 - local_p1
+
+            if obs['type'] == Marker.SPHERE:
+                # 射线 vs 球体交点测试
+                r = sx / 2.0
+                a = np.dot(local_d, local_d)
+                b = 2.0 * np.dot(local_p1, local_d)
+                c = np.dot(local_p1, local_p1) - r*r
+                delta = b*b - 4*a*c
+                if delta >= 0:
+                    t1 = (-b - math.sqrt(delta)) / (2*a)
+                    t2 = (-b + math.sqrt(delta)) / (2*a)
+                    # 如果有任何一个交点在线段 t in [0, 1] 内部，说明被遮挡
+                    if (0 <= t1 <= 1) or (0 <= t2 <= 1) or (t1 < 0 and t2 > 1):
+                        return False 
+
+            elif obs['type'] == Marker.CUBE:
+                # 射线 vs 倾斜包围盒 (OBB/AABB) - Slab Method
+                t_min, t_max = 0.0, 1.0
+                h = np.array([sx/2.0, sy/2.0, sz/2.0])
+                intersect = True
+                for i in range(3):
+                    if abs(local_d[i]) < 1e-6:
+                        # 射线平行于该轴，判断起点是否在盒内
+                        if local_p1[i] < -h[i] or local_p1[i] > h[i]:
+                            intersect = False; break
+                    else:
+                        t1 = (-h[i] - local_p1[i]) / local_d[i]
+                        t2 = (h[i] - local_p1[i]) / local_d[i]
+                        if t1 > t2: t1, t2 = t2, t1
+                        t_min = max(t_min, t1)
+                        t_max = min(t_max, t2)
+                        if t_min > t_max:
+                            intersect = False; break
+                if intersect and t_max >= 0 and t_min <= 1:
+                    return False 
+
+            elif obs['type'] == Marker.CYLINDER:
+                # 射线 vs 倾斜圆柱体
+                r = sx / 2.0
+                half_h = sz / 2.0
+                # 圆柱无限长方程投影：(x+dx*t)^2 + (y+dy*t)^2 = r^2
+                a = local_d[0]**2 + local_d[1]**2
+                b = 2.0 * (local_p1[0]*local_d[0] + local_p1[1]*local_d[1])
+                c = local_p1[0]**2 + local_p1[1]**2 - r**2
+                
+                if a < 1e-6: # 射线平行于Z轴
+                    if c <= 0: # 穿过圆柱内部
+                        t_near = (-half_h - local_p1[2]) / local_d[2] if local_d[2] != 0 else -1
+                        t_far = (half_h - local_p1[2]) / local_d[2] if local_d[2] != 0 else -1
+                        if local_d[2] == 0:
+                            if -half_h <= local_p1[2] <= half_h: return False
+                        else:
+                            if t_near > t_far: t_near, t_far = t_far, t_near
+                            if max(0.0, t_near) <= min(1.0, t_far): return False
+                else:
+                    delta = b*b - 4*a*c
+                    if delta >= 0:
+                        t1 = (-b - math.sqrt(delta)) / (2*a)
+                        t2 = (-b + math.sqrt(delta)) / (2*a)
+                        if t1 > t2: t1, t2 = t2, t1
+                        # 计算位于线段内的有效交点段
+                        t_in, t_out = max(0.0, t1), min(1.0, t2)
+                        if t_in <= t_out:
+                            z_in = local_p1[2] + t_in * local_d[2]
+                            z_out = local_p1[2] + t_out * local_d[2]
+                            z_min, z_max = min(z_in, z_out), max(z_in, z_out)
+                            # 如果该有效线段的高度落在圆柱上下底面范围内，则遮挡
+                            if z_min <= half_h and z_max >= -half_h:
+                                return False
+
+        return True # 所有障碍物都未遮挡视线
+
+
+    def update(self):
         # 获取当前所有 UUV 的状态快照
         states = dict(self.uuv_states)
         uuvs = list(states.keys())
@@ -291,7 +395,7 @@ class UUVManagerNode:
                     dist = math.sqrt(dx*dx + dy*dy + dz*dz)
 
                     # 若在感知半径内，则互相加为邻居
-                    if dist <= self.nb_sense_radius:
+                    if dist <= self.nb_sense_radius and self.check_los(uuv_data[uuv_i]['pos'], uuv_data[uuv_j]['pos']):
                         # 把 J 加入 I 的邻居列表
                         rx_j, ry_j, rz_j, ryaw_j, rpitch_j = self.get_relative_info(state_i, dx, dy, dz)
                         n_j = Neighbor3D()
@@ -409,9 +513,109 @@ class UUVManagerNode:
         if len(collision_msg_array.collisions) > 0:
             self.pub_collisions.publish(collision_msg_array)
 
-if __name__ == '__main__':
-    try:
-        node = UUVManagerNode()
-        node.run()
-    except rospy.ROSInterruptException:
-        pass
+        # 发布集群状态
+        self.publish_swarm_state(uuvs, neighborhoods)
+        # 发布集群拓扑可视化网格
+        self.publish_topology_marker(states, neighborhoods)
+
+    def publish_swarm_state(self, uuvs, neighborhoods):
+        """
+        计算并发布集群拓扑状态（代数连通度和连通分量数）
+        """
+        n = len(uuvs)
+        if n == 0:
+            return
+            
+        L_mat = np.zeros((n, n))
+        uuv_indices = {uuv_name: idx for idx, uuv_name in enumerate(uuvs)}
+        
+        # 构建无向图的拉普拉斯矩阵 (Laplacian Matrix)
+        for uuv_i, nb_data in neighborhoods.items():
+            idx_i = uuv_indices[uuv_i]
+            degree = 0
+            for nb in nb_data.neighbors:
+                idx_j = uuv_indices[nb.uuv_name]
+                L_mat[idx_i, idx_j] = -1.0
+                degree += 1
+            L_mat[idx_i, idx_i] = degree
+            
+        try:
+            # 使用 np.linalg.eigvalsh 求对称矩阵的特征值（结果会自动从小到大排序）
+            evals = np.linalg.eigvalsh(L_mat)
+            
+            # 特征值为 0 的个数即为连通分量数
+            num_components = int(np.sum(evals < 1e-5))
+            # 代数连通度 (Algebraic Connectivity)
+            alg_conn = float(evals[1]) if n > 1 else 0.0
+            
+        except Exception as e:
+            num_components = n
+            alg_conn = 0.0
+            
+        # 打包并发布自定义的 SwarmState 消息
+        state_msg = SwarmState()
+        state_msg.header.stamp = rospy.Time.now()
+        state_msg.connectivity = alg_conn
+        state_msg.num_connected = num_components
+        self.pub_swarm_state.publish(state_msg)
+
+
+    def publish_topology_marker(self, states, neighborhoods):
+        """
+        构建并发布集群拓扑 (Swarm Topology) 网络 - KNN 优化版
+        """
+        if self.pub_topology.get_num_connections() == 0:
+            return
+            
+        topo_marker_array = MarkerArray()
+        
+        lines = Marker()
+        lines.header.frame_id = "map"  
+        lines.header.stamp = rospy.Time.now()
+        lines.ns = "swarm_topology"
+        lines.id = 0
+        lines.type = Marker.LINE_LIST
+        lines.action = Marker.ADD
+        lines.pose.orientation.w = 1.0
+        lines.scale.x = 0.05  # 线宽
+        
+        from geometry_msgs.msg import Point
+        from std_msgs.msg import ColorRGBA
+        
+        drawn_edges = set() # 用于无向图去重
+        
+        for uuv_i, nb_data in neighborhoods.items():
+            pos_i = np.array([states[uuv_i].x, states[uuv_i].y, states[uuv_i].z])
+            p1 = Point(x=pos_i[1], y=pos_i[0], z=-pos_i[2]) # NED转ENU
+            
+            # KNN逻辑：根据距离从小到大排序，并只取前 topo_k_nearest 个进行连线
+            sorted_neighbors = sorted(nb_data.neighbors, key=lambda n: n.distance)
+            knn_neighbors = sorted_neighbors[:self.topo_k_nearest]
+            
+            for n_j in knn_neighbors:
+                uuv_j = n_j.uuv_name
+                
+                # 连线去重：如果 uuv_1 和 uuv_2 连过线了，跳过
+                edge_key = tuple(sorted([uuv_i, uuv_j]))
+                if edge_key in drawn_edges:
+                    continue
+                drawn_edges.add(edge_key)
+                
+                # 取出邻居位置
+                pos_j = np.array([states[uuv_j].x, states[uuv_j].y, states[uuv_j].z])
+                p2 = Point(x=pos_j[1], y=pos_j[0], z=-pos_j[2])
+                
+                lines.points.append(p1)
+                lines.points.append(p2)
+                
+                # 直接复用邻居数据里已经算好的 distance
+                alpha = 1.0 - 0.6 * (n_j.distance / self.nb_sense_radius)
+                alpha = max(0.1, alpha ** 1.5) 
+                
+                color = ColorRGBA(r=0.49, g=1.0, b=0.66, a=alpha)
+                lines.colors.append(color)
+                lines.colors.append(color)
+        lines.frame_locked = True
+
+        topo_marker_array.markers.append(lines)
+        self.pub_topology.publish(topo_marker_array)

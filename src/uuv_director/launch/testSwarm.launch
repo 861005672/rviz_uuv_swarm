@@ -2,22 +2,26 @@
 <launch>
     <include file="$(find uuv_environment)/launch/start_env.launch" />
 
-    <node pkg="uuv_director" type="uuv_loader.py" name="uuv_loader_node" output="screen" />
+    <!-- <node pkg="uuv_director" type="uuv_loader.py" name="uuv_loader_node" output="screen" />
 
     <node pkg="uuv_director" type="uuv_manager.py" name="uuv_manager_node" output="screen">
         <param name="nb_sense_radius" value="100" />
         <param name="collision_radius" value="0.3" />
+    </node> -->
+
+    <node pkg="uuv_director" type="director_node.py" name="director_node" output="screen">
+        <param name="scenario" value="swarm_nav" />
     </node>
 
     <node pkg="rqt_service_caller" type="rqt_service_caller" name="rqt_service_caller" output="screen" />
 
-    <node pkg="joy" type="joy_node" name="joy_node" />
+    <!-- <node pkg="joy" type="joy_node" name="joy_node" /> -->
 
-    <node pkg="uuv_director" type="joy_controller.py" name="joy_controller" output="screen">
+    <!-- <node pkg="uuv_director" type="joy_controller.py" name="joy_controller" output="screen">
         <param name="max_force_x" value="200" />
         <param name="max_torque_pitch" value="5" />
         <param name="max_torque_yaw" value="10" />
-    </node>
+    </node> -->
 
 
 </launch>

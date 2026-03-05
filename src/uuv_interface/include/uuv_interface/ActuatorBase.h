@@ -152,7 +152,14 @@ public:
 
     Eigen::VectorXd update(const Eigen::VectorXd& tau_cmd, const uuv_interface::State3D& state) {
         ros::Time now = ros::Time::now();
-        // 1. 更新频率控制
+        // 1. 调试信息发布控制
+        if (last_publish_debug_time_.isZero()) { last_publish_debug_time_ = now; }
+        double dt_publish_debug = (now - last_publish_debug_time_).toSec();
+        if (dt_publish_debug > (1.0 / this->publish_debug_rate_) * 0.95) {
+            publishDebug(now);
+            last_publish_debug_time_ = now;
+        }
+        // 2. 更新频率控制
         if (last_update_time_.isZero()) {
             last_update_time_ = now;
             return Eigen::VectorXd::Zero(6); 
@@ -161,13 +168,6 @@ public:
         if (dt_update <= 0.0 || dt_update < (1.0 / this->update_rate_) * 0.95) return last_output_tau_;
         last_update_time_ = now;
 
-        // 2. 调试信息发布控制
-        if (last_publish_debug_time_.isZero()) { last_publish_debug_time_ = now; }
-        double dt_publish_debug = (now - last_publish_debug_time_).toSec();
-        if (dt_publish_debug > (1.0 / this->publish_debug_rate_) * 0.95) {
-            publishDebug(now);
-            last_publish_debug_time_ = now;
-        }
         // 3. 拦截器验证
         const Eigen::VectorXd& actual_input_cmd = is_overridden_ ? override_input_ : tau_cmd;
 

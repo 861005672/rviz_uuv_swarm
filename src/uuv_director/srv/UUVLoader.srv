@@ -5,8 +5,11 @@ float64[] center
 float64 radius
 float64 min_dist
 string dynamics_type
+string actuator_type
 string controller_type
 string guidance_type
+string planner_type   
+string decision_type
 string control_level
 ---
 bool success

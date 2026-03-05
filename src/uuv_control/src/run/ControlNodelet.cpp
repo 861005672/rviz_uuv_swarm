@@ -18,6 +18,9 @@
 #include <nav_msgs/Path.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <uuv_interface/utils/UUVLogger.h>
+#include <uuv_interface/DecisionBase.h>
+#include <uuv_interface/PlannerBase.h>
+#include <visualization_msgs/Marker.h>
 
 namespace uuv_control {
 
@@ -32,13 +35,16 @@ private:
     std::unique_ptr<pluginlib::ClassLoader<uuv_interface::ActuatorBase>> act_loader_;
     std::unique_ptr<pluginlib::ClassLoader<uuv_interface::ControllerBase>> ctrl_loader_;
     std::unique_ptr<pluginlib::ClassLoader<uuv_interface::GuidanceBase>> guidance_loader_;
+    std::unique_ptr<pluginlib::ClassLoader<uuv_interface::PlannerBase>> planner_loader_;
+    std::unique_ptr<pluginlib::ClassLoader<uuv_interface::DecisionBase>> decision_loader_;
     std::unique_ptr<pluginlib::ClassLoader<uuv_interface::SensorPluginBase>> sensor_loader_;
-
     // 插件实例
     boost::shared_ptr<uuv_interface::DynamicsBase> dynamics_;
     boost::shared_ptr<uuv_interface::ActuatorBase> actuator_;
     boost::shared_ptr<uuv_interface::ControllerBase> controller_;
     boost::shared_ptr<uuv_interface::GuidanceBase> guidance_;
+    boost::shared_ptr<uuv_interface::PlannerBase> planner_;
+    boost::shared_ptr<uuv_interface::DecisionBase> decision_;
     std::vector<boost::shared_ptr<uuv_interface::SensorPluginBase>> sensors_;
 
     // 频率与定时器
@@ -46,6 +52,8 @@ private:
     double actuator_freq_;   
     double controller_freq_; 
     double guidance_freq_ = 10.0;
+    double planner_freq_ = 10.0;
+    double decision_freq_ = 10.0;
     ros::Timer control_timer_; // 替代原有的 while 循环
 
     // 发布与广播
@@ -59,9 +67,10 @@ private:
     std::string world_frame_;
     uuv_interface::State3D current_state_;
 
-    nav_msgs::Path uuv_trajectory_;
+    visualization_msgs::Marker traj_marker_;
     int max_trajectory_length_ =1000;
     double trajectory_seg_length_ = 1;
+    std::vector<geometry_msgs::Point> traj_points_;
 
     double visual_rate_;
     double visual_period_;
@@ -111,11 +120,25 @@ public:
         ctrl_loader_.reset(new pluginlib::ClassLoader<uuv_interface::ControllerBase>("uuv_interface", "uuv_interface::ControllerBase"));
         sensor_loader_.reset(new pluginlib::ClassLoader<uuv_interface::SensorPluginBase>("uuv_interface", "uuv_interface::SensorPluginBase"));
         guidance_loader_.reset(new pluginlib::ClassLoader<uuv_interface::GuidanceBase>("uuv_interface", "uuv_interface::GuidanceBase"));
+        planner_loader_.reset(new pluginlib::ClassLoader<uuv_interface::PlannerBase>("uuv_interface", "uuv_interface::PlannerBase"));
+        decision_loader_.reset(new pluginlib::ClassLoader<uuv_interface::DecisionBase>("uuv_interface", "uuv_interface::DecisionBase"));
         tf_broadcaster_.reset(new tf2_ros::TransformBroadcaster());
         
         pub_state_ = gnh_.advertise<uuv_interface::State3D>("state", 10);
-        pub_trajectory_  = gnh_.advertise<nav_msgs::Path>("trajectory", 10);
-        uuv_trajectory_.header.frame_id = "ned";
+        pub_trajectory_  = gnh_.advertise<visualization_msgs::Marker>("trajectory", 10);
+        traj_marker_.header.frame_id = world_frame_; // 通常是 "map"
+        traj_marker_.ns = "uuv_trajectory";
+        traj_marker_.id = 0;
+        traj_marker_.type = visualization_msgs::Marker::LINE_STRIP;
+        traj_marker_.action = visualization_msgs::Marker::ADD;
+        // 【核心修复】：开启坐标系锁定，解决运镜粘连卡顿
+        traj_marker_.frame_locked = true;
+        std::srand(std::time(0) + getpid());
+        traj_marker_.color.r = static_cast<double>(std::rand()) / RAND_MAX;
+        traj_marker_.color.g = static_cast<double>(std::rand()) / RAND_MAX;
+        traj_marker_.color.b = static_cast<double>(std::rand()) / RAND_MAX;
+        traj_marker_.color.a = 1.0;
+        traj_marker_.scale.x = 0.15;
 
         loadPluginsFromXML();
 
@@ -124,7 +147,7 @@ public:
         //     return;
         // }
 
-        double loop_freq = std::max({dynamics_freq_, controller_freq_, guidance_freq_, actuator_freq_, 100.0});
+        double loop_freq = std::max({dynamics_freq_, controller_freq_, guidance_freq_, actuator_freq_, decision_freq_, 100.0});
         if (loop_freq > 100) loop_freq = 100.0;
         UUV_INFO << "[ControlNodelet] Loop running at " << loop_freq << " Hz via Timer";
 
@@ -197,6 +220,20 @@ public:
                     guidance_freq_ = guidance_->get_rate();
                     UUV_INFO << "[ControlNodelet] Loaded Guidance : "<< name.c_str() <<  "[" << type.c_str() << "] @ " << guidance_freq_ << " Hz";
                 }
+                else if (layer == "planner") {
+                    planner_ = planner_loader_->createInstance(type);
+                    planner_->setLogger(uuv_logger_);
+                    planner_->initialize(gnh_, snippet, "planner");
+                    planner_freq_ = planner_->get_rate();
+                    UUV_INFO << "[ControlNodelet] Loaded Planner : "<< name.c_str() <<  "[" << type.c_str() << "] @ " << planner_freq_ << " Hz";
+                } 
+                else if (layer == "decision") {
+                    decision_ = decision_loader_->createInstance(type);
+                    decision_->setLogger(uuv_logger_);
+                    decision_->initialize(gnh_, snippet, "decision");
+                    decision_freq_ = decision_->get_rate();
+                    UUV_INFO << "[ControlNodelet] Loaded Decision : "<< name.c_str() <<  "[" << type.c_str() << "] @ " << decision_freq_ << " Hz";
+                } 
                 else if (layer == "sensor") {
                     auto sensor = sensor_loader_->createInstance(type);
                     sensor->setLogger(uuv_logger_);
@@ -222,30 +259,24 @@ public:
         if (last_visual_time_.isZero()) {
             last_visual_time_ = current_time;
         }
-        
-        // 目标点默认为自身位置，相当于默认不行动
-        uuv_interface::TargetPoint3D dummy_tgt;
-        // dummy_tgt.n = current_state_.x;
-        // dummy_tgt.e = current_state_.y;
-        // dummy_tgt.d = current_state_.z;
-        dummy_tgt.n = 100;
-        dummy_tgt.e = 0;
-        dummy_tgt.d = 0;
 
-
-        // === 1. 制导层 ===
-        uuv_interface::Cmd3D g_out = guidance_->update(dummy_tgt, current_state_);
-        // === 2. 控制层 ===
-        Eigen::VectorXd tau_cmd = controller_->update(g_out, current_state_);
-        // === 3. 执行器层 ===
+        // === 1. 决策层 === 
+        uuv_interface::TargetPoint3D final_target = decision_->update(current_state_);
+        // === 2. 规划层 ===
+        uuv_interface::TargetPoint3D path_target = planner_->update(final_target, current_state_);
+        // === 2. 制导层 ===
+        uuv_interface::Cmd3D cmd_out = guidance_->update(path_target, current_state_);
+        // === 3. 控制层 ===
+        Eigen::VectorXd tau_cmd = controller_->update(cmd_out, current_state_);
+        // === 4. 执行器层 ===
         Eigen::VectorXd actuator_tau = actuator_->update(tau_cmd, current_state_);
-        // === 4. 动力学层 ===
+        // === 5. 动力学层 ===
         current_state_ = dynamics_->update(actuator_tau);
-        // === 5. 更新传感器 === 
+        // === 6. 更新传感器 === 
         updateSensor();
-        // === 6. 发布状态话题 === 
+        // === 7. 发布状态话题 === 
         publishState(current_state_, current_time);
-        // === 7. 更新可视化(TF和轨迹) ===
+        // === 8. 更新可视化(TF和轨迹) ===
         if ((current_time - last_visual_time_).toSec() >= visual_period_ * 0.95) {
             publishTF(current_state_, current_time);
             publishTrajectory(current_state_, current_time);
@@ -268,46 +299,42 @@ public:
 
     // 轨迹发布函数
     void publishTrajectory(const uuv_interface::State3D& state, const ros::Time& time) {
-        // 1. 距离校验：如果轨迹数组不为空，计算当前点与上一个记录点的 3D 欧氏距离
-        if (!uuv_trajectory_.poses.empty()) {
-            const auto& last_pos = uuv_trajectory_.poses.back().pose.position;
-            double dx = state.x - last_pos.x;
-            double dy = state.y - last_pos.y;
-            double dz = state.z - last_pos.z;
-            double dist = std::sqrt(dx*dx + dy*dy + dz*dz);
+        geometry_msgs::Point current_pt;
+        current_pt.x = state.x;
+        current_pt.y = state.y;
+        current_pt.z = state.z;
+
+        bool should_add = false;
+
+        // 1. 如果是第一个点，直接添加
+        if (traj_points_.empty()) {
+            should_add = true;
+        } else {
+            // 2. 计算当前点与最后一个轨迹点之间的欧几里得距离
+            const auto& last_pt = traj_points_.back();
+            double dist = std::sqrt(std::pow(current_pt.x - last_pt.x, 2) +
+                                    std::pow(current_pt.y - last_pt.y, 2) +
+                                    std::pow(current_pt.z - last_pt.z, 2));
             
-            // 如果移动距离小于设定的阈值，直接返回，不记录也不发布！(极大节省计算和通信资源)
-            if (dist < trajectory_seg_length_) {
-                return; 
+            // 3. 只有超过阈值（例如 1.0米）才采样新点
+            if (dist >= trajectory_seg_length_) {
+                should_add = true;
             }
         }
 
-        // 2. 距离达标（或是第一个点），开始记录新点
-        geometry_msgs::PoseStamped current_pose;
-        current_pose.header.stamp = time;
-        current_pose.header.frame_id = uuv_trajectory_.header.frame_id;
+        if (should_add) {
+            traj_points_.push_back(current_pt);
 
-        current_pose.pose.position.x = state.x;
-        current_pose.pose.position.y = state.y;
-        current_pose.pose.position.z = state.z;
-
-        tf2::Quaternion q;
-        q.setRPY(state.roll, state.pitch, state.yaw);
-        current_pose.pose.orientation.x = q.x();
-        current_pose.pose.orientation.y = q.y();
-        current_pose.pose.orientation.z = q.z();
-        current_pose.pose.orientation.w = q.w();
-
-        uuv_trajectory_.poses.push_back(current_pose);
-
-        // 3. 维持滑动窗口
-        if (uuv_trajectory_.poses.size() > max_trajectory_length_) {
-            uuv_trajectory_.poses.erase(uuv_trajectory_.poses.begin());
+            // 维护滑动窗口长度
+            if (traj_points_.size() > max_trajectory_length_) {
+                traj_points_.erase(traj_points_.begin());
+            }
         }
 
-        // 4. 更新时间戳并发布
-        uuv_trajectory_.header.stamp = time;
-        pub_trajectory_.publish(uuv_trajectory_);
+        // 4. 无论是否新增点，每一帧都更新时间戳并发布，保证 Marker 不会闪烁
+        traj_marker_.header.stamp = time;
+        traj_marker_.points = traj_points_;
+        pub_trajectory_.publish(traj_marker_);
     }
 
     void publishTF(const uuv_interface::State3D& state, const ros::Time& time) {

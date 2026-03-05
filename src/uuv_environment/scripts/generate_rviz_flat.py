@@ -52,7 +52,7 @@ Visualization Manager:
       Enabled: true
       Name: Environment Obstacles (MarkerArray)
       Marker Topic:
-        Value: /visualization_marker_array
+        Value: /env_markers
       Value: true
     - Class: rviz/TF
       Enabled: true
@@ -197,7 +197,7 @@ Visualization Manager:
     # ==========================================
     rviz_content += """  Enabled: true
   Global Options:
-    Background Color: 211; 215; 207
+    Background Color: 32; 74; 135
     Fixed Frame: map
     Frame Rate: 30
   Name: root

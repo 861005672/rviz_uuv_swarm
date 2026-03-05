@@ -72,15 +72,15 @@ public:
     uuv_interface::Cmd3D update(const uuv_interface::TargetPoint3D& target, const uuv_interface::State3D& state) {
         ros::Time now = ros::Time::now();
 
-        // 2. 调试发布拦截
+        // 1. 调试发布拦截
         if (last_publish_debug_time_.isZero()) { last_publish_debug_time_ = now; }
-        double dt_publish_debug = (now - last_publish_debug_time_).toSec();
-        if (dt_publish_debug > (1.0 / this->publish_debug_rate_) * 0.95) {
-            publishDebug(now);
-            last_publish_debug_time_ = now;
+            double dt_publish_debug = (now - last_publish_debug_time_).toSec();
+            if (dt_publish_debug > (1.0 / this->publish_debug_rate_) * 0.95) {
+                publishDebug(now);
+                last_publish_debug_time_ = now;
         }
 
-        // 1. 频率控制与 dt 计算
+        // 2. 频率控制与 dt 计算
         if (last_update_time_.isZero()) {
             last_update_time_ = now;
             // 初始第一帧时，指令维持静止，姿态对齐
