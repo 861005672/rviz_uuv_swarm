@@ -65,7 +65,6 @@
                 0.0  0.0   0.0  0.0   0.0   0.0
             </linear_damping_forward_speed>
 
-            <xacro:insert_lauv_actuator />
             
         </plugin>
     </xacro:macro>

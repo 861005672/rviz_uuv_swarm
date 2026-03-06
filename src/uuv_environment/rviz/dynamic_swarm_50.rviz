@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /TF1/Frames1
+        - /MarkerArray1
       Splitter Ratio: 0.5
     Tree Height: 346
   - Class: rviz/Views
@@ -3279,7 +3280,7 @@ Visualization Manager:
               Marker Topic: /uuv_0/trajectory
               Name: Path
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3291,7 +3292,7 @@ Visualization Manager:
               Marker Topic: /uuv_1/trajectory
               Name: Trajectory_uuv_0
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3303,7 +3304,7 @@ Visualization Manager:
               Marker Topic: /uuv_2/trajectory
               Name: Trajectory_uuv_1
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3315,7 +3316,7 @@ Visualization Manager:
               Marker Topic: /uuv_3/trajectory
               Name: Trajectory_uuv_2
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3327,7 +3328,7 @@ Visualization Manager:
               Marker Topic: /uuv_4/trajectory
               Name: Trajectory_uuv_3
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3339,7 +3340,7 @@ Visualization Manager:
               Marker Topic: /uuv_5/trajectory
               Name: Trajectory_uuv_4
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3351,7 +3352,7 @@ Visualization Manager:
               Marker Topic: /uuv_6/trajectory
               Name: Trajectory_uuv_5
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3363,7 +3364,7 @@ Visualization Manager:
               Marker Topic: /uuv_7/trajectory
               Name: Trajectory_uuv_6
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3375,7 +3376,7 @@ Visualization Manager:
               Marker Topic: /uuv_8/trajectory
               Name: Trajectory_uuv_7
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3387,7 +3388,7 @@ Visualization Manager:
               Marker Topic: /uuv_9/trajectory
               Name: Trajectory_uuv_8
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3399,7 +3400,7 @@ Visualization Manager:
               Marker Topic: /uuv_10/trajectory
               Name: Trajectory_uuv_9
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3411,7 +3412,7 @@ Visualization Manager:
               Marker Topic: /uuv_11/trajectory
               Name: Trajectory_uuv_10
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3423,7 +3424,7 @@ Visualization Manager:
               Marker Topic: /uuv_12/trajectory
               Name: Trajectory_uuv_11
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3435,7 +3436,7 @@ Visualization Manager:
               Marker Topic: /uuv_13/trajectory
               Name: Trajectory_uuv_12
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3447,7 +3448,7 @@ Visualization Manager:
               Marker Topic: /uuv_14/trajectory
               Name: Trajectory_uuv_13
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3459,7 +3460,7 @@ Visualization Manager:
               Marker Topic: /uuv_15/trajectory
               Name: Trajectory_uuv_14
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3471,7 +3472,7 @@ Visualization Manager:
               Marker Topic: /uuv_16/trajectory
               Name: Trajectory_uuv_15
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3483,7 +3484,7 @@ Visualization Manager:
               Marker Topic: /uuv_17/trajectory
               Name: Trajectory_uuv_16
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3495,7 +3496,7 @@ Visualization Manager:
               Marker Topic: /uuv_18/trajectory
               Name: Trajectory_uuv_17
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3507,7 +3508,7 @@ Visualization Manager:
               Marker Topic: /uuv_19/trajectory
               Name: Trajectory_uuv_18
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3519,7 +3520,7 @@ Visualization Manager:
               Marker Topic: /uuv_20/trajectory
               Name: Trajectory_uuv_19
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3531,7 +3532,7 @@ Visualization Manager:
               Marker Topic: /uuv_21/trajectory
               Name: Trajectory_uuv_20
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3543,7 +3544,7 @@ Visualization Manager:
               Marker Topic: /uuv_22/trajectory
               Name: Trajectory_uuv_21
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3555,7 +3556,7 @@ Visualization Manager:
               Marker Topic: /uuv_23/trajectory
               Name: Trajectory_uuv_22
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3567,7 +3568,7 @@ Visualization Manager:
               Marker Topic: /uuv_24/trajectory
               Name: Trajectory_uuv_23
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3579,7 +3580,7 @@ Visualization Manager:
               Marker Topic: /uuv_25/trajectory
               Name: Trajectory_uuv_24
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3591,7 +3592,7 @@ Visualization Manager:
               Marker Topic: /uuv_26/trajectory
               Name: Trajectory_uuv_25
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3603,7 +3604,7 @@ Visualization Manager:
               Marker Topic: /uuv_27/trajectory
               Name: Trajectory_uuv_26
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3615,7 +3616,7 @@ Visualization Manager:
               Marker Topic: /uuv_28/trajectory
               Name: Trajectory_uuv_27
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3627,7 +3628,7 @@ Visualization Manager:
               Marker Topic: /uuv_29/trajectory
               Name: Trajectory_uuv_28
               Namespaces:
-                {}
+                uuv_trajectory: true
               Queue Size: 10
               Value: true
           Enabled: true
@@ -5486,6 +5487,14 @@ Visualization Manager:
         {}
       Queue Size: 100
       Value: false
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /scenario/target_markers
+      Name: MarkerArray
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 32; 74; 135
@@ -5511,7 +5520,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 0.0010879762703552842
+      Distance: 0.00318861729465425
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -5527,9 +5536,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0
+      Pitch: 0.42000001668930054
       Target Frame: spectator_link
-      Yaw: 3.1415903568267822
+      Yaw: 3.1065826416015625
     Saved:
       - Class: rviz/Orbit
         Distance: 0.0010000000474974513

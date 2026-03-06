@@ -150,6 +150,7 @@ add_library(ControlPlugins
   src/planner/SimplePlanner.cpp
 
   src/decision/VanguardDecision.cpp
+  src/decision/CBAADecision.cpp
 )
 
 add_dependencies(ControlPlugins ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})

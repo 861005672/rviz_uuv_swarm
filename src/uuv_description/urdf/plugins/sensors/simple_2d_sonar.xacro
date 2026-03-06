@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:macro name="insert_simple_2d_sonar" params="name:='sonar_front' update_rate:=10.0 beams:=30 fov:=150.0 max_range:=200.0">
+    <xacro:macro name="insert_simple_2d_sonar" 
+    params="name:='sonar_front' update_rate:=10.0 beams:=30 fov:=150.0 max_range:=200.0">
         <plugin layer="sensor" name="${name}" type="uuv_sensor/Simple2DSonar">
             <update_rate>${update_rate}</update_rate>
             <beams>${beams}</beams>

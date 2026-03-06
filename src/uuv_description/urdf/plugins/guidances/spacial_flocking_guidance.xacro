@@ -55,11 +55,14 @@
             <!-- 邻居内力部分 -->
             <zeta_n>${zeta_n}</zeta_n>
             <delta_n>${delta_n}</delta_n>
-            <max_ftotal>${k_pull}</max_ftotal>
+            <k_pull>${k_pull}</k_pull>
+            <r_comm>${r_comm}</r_comm>
+            <k_pull>${k_pull}</k_pull>
             <t_ftotal>${r_comm}</t_ftotal>
             <force_lp_gain>${force_lp_gain}</force_lp_gain>
             <flock_force_limit>${flock_force_limit}</flock_force_limit>
 
+            <!-- 避障力部分 -->
             <d_sense>${d_sense}</d_sense>
             <d_inflation>${d_inflation}</d_inflation>
             <zeta_obs>${zeta_obs}</zeta_obs>

@@ -21,6 +21,7 @@
 #include <uuv_interface/DecisionBase.h>
 #include <uuv_interface/PlannerBase.h>
 #include <visualization_msgs/Marker.h>
+#include <xmlrpcpp/XmlRpcException.h>
 
 namespace uuv_control {
 
@@ -48,9 +49,9 @@ private:
     std::vector<boost::shared_ptr<uuv_interface::SensorPluginBase>> sensors_;
 
     // 频率与定时器
-    double dynamics_freq_;   
-    double actuator_freq_;   
-    double controller_freq_; 
+    double dynamics_freq_ = 10.0;   
+    double actuator_freq_ = 10.0;   
+    double controller_freq_ = 10.0; 
     double guidance_freq_ = 10.0;
     double planner_freq_ = 10.0;
     double decision_freq_ = 10.0;
@@ -141,6 +142,13 @@ public:
         traj_marker_.scale.x = 0.15;
 
         loadPluginsFromXML();
+
+        if (!dynamics_ || !controller_ || !guidance_ || !actuator_) {
+            ROS_ERROR_STREAM("[" << uuv_ns_ << "] CRITICAL ERROR: Plugins missing! " 
+                << "Dyn:" << bool(dynamics_) << " Ctrl:" << bool(controller_) 
+                << " Guid:" << bool(guidance_) << " Act:" << bool(actuator_));
+            throw std::runtime_error("Required plugins failed to load! Please check robot_description.");
+        }
 
         // if (!dynamics_ || !controller_ || !guidance_) {
         //     UUV_ERROR << "[ControlNodelet] Plugins not loaded properly, nodelet stopping.";
@@ -244,11 +252,19 @@ public:
                 } 
                 else {
                     UUV_INFO << "[ControlNodelet] Unknown layer : "<< layer.c_str() <<  " for plugin " << name.c_str();
-
                 }
-            } catch(pluginlib::PluginlibException& ex) {
-                ROS_ERROR_STREAM("[ControlNodelet] Failed to load plugin " << name << " of type " << type << ". ERROR: " << ex.what());
-                UUV_ERROR << "[ControlNodelet] Failed to load plugin " << name.c_str() << ": " << ex.what();
+            }// 1. 捕获标准异常
+            catch(std::exception& ex) {
+                ROS_ERROR_STREAM("[" << uuv_ns_.c_str() << "] Error Parse plugin " << name << " failed: " << ex.what());
+                UUV_ERROR << "[ControlNodelet] Exception while initializing plugin " << name.c_str() << ": " << ex.what();
+            }
+            // 2. 【核心修复】：专门捕获 ROS 恶名昭彰的 XmlRpc 异常
+            catch(XmlRpc::XmlRpcException& ex) {
+                ROS_ERROR_STREAM("\n\n[" << uuv_ns_.c_str() << "] Error plugin param failed (XmlRpcError): " << ex.getMessage());
+            }
+            // 3. 【终极兜底】：捕获所有其他未知类型的异常，坚决不让管家死！
+            catch(...) {
+                ROS_ERROR_STREAM("\n[" << uuv_ns_.c_str() << "] Error (Unknown Exception)！");
             }
         }
     }

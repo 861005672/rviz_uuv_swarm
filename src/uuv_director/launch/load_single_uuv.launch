@@ -9,7 +9,11 @@
     </node>
   </group>
   <group ns="uuv_0">
-    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_0 dynamics_type:=fossen actuator_type:=lauv controller_type:=pid guidance_type:=spacial_flocking planner_type:=simple decision_type:=vanguard"/>
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' 
+    namespace:=uuv_0 
+    dynamics_type:=fossen actuator_type:=lauv controller_type:=pid 
+    guidance_type:=spacial_flocking planner_type:=simple decision_type:=vanguard"/>
+    
     <param name="init_x" value="0.497"/>
     <param name="init_y" value="-3.274"/>
     <param name="init_z" value="3.038"/>

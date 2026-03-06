@@ -1,0 +1,7 @@
+obstacles:
+- name: obs_sphere_0
+  ref_coord: NED
+  type: sphere
+  position: [300.0, 0.0, 0.0]
+  scale: [100.0, 100.0, 100.0]
+  color: [0.5, 0.5, 0.5, 1.0]

@@ -44,6 +44,11 @@
            base_class_type="uuv_interface::DecisionBase">
         <description>Vanguard Decision: Always assigns the first target from the global mission list to the UUV.</description>
     </class>
+    <class name="uuv_control/CBAADecision" 
+           type="uuv_control::CBAADecision" 
+           base_class_type="uuv_interface::DecisionBase">
+         <description>3D Distributed Consensus-Based Auction Algorithm for Decision Layer</description>
+    </class>
 
 </library>
 
