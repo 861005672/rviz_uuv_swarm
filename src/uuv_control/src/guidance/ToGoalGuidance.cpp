@@ -46,7 +46,10 @@ public:
     }
 
     // 核心黑盒运算，无任何内部状态缓存，只依赖传入参数
-    uuv_interface::Cmd3D customUpdate(const uuv_interface::TargetPoint3D& target, const uuv_interface::State3D& state, double dt) override {
+    uuv_interface::Cmd3D customUpdate(const uuv_interface::TargetPoint3D& target, 
+                                      const uuv_interface::State3D& state, 
+                                      const std::vector<uuv_interface::Neighbor3D>& neighbors,
+                                      double dt) override {
         uuv_interface::Cmd3D out;
 
         // 使用 target 和传入的 state 进行纯数学计算

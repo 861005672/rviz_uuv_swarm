@@ -20,3 +20,6 @@ float64 p      # Roll rate
 float64 q      # Pitch rate
 float64 r      # Yaw rate
 
+int32 target_id
+string data_json
+

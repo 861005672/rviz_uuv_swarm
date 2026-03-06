@@ -1,7 +1,8 @@
 <launch>
+    <arg name="env_name" default="none" />
 
     <node pkg="uuv_environment" type="env_spawner.py" name="env_spawner_node" output="screen">
-        <rosparam command="load" file="$(find uuv_environment)/env/oneSphere.yaml" />
+        <rosparam command="load" file="$(find uuv_environment)/env/$(arg env_name).yaml" />
     </node>
 
     <node pkg="joy" type="joy_node" name="joy_node" output="screen" />

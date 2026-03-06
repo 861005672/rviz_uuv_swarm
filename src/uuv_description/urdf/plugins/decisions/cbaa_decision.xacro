@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="insert_cbaa_decision" 
+                 params="update_rate:=100.0 publish_debug:=true publish_debug_rate:=5.0
+                 max_bundle_size:=1 virtual_id_multiplier:=100 gossip_size:=5 map_range:=2000" >
+        <plugin name="cbaa_decision" layer="decision" type="uuv_control/CBAADecision">
+            <update_rate>${update_rate}</update_rate>
+            <publish_debug>${publish_debug}</publish_debug>
+            <publish_debug_rate>${publish_debug_rate}</publish_debug_rate>
+            <max_bundle_size>${max_bundle_size}</max_bundle_size>
+            <virtual_id_multiplier>${virtual_id_multiplier}</virtual_id_multiplier>
+            <gossip_size>${gossip_size}</gossip_size>
+            <map_range>${map_range}</map_range>
+        </plugin>
+    </xacro:macro>
+
+</robot>

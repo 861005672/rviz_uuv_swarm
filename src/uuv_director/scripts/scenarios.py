@@ -54,44 +54,10 @@ class SwarmNavScenario(ScenarioBase):
 
         rospy.loginfo(f"[Scenario] SwarmNavScenario Initialized with {len(self.original_targets)} targets.")
 
-    def publish_target_markers(self):
-        """发布固定数量的目标点 Marker 用于 Rviz 显示"""
-        marker_array = MarkerArray()
-        reached_count = len(self.original_targets) - len(self.active_targets)
-        for i, target in enumerate(self.original_targets):
-            marker = Marker()
-            marker.header.frame_id = "map"  # 全局地图坐标系
-            marker.header.stamp = rospy.Time.now()
-            marker.ns = "scenario_targets"
-            marker.id = i
-            marker.type = Marker.SPHERE
-            marker.action = Marker.ADD
-            
-            # NED 转 ENU (供Rviz显示): x=E, y=N, z=-D
-            marker.pose.position.x = target.e
-            marker.pose.position.y = target.n
-            marker.pose.position.z = -target.d
-            marker.pose.orientation.w = 1.0
-            
-            # 设置球体大小和颜色
-            marker.scale.x = 5.0
-            marker.scale.y = 5.0
-            marker.scale.z = 5.0
-            if i < reached_count:
-                # 已到达的目标点变绿色
-                marker.color = ColorRGBA(r=0.0, g=1.0, b=0.0, a=0.6) 
-            else:
-                # 未到达的目标点保持红色
-                marker.color = ColorRGBA(r=1.0, g=0.0, b=0.0, a=0.5)
-            marker.frame_locked = True
-
-            marker_array.markers.append(marker)
-            
-        self.marker_pub.publish(marker_array)
-
     def update(self, current_time, manager):
         # 确保标记点被发布
-        self.publish_target_markers()
+        reached_count = len(self.original_targets) - len(self.active_targets)
+        self.director.publish_target_markers(self.original_targets, reached_count=reached_count)
 
         # Phase 0: 等待至 20 秒
         if self.phase == 0 and current_time > 20.0:
@@ -142,6 +108,71 @@ class SwarmNavScenario(ScenarioBase):
                     self.director.publish_missions([self.stop_target])
                     self.phase = 2  # 进入结束阶段
 
+class CBAATestScenario(ScenarioBase):
+    def __init__(self, director):
+        super().__init__(director)
+        self.phase = 0
+        self.marker_pub = rospy.Publisher('/scenario/target_markers', MarkerArray, queue_size=1, latch=True)
+        self.current_targets = []
+
+        self.uuv_count = rospy.get_param("~uuv_count", 30)
+        self.phase1_target = rospy.get_param("~phase1_target", [300.0, 0.0, 20.0])
+        
+        default_p2_targets = [[800.0, 400.0, 10.0], [800.0, -400.0, 30.0], [1000.0, 0.0, 50.0]]
+        default_p2_reqs = [10, 10, 10]
+        self.phase2_targets = rospy.get_param("~phase2_targets", default_p2_targets)
+        self.phase2_reqs = rospy.get_param("~phase2_reqs", default_p2_reqs)
+
+        rospy.loginfo("[Scenario] CBAATestScenario Initialized. Waiting for 10s to start Phase 1 (Aggregation).")
+
+    def update(self, current_time, manager):
+        if self.uuv_count == 0:
+            return
+
+        # Phase 0: 等待至 15 秒，下发聚合任务
+        if self.phase == 0 and current_time > 15.0:
+            rospy.loginfo(f"[Scenario] Phase 1: 发布单目标点，要求所有 {self.uuv_count} 架 UUV 聚集...")
+            t1 = TargetPoint3D()
+            t1.id = 1
+            t1.n = self.phase1_target[0]
+            t1.e = self.phase1_target[1]
+            t1.d = self.phase1_target[2]
+            t1.required_uuvs = self.uuv_count
+            
+            self.current_targets = [t1]
+            self.director.publish_missions(self.current_targets)
+            
+            # 使用青色，大球，清空旧标记
+            self.director.publish_target_markers(self.current_targets, custom_color=(0.0, 1.0, 1.0), clear_old=True, scale=10.0)
+            self.phase = 1
+
+        # Phase 1: 等待至 60 秒，下发分群任务
+        elif self.phase == 1 and current_time > 60.0:
+            rospy.loginfo(f"[Scenario] Phase 2: 发布 {len(self.phase2_targets)} 个目标点，触发 CBAA 自动分群...")
+            
+            self.current_targets = []
+            target_id_counter = 2 # 基础物理 ID 依次递增
+            
+            for i in range(len(self.phase2_targets)):
+                pt = self.phase2_targets[i]
+                req = self.phase2_reqs[i] if i < len(self.phase2_reqs) else 1
+                
+                t = TargetPoint3D()
+                t.id = target_id_counter
+                t.n = pt[0]
+                t.e = pt[1]
+                t.d = pt[2]
+                t.required_uuvs = req
+                
+                self.current_targets.append(t)
+                target_id_counter += 1
+
+            self.director.publish_missions(self.current_targets)
+            
+            # 使用橙色，大球，清空第一阶段的标记
+            self.director.publish_target_markers(self.current_targets, custom_color=(1.0, 0.5, 0.0), clear_old=True, scale=10.0)
+            self.phase = 2
+
 
 
 class ScenarioFactory:
@@ -149,6 +180,8 @@ class ScenarioFactory:
     def create(name, director):
         if name == "swarm_nav":
             return SwarmNavScenario(director)
+        elif name == "cbaa_test":                 # 【新增】：注册测试剧本
+            return CBAATestScenario(director)
         else:
             rospy.logwarn(f"Unknown scenario name: {name}, using default.")
             return ScenarioBase(director)

@@ -17,7 +17,6 @@ protected:
     // 层级拦截机制（核心）
     ros::ServiceServer override_srv_;
     ros::Subscriber sonar_sub_;
-    ros::Subscriber neighbor_sub_;
     uuv_interface::Cmd3D latest_output_cmd_;
     sensor_msgs::LaserScan latest_sonar_;
     uuv_interface::Neighborhood3D latest_neighbors_;
@@ -54,11 +53,13 @@ protected:
     // 注册传感器订阅的公共方法，供 ControlPluginBase 统一调用或在初始化时调用
     void registerSensorSubscribers() {
         sonar_sub_ = nh_.subscribe("sonar_scan", 1, &GuidanceBase::sonarCallback, this);
-        neighbor_sub_ = nh_.subscribe("neighborhood", 1, &GuidanceBase::neighborCallback, this);
         UUV_INFO << "[GuidanceBase] Sensor Subscriptions (Sonar & Neighborhood) Registered.";
     }
 
-    virtual uuv_interface::Cmd3D customUpdate(const uuv_interface::TargetPoint3D& target, const uuv_interface::State3D& state, double dt) = 0;
+    virtual uuv_interface::Cmd3D customUpdate(const uuv_interface::TargetPoint3D& target, 
+                                              const uuv_interface::State3D& state, 
+                                              const std::vector<uuv_interface::Neighbor3D>& neighbors,
+                                              double dt) = 0;
 
 public:
 
@@ -69,7 +70,9 @@ public:
     virtual ~GuidanceBase() {}
 
     // 统一的纯虚 update 函数
-    uuv_interface::Cmd3D update(const uuv_interface::TargetPoint3D& target, const uuv_interface::State3D& state) {
+    uuv_interface::Cmd3D update(const uuv_interface::TargetPoint3D& target, 
+                                const uuv_interface::State3D& state,
+                                const std::vector<uuv_interface::Neighbor3D>& neighbors) {
         ros::Time now = ros::Time::now();
 
         // 1. 调试发布拦截
@@ -99,7 +102,7 @@ public:
         const uuv_interface::TargetPoint3D& actual_target = is_overridden_ ? override_input_ : target;
 
         // 4. 执行纯粹的子类几何追踪算法
-        latest_output_cmd_ = customUpdate(actual_target, state, dt_update);
+        latest_output_cmd_ = customUpdate(actual_target, state, neighbors, dt_update);
         return latest_output_cmd_;
     }
 

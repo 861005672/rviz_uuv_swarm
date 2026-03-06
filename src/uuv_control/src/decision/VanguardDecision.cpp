@@ -10,7 +10,11 @@ protected:
         UUV_INFO << "[VanguardDecision] VanguardDecision Plugin Loaded. Awaiting vanguard missions...";
     }
 
-    uuv_interface::TargetPoint3D customUpdate(const uuv_interface::State3D& state, const uuv_interface::TargetPoint3DArray& mission_list, double dt) override {
+    uuv_interface::TargetPoint3D customUpdate(const uuv_interface::State3D& state, 
+                                 const uuv_interface::TargetPoint3DArray& mission_list, 
+                                 const std::vector<uuv_interface::Neighbor3D>& neighbors,
+                                 std::string& data_json, 
+                                 double dt) override {
         uuv_interface::TargetPoint3D target;
         
         // 【先锋逻辑】：永远只看任务列表里的第一个任务

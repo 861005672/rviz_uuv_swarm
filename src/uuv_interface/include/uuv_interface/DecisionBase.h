@@ -5,6 +5,7 @@
 #include <uuv_interface/TargetPoint3D.h>
 #include <uuv_interface/TargetPoint3DArray.h>
 #include <uuv_interface/State3D.h>
+#include <uuv_interface/Neighbor3D.h>
 #include <uuv_interface/utils/XmlParamReader.h>
 #include <ros/ros.h>
 
@@ -40,7 +41,7 @@ public:
     }
 
     // 主更新接口，带有严格的频率控制机制
-    uuv_interface::TargetPoint3D update(const uuv_interface::State3D& state) {
+    uuv_interface::TargetPoint3D update(const uuv_interface::State3D& state, const std::vector<uuv_interface::Neighbor3D>& neighbors, std::string& data_json) {
         ros::Time now = ros::Time::now();
         // 1. 调试发布拦截
         if (last_publish_debug_time_.isZero()) { last_publish_debug_time_ = now; }
@@ -58,7 +59,7 @@ public:
         if (dt_update <= 0.0 || dt_update < (1.0/this->update_rate_)*0.95) return latest_target_; 
         
         last_update_time_ = now;
-        latest_target_ = customUpdate(state, latest_mission_targets_, dt_update);
+        latest_target_ = customUpdate(state, latest_mission_targets_, neighbors, data_json, dt_update);
         
         // 没到时间就直接返回上一次缓存的决策目标
         return latest_target_;
@@ -71,7 +72,10 @@ public:
 
 protected:
     // 自定义算法逻辑：纯粹的输入输出，无需操心频率和ROS通信
-    virtual uuv_interface::TargetPoint3D customUpdate(const uuv_interface::State3D& state, const uuv_interface::TargetPoint3DArray& mission_list, double dt) = 0;
+    virtual uuv_interface::TargetPoint3D customUpdate(const uuv_interface::State3D& state, 
+        const uuv_interface::TargetPoint3DArray& mission_list,
+        const std::vector<uuv_interface::Neighbor3D>& neighbors, 
+        std::string& data_json, double dt) = 0;
 
 
 };

@@ -3,6 +3,8 @@
 
 import rospy
 from uuv_interface.msg import TargetPoint3D, TargetPoint3DArray
+from visualization_msgs.msg import MarkerArray, Marker
+from std_msgs.msg import ColorRGBA
 
 # 引入我们刚刚改造好的两个核心组件
 from uuv_manager import UUVManager
@@ -20,6 +22,7 @@ class DirectorNode:
         self.start_ros_time = rospy.get_time()
 
         self.mission_pub = rospy.Publisher('/swarm/mission_targets', TargetPoint3DArray, queue_size=1, latch=True)
+        self.marker_pub = rospy.Publisher('/scenario/target_markers', MarkerArray, queue_size=1, latch=True)
 
         # 3. 初始化任务剧本
         scenario_name = rospy.get_param("~scenario", "swarm_nav")
@@ -38,6 +41,45 @@ class DirectorNode:
         msg.targets = target_list
         self.mission_pub.publish(msg)
         rospy.loginfo(f"[Director] Broadcasted {len(target_list)} mission(s) to the entire swarm.")
+
+    def publish_target_markers(self, targets, reached_count=0, custom_color=None, clear_old=False, scale=5.0):
+        marker_array = MarkerArray()
+        
+        if clear_old:
+            delete_marker = Marker()
+            delete_marker.action = Marker.DELETEALL
+            marker_array.markers.append(delete_marker)
+
+        for i, target in enumerate(targets):
+            marker = Marker()
+            marker.header.frame_id = "map"
+            marker.header.stamp = rospy.Time.now()
+            marker.ns = "scenario_targets"
+            marker.id = target.id  # 直接使用物理目标的 ID
+            marker.type = Marker.SPHERE
+            marker.action = Marker.ADD
+            
+            # NED 转 ENU (供Rviz显示): x=E, y=N, z=-D
+            marker.pose.position.x = target.e
+            marker.pose.position.y = target.n
+            marker.pose.position.z = -target.d
+            marker.pose.orientation.w = 1.0
+            
+            marker.scale.x = scale
+            marker.scale.y = scale
+            marker.scale.z = scale
+            
+            if custom_color:
+                marker.color = ColorRGBA(r=custom_color[0], g=custom_color[1], b=custom_color[2], a=0.7)
+            else:
+                if i < reached_count:
+                    marker.color = ColorRGBA(r=0.0, g=1.0, b=0.0, a=0.6) # 绿色已到达
+                else:
+                    marker.color = ColorRGBA(r=1.0, g=0.0, b=0.0, a=0.5) # 红色未到达
+            marker.frame_locked = True
+            marker_array.markers.append(marker)
+            
+        self.marker_pub.publish(marker_array)
 
     def run(self):
         """

@@ -62,6 +62,10 @@ private:
     ros::Publisher pub_trajectory_;
     std::unique_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
 
+    // 订阅
+    ros::Subscriber neighbor_sub_;
+    std::vector<uuv_interface::Neighbor3D> latest_neighbors_;
+
     // 命名空间与坐标系参数
     std::string uuv_ns_;
     std::string base_frame_;
@@ -170,6 +174,13 @@ public:
         init_state.p = 0.0; init_state.q = 0.0; init_state.r = 0.0;
         dynamics_->setState(init_state);
         current_state_ = dynamics_->getState(); // 同步状态
+
+        // 订阅邻居数据
+        neighbor_sub_ = gnh_.subscribe("neighborhood", 1, &UUVControlNodelet::neighborCallback, this);
+    }
+
+    void neighborCallback(const uuv_interface::Neighborhood3D::ConstPtr& msg) {
+        latest_neighbors_ = msg->neighbors;
     }
 
     void loadPluginsFromXML() {
@@ -276,12 +287,13 @@ public:
             last_visual_time_ = current_time;
         }
 
+        std::string data_json;
         // === 1. 决策层 === 
-        uuv_interface::TargetPoint3D final_target = decision_->update(current_state_);
+        uuv_interface::TargetPoint3D final_target = decision_->update(current_state_, latest_neighbors_, data_json);
         // === 2. 规划层 ===
         uuv_interface::TargetPoint3D path_target = planner_->update(final_target, current_state_);
         // === 2. 制导层 ===
-        uuv_interface::Cmd3D cmd_out = guidance_->update(path_target, current_state_);
+        uuv_interface::Cmd3D cmd_out = guidance_->update(path_target, current_state_, latest_neighbors_);
         // === 3. 控制层 ===
         Eigen::VectorXd tau_cmd = controller_->update(cmd_out, current_state_);
         // === 4. 执行器层 ===
@@ -298,6 +310,9 @@ public:
             publishTrajectory(current_state_, current_time);
             last_visual_time_ = current_time;
         }
+        // === 9. 更新当前状态中的目标信息和data_json
+        current_state_.target_id = final_target.id;
+        current_state_.data_json = data_json;
     }
 
     void updateSensor() {

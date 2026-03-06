@@ -101,13 +101,15 @@ private:
     // =========================================================
     // 子函数 2：算 3D 集群邻居内力 (Flocking Force)
     // =========================================================
-    Eigen::Vector3d computeFlockingForce(const uuv_interface::State3D& state, double dt) {
+    Eigen::Vector3d computeFlockingForce(const uuv_interface::TargetPoint3D& target, 
+                                         const uuv_interface::State3D& state,
+                                         const std::vector<uuv_interface::Neighbor3D>& neighbors, 
+                                         double dt) {
         Eigen::Vector3d self_pos(state.x, state.y, state.z);
         double total_weight = 0.0;
         Eigen::Vector3d total_force = Eigen::Vector3d::Zero();
 
         // 若无邻居，则直接返回平滑后的力，这个力将逐渐趋近于0
-        const auto& neighbors = this->latest_neighbors_.neighbors; 
         if (neighbors.empty()) {
             if (!std::isnan(latest_f_flock_.x())) {
                 total_force = (1.0 - force_lp_gain_) * latest_f_flock_;
@@ -142,9 +144,9 @@ private:
             }
 
             // 异构编队逻辑：非同一目标的队友，只排斥，不产生吸引力
-            // if (nb.state.target_id != current_target_id && f_val < 0) {
-            //     f_val = 0.0;
-            // }
+            if (nb.state.target_id != target.id && f_val < 0) {
+                f_val = 0.0;
+            }
 
             Eigen::Vector3d f_vec = f_val * vec_diff;
 
@@ -522,7 +524,10 @@ public:
         debug_marker_pub_.publish(msg);
     }
 
-    uuv_interface::Cmd3D customUpdate(const uuv_interface::TargetPoint3D& target, const uuv_interface::State3D& state, double dt) override {
+    uuv_interface::Cmd3D customUpdate(const uuv_interface::TargetPoint3D& target, 
+                                      const uuv_interface::State3D& state, 
+                                      const std::vector<uuv_interface::Neighbor3D>& neighbors, 
+                                      double dt) override {
         latest_state_ = state;
         latest_self_pos_ = Eigen::Vector3d(state.x, state.y, state.z);
         // 0. 若目标（target.id < 0） 则停止
@@ -536,7 +541,7 @@ public:
 
         // 1. 计算导航力
         Eigen::Vector3d f_nav = computeNavForce(target, state, dt);
-        Eigen::Vector3d f_flocking = computeFlockingForce(state, dt);
+        Eigen::Vector3d f_flocking = computeFlockingForce(target, state, neighbors, dt);
         // Eigen::Vector3d f_flocking      = Eigen::Vector3d::Zero(); // TODO: 预留给未来
         // Eigen::Vector3d f_apf      = Eigen::Vector3d::Zero(); // TODO: 预留给未来
         Eigen::Vector3d f_apf = computeObstacleForce(state);
