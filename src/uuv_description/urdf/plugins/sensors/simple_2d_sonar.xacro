@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:macro name="insert_simple_2d_sonar" 
     params="name:='sonar_front' update_rate:=10.0 beams:=30 fov:=150.0 max_range:=200.0
-            noise_std_base:=0.5 noise_vel_factor:=0.1 miss_prob:=0.05 false_prob:=0.02">
+            noise_std_base:=0.5 noise_vel_factor:=0.1 noise_dist_factor:=0.02 miss_prob:=0.05 false_prob:=0.02">
         <plugin layer="sensor" name="${name}" type="uuv_sensor/Simple2DSonar">
             <update_rate>${update_rate}</update_rate>
             <beams>${beams}</beams>
@@ -10,6 +10,7 @@
             <max_range>${max_range}</max_range>
             <noise_std_base>${noise_std_base}</noise_std_base>
             <noise_vel_factor>${noise_vel_factor}</noise_vel_factor>
+            <noise_dist_factor>${noise_dist_factor}</noise_dist_factor>
             <miss_prob>${miss_prob}</miss_prob>
             <false_prob>${false_prob}</false_prob>
         </plugin>

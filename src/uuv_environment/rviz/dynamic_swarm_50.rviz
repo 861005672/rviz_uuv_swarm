@@ -6,9 +6,12 @@ Panels:
       Expanded:
         - /Global Options1
         - /TF1/Frames1
+        - /Swarm_Sonars1
+        - /Swarm_Sonars1/uuv_01
+        - /Swarm_Sonars1/uuv_01/SonarScan1
         - /TargetList1
       Splitter Ratio: 0.5
-    Tree Height: 511
+    Tree Height: 493
   - Class: rviz/Views
     Expanded:
       - /Current View1
@@ -44,7 +47,7 @@ Visualization Manager:
       Marker Topic: /env_markers
       Name: Environment Obstacles (MarkerArray)
       Namespaces:
-        {}
+        environment_obstacles: true
       Queue Size: 100
       Value: true
     - Class: rviz/TF
@@ -58,8 +61,6 @@ Visualization Manager:
           Value: false
         ned:
           Value: true
-        spectator_link:
-          Value: false
         uuv_0/base_link:
           Value: false
         uuv_0/fin_0:
@@ -71,354 +72,6 @@ Visualization Manager:
         uuv_0/fin_3:
           Value: false
         uuv_0/thruster_0:
-          Value: false
-        uuv_1/base_link:
-          Value: false
-        uuv_1/fin_0:
-          Value: false
-        uuv_1/fin_1:
-          Value: false
-        uuv_1/fin_2:
-          Value: false
-        uuv_1/fin_3:
-          Value: false
-        uuv_1/thruster_0:
-          Value: false
-        uuv_10/base_link:
-          Value: false
-        uuv_10/fin_0:
-          Value: false
-        uuv_10/fin_1:
-          Value: false
-        uuv_10/fin_2:
-          Value: false
-        uuv_10/fin_3:
-          Value: false
-        uuv_10/thruster_0:
-          Value: false
-        uuv_11/base_link:
-          Value: false
-        uuv_11/fin_0:
-          Value: false
-        uuv_11/fin_1:
-          Value: false
-        uuv_11/fin_2:
-          Value: false
-        uuv_11/fin_3:
-          Value: false
-        uuv_11/thruster_0:
-          Value: false
-        uuv_12/base_link:
-          Value: false
-        uuv_12/fin_0:
-          Value: false
-        uuv_12/fin_1:
-          Value: false
-        uuv_12/fin_2:
-          Value: false
-        uuv_12/fin_3:
-          Value: false
-        uuv_12/thruster_0:
-          Value: false
-        uuv_13/base_link:
-          Value: false
-        uuv_13/fin_0:
-          Value: false
-        uuv_13/fin_1:
-          Value: false
-        uuv_13/fin_2:
-          Value: false
-        uuv_13/fin_3:
-          Value: false
-        uuv_13/thruster_0:
-          Value: false
-        uuv_14/base_link:
-          Value: false
-        uuv_14/fin_0:
-          Value: false
-        uuv_14/fin_1:
-          Value: false
-        uuv_14/fin_2:
-          Value: false
-        uuv_14/fin_3:
-          Value: false
-        uuv_14/thruster_0:
-          Value: false
-        uuv_15/base_link:
-          Value: false
-        uuv_15/fin_0:
-          Value: false
-        uuv_15/fin_1:
-          Value: false
-        uuv_15/fin_2:
-          Value: false
-        uuv_15/fin_3:
-          Value: false
-        uuv_15/thruster_0:
-          Value: false
-        uuv_16/base_link:
-          Value: false
-        uuv_16/fin_0:
-          Value: false
-        uuv_16/fin_1:
-          Value: false
-        uuv_16/fin_2:
-          Value: false
-        uuv_16/fin_3:
-          Value: false
-        uuv_16/thruster_0:
-          Value: false
-        uuv_17/base_link:
-          Value: false
-        uuv_17/fin_0:
-          Value: false
-        uuv_17/fin_1:
-          Value: false
-        uuv_17/fin_2:
-          Value: false
-        uuv_17/fin_3:
-          Value: false
-        uuv_17/thruster_0:
-          Value: false
-        uuv_18/base_link:
-          Value: false
-        uuv_18/fin_0:
-          Value: false
-        uuv_18/fin_1:
-          Value: false
-        uuv_18/fin_2:
-          Value: false
-        uuv_18/fin_3:
-          Value: false
-        uuv_18/thruster_0:
-          Value: false
-        uuv_19/base_link:
-          Value: false
-        uuv_19/fin_0:
-          Value: false
-        uuv_19/fin_1:
-          Value: false
-        uuv_19/fin_2:
-          Value: false
-        uuv_19/fin_3:
-          Value: false
-        uuv_19/thruster_0:
-          Value: false
-        uuv_2/base_link:
-          Value: false
-        uuv_2/fin_0:
-          Value: false
-        uuv_2/fin_1:
-          Value: false
-        uuv_2/fin_2:
-          Value: false
-        uuv_2/fin_3:
-          Value: false
-        uuv_2/thruster_0:
-          Value: false
-        uuv_20/base_link:
-          Value: false
-        uuv_20/fin_0:
-          Value: false
-        uuv_20/fin_1:
-          Value: false
-        uuv_20/fin_2:
-          Value: false
-        uuv_20/fin_3:
-          Value: false
-        uuv_20/thruster_0:
-          Value: false
-        uuv_21/base_link:
-          Value: false
-        uuv_21/fin_0:
-          Value: false
-        uuv_21/fin_1:
-          Value: false
-        uuv_21/fin_2:
-          Value: false
-        uuv_21/fin_3:
-          Value: false
-        uuv_21/thruster_0:
-          Value: false
-        uuv_22/base_link:
-          Value: false
-        uuv_22/fin_0:
-          Value: false
-        uuv_22/fin_1:
-          Value: false
-        uuv_22/fin_2:
-          Value: false
-        uuv_22/fin_3:
-          Value: false
-        uuv_22/thruster_0:
-          Value: false
-        uuv_23/base_link:
-          Value: false
-        uuv_23/fin_0:
-          Value: false
-        uuv_23/fin_1:
-          Value: false
-        uuv_23/fin_2:
-          Value: false
-        uuv_23/fin_3:
-          Value: false
-        uuv_23/thruster_0:
-          Value: false
-        uuv_24/base_link:
-          Value: false
-        uuv_24/fin_0:
-          Value: false
-        uuv_24/fin_1:
-          Value: false
-        uuv_24/fin_2:
-          Value: false
-        uuv_24/fin_3:
-          Value: false
-        uuv_24/thruster_0:
-          Value: false
-        uuv_25/base_link:
-          Value: false
-        uuv_25/fin_0:
-          Value: false
-        uuv_25/fin_1:
-          Value: false
-        uuv_25/fin_2:
-          Value: false
-        uuv_25/fin_3:
-          Value: false
-        uuv_25/thruster_0:
-          Value: false
-        uuv_26/base_link:
-          Value: false
-        uuv_26/fin_0:
-          Value: false
-        uuv_26/fin_1:
-          Value: false
-        uuv_26/fin_2:
-          Value: false
-        uuv_26/fin_3:
-          Value: false
-        uuv_26/thruster_0:
-          Value: false
-        uuv_27/base_link:
-          Value: false
-        uuv_27/fin_0:
-          Value: false
-        uuv_27/fin_1:
-          Value: false
-        uuv_27/fin_2:
-          Value: false
-        uuv_27/fin_3:
-          Value: false
-        uuv_27/thruster_0:
-          Value: false
-        uuv_28/base_link:
-          Value: false
-        uuv_28/fin_0:
-          Value: false
-        uuv_28/fin_1:
-          Value: false
-        uuv_28/fin_2:
-          Value: false
-        uuv_28/fin_3:
-          Value: false
-        uuv_28/thruster_0:
-          Value: false
-        uuv_29/base_link:
-          Value: false
-        uuv_29/fin_0:
-          Value: false
-        uuv_29/fin_1:
-          Value: false
-        uuv_29/fin_2:
-          Value: false
-        uuv_29/fin_3:
-          Value: false
-        uuv_29/thruster_0:
-          Value: false
-        uuv_3/base_link:
-          Value: false
-        uuv_3/fin_0:
-          Value: false
-        uuv_3/fin_1:
-          Value: false
-        uuv_3/fin_2:
-          Value: false
-        uuv_3/fin_3:
-          Value: false
-        uuv_3/thruster_0:
-          Value: false
-        uuv_4/base_link:
-          Value: false
-        uuv_4/fin_0:
-          Value: false
-        uuv_4/fin_1:
-          Value: false
-        uuv_4/fin_2:
-          Value: false
-        uuv_4/fin_3:
-          Value: false
-        uuv_4/thruster_0:
-          Value: false
-        uuv_5/base_link:
-          Value: false
-        uuv_5/fin_0:
-          Value: false
-        uuv_5/fin_1:
-          Value: false
-        uuv_5/fin_2:
-          Value: false
-        uuv_5/fin_3:
-          Value: false
-        uuv_5/thruster_0:
-          Value: false
-        uuv_6/base_link:
-          Value: false
-        uuv_6/fin_0:
-          Value: false
-        uuv_6/fin_1:
-          Value: false
-        uuv_6/fin_2:
-          Value: false
-        uuv_6/fin_3:
-          Value: false
-        uuv_6/thruster_0:
-          Value: false
-        uuv_7/base_link:
-          Value: false
-        uuv_7/fin_0:
-          Value: false
-        uuv_7/fin_1:
-          Value: false
-        uuv_7/fin_2:
-          Value: false
-        uuv_7/fin_3:
-          Value: false
-        uuv_7/thruster_0:
-          Value: false
-        uuv_8/base_link:
-          Value: false
-        uuv_8/fin_0:
-          Value: false
-        uuv_8/fin_1:
-          Value: false
-        uuv_8/fin_2:
-          Value: false
-        uuv_8/fin_3:
-          Value: false
-        uuv_8/thruster_0:
-          Value: false
-        uuv_9/base_link:
-          Value: false
-        uuv_9/fin_0:
-          Value: false
-        uuv_9/fin_1:
-          Value: false
-        uuv_9/fin_2:
-          Value: false
-        uuv_9/fin_3:
-          Value: false
-        uuv_9/thruster_0:
           Value: false
       Marker Alpha: 1
       Marker Scale: 30
@@ -440,327 +93,6 @@ Visualization Manager:
                 {}
               uuv_0/thruster_0:
                 {}
-            uuv_1/base_link:
-              uuv_1/fin_0:
-                {}
-              uuv_1/fin_1:
-                {}
-              uuv_1/fin_2:
-                {}
-              uuv_1/fin_3:
-                {}
-              uuv_1/thruster_0:
-                {}
-            uuv_10/base_link:
-              uuv_10/fin_0:
-                {}
-              uuv_10/fin_1:
-                {}
-              uuv_10/fin_2:
-                {}
-              uuv_10/fin_3:
-                {}
-              uuv_10/thruster_0:
-                {}
-            uuv_11/base_link:
-              uuv_11/fin_0:
-                {}
-              uuv_11/fin_1:
-                {}
-              uuv_11/fin_2:
-                {}
-              uuv_11/fin_3:
-                {}
-              uuv_11/thruster_0:
-                {}
-            uuv_12/base_link:
-              uuv_12/fin_0:
-                {}
-              uuv_12/fin_1:
-                {}
-              uuv_12/fin_2:
-                {}
-              uuv_12/fin_3:
-                {}
-              uuv_12/thruster_0:
-                {}
-            uuv_13/base_link:
-              uuv_13/fin_0:
-                {}
-              uuv_13/fin_1:
-                {}
-              uuv_13/fin_2:
-                {}
-              uuv_13/fin_3:
-                {}
-              uuv_13/thruster_0:
-                {}
-            uuv_14/base_link:
-              uuv_14/fin_0:
-                {}
-              uuv_14/fin_1:
-                {}
-              uuv_14/fin_2:
-                {}
-              uuv_14/fin_3:
-                {}
-              uuv_14/thruster_0:
-                {}
-            uuv_15/base_link:
-              uuv_15/fin_0:
-                {}
-              uuv_15/fin_1:
-                {}
-              uuv_15/fin_2:
-                {}
-              uuv_15/fin_3:
-                {}
-              uuv_15/thruster_0:
-                {}
-            uuv_16/base_link:
-              uuv_16/fin_0:
-                {}
-              uuv_16/fin_1:
-                {}
-              uuv_16/fin_2:
-                {}
-              uuv_16/fin_3:
-                {}
-              uuv_16/thruster_0:
-                {}
-            uuv_17/base_link:
-              uuv_17/fin_0:
-                {}
-              uuv_17/fin_1:
-                {}
-              uuv_17/fin_2:
-                {}
-              uuv_17/fin_3:
-                {}
-              uuv_17/thruster_0:
-                {}
-            uuv_18/base_link:
-              uuv_18/fin_0:
-                {}
-              uuv_18/fin_1:
-                {}
-              uuv_18/fin_2:
-                {}
-              uuv_18/fin_3:
-                {}
-              uuv_18/thruster_0:
-                {}
-            uuv_19/base_link:
-              uuv_19/fin_0:
-                {}
-              uuv_19/fin_1:
-                {}
-              uuv_19/fin_2:
-                {}
-              uuv_19/fin_3:
-                {}
-              uuv_19/thruster_0:
-                {}
-            uuv_2/base_link:
-              uuv_2/fin_0:
-                {}
-              uuv_2/fin_1:
-                {}
-              uuv_2/fin_2:
-                {}
-              uuv_2/fin_3:
-                {}
-              uuv_2/thruster_0:
-                {}
-            uuv_20/base_link:
-              uuv_20/fin_0:
-                {}
-              uuv_20/fin_1:
-                {}
-              uuv_20/fin_2:
-                {}
-              uuv_20/fin_3:
-                {}
-              uuv_20/thruster_0:
-                {}
-            uuv_21/base_link:
-              uuv_21/fin_0:
-                {}
-              uuv_21/fin_1:
-                {}
-              uuv_21/fin_2:
-                {}
-              uuv_21/fin_3:
-                {}
-              uuv_21/thruster_0:
-                {}
-            uuv_22/base_link:
-              uuv_22/fin_0:
-                {}
-              uuv_22/fin_1:
-                {}
-              uuv_22/fin_2:
-                {}
-              uuv_22/fin_3:
-                {}
-              uuv_22/thruster_0:
-                {}
-            uuv_23/base_link:
-              uuv_23/fin_0:
-                {}
-              uuv_23/fin_1:
-                {}
-              uuv_23/fin_2:
-                {}
-              uuv_23/fin_3:
-                {}
-              uuv_23/thruster_0:
-                {}
-            uuv_24/base_link:
-              uuv_24/fin_0:
-                {}
-              uuv_24/fin_1:
-                {}
-              uuv_24/fin_2:
-                {}
-              uuv_24/fin_3:
-                {}
-              uuv_24/thruster_0:
-                {}
-            uuv_25/base_link:
-              uuv_25/fin_0:
-                {}
-              uuv_25/fin_1:
-                {}
-              uuv_25/fin_2:
-                {}
-              uuv_25/fin_3:
-                {}
-              uuv_25/thruster_0:
-                {}
-            uuv_26/base_link:
-              uuv_26/fin_0:
-                {}
-              uuv_26/fin_1:
-                {}
-              uuv_26/fin_2:
-                {}
-              uuv_26/fin_3:
-                {}
-              uuv_26/thruster_0:
-                {}
-            uuv_27/base_link:
-              uuv_27/fin_0:
-                {}
-              uuv_27/fin_1:
-                {}
-              uuv_27/fin_2:
-                {}
-              uuv_27/fin_3:
-                {}
-              uuv_27/thruster_0:
-                {}
-            uuv_28/base_link:
-              uuv_28/fin_0:
-                {}
-              uuv_28/fin_1:
-                {}
-              uuv_28/fin_2:
-                {}
-              uuv_28/fin_3:
-                {}
-              uuv_28/thruster_0:
-                {}
-            uuv_29/base_link:
-              uuv_29/fin_0:
-                {}
-              uuv_29/fin_1:
-                {}
-              uuv_29/fin_2:
-                {}
-              uuv_29/fin_3:
-                {}
-              uuv_29/thruster_0:
-                {}
-            uuv_3/base_link:
-              uuv_3/fin_0:
-                {}
-              uuv_3/fin_1:
-                {}
-              uuv_3/fin_2:
-                {}
-              uuv_3/fin_3:
-                {}
-              uuv_3/thruster_0:
-                {}
-            uuv_4/base_link:
-              uuv_4/fin_0:
-                {}
-              uuv_4/fin_1:
-                {}
-              uuv_4/fin_2:
-                {}
-              uuv_4/fin_3:
-                {}
-              uuv_4/thruster_0:
-                {}
-            uuv_5/base_link:
-              uuv_5/fin_0:
-                {}
-              uuv_5/fin_1:
-                {}
-              uuv_5/fin_2:
-                {}
-              uuv_5/fin_3:
-                {}
-              uuv_5/thruster_0:
-                {}
-            uuv_6/base_link:
-              uuv_6/fin_0:
-                {}
-              uuv_6/fin_1:
-                {}
-              uuv_6/fin_2:
-                {}
-              uuv_6/fin_3:
-                {}
-              uuv_6/thruster_0:
-                {}
-            uuv_7/base_link:
-              uuv_7/fin_0:
-                {}
-              uuv_7/fin_1:
-                {}
-              uuv_7/fin_2:
-                {}
-              uuv_7/fin_3:
-                {}
-              uuv_7/thruster_0:
-                {}
-            uuv_8/base_link:
-              uuv_8/fin_0:
-                {}
-              uuv_8/fin_1:
-                {}
-              uuv_8/fin_2:
-                {}
-              uuv_8/fin_3:
-                {}
-              uuv_8/thruster_0:
-                {}
-            uuv_9/base_link:
-              uuv_9/fin_0:
-                {}
-              uuv_9/fin_1:
-                {}
-              uuv_9/fin_2:
-                {}
-              uuv_9/fin_3:
-                {}
-              uuv_9/thruster_0:
-                {}
-          spectator_link:
-            {}
       Update Interval: 0
       Value: true
     - Class: rviz/Group
@@ -1431,36 +763,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_1/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_1/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_1/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_1/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_1/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_1/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_1/robot_description
               TF Prefix: ""
@@ -1481,36 +783,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_2/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_2/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_2/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_2/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_2/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_2/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_2/robot_description
               TF Prefix: ""
@@ -1531,36 +803,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_3/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_3/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_3/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_3/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_3/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_3/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_3/robot_description
               TF Prefix: ""
@@ -1581,36 +823,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_4/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_4/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_4/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_4/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_4/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_4/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_4/robot_description
               TF Prefix: ""
@@ -1631,36 +843,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_5/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_5/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_5/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_5/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_5/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_5/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_5/robot_description
               TF Prefix: ""
@@ -1681,36 +863,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_6/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_6/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_6/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_6/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_6/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_6/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_6/robot_description
               TF Prefix: ""
@@ -1731,36 +883,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_7/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_7/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_7/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_7/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_7/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_7/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_7/robot_description
               TF Prefix: ""
@@ -1781,36 +903,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_8/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_8/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_8/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_8/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_8/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_8/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_8/robot_description
               TF Prefix: ""
@@ -1831,36 +923,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_9/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_9/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_9/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_9/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_9/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_9/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_9/robot_description
               TF Prefix: ""
@@ -1881,36 +943,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_10/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_10/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_10/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_10/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_10/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_10/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_10/robot_description
               TF Prefix: ""
@@ -1931,36 +963,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_11/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_11/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_11/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_11/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_11/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_11/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_11/robot_description
               TF Prefix: ""
@@ -1981,36 +983,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_12/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_12/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_12/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_12/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_12/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_12/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_12/robot_description
               TF Prefix: ""
@@ -2031,36 +1003,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_13/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_13/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_13/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_13/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_13/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_13/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_13/robot_description
               TF Prefix: ""
@@ -2081,36 +1023,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_14/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_14/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_14/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_14/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_14/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_14/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_14/robot_description
               TF Prefix: ""
@@ -2131,36 +1043,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_15/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_15/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_15/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_15/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_15/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_15/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_15/robot_description
               TF Prefix: ""
@@ -2181,36 +1063,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_16/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_16/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_16/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_16/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_16/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_16/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_16/robot_description
               TF Prefix: ""
@@ -2231,36 +1083,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_17/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_17/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_17/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_17/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_17/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_17/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_17/robot_description
               TF Prefix: ""
@@ -2281,36 +1103,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_18/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_18/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_18/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_18/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_18/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_18/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_18/robot_description
               TF Prefix: ""
@@ -2331,36 +1123,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_19/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_19/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_19/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_19/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_19/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_19/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_19/robot_description
               TF Prefix: ""
@@ -2381,36 +1143,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_20/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_20/robot_description
               TF Prefix: ""
@@ -2431,36 +1163,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_21/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_21/robot_description
               TF Prefix: ""
@@ -2481,36 +1183,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_22/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_22/robot_description
               TF Prefix: ""
@@ -2531,36 +1203,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_23/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_23/robot_description
               TF Prefix: ""
@@ -2581,36 +1223,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_24/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_24/robot_description
               TF Prefix: ""
@@ -2631,36 +1243,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_25/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_25/robot_description
               TF Prefix: ""
@@ -2681,36 +1263,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_26/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_26/robot_description
               TF Prefix: ""
@@ -2731,36 +1283,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_27/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_27/robot_description
               TF Prefix: ""
@@ -2781,36 +1303,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_28/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_28/robot_description
               TF Prefix: ""
@@ -2831,36 +1323,6 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_29/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_29/robot_description
               TF Prefix: ""
@@ -3292,7 +1754,7 @@ Visualization Manager:
               Marker Topic: /uuv_1/trajectory
               Name: Trajectory_uuv_0
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3304,7 +1766,7 @@ Visualization Manager:
               Marker Topic: /uuv_2/trajectory
               Name: Trajectory_uuv_1
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3316,7 +1778,7 @@ Visualization Manager:
               Marker Topic: /uuv_3/trajectory
               Name: Trajectory_uuv_2
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3328,7 +1790,7 @@ Visualization Manager:
               Marker Topic: /uuv_4/trajectory
               Name: Trajectory_uuv_3
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3340,7 +1802,7 @@ Visualization Manager:
               Marker Topic: /uuv_5/trajectory
               Name: Trajectory_uuv_4
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3352,7 +1814,7 @@ Visualization Manager:
               Marker Topic: /uuv_6/trajectory
               Name: Trajectory_uuv_5
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3364,7 +1826,7 @@ Visualization Manager:
               Marker Topic: /uuv_7/trajectory
               Name: Trajectory_uuv_6
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3376,7 +1838,7 @@ Visualization Manager:
               Marker Topic: /uuv_8/trajectory
               Name: Trajectory_uuv_7
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3388,7 +1850,7 @@ Visualization Manager:
               Marker Topic: /uuv_9/trajectory
               Name: Trajectory_uuv_8
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3400,7 +1862,7 @@ Visualization Manager:
               Marker Topic: /uuv_10/trajectory
               Name: Trajectory_uuv_9
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3412,7 +1874,7 @@ Visualization Manager:
               Marker Topic: /uuv_11/trajectory
               Name: Trajectory_uuv_10
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3424,7 +1886,7 @@ Visualization Manager:
               Marker Topic: /uuv_12/trajectory
               Name: Trajectory_uuv_11
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3436,7 +1898,7 @@ Visualization Manager:
               Marker Topic: /uuv_13/trajectory
               Name: Trajectory_uuv_12
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3448,7 +1910,7 @@ Visualization Manager:
               Marker Topic: /uuv_14/trajectory
               Name: Trajectory_uuv_13
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3460,7 +1922,7 @@ Visualization Manager:
               Marker Topic: /uuv_15/trajectory
               Name: Trajectory_uuv_14
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3472,7 +1934,7 @@ Visualization Manager:
               Marker Topic: /uuv_16/trajectory
               Name: Trajectory_uuv_15
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3484,7 +1946,7 @@ Visualization Manager:
               Marker Topic: /uuv_17/trajectory
               Name: Trajectory_uuv_16
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3496,7 +1958,7 @@ Visualization Manager:
               Marker Topic: /uuv_18/trajectory
               Name: Trajectory_uuv_17
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3508,7 +1970,7 @@ Visualization Manager:
               Marker Topic: /uuv_19/trajectory
               Name: Trajectory_uuv_18
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3520,7 +1982,7 @@ Visualization Manager:
               Marker Topic: /uuv_20/trajectory
               Name: Trajectory_uuv_19
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3532,7 +1994,7 @@ Visualization Manager:
               Marker Topic: /uuv_21/trajectory
               Name: Trajectory_uuv_20
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3544,7 +2006,7 @@ Visualization Manager:
               Marker Topic: /uuv_22/trajectory
               Name: Trajectory_uuv_21
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3556,7 +2018,7 @@ Visualization Manager:
               Marker Topic: /uuv_23/trajectory
               Name: Trajectory_uuv_22
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3568,7 +2030,7 @@ Visualization Manager:
               Marker Topic: /uuv_24/trajectory
               Name: Trajectory_uuv_23
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3580,7 +2042,7 @@ Visualization Manager:
               Marker Topic: /uuv_25/trajectory
               Name: Trajectory_uuv_24
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3592,7 +2054,7 @@ Visualization Manager:
               Marker Topic: /uuv_26/trajectory
               Name: Trajectory_uuv_25
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3604,7 +2066,7 @@ Visualization Manager:
               Marker Topic: /uuv_27/trajectory
               Name: Trajectory_uuv_26
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3616,7 +2078,7 @@ Visualization Manager:
               Marker Topic: /uuv_28/trajectory
               Name: Trajectory_uuv_27
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3628,7 +2090,7 @@ Visualization Manager:
               Marker Topic: /uuv_29/trajectory
               Name: Trajectory_uuv_28
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3888,7 +2350,7 @@ Visualization Manager:
               Axis: Z
               Channel Name: intensity
               Class: rviz/LaserScan
-              Color: 255; 255; 255
+              Color: 255; 0; 0
               Color Transformer: FlatColor
               Decay Time: 0
               Enabled: true
@@ -3899,7 +2361,7 @@ Visualization Manager:
               Position Transformer: XYZ
               Queue Size: 10
               Selectable: true
-              Size (Pixels): 3
+              Size (Pixels): 30
               Size (m): 0.10000000149011612
               Style: Points
               Topic: /uuv_0/sonar_scan
@@ -5477,7 +3939,7 @@ Visualization Manager:
               Value: true
           Enabled: true
           Name: uuv_49
-      Enabled: false
+      Enabled: true
       Name: Swarm_Sonars
     - Class: rviz/MarkerArray
       Enabled: false
@@ -5499,7 +3961,7 @@ Visualization Manager:
   Global Options:
     Background Color: 32; 74; 135
     Default Light: true
-    Fixed Frame: spectator_link
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -5520,7 +3982,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/ThirdPersonFollower
-      Distance: 8
+      Distance: 4.221855640411377
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -5536,9 +3998,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: -0.34499987959861755
+      Pitch: 0.15000015497207642
       Target Frame: uuv_0/base_link
-      Yaw: 3.1300010681152344
+      Yaw: 3.13000226020813
     Saved:
       - Class: rviz/Orbit
         Distance: 0.0010000000474974513
@@ -6577,12 +5039,12 @@ Visualization Manager:
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1043
+  Height: 1016
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd0000000100000000000001dc000003b9fc0200000002fb000000100044006900730070006c006100790073010000003d00000282000000c900fffffffb0000000a0056006900650077007301000002c500000131000000a400ffffff0000059e000003b900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000100000000000001dc0000039efc0200000002fb000000100044006900730070006c006100790073010000003d00000270000000c900fffffffb0000000a0056006900650077007301000002b300000128000000a400ffffff0000056a0000039e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: false
-  Width: 1920
-  X: 1920
-  Y: 0
+  Width: 1868
+  X: 52
+  Y: 27

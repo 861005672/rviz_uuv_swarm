@@ -32,6 +32,7 @@ private:
     // 弱观测参数
     double noise_std_base_;
     double noise_vel_factor_;
+    double noise_dist_factor_;
     double miss_prob_;
     double false_prob_;
     
@@ -165,9 +166,8 @@ protected:
         Eigen::Vector3d ray_origin(state.x, state.y, state.z);
 
         double speed = std::sqrt(state.u * state.u + state.v * state.v + state.w * state.w);
-        double current_std = noise_std_base_ + noise_vel_factor_ * speed;
-        double current_variance = current_std * current_std;
-        std::normal_distribution<double> noise_dist(0.0, current_std);
+        double base_and_speed_std = noise_std_base_ * (1+noise_vel_factor_ * speed);
+        std::normal_distribution<double> standard_normal_dist(0.0, 1.0);
     
         // 发射 beams_ 根声纳射线
         for (int i = 0; i < beams_; ++i) {
@@ -198,11 +198,14 @@ protected:
             // 执行 3D 数学求交算法
             double min_dist = checkIntersection(ray_origin, ray_dir);
             if (min_dist < max_range_) {
+                // 真实物理噪声标准差随距离线性放大
+                double current_std = base_and_speed_std * (1.0 + noise_dist_factor_ * min_dist);
+                double current_variance = current_std * current_std;
                 // 3. 注入动态高斯噪声
-                double noisy_dist = min_dist + noise_dist(generator_);
+                double noisy_dist = min_dist + standard_normal_dist(generator_)* current_std;
                 scan.ranges[i] = std::max(0.5, std::min(noisy_dist, max_range_));
                 // 4. 将该射线的当前方差赋值给 intensities (距离越远误差越大)
-                scan.intensities[i] = current_variance * (1.0 + 0.02 * min_dist);
+                scan.intensities[i] = current_variance;
             }
         }
         pub_scan_.publish(scan);
@@ -227,6 +230,7 @@ public:
 
         reader.param("noise_std_base", noise_std_base_, 0.5);
         reader.param("noise_vel_factor", noise_vel_factor_, 0.1);
+        reader.param("noise_dist_factor", noise_dist_factor_, 0.02);
         reader.param("miss_prob", miss_prob_, 0.05);
         reader.param("false_prob", false_prob_, 0.02);
         

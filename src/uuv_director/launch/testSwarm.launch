@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <launch>
     <include file="$(find uuv_environment)/launch/start_env.launch">
-        <arg name="env_name" value="none" />
+        <arg name="env_name" value="test1" />
     </include>
 
-    <!-- <node pkg="uuv_director" type="director_node.py" name="director_node" output="screen">
-        <param name="scenario" value="swarm_nav" />
-    </node> -->
-
     <node pkg="uuv_director" type="director_node.py" name="director_node" output="screen">
+        <param name="scenario" value="swarm_nav" />
+    </node>
+
+    <!-- <node pkg="uuv_director" type="director_node.py" name="director_node" output="screen">
         <param name="scenario" value="cbaa_test" />
         <param name="uuv_count" value="30" />
         <param name="nb_sense_radius" value="200.0" />
@@ -22,18 +22,18 @@
             ]
         </rosparam>
         <rosparam param="phase2_reqs">[10, 5, 15]</rosparam>
-    </node>
+    </node> -->
 
 
     <node pkg="rqt_service_caller" type="rqt_service_caller" name="rqt_service_caller" output="screen" />
 
     <!-- <node pkg="joy" type="joy_node" name="joy_node" /> -->
 
-    <!-- <node pkg="uuv_director" type="joy_controller.py" name="joy_controller" output="screen">
+    <node pkg="uuv_director" type="joy_controller.py" name="joy_controller" output="screen">
         <param name="max_force_x" value="200" />
         <param name="max_torque_pitch" value="5" />
         <param name="max_torque_yaw" value="10" />
-    </node> -->
+    </node>
 
 
 </launch>
