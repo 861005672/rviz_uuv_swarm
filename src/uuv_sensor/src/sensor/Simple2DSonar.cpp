@@ -8,6 +8,7 @@
 #include <Eigen/Dense>
 #include <vector>
 #include <string>
+#include <random>
 
 namespace uuv_sensor {
 
@@ -27,9 +28,19 @@ private:
     int beams_;
     double fov_;
     double max_range_;
+
+    // 弱观测参数
+    double noise_std_base_;
+    double noise_vel_factor_;
+    double miss_prob_;
+    double false_prob_;
     
     // 环境障碍物容器
     std::vector<Obstacle> obstacles_;
+
+    // 随机数生成器
+    std::default_random_engine generator_;
+    std::uniform_real_distribution<double> uniform_dist_{0.0, 1.0};
 
     void loadEnvironment(ros::NodeHandle& nh) {
         // 从参数服务器的 /env_spawner_node/obstacles 读取环境列表
@@ -151,11 +162,15 @@ protected:
         q.setRPY(state.roll, state.pitch, state.yaw);
         tf2::Matrix3x3 R_wb(q);
         Eigen::Vector3d ray_origin(state.x, state.y, state.z);
+
+        double speed = std::sqrt(state.u * state.u + state.v * state.v + state.w * state.w);
+        double current_std = noise_std_base_ + noise_vel_factor_ * speed;
+        std::normal_distribution<double> noise_dist(0.0, current_std);
     
         // 发射 beams_ 根声纳射线
         for (int i = 0; i < beams_; ++i) {
             double angle = scan.angle_min + i * scan.angle_increment;
-            
+
             // 射线在机体系下处于水平面内
             tf2::Vector3 ray_b(cos(angle), sin(angle), 0.0); 
             
@@ -163,11 +178,25 @@ protected:
             tf2::Vector3 ray_w_tf = R_wb * ray_b;
             Eigen::Vector3d ray_dir(ray_w_tf.x(), ray_w_tf.y(), ray_w_tf.z());
             ray_dir.normalize();
+
+            // 错检判定- 即使无障碍也可能返回随机值
+            if (uniform_dist_(generator_) < false_prob_) {
+                scan.ranges[i] = 0.5 + uniform_dist_(generator_) * (max_range_ - 0.5);
+                continue;
+            }
+
+            // 漏检判定- 即使有障碍也可能丢失回波
+            if (uniform_dist_(generator_) < miss_prob_) {
+                scan.ranges[i] = max_range_ + 1.0;
+                continue;
+            }
     
             // 执行 3D 数学求交算法
             double min_dist = checkIntersection(ray_origin, ray_dir);
             if (min_dist < max_range_) {
-                scan.ranges[i] = min_dist;
+                // 3. 注入动态高斯噪声
+                double noisy_dist = min_dist + noise_dist(generator_);
+                scan.ranges[i] = std::max(0.5, std::min(noisy_dist, max_range_));
             }
         }
         pub_scan_.publish(scan);
@@ -189,6 +218,11 @@ public:
         fov_ = fov_deg * M_PI / 180.0;
     
         pub_scan_ = nh.advertise<sensor_msgs::LaserScan>("sonar_scan", 10);
+
+        reader.param("noise_std_base", noise_std_base_, 0.5);
+        reader.param("noise_vel_factor", noise_vel_factor_, 0.1);
+        reader.param("miss_prob", miss_prob_, 0.05);
+        reader.param("false_prob", false_prob_, 0.02);
         
         UUV_INFO << "[Simple2DSonar] Xml Params Loaded: " << "\n beams=\n" 
                         << beams_ << "\n max_range=\n" << max_range_ << "\n fov_deg=\n" << fov_deg;

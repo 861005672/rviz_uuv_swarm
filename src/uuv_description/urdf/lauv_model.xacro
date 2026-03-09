@@ -55,7 +55,7 @@
   </xacro:if>
 
   <xacro:if value="${'$(arg decision_type)' == 'cbaa'}">
-      <xacro:insert_cbaa_decision update_rate="1.0" publish_debug="false" publish_debug_rate="1.0" 
+      <xacro:insert_cbaa_decision update_rate="100.0" publish_debug="false" publish_debug_rate="1.0" 
               max_bundle_size="1" virtual_id_multiplier="100" gossip_size="5" map_range="5000.0" />
   </xacro:if>
   

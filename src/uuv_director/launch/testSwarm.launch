@@ -10,7 +10,9 @@
 
     <node pkg="uuv_director" type="director_node.py" name="director_node" output="screen">
         <param name="scenario" value="cbaa_test" />
-        <param name="uuv_count" value="50" />
+        <param name="uuv_count" value="30" />
+        <param name="nb_sense_radius" value="200.0" />
+        <param name="topo_k_nearest" value="6" />
         <rosparam param="phase1_target">[500.0, 0.0, 0.0]</rosparam>
         <rosparam param="phase2_targets">
             [

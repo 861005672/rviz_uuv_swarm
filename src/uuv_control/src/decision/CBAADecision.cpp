@@ -116,6 +116,8 @@ protected:
             bool task_exists = (known_tasks_.find(vid) != known_tasks_.end());
             if (is_winner && task_exists) {
                 valid_bundle.push_back(vid);
+                double current_score = calcScore(known_tasks_.at(vid), state);
+                consensus_map_[vid].bid_value = current_score;
             } else break; 
         }
         my_bundle_ = valid_bundle;
@@ -256,6 +258,15 @@ protected:
             if (known_tasks_.find(vid) == known_tasks_.end()) {
                 it = consensus_map_.erase(it); replan_needed_ = true;
             } else ++it;
+        }
+        if (!my_bundle_.empty()) {
+            for (int vid : my_bundle_) {
+                // 确保任务还存在，且我依然是这个任务的赢家
+                if (known_tasks_.find(vid) != known_tasks_.end() && consensus_map_[vid].winner_id == uuv_name_) {
+                    double my_current_score = calcScore(known_tasks_.at(vid), state);
+                    consensus_map_[vid].bid_value = my_current_score; 
+                }
+            }
         }
         // ---------------------------------------------------------
         // Step 4: 【处理邻居数据】(共识更新)

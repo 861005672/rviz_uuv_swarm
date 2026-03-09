@@ -287,7 +287,7 @@ public:
             last_visual_time_ = current_time;
         }
 
-        std::string data_json;
+        std::string data_json = current_state_.data_json;
         // === 1. 决策层 === 
         uuv_interface::TargetPoint3D final_target = decision_->update(current_state_, latest_neighbors_, data_json);
         // === 2. 规划层 ===
@@ -302,6 +302,9 @@ public:
         current_state_ = dynamics_->update(actuator_tau);
         // === 6. 更新传感器 === 
         updateSensor();
+        // === 7. 更新data_json
+        current_state_.target_id = final_target.id;
+        current_state_.data_json = data_json;
         // === 7. 发布状态话题 === 
         publishState(current_state_, current_time);
         // === 8. 更新可视化(TF和轨迹) ===
@@ -310,9 +313,6 @@ public:
             publishTrajectory(current_state_, current_time);
             last_visual_time_ = current_time;
         }
-        // === 9. 更新当前状态中的目标信息和data_json
-        current_state_.target_id = final_target.id;
-        current_state_.data_json = data_json;
     }
 
     void updateSensor() {

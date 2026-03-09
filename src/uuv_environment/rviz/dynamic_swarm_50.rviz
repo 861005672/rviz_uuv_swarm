@@ -6,9 +6,9 @@ Panels:
       Expanded:
         - /Global Options1
         - /TF1/Frames1
-        - /MarkerArray1
+        - /TargetList1
       Splitter Ratio: 0.5
-    Tree Height: 346
+    Tree Height: 511
   - Class: rviz/Views
     Expanded:
       - /Current View1
@@ -44,7 +44,7 @@ Visualization Manager:
       Marker Topic: /env_markers
       Name: Environment Obstacles (MarkerArray)
       Namespaces:
-        environment_obstacles: true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/TF
@@ -5490,9 +5490,9 @@ Visualization Manager:
     - Class: rviz/MarkerArray
       Enabled: true
       Marker Topic: /scenario/target_markers
-      Name: MarkerArray
+      Name: TargetList
       Namespaces:
-        {}
+        scenario_targets: true
       Queue Size: 100
       Value: true
   Enabled: true
@@ -5519,26 +5519,26 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz/Orbit
-      Distance: 0.00318861729465425
+      Class: rviz/ThirdPersonFollower
+      Distance: 8
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
-      Field of View: 0.7853981852531433
+      Field of View: 0.7850000262260437
       Focal Point:
-        X: 1.9803992472589016e-05
-        Y: 1.2482592737228515e-10
-        Z: 0.00020000000949949026
+        X: 0
+        Y: 0
+        Z: 0
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.42000001668930054
-      Target Frame: spectator_link
-      Yaw: 3.1065826416015625
+      Pitch: -0.34499987959861755
+      Target Frame: uuv_0/base_link
+      Yaw: 3.1300010681152344
     Saved:
       - Class: rviz/Orbit
         Distance: 0.0010000000474974513
@@ -6577,12 +6577,12 @@ Visualization Manager:
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 800
+  Height: 1043
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd0000000100000000000001dc000002c6fc0200000002fb000000100044006900730070006c006100790073010000003d000001dd000000c900fffffffb0000000a005600690065007700730100000220000000e3000000a400ffffff000002ce000002c600000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000100000000000001dc000003b9fc0200000002fb000000100044006900730070006c006100790073010000003d00000282000000c900fffffffb0000000a0056006900650077007301000002c500000131000000a400ffffff0000059e000003b900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: false
-  Width: 1200
-  X: 52
-  Y: 27
+  Width: 1920
+  X: 1920
+  Y: 0
