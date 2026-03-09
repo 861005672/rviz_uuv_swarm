@@ -156,6 +156,7 @@ protected:
         scan.range_min = 0.5;
         scan.range_max = max_range_;
         scan.ranges.resize(beams_, max_range_ + 1.0); // 默认值为超出量程
+        scan.intensities.resize(beams_, 0.0);  // 初始化方差数组
     
         // 构建机体到世界坐标系的旋转矩阵 R_wb
         tf2::Quaternion q;
@@ -165,6 +166,7 @@ protected:
 
         double speed = std::sqrt(state.u * state.u + state.v * state.v + state.w * state.w);
         double current_std = noise_std_base_ + noise_vel_factor_ * speed;
+        double current_variance = current_std * current_std;
         std::normal_distribution<double> noise_dist(0.0, current_std);
     
         // 发射 beams_ 根声纳射线
@@ -182,12 +184,14 @@ protected:
             // 错检判定- 即使无障碍也可能返回随机值
             if (uniform_dist_(generator_) < false_prob_) {
                 scan.ranges[i] = 0.5 + uniform_dist_(generator_) * (max_range_ - 0.5);
+                scan.intensities[i] = 100.0;
                 continue;
             }
 
             // 漏检判定- 即使有障碍也可能丢失回波
             if (uniform_dist_(generator_) < miss_prob_) {
                 scan.ranges[i] = max_range_ + 1.0;
+                scan.intensities[i] = 0.0;
                 continue;
             }
     
@@ -197,6 +201,8 @@ protected:
                 // 3. 注入动态高斯噪声
                 double noisy_dist = min_dist + noise_dist(generator_);
                 scan.ranges[i] = std::max(0.5, std::min(noisy_dist, max_range_));
+                // 4. 将该射线的当前方差赋值给 intensities (距离越远误差越大)
+                scan.intensities[i] = current_variance * (1.0 + 0.02 * min_dist);
             }
         }
         pub_scan_.publish(scan);
