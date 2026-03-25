@@ -7,7 +7,7 @@
 
     <node pkg="joy" type="joy_node" name="joy_node" output="screen" />
 
-    <!-- <node pkg="uuv_environment" type="spectator_camera.py" name="spectator_camera" output="screen">
+    <node pkg="uuv_environment" type="spectator_camera.py" name="spectator_camera" output="screen">
         <param name="kb_base_linear_speed" value="15.0" />
         <param name="kb_boost_linear_speed" value="60.0" />
         <param name="kb_base_angular_speed" value="1.0" />
@@ -15,7 +15,7 @@
         
         <param name="joy_max_linear_speed" value="20.0" />
         <param name="joy_max_angular_speed" value="1.0" />
-    </node> -->
+    </node>
 
     <node pkg="rviz" type="rviz" name="rviz" args="-d $(find uuv_environment)/rviz/dynamic_swarm_50.rviz" required="true" />
 

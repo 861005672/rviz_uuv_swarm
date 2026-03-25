@@ -84,16 +84,16 @@ class DirectorNode:
     def run(self):
         """
         双频控制核心：
-        - 物理层 (manager): 10 Hz 保证邻居发现和碰撞检测的实时性
+        - 物理层 (manager): 60 Hz 保证邻居发现和碰撞检测的实时性
         - 决策层 (scenario): 1 Hz 保证宏观编队决策的稳定性
         """
-        rate = rospy.Rate(60) # 10Hz
+        rate = rospy.Rate(50) # 60Hz
         tick = 0
         
         while not rospy.is_shutdown():
             current_sim_time = rospy.get_time() - self.start_ros_time
             
-            # 【物理层】：10Hz 更新一次 UUV 的邻居和碰撞
+            # 【物理层】：60Hz 更新一次 UUV 的邻居和碰撞
             self.manager.update()
             
             # 【决策层】：每 10 个 tick (即 1 秒) 更新一次剧本

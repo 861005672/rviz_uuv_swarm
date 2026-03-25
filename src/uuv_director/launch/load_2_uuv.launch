@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<launch>
+  <group ns="group0">
+    <node pkg="nodelet" type="nodelet" name="group0_manager" args="manager" output="screen"/>
+    <node pkg="nodelet" type="nodelet" name="state_aggregator" args="load uuv_control/StateAggregatorNodelet group0_manager">
+      <param name="group_name" value="group0"/>
+      <param name="start_global_id" value="0"/>
+      <param name="uuv_count" value="2"/>
+    </node>
+  </group>
+  <group ns="uuv_0">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_0 dynamics_type:=fossen actuator_type:=lauv controller_type:=pid guidance_type:=spacial_flocking planner_type:=simple decision_type:=vanguard"/>
+    <param name="init_x" value="-1.303"/>
+    <param name="init_y" value="19.235"/>
+    <param name="init_z" value="-28.560"/>
+    <param name="init_yaw" value="1.479"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="decision"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/2_uuv"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group0/group0_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+  <group ns="uuv_1">
+    <param name="robot_description" command="$(find xacro)/xacro '$(find uuv_description)/urdf/lauv_model.xacro' namespace:=uuv_1 dynamics_type:=fossen actuator_type:=lauv controller_type:=pid guidance_type:=spacial_flocking planner_type:=simple decision_type:=vanguard"/>
+    <param name="init_x" value="-7.320"/>
+    <param name="init_y" value="30.084"/>
+    <param name="init_z" value="12.527"/>
+    <param name="init_yaw" value="-0.889"/>
+    <param name="start_n" value="0.000"/>
+    <param name="start_e" value="0.000"/>
+    <param name="start_d" value="0.000"/>
+    <param name="control_level" value="decision"/>
+    <param name="log_dir" value="/home/zx567/rvizuuv3d/auuv_logs/2_uuv"/>
+    <param name="visual_rate" value="20.0"/>
+    <node pkg="nodelet" type="nodelet" name="uuv_control" args="load uuv_control/ControlNodelet /group0/group0_manager" />
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp" />
+  </group>
+</launch>

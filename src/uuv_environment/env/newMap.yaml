@@ -1,0 +1,61 @@
+obstacles:
+- name: obs_box_0
+  ref_coord: NED
+  type: box
+  position: [82.75, 54.27, 0.0]
+  scale: [4.64, 7.96, 6.0]
+  color: [0.5, 0.5, 0.5, 1.0]
+- name: obs_box_1
+  ref_coord: NED
+  type: box
+  position: [28.55, 59.37, 0.0]
+  scale: [7.07, 6.63, 6.0]
+  color: [0.5, 0.5, 0.5, 1.0]
+- name: obs_box_2
+  ref_coord: NED
+  type: box
+  position: [54.01, 2.64, 0.0]
+  scale: [3.2, 3.82, 6.0]
+  color: [0.5, 0.5, 0.5, 1.0]
+- name: obs_box_3
+  ref_coord: NED
+  type: box
+  position: [9.94, 56.33, 0.0]
+  scale: [3.21, 3.19, 6.0]
+  color: [0.5, 0.5, 0.5, 1.0]
+- name: obs_cylinder_4
+  ref_coord: NED
+  type: cylinder
+  position: [44.25, 42.39, 0.0]
+  scale: [8.7, 7.69, 6.0]
+  color: [0.5, 0.5, 0.5, 1.0]
+- name: obs_box_5
+  ref_coord: NED
+  type: box
+  position: [83.58, 17.34, 0.0]
+  scale: [5.25, 8.91, 6.0]
+  color: [0.5, 0.5, 0.5, 1.0]
+- name: obs_box_6
+  ref_coord: NED
+  type: box
+  position: [90.25, 24.95, 0.0]
+  scale: [8.34, 8.31, 6.0]
+  color: [0.5, 0.5, 0.5, 1.0]
+- name: obs_box_7
+  ref_coord: NED
+  type: box
+  position: [20.92, 51.56, 0.0]
+  scale: [5.43, 9.0, 6.0]
+  color: [0.5, 0.5, 0.5, 1.0]
+- name: obs_box_8
+  ref_coord: NED
+  type: box
+  position: [3.52, 45.54, 0.0]
+  scale: [7.74, 8.75, 6.0]
+  color: [0.5, 0.5, 0.5, 1.0]
+- name: obs_cylinder_9
+  ref_coord: NED
+  type: cylinder
+  position: [58.52, 91.01, 0.0]
+  scale: [7.88, 6.58, 6.0]
+  color: [0.5, 0.5, 0.5, 1.0]

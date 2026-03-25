@@ -2,7 +2,8 @@ int32 total_uuvs
 int32 group_size
 string init_type
 float64[] center
-float64 radius
+float64 side_a        # 正方体底面的边长
+float64 height_c      # 立方体的高度（如果设为 0，则退化为 2D 平面）
 float64 min_dist
 string dynamics_type
 string actuator_type

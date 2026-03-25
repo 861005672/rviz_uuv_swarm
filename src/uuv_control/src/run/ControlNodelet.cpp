@@ -142,8 +142,11 @@ public:
         traj_marker_.color.r = static_cast<double>(std::rand()) / RAND_MAX;
         traj_marker_.color.g = static_cast<double>(std::rand()) / RAND_MAX;
         traj_marker_.color.b = static_cast<double>(std::rand()) / RAND_MAX;
+        // traj_marker_.color.r = 0.0;
+        // traj_marker_.color.g = 0.0;
+        // traj_marker_.color.b = 0.0;
         traj_marker_.color.a = 1.0;
-        traj_marker_.scale.x = 0.15;
+        traj_marker_.scale.x = 0.5;
 
         loadPluginsFromXML();
 
@@ -306,6 +309,12 @@ public:
         current_state_.target_id = final_target.id;
         current_state_.data_json = data_json;
         // === 7. 发布状态话题 === 
+        // 提取虚拟领航点的方向，填入 state 中
+        Eigen::Vector3d vt_dir = guidance_->getTargetDir();
+        current_state_.vt_dir_x = vt_dir.x();
+        current_state_.vt_dir_y = vt_dir.y();
+        current_state_.vt_dir_z = vt_dir.z();
+        // 发布状态
         publishState(current_state_, current_time);
         // === 8. 更新可视化(TF和轨迹) ===
         if ((current_time - last_visual_time_).toSec() >= visual_period_ * 0.95) {

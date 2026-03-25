@@ -9,6 +9,7 @@
 #include <uuv_interface/SetTargetPoint3D.h>
 #include <sensor_msgs/LaserScan.h>
 #include <uuv_interface/Neighborhood3D.h>
+#include <Eigen/Dense>
 
 namespace uuv_interface {
 
@@ -68,6 +69,8 @@ public:
         override_input_ = latest_target_;
     }
     virtual ~GuidanceBase() {}
+    
+    virtual Eigen::Vector3d getTargetDir() const { return Eigen::Vector3d(1, 0, 0); }
 
     // 统一的纯虚 update 函数
     uuv_interface::Cmd3D update(const uuv_interface::TargetPoint3D& target, 

@@ -59,7 +59,7 @@ add_message_files(
   CollisionInfo.msg
   CollisionInfoArray.msg
   SwarmState.msg
-  
+  UUVMetrics.msg
 )
 
 ## Generate services in the 'srv' folder

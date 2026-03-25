@@ -38,19 +38,27 @@ class UUVLoader:
                 return "/tmp/dynamic_swarm.launch"
         return path
 
-    def generate_random_poses(self, total, center, radius, min_dist):
+    def generate_random_poses(self, total, center, side_a, height_c, min_dist):
         poses = []
         max_attempts = 2000
+        
+        # 计算 X, Y, Z 方向上的偏移半长
+        half_a = side_a / 2.0
+        half_c = height_c / 2.0
+
         for i in range(total):
             placed = False
             for attempt in range(max_attempts):
-                r = radius * (random.random() ** (1.0 / 3.0))
-                theta = random.uniform(0, 2 * math.pi)
-                phi = math.acos(2 * random.random() - 1)
+                # 在正方形底面上随机生成 X 和 Y
+                x = center[0] + random.uniform(-half_a, half_a)
+                y = center[1] + random.uniform(-half_a, half_a)
                 
-                x = center[0] + r * math.sin(phi) * math.cos(theta)
-                y = center[1] + r * math.sin(phi) * math.sin(theta)
-                z = center[2] + r * math.cos(phi)
+                # 高度逻辑：如果是0，严格锁定在中心平面；否则在指定高度内随机
+                if height_c <= 1e-5: # 使用极小值判断浮点数 0
+                    z = center[2]
+                else:
+                    z = center[2] + random.uniform(-half_c, half_c)
+                    
                 yaw = random.uniform(-math.pi, math.pi)
                 
                 collision = False
@@ -133,7 +141,8 @@ class UUVLoader:
         group_size = req.group_size if req.group_size!=0 else 10
         init_type = req.init_type if req.init_type!='' else 'random'
         center = req.center if len(req.center)==3 else [0,0,0]
-        radius = req.radius if req.radius!=0 else 5
+        side_a = req.side_a if req.side_a != 0 else 10.0
+        height_c = req.height_c 
         min_dist = req.min_dist if req.min_dist!=0 else 2
         dynamics_type = req.dynamics_type if req.dynamics_type!='' else 'fossen'
         actuator_type = req.actuator_type if req.actuator_type!='' else 'lauv'
@@ -148,7 +157,7 @@ class UUVLoader:
             return UUVLoaderResponse(False, "Deterministic mode is not implemented yet.")
 
         rospy.loginfo(f"Generating {total_uuvs} appended UUVs in random mode...")
-        poses = self.generate_random_poses(total_uuvs, center, radius, min_dist)
+        poses = self.generate_random_poses(total_uuvs, center, side_a, height_c, min_dist)
         
         if poses is None:
             return UUVLoaderResponse(False, "Failed to generate collision-free poses. Space is too crowded.")

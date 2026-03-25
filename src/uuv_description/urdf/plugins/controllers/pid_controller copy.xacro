@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="insert_pid_controller" params="update_rate:=100.0 publish_debug:=true publish_debug_rate:=5.0 enable_dyn:=false">
+        <plugin layer="controller" name="pid_ctrl" type="uuv_control/PidController">
+            <!-- ControlPluginBase的参数 -->
+            <update_rate>${update_rate}</update_rate>
+            <publish_debug>${publish_debug}</publish_debug>
+            <publish_debug_rate>${publish_debug_rate}</publish_debug_rate>
+            <!--  PidController 特有的参数  -->
+            <enable_dynamic_reconfigure>${enable_dyn}</enable_dynamic_reconfigure>
+            <kp_u>40.0</kp_u> <ki_u>20.0</ki_u> <kd_u>10.0</kd_u> <max_output_u>450.0</max_output_u> <max_integral_u>300.0</max_integral_u>
+            <kp_pitch>0.4</kp_pitch> <ki_pitch>0.0</ki_pitch> <kd_pitch>0.0</kd_pitch> <max_output_pitch>0.8</max_output_pitch> <max_integral_pitch>0.0</max_integral_pitch>
+            <kp_q>30.0</kp_q> <ki_q>3.0</ki_q> <kd_q>0.0</kd_q> <max_output_q>30.0</max_output_q> <max_integral_q>10.0</max_integral_q>
+            <kp_yaw>0.6</kp_yaw> <ki_yaw>0.0</ki_yaw> <kd_yaw>0.0</kd_yaw> <max_output_yaw>1.8</max_output_yaw> <max_integral_yaw>0.0</max_integral_yaw>
+            <kp_r>50.0</kp_r> <ki_r>15.0</ki_r> <kd_r>0.0</kd_r> <max_output_r>80.0</max_output_r> <max_integral_r>15.0</max_integral_r>
+        </plugin>
+    </xacro:macro>
+</robot>

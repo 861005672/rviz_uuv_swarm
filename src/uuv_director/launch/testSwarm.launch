@@ -1,19 +1,30 @@
 <?xml version="1.0"?>
 <launch>
     <include file="$(find uuv_environment)/launch/start_env.launch">
-        <arg name="env_name" value="test1" />
+        <arg name="env_name" value="none" />
     </include>
 
     <node pkg="uuv_director" type="director_node.py" name="director_node" output="screen">
+        <param name="passive_sonar_delay" value="5.0" />   
+        <param name="noise_dist_std" value="0.0" />        
+        <param name="miss_prob" value="0.0" />             
+        <param name="false_prob" value="0.0" />            
+        <param name="nb_sense_radius" value="150.0" />
         <param name="scenario" value="swarm_nav" />
     </node>
 
+
     <!-- <node pkg="uuv_director" type="director_node.py" name="director_node" output="screen">
+        <param name="passive_sonar_delay" value="3.0" />   
+        <param name="noise_dist_std" value="0.0" />        
+        <param name="miss_prob" value="0.0" />             
+        <param name="false_prob" value="0.0" />  
+
         <param name="scenario" value="cbaa_test" />
         <param name="uuv_count" value="30" />
         <param name="nb_sense_radius" value="200.0" />
         <param name="topo_k_nearest" value="6" />
-        <rosparam param="phase1_target">[500.0, 0.0, 0.0]</rosparam>
+        <rosparam param="phase1_target">[3000.0, 0.0, 0.0]</rosparam>
         <rosparam param="phase2_targets">
             [
                 [500.0, 400.0, 0.0],
@@ -27,13 +38,30 @@
 
     <node pkg="rqt_service_caller" type="rqt_service_caller" name="rqt_service_caller" output="screen" />
 
-    <!-- <node pkg="joy" type="joy_node" name="joy_node" /> -->
 
-    <node pkg="uuv_director" type="joy_controller.py" name="joy_controller" output="screen">
+    <!-- <node pkg="uuv_director" type="joy_controller.py" name="joy_controller" output="screen">
         <param name="max_force_x" value="200" />
         <param name="max_torque_pitch" value="5" />
         <param name="max_torque_yaw" value="10" />
-    </node>
+    </node> -->
+
+    <!-- <node 
+        pkg="rosbag" 
+        type="record" 
+        name="bag_recorder" 
+        output="screen"
+        args="-O $(find uuv_control)/../bags/uuv_cluster.bag /uuv_*/state"
+    /> -->
+
+
+    <node pkg="rosbag" type="record" name="rosbag_record_swarm" 
+        args="-e 
+        /(.*)/state
+        /(.*)/metrics
+        /(.*)/actuator_states
+        /(.*)/actuator_wrench
+        -o $(find uuv_control)/../../bags/test" 
+        output="screen"/>
 
 
 </launch>

@@ -23,3 +23,8 @@ float64 r      # Yaw rate
 int32 target_id
 string data_json
 
+
+# 虚拟领航点的期望前进方向
+float64 vt_dir_x
+float64 vt_dir_y
+float64 vt_dir_z

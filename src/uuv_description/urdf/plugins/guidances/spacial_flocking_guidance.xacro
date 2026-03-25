@@ -23,6 +23,10 @@
             r_comm:=80
             force_lp_gain:=0.2
             flock_force_limit:=2005
+            delay_tau:=1.0
+            max_delta_n:=100.0
+            k_delay:=20.0
+            est_window_size:=30
 
             d_sense:=202
             d_inflation:=5.5
@@ -31,7 +35,6 @@
             num_sectors:=6
             range_zeta_norm:='0.3 1.5'
             range_zeta_tan:='0.23 3.5'
-
 
             "
     >
@@ -61,6 +64,12 @@
             <t_ftotal>${r_comm}</t_ftotal>
             <force_lp_gain>${force_lp_gain}</force_lp_gain>
             <flock_force_limit>${flock_force_limit}</flock_force_limit>
+
+            <delay_tau>${delay_tau}</delay_tau>
+            <max_delta_n>${max_delta_n}</max_delta_n>
+            <est_window_size>${est_window_size}</est_window_size>
+            <k_delay>${k_delay}</k_delay>
+
 
             <!-- 避障力部分 -->
             <d_sense>${d_sense}</d_sense>
