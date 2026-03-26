@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <launch>
     <include file="$(find uuv_environment)/launch/start_env.launch">
-        <arg name="env_name" value="none" />
+        <arg name="env_name" value="test2最好的避障演示地图" />
     </include>
 
     <node pkg="uuv_director" type="director_node.py" name="director_node" output="screen">
-        <param name="passive_sonar_delay" value="5.0" />   
+        <param name="passive_sonar_delay" value="0.0" />   
         <param name="noise_dist_std" value="0.0" />        
         <param name="miss_prob" value="0.0" />             
         <param name="false_prob" value="0.0" />            
@@ -60,6 +60,7 @@
         /(.*)/metrics
         /(.*)/actuator_states
         /(.*)/actuator_wrench
+        /uuv_manager/swarm_state
         -o $(find uuv_control)/../../bags/test" 
         output="screen"/>
 

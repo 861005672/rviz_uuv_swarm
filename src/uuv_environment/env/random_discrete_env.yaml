@@ -1,0 +1,157 @@
+obstacles:
+- name: sea_bed
+  ref_coord: NED
+  type: box
+  position: [1600.0, 0.0, 600.0]
+  scale: [10000.0, 10000.0, 5.0]
+  color: [0.54, 0.27, 0.07, 1.0]
+- name: obs_cylinder_0
+  ref_coord: NED
+  type: cylinder
+  position: [1857.17, -356.81, 300.77]
+  scale: [23.88, 23.88, 595.78]
+  color: &id001 [0.5, 0.5, 0.5, 1.0]
+- name: obs_cylinder_1
+  ref_coord: NED
+  type: cylinder
+  position: [1210.88, 382.41, 300.28]
+  scale: [23.91, 23.91, 596.37]
+  color: *id001
+- name: obs_cylinder_2
+  ref_coord: NED
+  type: cylinder
+  position: [1428.8, -162.43, 299.5]
+  scale: [23.87, 23.87, 598.25]
+  color: *id001
+- name: obs_cylinder_3
+  ref_coord: NED
+  type: cylinder
+  position: [1648.82, -383.56, 303.06]
+  scale: [39.03, 39.03, 591.88]
+  color: *id001
+- name: obs_cylinder_4
+  ref_coord: NED
+  type: cylinder
+  position: [1282.26, -140.85, 300.96]
+  scale: [25.23, 25.23, 597.02]
+  color: *id001
+- name: obs_cylinder_5
+  ref_coord: NED
+  type: cylinder
+  position: [1563.2, 325.38, 300.9]
+  scale: [29.13, 29.13, 595.53]
+  color: *id001
+- name: obs_cylinder_6
+  ref_coord: NED
+  type: cylinder
+  position: [1242.41, -248.87, 297.2]
+  scale: [37.86, 37.86, 592.67]
+  color: *id001
+- name: obs_cylinder_7
+  ref_coord: NED
+  type: cylinder
+  position: [1813.08, -110.5, 296.69]
+  scale: [20.52, 20.52, 591.57]
+  color: *id001
+- name: obs_cylinder_8
+  ref_coord: NED
+  type: cylinder
+  position: [1840.46, 396.64, 299.99]
+  scale: [20.33, 20.33, 594.74]
+  color: *id001
+- name: obs_cylinder_9
+  ref_coord: NED
+  type: cylinder
+  position: [1773.85, -251.07, 302.3]
+  scale: [32.91, 32.91, 593.37]
+  color: *id001
+- name: obs_cylinder_10
+  ref_coord: NED
+  type: cylinder
+  position: [1847.53, 164.9, 303.46]
+  scale: [25.1, 25.1, 590.93]
+  color: *id001
+- name: obs_cylinder_11
+  ref_coord: NED
+  type: cylinder
+  position: [1889.95, 146.98, 301.37]
+  scale: [37.81, 37.81, 596.05]
+  color: *id001
+- name: obs_cylinder_12
+  ref_coord: NED
+  type: cylinder
+  position: [1301.23, -337.89, 296.03]
+  scale: [36.79, 36.79, 590.16]
+  color: *id001
+- name: obs_cylinder_13
+  ref_coord: NED
+  type: cylinder
+  position: [1356.02, -159.76, 299.7]
+  scale: [24.17, 24.17, 594.32]
+  color: *id001
+- name: obs_cylinder_14
+  ref_coord: NED
+  type: cylinder
+  position: [1421.19, -354.77, 301.69]
+  scale: [34.73, 34.73, 596.6]
+  color: *id001
+- name: obs_box_15
+  ref_coord: NED
+  type: box
+  position: [1707.78, -102.03, 300.47]
+  scale: [39.35, 36.54, 598.45]
+  color: *id001
+- name: obs_box_16
+  ref_coord: NED
+  type: box
+  position: [1355.73, -235.4, 299.99]
+  scale: [35.01, 29.78, 596.13]
+  color: *id001
+- name: obs_box_17
+  ref_coord: NED
+  type: box
+  position: [1510.6, 65.86, 303.88]
+  scale: [27.55, 32.65, 592.13]
+  color: *id001
+- name: obs_box_18
+  ref_coord: NED
+  type: box
+  position: [1555.69, -189.45, 302.17]
+  scale: [35.66, 27.29, 590.33]
+  color: *id001
+- name: obs_box_19
+  ref_coord: NED
+  type: box
+  position: [1390.5, 48.83, 300.0]
+  scale: [32.19, 24.38, 596.86]
+  color: *id001
+- name: obs_box_20
+  ref_coord: NED
+  type: box
+  position: [1619.65, 107.57, 302.32]
+  scale: [24.86, 20.76, 595.34]
+  color: *id001
+- name: obs_box_21
+  ref_coord: NED
+  type: box
+  position: [1961.7, -13.98, 300.13]
+  scale: [26.31, 21.02, 597.54]
+  color: *id001
+- name: obs_box_22
+  ref_coord: NED
+  type: box
+  position: [1835.79, 130.52, 301.42]
+  scale: [34.63, 23.89, 596.14]
+  color: *id001
+- name: obs_box_23
+  ref_coord: NED
+  type: box
+  position: [1458.06, -95.63, 297.56]
+  scale: [27.98, 30.89, 591.57]
+  color: *id001
+- name: obs_box_24
+  ref_coord: NED
+  type: box
+  position: [1603.35, 195.0, 298.27]
+  scale: [22.28, 20.93, 596.4]
+  color: *id001

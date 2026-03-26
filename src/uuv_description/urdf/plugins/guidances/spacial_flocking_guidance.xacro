@@ -60,8 +60,7 @@
             <delta_n>${delta_n}</delta_n>
             <k_pull>${k_pull}</k_pull>
             <r_comm>${r_comm}</r_comm>
-            <k_pull>${k_pull}</k_pull>
-            <t_ftotal>${r_comm}</t_ftotal>
+            <t_ftotal>${t_ftotal}</t_ftotal>
             <force_lp_gain>${force_lp_gain}</force_lp_gain>
             <flock_force_limit>${flock_force_limit}</flock_force_limit>
 

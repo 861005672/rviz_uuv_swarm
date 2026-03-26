@@ -1,0 +1,205 @@
+obstacles:
+- name: terrain_box_0
+  ref_coord: NED
+  type: box
+  position: [1260.0, 0.0, 119.0]
+  scale: [1000.0, 1000.0, 2.0]
+  color: &id001 [0.5, 0.5, 0.5, 0.99]
+- name: standalone_cyl_1
+  ref_coord: NED
+  type: cylinder
+  position: [965.39, -25.84, -27.19]
+  scale: [20.0, 20.0, 294.39]
+  color: *id001
+- name: standalone_cyl_2
+  ref_coord: NED
+  type: cylinder
+  position: [953.56, 47.38, 5.06]
+  scale: [20.0, 20.0, 229.88]
+  color: *id001
+- name: standalone_cyl_3
+  ref_coord: NED
+  type: cylinder
+  position: [918.98, 55.48, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_4
+  ref_coord: NED
+  type: cylinder
+  position: [918.98, 55.48, 69.0]
+  scale: [20.0, 20.0, 102.0]
+  color: *id001
+- name: standalone_cyl_5
+  ref_coord: NED
+  type: cylinder
+  position: [1043.55, 273.71, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_6
+  ref_coord: NED
+  type: cylinder
+  position: [1043.55, 273.71, 69.0]
+  scale: [20.0, 20.0, 102.0]
+  color: *id001
+- name: standalone_cyl_7
+  ref_coord: NED
+  type: cylinder
+  position: [1336.17, 305.1, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_8
+  ref_coord: NED
+  type: cylinder
+  position: [1178.73, 323.26, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_9
+  ref_coord: NED
+  type: cylinder
+  position: [1211.56, -221.21, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_10
+  ref_coord: NED
+  type: cylinder
+  position: [1086.68, -238.44, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_11
+  ref_coord: NED
+  type: cylinder
+  position: [1156.61, 0.17, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_12
+  ref_coord: NED
+  type: cylinder
+  position: [1357.52, -58.42, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_13
+  ref_coord: NED
+  type: cylinder
+  position: [1470.06, -20.75, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_14
+  ref_coord: NED
+  type: cylinder
+  position: [1369.83, 36.33, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_15
+  ref_coord: NED
+  type: cylinder
+  position: [1479.6, -314.98, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_16
+  ref_coord: NED
+  type: cylinder
+  position: [902.33, -270.85, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_17
+  ref_coord: NED
+  type: cylinder
+  position: [1538.1, 328.09, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_18
+  ref_coord: NED
+  type: cylinder
+  position: [1590.26, 58.2, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_19
+  ref_coord: NED
+  type: cylinder
+  position: [1298.59, 60.41, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_20
+  ref_coord: NED
+  type: cylinder
+  position: [886.12, 235.61, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_21
+  ref_coord: NED
+  type: cylinder
+  position: [1645.91, -271.03, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_22
+  ref_coord: NED
+  type: cylinder
+  position: [884.46, -161.35, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_23
+  ref_coord: NED
+  type: cylinder
+  position: [1509.72, 392.79, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_24
+  ref_coord: NED
+  type: cylinder
+  position: [1089.19, 369.08, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_25
+  ref_coord: NED
+  type: cylinder
+  position: [1430.64, 85.1, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_26
+  ref_coord: NED
+  type: cylinder
+  position: [1437.67, -383.39, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_27
+  ref_coord: NED
+  type: cylinder
+  position: [939.38, 363.52, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_28
+  ref_coord: NED
+  type: cylinder
+  position: [1212.54, 51.64, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_29
+  ref_coord: NED
+  type: cylinder
+  position: [836.02, -83.37, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_30
+  ref_coord: NED
+  type: cylinder
+  position: [866.01, 130.62, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_31
+  ref_coord: NED
+  type: cylinder
+  position: [1486.7, -198.89, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_32
+  ref_coord: NED
+  type: cylinder
+  position: [1213.89, -370.4, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001
+- name: standalone_cyl_33
+  ref_coord: NED
+  type: cylinder
+  position: [774.89, -91.99, 19.0]
+  scale: [20.0, 20.0, 202.0]
+  color: *id001

@@ -1,0 +1,1525 @@
+obstacles:
+- name: greedy_obs_0
+  ref_coord: NED
+  type: box
+  position: [970.0, -310.0, 99.0]
+  scale: [220.0, 380.0, 2.0]
+  color: &id001 [0.65, 0.75, 0.5, 0.5]
+- name: greedy_obs_1
+  ref_coord: NED
+  type: box
+  position: [870.0, -110.0, 50.0]
+  scale: [20.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_2
+  ref_coord: NED
+  type: box
+  position: [870.0, -90.0, 40.0]
+  scale: [20.0, 20.0, 120.0]
+  color: *id001
+- name: greedy_obs_3
+  ref_coord: NED
+  type: box
+  position: [870.0, -70.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_4
+  ref_coord: NED
+  type: box
+  position: [880.0, 220.0, 99.0]
+  scale: [40.0, 560.0, 2.0]
+  color: *id001
+- name: greedy_obs_5
+  ref_coord: NED
+  type: box
+  position: [890.0, -110.0, 20.0]
+  scale: [20.0, 20.0, 160.0]
+  color: *id001
+- name: greedy_obs_6
+  ref_coord: NED
+  type: box
+  position: [890.0, -90.0, -50.0]
+  scale: [20.0, 20.0, 300.0]
+  color: *id001
+- name: greedy_obs_7
+  ref_coord: NED
+  type: box
+  position: [890.0, -70.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_8
+  ref_coord: NED
+  type: box
+  position: [910.0, -110.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_9
+  ref_coord: NED
+  type: box
+  position: [910.0, -90.0, 0.0]
+  scale: [20.0, 20.0, 200.0]
+  color: *id001
+- name: greedy_obs_10
+  ref_coord: NED
+  type: box
+  position: [910.0, -70.0, 40.0]
+  scale: [20.0, 20.0, 120.0]
+  color: *id001
+- name: greedy_obs_11
+  ref_coord: NED
+  type: box
+  position: [910.0, -50.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_12
+  ref_coord: NED
+  type: box
+  position: [920.0, 230.0, 99.0]
+  scale: [40.0, 540.0, 2.0]
+  color: *id001
+- name: greedy_obs_13
+  ref_coord: NED
+  type: box
+  position: [930.0, -110.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_14
+  ref_coord: NED
+  type: box
+  position: [930.0, -80.0, 60.0]
+  scale: [20.0, 40.0, 80.0]
+  color: *id001
+- name: greedy_obs_15
+  ref_coord: NED
+  type: box
+  position: [940.0, -50.0, 90.0]
+  scale: [40.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_16
+  ref_coord: NED
+  type: box
+  position: [1150.0, -110.0, 99.0]
+  scale: [420.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_17
+  ref_coord: NED
+  type: box
+  position: [950.0, -90.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_18
+  ref_coord: NED
+  type: box
+  position: [950.0, -70.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_19
+  ref_coord: NED
+  type: box
+  position: [980.0, 40.0, 99.0]
+  scale: [80.0, 160.0, 2.0]
+  color: *id001
+- name: greedy_obs_20
+  ref_coord: NED
+  type: box
+  position: [960.0, 130.0, 100.0]
+  scale: [40.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_21
+  ref_coord: NED
+  type: box
+  position: [950.0, 150.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_22
+  ref_coord: NED
+  type: box
+  position: [950.0, 330.0, 99.0]
+  scale: [20.0, 340.0, 2.0]
+  color: *id001
+- name: greedy_obs_23
+  ref_coord: NED
+  type: box
+  position: [1160.0, -90.0, 99.0]
+  scale: [400.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_24
+  ref_coord: NED
+  type: box
+  position: [970.0, -60.0, 100.0]
+  scale: [20.0, 40.0, 0.0]
+  color: *id001
+- name: greedy_obs_25
+  ref_coord: NED
+  type: box
+  position: [970.0, 150.0, 50.0]
+  scale: [20.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_26
+  ref_coord: NED
+  type: box
+  position: [970.0, 170.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_27
+  ref_coord: NED
+  type: box
+  position: [980.0, 340.0, 99.0]
+  scale: [40.0, 320.0, 2.0]
+  color: *id001
+- name: greedy_obs_28
+  ref_coord: NED
+  type: box
+  position: [1190.0, -60.0, 99.0]
+  scale: [420.0, 40.0, 2.0]
+  color: *id001
+- name: greedy_obs_29
+  ref_coord: NED
+  type: box
+  position: [1060.0, 130.0, 99.0]
+  scale: [160.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_30
+  ref_coord: NED
+  type: box
+  position: [990.0, 150.0, 40.0]
+  scale: [20.0, 20.0, 120.0]
+  color: *id001
+- name: greedy_obs_31
+  ref_coord: NED
+  type: box
+  position: [990.0, 170.0, 30.0]
+  scale: [20.0, 20.0, 140.0]
+  color: *id001
+- name: greedy_obs_32
+  ref_coord: NED
+  type: box
+  position: [1300.0, 150.0, 99.0]
+  scale: [600.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_33
+  ref_coord: NED
+  type: box
+  position: [1010.0, 170.0, 60.0]
+  scale: [20.0, 20.0, 80.0]
+  color: *id001
+- name: greedy_obs_34
+  ref_coord: NED
+  type: box
+  position: [1020.0, 190.0, 70.0]
+  scale: [40.0, 20.0, 60.0]
+  color: *id001
+- name: greedy_obs_35
+  ref_coord: NED
+  type: box
+  position: [1010.0, 350.0, 99.0]
+  scale: [20.0, 300.0, 2.0]
+  color: *id001
+- name: greedy_obs_36
+  ref_coord: NED
+  type: box
+  position: [1110.0, 10.0, 99.0]
+  scale: [180.0, 100.0, 2.0]
+  color: *id001
+- name: greedy_obs_37
+  ref_coord: NED
+  type: box
+  position: [1030.0, 80.0, 70.0]
+  scale: [20.0, 40.0, 60.0]
+  color: *id001
+- name: greedy_obs_38
+  ref_coord: NED
+  type: box
+  position: [1040.0, 110.0, 99.0]
+  scale: [40.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_39
+  ref_coord: NED
+  type: box
+  position: [1030.0, 170.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_40
+  ref_coord: NED
+  type: box
+  position: [1040.0, 210.0, 100.0]
+  scale: [40.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_41
+  ref_coord: NED
+  type: box
+  position: [1110.0, 360.0, 99.0]
+  scale: [180.0, 280.0, 2.0]
+  color: *id001
+- name: greedy_obs_42
+  ref_coord: NED
+  type: box
+  position: [1050.0, 80.0, 40.0]
+  scale: [20.0, 40.0, 120.0]
+  color: *id001
+- name: greedy_obs_43
+  ref_coord: NED
+  type: box
+  position: [1450.0, 170.0, 99.0]
+  scale: [820.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_44
+  ref_coord: NED
+  type: box
+  position: [1050.0, 190.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_45
+  ref_coord: NED
+  type: box
+  position: [1070.0, 70.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_46
+  ref_coord: NED
+  type: box
+  position: [1070.0, 90.0, 70.0]
+  scale: [20.0, 20.0, 60.0]
+  color: *id001
+- name: greedy_obs_47
+  ref_coord: NED
+  type: box
+  position: [1080.0, 110.0, 100.0]
+  scale: [40.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_48
+  ref_coord: NED
+  type: box
+  position: [1460.0, 200.0, 99.0]
+  scale: [800.0, 40.0, 2.0]
+  color: *id001
+- name: greedy_obs_49
+  ref_coord: NED
+  type: box
+  position: [1100.0, -350.0, 99.0]
+  scale: [40.0, 300.0, 2.0]
+  color: *id001
+- name: greedy_obs_50
+  ref_coord: NED
+  type: box
+  position: [1090.0, -190.0, 10.0]
+  scale: [20.0, 20.0, 180.0]
+  color: *id001
+- name: greedy_obs_51
+  ref_coord: NED
+  type: box
+  position: [1090.0, -170.0, 0.0]
+  scale: [20.0, 20.0, 200.0]
+  color: *id001
+- name: greedy_obs_52
+  ref_coord: NED
+  type: box
+  position: [1090.0, -140.0, 99.0]
+  scale: [20.0, 40.0, 2.0]
+  color: *id001
+- name: greedy_obs_53
+  ref_coord: NED
+  type: box
+  position: [1150.0, 70.0, 99.0]
+  scale: [140.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_54
+  ref_coord: NED
+  type: box
+  position: [1110.0, 90.0, 90.0]
+  scale: [60.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_55
+  ref_coord: NED
+  type: box
+  position: [1110.0, -190.0, -20.0]
+  scale: [20.0, 20.0, 240.0]
+  color: *id001
+- name: greedy_obs_56
+  ref_coord: NED
+  type: box
+  position: [1110.0, -170.0, -50.0]
+  scale: [20.0, 20.0, 300.0]
+  color: *id001
+- name: greedy_obs_57
+  ref_coord: NED
+  type: box
+  position: [1110.0, -150.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_58
+  ref_coord: NED
+  type: box
+  position: [1120.0, -130.0, 99.0]
+  scale: [40.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_59
+  ref_coord: NED
+  type: box
+  position: [1110.0, 110.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_60
+  ref_coord: NED
+  type: box
+  position: [1130.0, -440.0, 99.0]
+  scale: [20.0, 120.0, 2.0]
+  color: *id001
+- name: greedy_obs_61
+  ref_coord: NED
+  type: box
+  position: [1130.0, -370.0, 40.0]
+  scale: [20.0, 20.0, 120.0]
+  color: *id001
+- name: greedy_obs_62
+  ref_coord: NED
+  type: box
+  position: [1130.0, -280.0, 99.0]
+  scale: [20.0, 160.0, 2.0]
+  color: *id001
+- name: greedy_obs_63
+  ref_coord: NED
+  type: box
+  position: [1130.0, -190.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_64
+  ref_coord: NED
+  type: box
+  position: [1130.0, -160.0, 60.0]
+  scale: [20.0, 40.0, 80.0]
+  color: *id001
+- name: greedy_obs_65
+  ref_coord: NED
+  type: box
+  position: [1130.0, 110.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_66
+  ref_coord: NED
+  type: box
+  position: [1500.0, -450.0, 99.0]
+  scale: [720.0, 100.0, 2.0]
+  color: *id001
+- name: greedy_obs_67
+  ref_coord: NED
+  type: box
+  position: [1150.0, -390.0, 50.0]
+  scale: [20.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_68
+  ref_coord: NED
+  type: box
+  position: [1150.0, -370.0, -10.0]
+  scale: [20.0, 20.0, 220.0]
+  color: *id001
+- name: greedy_obs_69
+  ref_coord: NED
+  type: box
+  position: [1150.0, -350.0, 60.0]
+  scale: [20.0, 20.0, 80.0]
+  color: *id001
+- name: greedy_obs_70
+  ref_coord: NED
+  type: box
+  position: [1160.0, -250.0, 99.0]
+  scale: [40.0, 180.0, 2.0]
+  color: *id001
+- name: greedy_obs_71
+  ref_coord: NED
+  type: box
+  position: [1150.0, -150.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_72
+  ref_coord: NED
+  type: box
+  position: [1150.0, -130.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_73
+  ref_coord: NED
+  type: box
+  position: [1190.0, 90.0, 99.0]
+  scale: [100.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_74
+  ref_coord: NED
+  type: box
+  position: [1150.0, 110.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_75
+  ref_coord: NED
+  type: box
+  position: [1150.0, 130.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_76
+  ref_coord: NED
+  type: box
+  position: [1510.0, -390.0, 99.0]
+  scale: [700.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_77
+  ref_coord: NED
+  type: box
+  position: [1170.0, -370.0, 30.0]
+  scale: [20.0, 20.0, 140.0]
+  color: *id001
+- name: greedy_obs_78
+  ref_coord: NED
+  type: box
+  position: [1170.0, -350.0, 20.0]
+  scale: [20.0, 20.0, 160.0]
+  color: *id001
+- name: greedy_obs_79
+  ref_coord: NED
+  type: box
+  position: [1170.0, -150.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_80
+  ref_coord: NED
+  type: box
+  position: [1400.0, -130.0, 99.0]
+  scale: [480.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_81
+  ref_coord: NED
+  type: box
+  position: [1220.0, 120.0, 99.0]
+  scale: [120.0, 40.0, 2.0]
+  color: *id001
+- name: greedy_obs_82
+  ref_coord: NED
+  type: box
+  position: [1190.0, -370.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_83
+  ref_coord: NED
+  type: box
+  position: [1190.0, -350.0, 60.0]
+  scale: [20.0, 20.0, 80.0]
+  color: *id001
+- name: greedy_obs_84
+  ref_coord: NED
+  type: box
+  position: [1190.0, -330.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_85
+  ref_coord: NED
+  type: box
+  position: [1230.0, -230.0, 99.0]
+  scale: [100.0, 180.0, 2.0]
+  color: *id001
+- name: greedy_obs_86
+  ref_coord: NED
+  type: box
+  position: [1340.0, -370.0, 99.0]
+  scale: [280.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_87
+  ref_coord: NED
+  type: box
+  position: [1210.0, -350.0, 70.0]
+  scale: [20.0, 20.0, 60.0]
+  color: *id001
+- name: greedy_obs_88
+  ref_coord: NED
+  type: box
+  position: [1220.0, -330.0, 90.0]
+  scale: [40.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_89
+  ref_coord: NED
+  type: box
+  position: [1230.0, -10.0, 99.0]
+  scale: [60.0, 60.0, 2.0]
+  color: *id001
+- name: greedy_obs_90
+  ref_coord: NED
+  type: box
+  position: [1210.0, 30.0, 60.0]
+  scale: [20.0, 20.0, 80.0]
+  color: *id001
+- name: greedy_obs_91
+  ref_coord: NED
+  type: box
+  position: [1220.0, 50.0, -30.0]
+  scale: [40.0, 20.0, 260.0]
+  color: *id001
+- name: greedy_obs_92
+  ref_coord: NED
+  type: box
+  position: [1530.0, 250.0, 99.0]
+  scale: [660.0, 60.0, 2.0]
+  color: *id001
+- name: greedy_obs_93
+  ref_coord: NED
+  type: box
+  position: [1220.0, 290.0, 20.0]
+  scale: [40.0, 20.0, 160.0]
+  color: *id001
+- name: greedy_obs_94
+  ref_coord: NED
+  type: box
+  position: [1210.0, 310.0, 10.0]
+  scale: [20.0, 20.0, 180.0]
+  color: *id001
+- name: greedy_obs_95
+  ref_coord: NED
+  type: box
+  position: [1210.0, 410.0, 99.0]
+  scale: [20.0, 180.0, 2.0]
+  color: *id001
+- name: greedy_obs_96
+  ref_coord: NED
+  type: box
+  position: [1230.0, -350.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_97
+  ref_coord: NED
+  type: box
+  position: [1230.0, 30.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_98
+  ref_coord: NED
+  type: box
+  position: [1230.0, 70.0, 70.0]
+  scale: [20.0, 20.0, 60.0]
+  color: *id001
+- name: greedy_obs_99
+  ref_coord: NED
+  type: box
+  position: [1230.0, 310.0, -40.0]
+  scale: [20.0, 20.0, 280.0]
+  color: *id001
+- name: greedy_obs_100
+  ref_coord: NED
+  type: box
+  position: [1230.0, 330.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_101
+  ref_coord: NED
+  type: box
+  position: [1240.0, 420.0, 99.0]
+  scale: [40.0, 160.0, 2.0]
+  color: *id001
+- name: greedy_obs_102
+  ref_coord: NED
+  type: box
+  position: [1360.0, -340.0, 99.0]
+  scale: [240.0, 40.0, 2.0]
+  color: *id001
+- name: greedy_obs_103
+  ref_coord: NED
+  type: box
+  position: [1250.0, 30.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_104
+  ref_coord: NED
+  type: box
+  position: [1250.0, 50.0, 70.0]
+  scale: [20.0, 20.0, 60.0]
+  color: *id001
+- name: greedy_obs_105
+  ref_coord: NED
+  type: box
+  position: [1250.0, 70.0, 50.0]
+  scale: [20.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_106
+  ref_coord: NED
+  type: box
+  position: [1250.0, 90.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_107
+  ref_coord: NED
+  type: box
+  position: [1340.0, 290.0, 99.0]
+  scale: [200.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_108
+  ref_coord: NED
+  type: box
+  position: [1250.0, 310.0, 40.0]
+  scale: [20.0, 20.0, 120.0]
+  color: *id001
+- name: greedy_obs_109
+  ref_coord: NED
+  type: box
+  position: [1250.0, 330.0, 50.0]
+  scale: [20.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_110
+  ref_coord: NED
+  type: box
+  position: [1560.0, -30.0, 99.0]
+  scale: [600.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_111
+  ref_coord: NED
+  type: box
+  position: [1270.0, -10.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_112
+  ref_coord: NED
+  type: box
+  position: [1270.0, 10.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_113
+  ref_coord: NED
+  type: box
+  position: [1270.0, 40.0, 99.0]
+  scale: [20.0, 40.0, 2.0]
+  color: *id001
+- name: greedy_obs_114
+  ref_coord: NED
+  type: box
+  position: [1270.0, 80.0, 80.0]
+  scale: [20.0, 40.0, 40.0]
+  color: *id001
+- name: greedy_obs_115
+  ref_coord: NED
+  type: box
+  position: [1350.0, 310.0, 99.0]
+  scale: [180.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_116
+  ref_coord: NED
+  type: box
+  position: [1270.0, 330.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_117
+  ref_coord: NED
+  type: box
+  position: [1270.0, 350.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_118
+  ref_coord: NED
+  type: box
+  position: [1560.0, 430.0, 99.0]
+  scale: [600.0, 140.0, 2.0]
+  color: *id001
+- name: greedy_obs_119
+  ref_coord: NED
+  type: box
+  position: [1570.0, -300.0, 99.0]
+  scale: [580.0, 40.0, 2.0]
+  color: *id001
+- name: greedy_obs_120
+  ref_coord: NED
+  type: box
+  position: [1290.0, -260.0, 60.0]
+  scale: [20.0, 40.0, 80.0]
+  color: *id001
+- name: greedy_obs_121
+  ref_coord: NED
+  type: box
+  position: [1310.0, -190.0, 99.0]
+  scale: [60.0, 100.0, 2.0]
+  color: *id001
+- name: greedy_obs_122
+  ref_coord: NED
+  type: box
+  position: [1300.0, -10.0, 50.0]
+  scale: [40.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_123
+  ref_coord: NED
+  type: box
+  position: [1290.0, 10.0, -20.0]
+  scale: [20.0, 20.0, 240.0]
+  color: *id001
+- name: greedy_obs_124
+  ref_coord: NED
+  type: box
+  position: [1290.0, 30.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_125
+  ref_coord: NED
+  type: box
+  position: [1320.0, 60.0, 99.0]
+  scale: [80.0, 40.0, 2.0]
+  color: *id001
+- name: greedy_obs_126
+  ref_coord: NED
+  type: box
+  position: [1290.0, 90.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_127
+  ref_coord: NED
+  type: box
+  position: [1290.0, 110.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_128
+  ref_coord: NED
+  type: box
+  position: [1410.0, 130.0, 99.0]
+  scale: [260.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_129
+  ref_coord: NED
+  type: box
+  position: [1290.0, 340.0, 100.0]
+  scale: [20.0, 40.0, 0.0]
+  color: *id001
+- name: greedy_obs_130
+  ref_coord: NED
+  type: box
+  position: [1310.0, -270.0, 30.0]
+  scale: [20.0, 20.0, 140.0]
+  color: *id001
+- name: greedy_obs_131
+  ref_coord: NED
+  type: box
+  position: [1310.0, -250.0, 10.0]
+  scale: [20.0, 20.0, 180.0]
+  color: *id001
+- name: greedy_obs_132
+  ref_coord: NED
+  type: box
+  position: [1310.0, 10.0, -40.0]
+  scale: [20.0, 20.0, 280.0]
+  color: *id001
+- name: greedy_obs_133
+  ref_coord: NED
+  type: box
+  position: [1310.0, 30.0, 70.0]
+  scale: [20.0, 20.0, 60.0]
+  color: *id001
+- name: greedy_obs_134
+  ref_coord: NED
+  type: box
+  position: [1410.0, 100.0, 99.0]
+  scale: [220.0, 40.0, 2.0]
+  color: *id001
+- name: greedy_obs_135
+  ref_coord: NED
+  type: box
+  position: [1370.0, 340.0, 99.0]
+  scale: [140.0, 40.0, 2.0]
+  color: *id001
+- name: greedy_obs_136
+  ref_coord: NED
+  type: box
+  position: [1330.0, -270.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_137
+  ref_coord: NED
+  type: box
+  position: [1330.0, -250.0, 60.0]
+  scale: [20.0, 20.0, 80.0]
+  color: *id001
+- name: greedy_obs_138
+  ref_coord: NED
+  type: box
+  position: [1590.0, -10.0, 99.0]
+  scale: [540.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_139
+  ref_coord: NED
+  type: box
+  position: [1330.0, 10.0, 70.0]
+  scale: [20.0, 20.0, 60.0]
+  color: *id001
+- name: greedy_obs_140
+  ref_coord: NED
+  type: box
+  position: [1330.0, 30.0, 60.0]
+  scale: [20.0, 20.0, 80.0]
+  color: *id001
+- name: greedy_obs_141
+  ref_coord: NED
+  type: box
+  position: [1350.0, -270.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_142
+  ref_coord: NED
+  type: box
+  position: [1350.0, -250.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_143
+  ref_coord: NED
+  type: box
+  position: [1350.0, -230.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_144
+  ref_coord: NED
+  type: box
+  position: [1410.0, -180.0, 99.0]
+  scale: [140.0, 80.0, 2.0]
+  color: *id001
+- name: greedy_obs_145
+  ref_coord: NED
+  type: box
+  position: [1350.0, 10.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_146
+  ref_coord: NED
+  type: box
+  position: [1350.0, 30.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_147
+  ref_coord: NED
+  type: box
+  position: [1610.0, -270.0, 99.0]
+  scale: [500.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_148
+  ref_coord: NED
+  type: box
+  position: [1370.0, -250.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_149
+  ref_coord: NED
+  type: box
+  position: [1410.0, -230.0, 99.0]
+  scale: [100.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_150
+  ref_coord: NED
+  type: box
+  position: [1370.0, -100.0, 40.0]
+  scale: [20.0, 40.0, 120.0]
+  color: *id001
+- name: greedy_obs_151
+  ref_coord: NED
+  type: box
+  position: [1490.0, 10.0, 99.0]
+  scale: [260.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_152
+  ref_coord: NED
+  type: box
+  position: [1370.0, 30.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_153
+  ref_coord: NED
+  type: box
+  position: [1370.0, 50.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_154
+  ref_coord: NED
+  type: box
+  position: [1530.0, 70.0, 99.0]
+  scale: [340.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_155
+  ref_coord: NED
+  type: box
+  position: [1620.0, -250.0, 99.0]
+  scale: [480.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_156
+  ref_coord: NED
+  type: box
+  position: [1390.0, -110.0, 20.0]
+  scale: [20.0, 20.0, 160.0]
+  color: *id001
+- name: greedy_obs_157
+  ref_coord: NED
+  type: box
+  position: [1390.0, -90.0, -10.0]
+  scale: [20.0, 20.0, 220.0]
+  color: *id001
+- name: greedy_obs_158
+  ref_coord: NED
+  type: box
+  position: [1500.0, 40.0, 99.0]
+  scale: [240.0, 40.0, 2.0]
+  color: *id001
+- name: greedy_obs_159
+  ref_coord: NED
+  type: box
+  position: [1410.0, -110.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_160
+  ref_coord: NED
+  type: box
+  position: [1410.0, -90.0, 20.0]
+  scale: [20.0, 20.0, 160.0]
+  color: *id001
+- name: greedy_obs_161
+  ref_coord: NED
+  type: box
+  position: [1410.0, -70.0, 70.0]
+  scale: [20.0, 20.0, 60.0]
+  color: *id001
+- name: greedy_obs_162
+  ref_coord: NED
+  type: box
+  position: [1420.0, -50.0, 99.0]
+  scale: [40.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_163
+  ref_coord: NED
+  type: box
+  position: [1530.0, -110.0, 99.0]
+  scale: [220.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_164
+  ref_coord: NED
+  type: box
+  position: [1430.0, -90.0, 60.0]
+  scale: [20.0, 20.0, 80.0]
+  color: *id001
+- name: greedy_obs_165
+  ref_coord: NED
+  type: box
+  position: [1430.0, -70.0, 50.0]
+  scale: [20.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_166
+  ref_coord: NED
+  type: box
+  position: [1550.0, -90.0, 99.0]
+  scale: [220.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_167
+  ref_coord: NED
+  type: box
+  position: [1450.0, -70.0, 70.0]
+  scale: [20.0, 20.0, 60.0]
+  color: *id001
+- name: greedy_obs_168
+  ref_coord: NED
+  type: box
+  position: [1460.0, -50.0, 90.0]
+  scale: [40.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_169
+  ref_coord: NED
+  type: box
+  position: [1450.0, 290.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_170
+  ref_coord: NED
+  type: box
+  position: [1450.0, 320.0, 50.0]
+  scale: [20.0, 40.0, 100.0]
+  color: *id001
+- name: greedy_obs_171
+  ref_coord: NED
+  type: box
+  position: [1480.0, 350.0, 99.0]
+  scale: [80.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_172
+  ref_coord: NED
+  type: box
+  position: [1470.0, -230.0, 50.0]
+  scale: [20.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_173
+  ref_coord: NED
+  type: box
+  position: [1470.0, -70.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_174
+  ref_coord: NED
+  type: box
+  position: [1470.0, 290.0, 50.0]
+  scale: [20.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_175
+  ref_coord: NED
+  type: box
+  position: [1470.0, 310.0, -20.0]
+  scale: [20.0, 20.0, 240.0]
+  color: *id001
+- name: greedy_obs_176
+  ref_coord: NED
+  type: box
+  position: [1470.0, 330.0, 50.0]
+  scale: [20.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_177
+  ref_coord: NED
+  type: box
+  position: [1490.0, -370.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_178
+  ref_coord: NED
+  type: box
+  position: [1490.0, -350.0, 60.0]
+  scale: [20.0, 20.0, 80.0]
+  color: *id001
+- name: greedy_obs_179
+  ref_coord: NED
+  type: box
+  position: [1490.0, -330.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_180
+  ref_coord: NED
+  type: box
+  position: [1490.0, -230.0, 0.0]
+  scale: [20.0, 20.0, 200.0]
+  color: *id001
+- name: greedy_obs_181
+  ref_coord: NED
+  type: box
+  position: [1490.0, -210.0, 50.0]
+  scale: [20.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_182
+  ref_coord: NED
+  type: box
+  position: [1670.0, -170.0, 99.0]
+  scale: [380.0, 60.0, 2.0]
+  color: *id001
+- name: greedy_obs_183
+  ref_coord: NED
+  type: box
+  position: [1490.0, -60.0, 100.0]
+  scale: [20.0, 40.0, 0.0]
+  color: *id001
+- name: greedy_obs_184
+  ref_coord: NED
+  type: box
+  position: [1490.0, 290.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_185
+  ref_coord: NED
+  type: box
+  position: [1490.0, 310.0, 30.0]
+  scale: [20.0, 20.0, 140.0]
+  color: *id001
+- name: greedy_obs_186
+  ref_coord: NED
+  type: box
+  position: [1490.0, 330.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_187
+  ref_coord: NED
+  type: box
+  position: [1510.0, -370.0, 50.0]
+  scale: [20.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_188
+  ref_coord: NED
+  type: box
+  position: [1520.0, -350.0, 10.0]
+  scale: [40.0, 20.0, 180.0]
+  color: *id001
+- name: greedy_obs_189
+  ref_coord: NED
+  type: box
+  position: [1520.0, -330.0, 70.0]
+  scale: [40.0, 20.0, 60.0]
+  color: *id001
+- name: greedy_obs_190
+  ref_coord: NED
+  type: box
+  position: [1510.0, -230.0, 50.0]
+  scale: [20.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_191
+  ref_coord: NED
+  type: box
+  position: [1510.0, -210.0, 0.0]
+  scale: [20.0, 20.0, 200.0]
+  color: *id001
+- name: greedy_obs_192
+  ref_coord: NED
+  type: box
+  position: [1680.0, -60.0, 99.0]
+  scale: [360.0, 40.0, 2.0]
+  color: *id001
+- name: greedy_obs_193
+  ref_coord: NED
+  type: box
+  position: [1680.0, 290.0, 99.0]
+  scale: [360.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_194
+  ref_coord: NED
+  type: box
+  position: [1510.0, 320.0, 50.0]
+  scale: [20.0, 40.0, 100.0]
+  color: *id001
+- name: greedy_obs_195
+  ref_coord: NED
+  type: box
+  position: [1530.0, -370.0, 60.0]
+  scale: [20.0, 20.0, 80.0]
+  color: *id001
+- name: greedy_obs_196
+  ref_coord: NED
+  type: box
+  position: [1690.0, -230.0, 99.0]
+  scale: [340.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_197
+  ref_coord: NED
+  type: box
+  position: [1530.0, -210.0, 50.0]
+  scale: [20.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_198
+  ref_coord: NED
+  type: box
+  position: [1540.0, 90.0, 70.0]
+  scale: [40.0, 20.0, 60.0]
+  color: *id001
+- name: greedy_obs_199
+  ref_coord: NED
+  type: box
+  position: [1530.0, 110.0, 50.0]
+  scale: [20.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_200
+  ref_coord: NED
+  type: box
+  position: [1690.0, 310.0, 99.0]
+  scale: [340.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_201
+  ref_coord: NED
+  type: box
+  position: [1530.0, 330.0, 70.0]
+  scale: [20.0, 20.0, 60.0]
+  color: *id001
+- name: greedy_obs_202
+  ref_coord: NED
+  type: box
+  position: [1540.0, 350.0, 90.0]
+  scale: [40.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_203
+  ref_coord: NED
+  type: box
+  position: [1550.0, -370.0, 70.0]
+  scale: [20.0, 20.0, 60.0]
+  color: *id001
+- name: greedy_obs_204
+  ref_coord: NED
+  type: box
+  position: [1550.0, -350.0, 40.0]
+  scale: [20.0, 20.0, 120.0]
+  color: *id001
+- name: greedy_obs_205
+  ref_coord: NED
+  type: box
+  position: [1560.0, -330.0, 80.0]
+  scale: [40.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_206
+  ref_coord: NED
+  type: box
+  position: [1700.0, -210.0, 99.0]
+  scale: [320.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_207
+  ref_coord: NED
+  type: box
+  position: [1550.0, 110.0, 0.0]
+  scale: [20.0, 20.0, 200.0]
+  color: *id001
+- name: greedy_obs_208
+  ref_coord: NED
+  type: box
+  position: [1550.0, 130.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_209
+  ref_coord: NED
+  type: box
+  position: [1550.0, 330.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_210
+  ref_coord: NED
+  type: box
+  position: [1580.0, -370.0, 90.0]
+  scale: [40.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_211
+  ref_coord: NED
+  type: box
+  position: [1570.0, -350.0, 70.0]
+  scale: [20.0, 20.0, 60.0]
+  color: *id001
+- name: greedy_obs_212
+  ref_coord: NED
+  type: box
+  position: [1710.0, 90.0, 99.0]
+  scale: [300.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_213
+  ref_coord: NED
+  type: box
+  position: [1570.0, 110.0, 40.0]
+  scale: [20.0, 20.0, 120.0]
+  color: *id001
+- name: greedy_obs_214
+  ref_coord: NED
+  type: box
+  position: [1570.0, 130.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_215
+  ref_coord: NED
+  type: box
+  position: [1710.0, 330.0, 99.0]
+  scale: [300.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_216
+  ref_coord: NED
+  type: box
+  position: [1570.0, 350.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_217
+  ref_coord: NED
+  type: box
+  position: [1590.0, -350.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_218
+  ref_coord: NED
+  type: box
+  position: [1600.0, -330.0, 90.0]
+  scale: [40.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_219
+  ref_coord: NED
+  type: box
+  position: [1590.0, 120.0, 70.0]
+  scale: [20.0, 40.0, 60.0]
+  color: *id001
+- name: greedy_obs_220
+  ref_coord: NED
+  type: box
+  position: [1720.0, 350.0, 99.0]
+  scale: [280.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_221
+  ref_coord: NED
+  type: box
+  position: [1610.0, -370.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_222
+  ref_coord: NED
+  type: box
+  position: [1610.0, -350.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_223
+  ref_coord: NED
+  type: box
+  position: [1610.0, 110.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_224
+  ref_coord: NED
+  type: box
+  position: [1610.0, 130.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_225
+  ref_coord: NED
+  type: box
+  position: [1620.0, 150.0, 100.0]
+  scale: [40.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_226
+  ref_coord: NED
+  type: box
+  position: [1740.0, -370.0, 99.0]
+  scale: [240.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_227
+  ref_coord: NED
+  type: box
+  position: [1630.0, -340.0, 100.0]
+  scale: [20.0, 40.0, 0.0]
+  color: *id001
+- name: greedy_obs_228
+  ref_coord: NED
+  type: box
+  position: [1640.0, 10.0, 100.0]
+  scale: [40.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_229
+  ref_coord: NED
+  type: box
+  position: [1630.0, 30.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_230
+  ref_coord: NED
+  type: box
+  position: [1630.0, 50.0, 99.0]
+  scale: [20.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_231
+  ref_coord: NED
+  type: box
+  position: [1740.0, 110.0, 99.0]
+  scale: [240.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_232
+  ref_coord: NED
+  type: box
+  position: [1630.0, 130.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_233
+  ref_coord: NED
+  type: box
+  position: [1750.0, -340.0, 99.0]
+  scale: [220.0, 40.0, 2.0]
+  color: *id001
+- name: greedy_obs_234
+  ref_coord: NED
+  type: box
+  position: [1650.0, -130.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_235
+  ref_coord: NED
+  type: box
+  position: [1650.0, -110.0, 50.0]
+  scale: [20.0, 20.0, 100.0]
+  color: *id001
+- name: greedy_obs_236
+  ref_coord: NED
+  type: box
+  position: [1660.0, 30.0, 70.0]
+  scale: [40.0, 20.0, 60.0]
+  color: *id001
+- name: greedy_obs_237
+  ref_coord: NED
+  type: box
+  position: [1650.0, 50.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_238
+  ref_coord: NED
+  type: box
+  position: [1750.0, 140.0, 99.0]
+  scale: [220.0, 40.0, 2.0]
+  color: *id001
+- name: greedy_obs_239
+  ref_coord: NED
+  type: box
+  position: [1670.0, -130.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_240
+  ref_coord: NED
+  type: box
+  position: [1670.0, -110.0, 10.0]
+  scale: [20.0, 20.0, 180.0]
+  color: *id001
+- name: greedy_obs_241
+  ref_coord: NED
+  type: box
+  position: [1670.0, -90.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_242
+  ref_coord: NED
+  type: box
+  position: [1760.0, 10.0, 99.0]
+  scale: [200.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_243
+  ref_coord: NED
+  type: box
+  position: [1680.0, 50.0, 80.0]
+  scale: [40.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_244
+  ref_coord: NED
+  type: box
+  position: [1770.0, -130.0, 99.0]
+  scale: [180.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_245
+  ref_coord: NED
+  type: box
+  position: [1690.0, -110.0, 80.0]
+  scale: [20.0, 20.0, 40.0]
+  color: *id001
+- name: greedy_obs_246
+  ref_coord: NED
+  type: box
+  position: [1690.0, -90.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_247
+  ref_coord: NED
+  type: box
+  position: [1690.0, 30.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_248
+  ref_coord: NED
+  type: box
+  position: [1710.0, -110.0, 90.0]
+  scale: [20.0, 20.0, 20.0]
+  color: *id001
+- name: greedy_obs_249
+  ref_coord: NED
+  type: box
+  position: [1710.0, -90.0, 100.0]
+  scale: [20.0, 20.0, 0.0]
+  color: *id001
+- name: greedy_obs_250
+  ref_coord: NED
+  type: box
+  position: [1780.0, 30.0, 99.0]
+  scale: [160.0, 20.0, 2.0]
+  color: *id001
+- name: greedy_obs_251
+  ref_coord: NED
+  type: box
+  position: [1710.0, 60.0, 100.0]
+  scale: [20.0, 40.0, 0.0]
+  color: *id001
+- name: greedy_obs_252
+  ref_coord: NED
+  type: box
+  position: [1790.0, -100.0, 99.0]
+  scale: [140.0, 40.0, 2.0]
+  color: *id001
+- name: greedy_obs_253
+  ref_coord: NED
+  type: box
+  position: [1790.0, 60.0, 99.0]
+  scale: [140.0, 40.0, 2.0]
+  color: *id001

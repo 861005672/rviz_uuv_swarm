@@ -806,7 +806,14 @@ private:
         avoid_dir_smooth_ = alpha_obs * avoid_dir_smooth_ + (1.0 - alpha_obs) * avoid_trend_sum;
 
         double projection = avoid_dir_smooth_.dot(sonar_plane_normal);
-        if (std::abs(projection) < 0.1) projection = 1.0; 
+        if (std::abs(projection) < 1e-4) { 
+            // 此时处于绝对对称的奇异点，利用集群自身的拓扑位置进行破局分流
+            if (state.y > vTgt_.pos.y()) {
+                projection = -1.0; // 靠右的 UUV 往右侧绕
+            } else {
+                projection = 1.0;  // 靠左的 UUV 往左侧绕
+            }
+        }
         Eigen::Vector3d rotate_axis = (projection > 0) ? sonar_plane_normal : -sonar_plane_normal;
 
         // 【模块 E：结合注意力机制的斥力解算】
@@ -996,14 +1003,20 @@ private:
             while (yaw_err > M_PI)  yaw_err -= 2.0 * M_PI;
             while (yaw_err < -M_PI) yaw_err += 2.0 * M_PI;
 
-            // 3. 防鬼畜侧滑逻辑
-            if (yaw_err > M_PI / 2.0) {
-                // 受力在左后方 -> 坚决不向左猛打180度！机头向右微调，保持前进姿态侧滑避让
-                yaw_err = M_PI - yaw_err; 
-            } else if (yaw_err < -M_PI / 2.0) {
-                // 受力在右后方 -> 机头向左微调，侧滑避让
-                yaw_err = -M_PI - yaw_err; 
-            }
+            // // 3. 防鬼畜侧滑逻辑
+            // if (yaw_err > M_PI / 2.0) {
+            //     // 受力在左后方 -> 坚决不向左猛打180度！机头向右微调，保持前进姿态侧滑避让
+            //     yaw_err = M_PI - yaw_err; 
+            // } else if (yaw_err < -M_PI / 2.0) {
+            //     // 受力在右后方 -> 机头向左微调，侧滑避让
+            //     yaw_err = -M_PI - yaw_err; 
+            // }
+
+            // 🌟 替换为：引入“阿克曼”式柔性舵角限幅 (Steering Saturation)            #####   注意，这个是20260326修改的，为的是尝试解决时延下集群避障时的回转现象，有点作用，它替换的是上面那段注释
+            double max_steer_rad = 45.0 * M_PI / 180.0; // 限制单次最大期望偏航角偏差为 45度
+            yaw_err = uuv_interface::softClampScl(yaw_err, -max_steer_rad, max_steer_rad, max_steer_rad / 4.0);
+            // 🌟 替换为：引入“阿克曼”式柔性舵角限幅 (Steering Saturation)            #####   注意，这个是20260326修改的，未的是尝试解决时延下集群避障时的回转现象，有点作用，它替换的是上面那段注释
+
 
             // 4. 将安全处理后的误差加回当前机头，生成给底层 PID 的最终期望航向
             out.target_yaw = state.yaw + yaw_err;

@@ -17,3 +17,4 @@ logs/
 # 忽略代码生成的一些日志/缓存文件夹
 adynamic_launches/
 auuv_logs/
+*.bag

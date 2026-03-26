@@ -146,7 +146,7 @@ public:
         // traj_marker_.color.g = 0.0;
         // traj_marker_.color.b = 0.0;
         traj_marker_.color.a = 1.0;
-        traj_marker_.scale.x = 0.5;
+        traj_marker_.scale.x = 1.0;
 
         loadPluginsFromXML();
 

@@ -618,7 +618,7 @@ class UUVManager:
 
     def publish_swarm_state(self, uuvs, neighborhoods):
         """
-        计算并发布集群拓扑状态（代数连通度和连通分量数）
+        计算并发布集群拓扑状态（加权代数连通度和连通分量数）
         """
         n = len(uuvs)
         if n == 0:
@@ -627,25 +627,36 @@ class UUVManager:
         L_mat = np.zeros((n, n))
         uuv_indices = {uuv_name: idx for idx, uuv_name in enumerate(uuvs)}
         
-        # 构建无向图的拉普拉斯矩阵 (Laplacian Matrix)
+        # 构建加权无向图的拉普拉斯矩阵 (Weighted Laplacian Matrix)
         for uuv_i, nb_data in neighborhoods.items():
             idx_i = uuv_indices[uuv_i]
-            degree = 0
+            weighted_degree = 0.0
+            
             for nb in nb_data.neighbors:
                 if nb.uuv_name not in uuv_indices:
                     continue
                 idx_j = uuv_indices[nb.uuv_name]
-                L_mat[idx_i, idx_j] = -1.0
-                degree += 1
-            L_mat[idx_i, idx_i] = degree
+                
+                # 【核心修改】：计算基于距离的连续权重
+                # 距离越近，权重越接近 1.0；距离到达感知边缘 (nb_sense_radius)，权重平滑降为 0.0
+                weight = 1.0 - (nb.distance / self.nb_sense_radius)
+                
+                # 限幅保护，确保权重严格在 [0, 1] 之间
+                weight = max(0.0, min(1.0, weight))
+                
+                # 非对角线元素为负的权重，对角线元素为权重之和
+                L_mat[idx_i, idx_j] = -weight
+                weighted_degree += weight
+                
+            L_mat[idx_i, idx_i] = weighted_degree
             
         try:
             # 使用 np.linalg.eigvalsh 求对称矩阵的特征值（结果会自动从小到大排序）
             evals = np.linalg.eigvalsh(L_mat)
             
-            # 特征值为 0 的个数即为连通分量数
-            num_components = int(np.sum(evals < 1e-5))
-            # 代数连通度 (Algebraic Connectivity)
+            # 特征值接近 0 的个数即为连通分量数 (加权图中判定阈值需稍微放宽防浮点误差)
+            num_components = int(np.sum(evals < 1e-4))
+            # 代数连通度 (Algebraic Connectivity) 为第二小特征值
             alg_conn = float(evals[1]) if n > 1 else 0.0
             
         except Exception as e:

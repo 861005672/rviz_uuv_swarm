@@ -1,0 +1,75 @@
+# ========================================================
+# UUV 离散障碍物环境配置文件
+# ========================================================
+
+# === 【全局宏定义参数】 (修改这里的数值即可全局生效) ===
+definitions:
+  - &GLOBAL_COLOR  [0.5, 0.5, 0.5, 1.0]  # 障碍物统一颜色 (R, G, B, A)
+  - &GLOBAL_DEPTH  100.0                 # 统一深度坐标 (NED下的Z轴)
+  - &GLOBAL_HEIGHT 400.0                 # 统一物理高度
+
+# === 【障碍物列表】 ===
+obstacles:
+  - name: obs_cylinder_0
+    ref_coord: NED
+    type: cylinder
+    position: [1062.36, 0.91, *GLOBAL_DEPTH]
+    scale: [61.82, 61.82, *GLOBAL_HEIGHT]
+    color: *GLOBAL_COLOR
+
+  - name: obs_cylinder_1
+    ref_coord: NED
+    type: cylinder
+    position: [1125.05, -147.11, *GLOBAL_DEPTH]
+    scale: [32.73, 32.73, *GLOBAL_HEIGHT]
+    color: *GLOBAL_COLOR
+
+  - name: obs_cylinder_2
+    ref_coord: NED
+    type: cylinder
+    position: [1373.91, 123.05, *GLOBAL_DEPTH]
+    scale: [38.91, 38.91, *GLOBAL_HEIGHT]
+    color: *GLOBAL_COLOR
+
+  - name: obs_cylinder_3
+    ref_coord: NED
+    type: cylinder
+    position: [1532.89, -2.16, *GLOBAL_DEPTH]
+    scale: [32.73, 32.73, *GLOBAL_HEIGHT]
+    color: *GLOBAL_COLOR
+
+  - name: obs_cylinder_4
+    ref_coord: NED
+    type: cylinder
+    position: [1517.42, -196.31, *GLOBAL_DEPTH]
+    scale: [50.91, 50.91, *GLOBAL_HEIGHT]
+    color: *GLOBAL_COLOR
+
+  - name: obs_cylinder_5
+    ref_coord: NED
+    type: cylinder
+    position: [1268.24, 6.84, *GLOBAL_DEPTH]
+    scale: [50.91, 50.91, *GLOBAL_HEIGHT]
+    color: *GLOBAL_COLOR
+
+  - name: obs_cylinder_6
+    ref_coord: NED
+    type: cylinder
+    position: [1398.48, -85.6, *GLOBAL_DEPTH]
+    scale: [65.45, 65.45, *GLOBAL_HEIGHT]
+    color: *GLOBAL_COLOR
+
+  - name: obs_cylinder_7
+    ref_coord: NED
+    type: cylinder
+    position: [1280.24, -198.16, *GLOBAL_DEPTH]
+    scale: [52.0, 52.0, *GLOBAL_HEIGHT]
+    color: *GLOBAL_COLOR
+
+  - name: obs_cylinder_8
+    ref_coord: NED
+    type: cylinder
+    position: [1207.24, 208.84, *GLOBAL_DEPTH]
+    scale: [52.0, 52.0, *GLOBAL_HEIGHT]
+    color: *GLOBAL_COLOR
+

@@ -1,0 +1,2029 @@
+obstacles:
+- name: seamount_2d_merged_0
+  ref_coord: NED
+  type: box
+  position: [1750.0, -575.0, 275.0]
+  scale: [300.0, 50.0, 50.0]
+  color: [0.23, 0.28, 0.3, 1.0]
+- name: seamount_2d_merged_1
+  ref_coord: NED
+  type: box
+  position: [1925.0, -575.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.27, 0.32, 0.34, 1.0]
+- name: seamount_2d_merged_2
+  ref_coord: NED
+  type: box
+  position: [1975.0, -575.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.3, 0.37, 0.39, 1.0]
+- name: seamount_2d_merged_3
+  ref_coord: NED
+  type: box
+  position: [2050.0, -575.0, 175.0]
+  scale: [100.0, 50.0, 250.0]
+  color: [0.35, 0.42, 0.45, 1.0]
+- name: seamount_2d_merged_4
+  ref_coord: NED
+  type: box
+  position: [2125.0, -575.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.38, 0.41, 1.0]
+- name: seamount_2d_merged_5
+  ref_coord: NED
+  type: box
+  position: [2175.0, -575.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.27, 0.33, 0.35, 1.0]
+- name: seamount_2d_merged_6
+  ref_coord: NED
+  type: box
+  position: [2250.0, -550.0, 275.0]
+  scale: [100.0, 100.0, 50.0]
+  color: [0.24, 0.29, 0.31, 1.0]
+- name: seamount_2d_merged_7
+  ref_coord: NED
+  type: box
+  position: [1650.0, -525.0, 275.0]
+  scale: [100.0, 50.0, 50.0]
+  color: [0.23, 0.28, 0.29, 1.0]
+- name: seamount_2d_merged_8
+  ref_coord: NED
+  type: box
+  position: [1775.0, -525.0, 250.0]
+  scale: [150.0, 50.0, 100.0]
+  color: [0.26, 0.32, 0.34, 1.0]
+- name: seamount_2d_merged_9
+  ref_coord: NED
+  type: box
+  position: [1900.0, -525.0, 225.0]
+  scale: [100.0, 50.0, 150.0]
+  color: [0.29, 0.35, 0.37, 1.0]
+- name: seamount_2d_merged_10
+  ref_coord: NED
+  type: box
+  position: [1975.0, -525.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.4, 0.48, 0.51, 1.0]
+- name: seamount_2d_merged_11
+  ref_coord: NED
+  type: box
+  position: [2025.0, -525.0, 75.0]
+  scale: [50.0, 50.0, 450.0]
+  color: [0.45, 0.55, 0.58, 1.0]
+- name: seamount_2d_merged_12
+  ref_coord: NED
+  type: box
+  position: [2075.0, -525.0, 50.0]
+  scale: [50.0, 50.0, 500.0]
+  color: [0.49, 0.59, 0.63, 1.0]
+- name: seamount_2d_merged_13
+  ref_coord: NED
+  type: box
+  position: [2125.0, -525.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.4, 0.48, 0.51, 1.0]
+- name: seamount_2d_merged_14
+  ref_coord: NED
+  type: box
+  position: [2175.0, -500.0, 200.0]
+  scale: [50.0, 100.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_15
+  ref_coord: NED
+  type: box
+  position: [2450.0, -500.0, 275.0]
+  scale: [300.0, 100.0, 50.0]
+  color: [0.24, 0.29, 0.3, 1.0]
+- name: seamount_2d_merged_16
+  ref_coord: NED
+  type: box
+  position: [2725.0, -475.0, 275.0]
+  scale: [150.0, 150.0, 50.0]
+  color: [0.25, 0.3, 0.32, 1.0]
+- name: seamount_2d_merged_17
+  ref_coord: NED
+  type: box
+  position: [1625.0, -475.0, 275.0]
+  scale: [50.0, 50.0, 50.0]
+  color: [0.23, 0.28, 0.29, 1.0]
+- name: seamount_2d_merged_18
+  ref_coord: NED
+  type: box
+  position: [1675.0, -475.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.28, 0.34, 0.36, 1.0]
+- name: seamount_2d_merged_19
+  ref_coord: NED
+  type: box
+  position: [1750.0, -475.0, 175.0]
+  scale: [100.0, 50.0, 250.0]
+  color: [0.34, 0.41, 0.43, 1.0]
+- name: seamount_2d_merged_20
+  ref_coord: NED
+  type: box
+  position: [1850.0, -475.0, 150.0]
+  scale: [100.0, 50.0, 300.0]
+  color: [0.39, 0.47, 0.5, 1.0]
+- name: seamount_2d_merged_21
+  ref_coord: NED
+  type: box
+  position: [1925.0, -475.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.34, 0.41, 0.44, 1.0]
+- name: seamount_2d_merged_22
+  ref_coord: NED
+  type: box
+  position: [1975.0, -475.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.43, 0.53, 0.56, 1.0]
+- name: seamount_2d_merged_23
+  ref_coord: NED
+  type: box
+  position: [2025.0, -475.0, 25.0]
+  scale: [50.0, 50.0, 550.0]
+  color: [0.53, 0.64, 0.68, 1.0]
+- name: seamount_2d_merged_24
+  ref_coord: NED
+  type: box
+  position: [2075.0, -475.0, 0.0]
+  scale: [50.0, 50.0, 600.0]
+  color: [0.55, 0.67, 0.71, 1.0]
+- name: seamount_2d_merged_25
+  ref_coord: NED
+  type: box
+  position: [2125.0, -475.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.44, 0.53, 0.57, 1.0]
+- name: seamount_2d_merged_26
+  ref_coord: NED
+  type: box
+  position: [2225.0, -475.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.26, 0.32, 0.34, 1.0]
+- name: seamount_2d_merged_27
+  ref_coord: NED
+  type: box
+  position: [2275.0, -450.0, 275.0]
+  scale: [50.0, 100.0, 50.0]
+  color: [0.25, 0.3, 0.32, 1.0]
+- name: seamount_2d_merged_28
+  ref_coord: NED
+  type: box
+  position: [2625.0, -425.0, 275.0]
+  scale: [50.0, 150.0, 50.0]
+  color: [0.24, 0.29, 0.31, 1.0]
+- name: seamount_2d_merged_29
+  ref_coord: NED
+  type: box
+  position: [1625.0, -400.0, 250.0]
+  scale: [50.0, 100.0, 100.0]
+  color: [0.27, 0.33, 0.35, 1.0]
+- name: seamount_2d_merged_30
+  ref_coord: NED
+  type: box
+  position: [1675.0, -400.0, 200.0]
+  scale: [50.0, 100.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_31
+  ref_coord: NED
+  type: box
+  position: [1725.0, -400.0, 125.0]
+  scale: [50.0, 100.0, 350.0]
+  color: [0.39, 0.48, 0.51, 1.0]
+- name: seamount_2d_merged_32
+  ref_coord: NED
+  type: box
+  position: [1775.0, -425.0, 75.0]
+  scale: [50.0, 50.0, 450.0]
+  color: [0.47, 0.57, 0.6, 1.0]
+- name: seamount_2d_merged_33
+  ref_coord: NED
+  type: box
+  position: [1825.0, -425.0, 50.0]
+  scale: [50.0, 50.0, 500.0]
+  color: [0.48, 0.58, 0.61, 1.0]
+- name: seamount_2d_merged_34
+  ref_coord: NED
+  type: box
+  position: [1875.0, -425.0, 25.0]
+  scale: [50.0, 50.0, 550.0]
+  color: [0.51, 0.62, 0.66, 1.0]
+- name: seamount_2d_merged_35
+  ref_coord: NED
+  type: box
+  position: [1925.0, -425.0, 75.0]
+  scale: [50.0, 50.0, 450.0]
+  color: [0.47, 0.57, 0.61, 1.0]
+- name: seamount_2d_merged_36
+  ref_coord: NED
+  type: box
+  position: [1975.0, -425.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.38, 0.46, 0.48, 1.0]
+- name: seamount_2d_merged_37
+  ref_coord: NED
+  type: box
+  position: [2050.0, -425.0, 75.0]
+  scale: [100.0, 50.0, 450.0]
+  color: [0.47, 0.57, 0.6, 1.0]
+- name: seamount_2d_merged_38
+  ref_coord: NED
+  type: box
+  position: [2125.0, -425.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.39, 0.48, 0.5, 1.0]
+- name: seamount_2d_merged_39
+  ref_coord: NED
+  type: box
+  position: [2175.0, -425.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.29, 0.36, 0.38, 1.0]
+- name: seamount_2d_merged_40
+  ref_coord: NED
+  type: box
+  position: [2225.0, -375.0, 275.0]
+  scale: [50.0, 150.0, 50.0]
+  color: [0.25, 0.3, 0.32, 1.0]
+- name: seamount_2d_merged_41
+  ref_coord: NED
+  type: box
+  position: [2350.0, -425.0, 275.0]
+  scale: [100.0, 50.0, 50.0]
+  color: [0.23, 0.28, 0.3, 1.0]
+- name: seamount_2d_merged_42
+  ref_coord: NED
+  type: box
+  position: [2425.0, -425.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.26, 0.31, 0.33, 1.0]
+- name: seamount_2d_merged_43
+  ref_coord: NED
+  type: box
+  position: [2475.0, -425.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.3, 0.37, 0.39, 1.0]
+- name: seamount_2d_merged_44
+  ref_coord: NED
+  type: box
+  position: [2525.0, -425.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.26, 0.32, 0.34, 1.0]
+- name: seamount_2d_merged_45
+  ref_coord: NED
+  type: box
+  position: [2575.0, -425.0, 275.0]
+  scale: [50.0, 50.0, 50.0]
+  color: [0.24, 0.29, 0.31, 1.0]
+- name: seamount_2d_merged_46
+  ref_coord: NED
+  type: box
+  position: [1775.0, -375.0, 50.0]
+  scale: [50.0, 50.0, 500.0]
+  color: [0.5, 0.61, 0.65, 1.0]
+- name: seamount_2d_merged_47
+  ref_coord: NED
+  type: box
+  position: [1850.0, -375.0, 0.0]
+  scale: [100.0, 50.0, 600.0]
+  color: [0.55, 0.66, 0.7, 1.0]
+- name: seamount_2d_merged_48
+  ref_coord: NED
+  type: box
+  position: [1925.0, -375.0, 50.0]
+  scale: [50.0, 50.0, 500.0]
+  color: [0.48, 0.58, 0.62, 1.0]
+- name: seamount_2d_merged_49
+  ref_coord: NED
+  type: box
+  position: [1975.0, -375.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.41, 0.49, 0.52, 1.0]
+- name: seamount_2d_merged_50
+  ref_coord: NED
+  type: box
+  position: [2050.0, -375.0, 200.0]
+  scale: [100.0, 50.0, 200.0]
+  color: [0.33, 0.41, 0.43, 1.0]
+- name: seamount_2d_merged_51
+  ref_coord: NED
+  type: box
+  position: [2125.0, -375.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.31, 0.37, 0.39, 1.0]
+- name: seamount_2d_merged_52
+  ref_coord: NED
+  type: box
+  position: [2175.0, -375.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.27, 0.32, 0.34, 1.0]
+- name: seamount_2d_merged_53
+  ref_coord: NED
+  type: box
+  position: [2275.0, -375.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.26, 0.32, 0.33, 1.0]
+- name: seamount_2d_merged_54
+  ref_coord: NED
+  type: box
+  position: [2350.0, -375.0, 225.0]
+  scale: [100.0, 50.0, 150.0]
+  color: [0.28, 0.34, 0.36, 1.0]
+- name: seamount_2d_merged_55
+  ref_coord: NED
+  type: box
+  position: [2425.0, -375.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.35, 0.42, 0.45, 1.0]
+- name: seamount_2d_merged_56
+  ref_coord: NED
+  type: box
+  position: [2475.0, -375.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.38, 0.46, 0.49, 1.0]
+- name: seamount_2d_merged_57
+  ref_coord: NED
+  type: box
+  position: [2525.0, -375.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.35, 0.42, 0.44, 1.0]
+- name: seamount_2d_merged_58
+  ref_coord: NED
+  type: box
+  position: [2575.0, -375.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.3, 0.36, 0.38, 1.0]
+- name: seamount_2d_merged_59
+  ref_coord: NED
+  type: box
+  position: [2725.0, -375.0, 250.0]
+  scale: [150.0, 50.0, 100.0]
+  color: [0.27, 0.32, 0.34, 1.0]
+- name: seamount_2d_merged_60
+  ref_coord: NED
+  type: box
+  position: [1625.0, -325.0, 275.0]
+  scale: [50.0, 50.0, 50.0]
+  color: [0.25, 0.3, 0.32, 1.0]
+- name: seamount_2d_merged_61
+  ref_coord: NED
+  type: box
+  position: [1675.0, -300.0, 225.0]
+  scale: [50.0, 100.0, 150.0]
+  color: [0.29, 0.35, 0.37, 1.0]
+- name: seamount_2d_merged_62
+  ref_coord: NED
+  type: box
+  position: [1725.0, -325.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.35, 0.43, 0.45, 1.0]
+- name: seamount_2d_merged_63
+  ref_coord: NED
+  type: box
+  position: [1775.0, -325.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.41, 0.5, 0.53, 1.0]
+- name: seamount_2d_merged_64
+  ref_coord: NED
+  type: box
+  position: [1850.0, -325.0, 75.0]
+  scale: [100.0, 50.0, 450.0]
+  color: [0.45, 0.55, 0.58, 1.0]
+- name: seamount_2d_merged_65
+  ref_coord: NED
+  type: box
+  position: [1925.0, -325.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.44, 0.53, 0.56, 1.0]
+- name: seamount_2d_merged_66
+  ref_coord: NED
+  type: box
+  position: [1975.0, -325.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.38, 0.46, 0.49, 1.0]
+- name: seamount_2d_merged_67
+  ref_coord: NED
+  type: box
+  position: [2025.0, -325.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.3, 0.36, 0.38, 1.0]
+- name: seamount_2d_merged_68
+  ref_coord: NED
+  type: box
+  position: [2075.0, -325.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.27, 0.33, 0.35, 1.0]
+- name: seamount_2d_merged_69
+  ref_coord: NED
+  type: box
+  position: [2150.0, -325.0, 275.0]
+  scale: [100.0, 50.0, 50.0]
+  color: [0.23, 0.27, 0.29, 1.0]
+- name: seamount_2d_merged_70
+  ref_coord: NED
+  type: box
+  position: [2275.0, -325.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.29, 0.36, 0.38, 1.0]
+- name: seamount_2d_merged_71
+  ref_coord: NED
+  type: box
+  position: [2325.0, -325.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.35, 0.42, 0.45, 1.0]
+- name: seamount_2d_merged_72
+  ref_coord: NED
+  type: box
+  position: [2425.0, -325.0, 125.0]
+  scale: [150.0, 50.0, 350.0]
+  color: [0.41, 0.5, 0.53, 1.0]
+- name: seamount_2d_merged_73
+  ref_coord: NED
+  type: box
+  position: [2525.0, -325.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.39, 0.47, 0.5, 1.0]
+- name: seamount_2d_merged_74
+  ref_coord: NED
+  type: box
+  position: [2575.0, -325.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_75
+  ref_coord: NED
+  type: box
+  position: [2625.0, -325.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.25, 0.31, 0.33, 1.0]
+- name: seamount_2d_merged_76
+  ref_coord: NED
+  type: box
+  position: [2675.0, -325.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.28, 0.34, 0.36, 1.0]
+- name: seamount_2d_merged_77
+  ref_coord: NED
+  type: box
+  position: [2750.0, -325.0, 200.0]
+  scale: [100.0, 50.0, 200.0]
+  color: [0.33, 0.4, 0.43, 1.0]
+- name: seamount_2d_merged_78
+  ref_coord: NED
+  type: box
+  position: [1625.0, -275.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.26, 0.31, 0.33, 1.0]
+- name: seamount_2d_merged_79
+  ref_coord: NED
+  type: box
+  position: [1725.0, -275.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.42, 1.0]
+- name: seamount_2d_merged_80
+  ref_coord: NED
+  type: box
+  position: [1825.0, -275.0, 175.0]
+  scale: [150.0, 50.0, 250.0]
+  color: [0.34, 0.41, 0.44, 1.0]
+- name: seamount_2d_merged_81
+  ref_coord: NED
+  type: box
+  position: [1950.0, -275.0, 200.0]
+  scale: [100.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_82
+  ref_coord: NED
+  type: box
+  position: [2025.0, -275.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.36, 0.44, 0.46, 1.0]
+- name: seamount_2d_merged_83
+  ref_coord: NED
+  type: box
+  position: [2075.0, -275.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.38, 0.41, 1.0]
+- name: seamount_2d_merged_84
+  ref_coord: NED
+  type: box
+  position: [2125.0, -275.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.28, 0.34, 0.36, 1.0]
+- name: seamount_2d_merged_85
+  ref_coord: NED
+  type: box
+  position: [2175.0, -250.0, 275.0]
+  scale: [50.0, 100.0, 50.0]
+  color: [0.22, 0.27, 0.29, 1.0]
+- name: seamount_2d_merged_86
+  ref_coord: NED
+  type: box
+  position: [2225.0, -225.0, 250.0]
+  scale: [50.0, 150.0, 100.0]
+  color: [0.27, 0.32, 0.34, 1.0]
+- name: seamount_2d_merged_87
+  ref_coord: NED
+  type: box
+  position: [2275.0, -275.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_88
+  ref_coord: NED
+  type: box
+  position: [2325.0, -275.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.39, 0.48, 0.51, 1.0]
+- name: seamount_2d_merged_89
+  ref_coord: NED
+  type: box
+  position: [2400.0, -250.0, 50.0]
+  scale: [100.0, 100.0, 500.0]
+  color: [0.48, 0.58, 0.62, 1.0]
+- name: seamount_2d_merged_90
+  ref_coord: NED
+  type: box
+  position: [2475.0, -250.0, 100.0]
+  scale: [50.0, 100.0, 400.0]
+  color: [0.42, 0.51, 0.54, 1.0]
+- name: seamount_2d_merged_91
+  ref_coord: NED
+  type: box
+  position: [2525.0, -250.0, 175.0]
+  scale: [50.0, 100.0, 250.0]
+  color: [0.34, 0.41, 0.43, 1.0]
+- name: seamount_2d_merged_92
+  ref_coord: NED
+  type: box
+  position: [2600.0, -275.0, 225.0]
+  scale: [100.0, 50.0, 150.0]
+  color: [0.31, 0.37, 0.39, 1.0]
+- name: seamount_2d_merged_93
+  ref_coord: NED
+  type: box
+  position: [2675.0, -275.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.34, 0.42, 0.44, 1.0]
+- name: seamount_2d_merged_94
+  ref_coord: NED
+  type: box
+  position: [2725.0, -275.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.38, 0.47, 0.49, 1.0]
+- name: seamount_2d_merged_95
+  ref_coord: NED
+  type: box
+  position: [2775.0, -275.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.35, 0.42, 0.45, 1.0]
+- name: seamount_2d_merged_96
+  ref_coord: NED
+  type: box
+  position: [1625.0, -225.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.31, 0.38, 0.4, 1.0]
+- name: seamount_2d_merged_97
+  ref_coord: NED
+  type: box
+  position: [1675.0, -225.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.41, 0.49, 0.52, 1.0]
+- name: seamount_2d_merged_98
+  ref_coord: NED
+  type: box
+  position: [1725.0, -225.0, 75.0]
+  scale: [50.0, 50.0, 450.0]
+  color: [0.45, 0.55, 0.58, 1.0]
+- name: seamount_2d_merged_99
+  ref_coord: NED
+  type: box
+  position: [1775.0, -225.0, 50.0]
+  scale: [50.0, 50.0, 500.0]
+  color: [0.49, 0.59, 0.63, 1.0]
+- name: seamount_2d_merged_100
+  ref_coord: NED
+  type: box
+  position: [1825.0, -225.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.44, 0.54, 0.57, 1.0]
+- name: seamount_2d_merged_101
+  ref_coord: NED
+  type: box
+  position: [1875.0, -225.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.36, 0.44, 0.47, 1.0]
+- name: seamount_2d_merged_102
+  ref_coord: NED
+  type: box
+  position: [1925.0, -225.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.33, 0.4, 0.42, 1.0]
+- name: seamount_2d_merged_103
+  ref_coord: NED
+  type: box
+  position: [1975.0, -225.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.4, 0.49, 0.52, 1.0]
+- name: seamount_2d_merged_104
+  ref_coord: NED
+  type: box
+  position: [2025.0, -225.0, 75.0]
+  scale: [50.0, 50.0, 450.0]
+  color: [0.45, 0.55, 0.58, 1.0]
+- name: seamount_2d_merged_105
+  ref_coord: NED
+  type: box
+  position: [2075.0, -225.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.41, 0.5, 0.53, 1.0]
+- name: seamount_2d_merged_106
+  ref_coord: NED
+  type: box
+  position: [2125.0, -225.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.31, 0.38, 0.4, 1.0]
+- name: seamount_2d_merged_107
+  ref_coord: NED
+  type: box
+  position: [2275.0, -225.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.34, 0.41, 0.44, 1.0]
+- name: seamount_2d_merged_108
+  ref_coord: NED
+  type: box
+  position: [2325.0, -225.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.43, 0.53, 0.56, 1.0]
+- name: seamount_2d_merged_109
+  ref_coord: NED
+  type: box
+  position: [2575.0, -150.0, 250.0]
+  scale: [50.0, 200.0, 100.0]
+  color: [0.28, 0.34, 0.36, 1.0]
+- name: seamount_2d_merged_110
+  ref_coord: NED
+  type: box
+  position: [2625.0, -200.0, 225.0]
+  scale: [50.0, 100.0, 150.0]
+  color: [0.31, 0.37, 0.39, 1.0]
+- name: seamount_2d_merged_111
+  ref_coord: NED
+  type: box
+  position: [2675.0, -225.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.38, 0.46, 0.49, 1.0]
+- name: seamount_2d_merged_112
+  ref_coord: NED
+  type: box
+  position: [2725.0, -200.0, 125.0]
+  scale: [50.0, 100.0, 350.0]
+  color: [0.41, 0.49, 0.52, 1.0]
+- name: seamount_2d_merged_113
+  ref_coord: NED
+  type: box
+  position: [2775.0, -200.0, 150.0]
+  scale: [50.0, 100.0, 300.0]
+  color: [0.37, 0.44, 0.47, 1.0]
+- name: seamount_2d_merged_114
+  ref_coord: NED
+  type: box
+  position: [1625.0, -175.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.36, 0.44, 0.46, 1.0]
+- name: seamount_2d_merged_115
+  ref_coord: NED
+  type: box
+  position: [1675.0, -175.0, 75.0]
+  scale: [50.0, 50.0, 450.0]
+  color: [0.46, 0.56, 0.59, 1.0]
+- name: seamount_2d_merged_116
+  ref_coord: NED
+  type: box
+  position: [1750.0, -175.0, 0.0]
+  scale: [100.0, 50.0, 600.0]
+  color: [0.56, 0.68, 0.72, 1.0]
+- name: seamount_2d_merged_117
+  ref_coord: NED
+  type: box
+  position: [1825.0, -175.0, 50.0]
+  scale: [50.0, 50.0, 500.0]
+  color: [0.49, 0.59, 0.62, 1.0]
+- name: seamount_2d_merged_118
+  ref_coord: NED
+  type: box
+  position: [1875.0, -175.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.4, 0.49, 0.52, 1.0]
+- name: seamount_2d_merged_119
+  ref_coord: NED
+  type: box
+  position: [1925.0, -150.0, 150.0]
+  scale: [50.0, 100.0, 300.0]
+  color: [0.39, 0.48, 0.5, 1.0]
+- name: seamount_2d_merged_120
+  ref_coord: NED
+  type: box
+  position: [1975.0, -175.0, 50.0]
+  scale: [50.0, 50.0, 500.0]
+  color: [0.5, 0.61, 0.64, 1.0]
+- name: seamount_2d_merged_121
+  ref_coord: NED
+  type: box
+  position: [2025.0, -175.0, 0.0]
+  scale: [50.0, 50.0, 600.0]
+  color: [0.54, 0.66, 0.7, 1.0]
+- name: seamount_2d_merged_122
+  ref_coord: NED
+  type: box
+  position: [2075.0, -175.0, 75.0]
+  scale: [50.0, 50.0, 450.0]
+  color: [0.47, 0.57, 0.61, 1.0]
+- name: seamount_2d_merged_123
+  ref_coord: NED
+  type: box
+  position: [2125.0, -150.0, 175.0]
+  scale: [50.0, 100.0, 250.0]
+  color: [0.34, 0.42, 0.44, 1.0]
+- name: seamount_2d_merged_124
+  ref_coord: NED
+  type: box
+  position: [2175.0, -125.0, 250.0]
+  scale: [50.0, 150.0, 100.0]
+  color: [0.26, 0.32, 0.34, 1.0]
+- name: seamount_2d_merged_125
+  ref_coord: NED
+  type: box
+  position: [2275.0, -175.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.33, 0.4, 0.43, 1.0]
+- name: seamount_2d_merged_126
+  ref_coord: NED
+  type: box
+  position: [2325.0, -175.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.39, 0.47, 0.5, 1.0]
+- name: seamount_2d_merged_127
+  ref_coord: NED
+  type: box
+  position: [2400.0, -175.0, 100.0]
+  scale: [100.0, 50.0, 400.0]
+  color: [0.43, 0.52, 0.55, 1.0]
+- name: seamount_2d_merged_128
+  ref_coord: NED
+  type: box
+  position: [2475.0, -150.0, 125.0]
+  scale: [50.0, 100.0, 350.0]
+  color: [0.41, 0.5, 0.53, 1.0]
+- name: seamount_2d_merged_129
+  ref_coord: NED
+  type: box
+  position: [2525.0, -175.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.31, 0.38, 0.4, 1.0]
+- name: seamount_2d_merged_130
+  ref_coord: NED
+  type: box
+  position: [2675.0, -175.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.34, 0.41, 0.44, 1.0]
+- name: seamount_2d_merged_131
+  ref_coord: NED
+  type: box
+  position: [1625.0, -125.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_132
+  ref_coord: NED
+  type: box
+  position: [1675.0, -125.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.4, 0.49, 0.52, 1.0]
+- name: seamount_2d_merged_133
+  ref_coord: NED
+  type: box
+  position: [1750.0, -125.0, 50.0]
+  scale: [100.0, 50.0, 500.0]
+  color: [0.48, 0.59, 0.62, 1.0]
+- name: seamount_2d_merged_134
+  ref_coord: NED
+  type: box
+  position: [1825.0, -125.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.43, 0.52, 0.55, 1.0]
+- name: seamount_2d_merged_135
+  ref_coord: NED
+  type: box
+  position: [1875.0, -125.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.34, 0.42, 0.44, 1.0]
+- name: seamount_2d_merged_136
+  ref_coord: NED
+  type: box
+  position: [1975.0, -125.0, 25.0]
+  scale: [50.0, 50.0, 550.0]
+  color: [0.53, 0.64, 0.68, 1.0]
+- name: seamount_2d_merged_137
+  ref_coord: NED
+  type: box
+  position: [2025.0, -125.0, -25.0]
+  scale: [50.0, 50.0, 650.0]
+  color: [0.57, 0.69, 0.73, 1.0]
+- name: seamount_2d_merged_138
+  ref_coord: NED
+  type: box
+  position: [2075.0, -125.0, 50.0]
+  scale: [50.0, 50.0, 500.0]
+  color: [0.5, 0.6, 0.64, 1.0]
+- name: seamount_2d_merged_139
+  ref_coord: NED
+  type: box
+  position: [2225.0, 0.0, 275.0]
+  scale: [50.0, 300.0, 50.0]
+  color: [0.24, 0.29, 0.31, 1.0]
+- name: seamount_2d_merged_140
+  ref_coord: NED
+  type: box
+  position: [2275.0, -125.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.28, 0.33, 0.35, 1.0]
+- name: seamount_2d_merged_141
+  ref_coord: NED
+  type: box
+  position: [2325.0, -125.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.31, 0.38, 0.4, 1.0]
+- name: seamount_2d_merged_142
+  ref_coord: NED
+  type: box
+  position: [2375.0, -125.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.36, 0.44, 0.46, 1.0]
+- name: seamount_2d_merged_143
+  ref_coord: NED
+  type: box
+  position: [2425.0, -125.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.4, 0.49, 0.52, 1.0]
+- name: seamount_2d_merged_144
+  ref_coord: NED
+  type: box
+  position: [2525.0, -125.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.34, 0.41, 0.43, 1.0]
+- name: seamount_2d_merged_145
+  ref_coord: NED
+  type: box
+  position: [2625.0, -125.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.27, 0.32, 0.34, 1.0]
+- name: seamount_2d_merged_146
+  ref_coord: NED
+  type: box
+  position: [2675.0, -125.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_147
+  ref_coord: NED
+  type: box
+  position: [2725.0, -125.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.34, 0.42, 0.44, 1.0]
+- name: seamount_2d_merged_148
+  ref_coord: NED
+  type: box
+  position: [2775.0, -125.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.33, 0.4, 0.43, 1.0]
+- name: seamount_2d_merged_149
+  ref_coord: NED
+  type: box
+  position: [1625.0, -75.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.27, 0.32, 0.34, 1.0]
+- name: seamount_2d_merged_150
+  ref_coord: NED
+  type: box
+  position: [1675.0, -75.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.33, 0.4, 0.43, 1.0]
+- name: seamount_2d_merged_151
+  ref_coord: NED
+  type: box
+  position: [1750.0, -75.0, 175.0]
+  scale: [100.0, 50.0, 250.0]
+  color: [0.36, 0.44, 0.46, 1.0]
+- name: seamount_2d_merged_152
+  ref_coord: NED
+  type: box
+  position: [1825.0, -75.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_153
+  ref_coord: NED
+  type: box
+  position: [1875.0, -75.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.3, 0.36, 0.38, 1.0]
+- name: seamount_2d_merged_154
+  ref_coord: NED
+  type: box
+  position: [1925.0, -75.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.35, 0.43, 0.45, 1.0]
+- name: seamount_2d_merged_155
+  ref_coord: NED
+  type: box
+  position: [1975.0, -75.0, 75.0]
+  scale: [50.0, 50.0, 450.0]
+  color: [0.45, 0.55, 0.58, 1.0]
+- name: seamount_2d_merged_156
+  ref_coord: NED
+  type: box
+  position: [2025.0, -75.0, 25.0]
+  scale: [50.0, 50.0, 550.0]
+  color: [0.51, 0.62, 0.66, 1.0]
+- name: seamount_2d_merged_157
+  ref_coord: NED
+  type: box
+  position: [2075.0, -75.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.43, 0.52, 0.55, 1.0]
+- name: seamount_2d_merged_158
+  ref_coord: NED
+  type: box
+  position: [2125.0, -75.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.31, 0.38, 0.4, 1.0]
+- name: seamount_2d_merged_159
+  ref_coord: NED
+  type: box
+  position: [2275.0, -25.0, 275.0]
+  scale: [50.0, 150.0, 50.0]
+  color: [0.25, 0.3, 0.32, 1.0]
+- name: seamount_2d_merged_160
+  ref_coord: NED
+  type: box
+  position: [2325.0, -75.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.25, 0.31, 0.33, 1.0]
+- name: seamount_2d_merged_161
+  ref_coord: NED
+  type: box
+  position: [2375.0, -75.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.33, 0.39, 0.42, 1.0]
+- name: seamount_2d_merged_162
+  ref_coord: NED
+  type: box
+  position: [2450.0, -75.0, 150.0]
+  scale: [100.0, 50.0, 300.0]
+  color: [0.38, 0.46, 0.49, 1.0]
+- name: seamount_2d_merged_163
+  ref_coord: NED
+  type: box
+  position: [2525.0, -75.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_164
+  ref_coord: NED
+  type: box
+  position: [2625.0, -50.0, 275.0]
+  scale: [50.0, 100.0, 50.0]
+  color: [0.23, 0.28, 0.3, 1.0]
+- name: seamount_2d_merged_165
+  ref_coord: NED
+  type: box
+  position: [2675.0, -75.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.27, 0.33, 0.35, 1.0]
+- name: seamount_2d_merged_166
+  ref_coord: NED
+  type: box
+  position: [2750.0, -75.0, 225.0]
+  scale: [100.0, 50.0, 150.0]
+  color: [0.3, 0.36, 0.39, 1.0]
+- name: seamount_2d_merged_167
+  ref_coord: NED
+  type: box
+  position: [1675.0, 25.0, 275.0]
+  scale: [150.0, 150.0, 50.0]
+  color: [0.24, 0.29, 0.3, 1.0]
+- name: seamount_2d_merged_168
+  ref_coord: NED
+  type: box
+  position: [1775.0, 0.0, 250.0]
+  scale: [50.0, 100.0, 100.0]
+  color: [0.28, 0.34, 0.36, 1.0]
+- name: seamount_2d_merged_169
+  ref_coord: NED
+  type: box
+  position: [1850.0, -25.0, 275.0]
+  scale: [100.0, 50.0, 50.0]
+  color: [0.25, 0.3, 0.32, 1.0]
+- name: seamount_2d_merged_170
+  ref_coord: NED
+  type: box
+  position: [1925.0, 0.0, 225.0]
+  scale: [50.0, 100.0, 150.0]
+  color: [0.29, 0.35, 0.37, 1.0]
+- name: seamount_2d_merged_171
+  ref_coord: NED
+  type: box
+  position: [1975.0, -25.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.37, 0.44, 0.47, 1.0]
+- name: seamount_2d_merged_172
+  ref_coord: NED
+  type: box
+  position: [2025.0, -25.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.42, 0.51, 0.54, 1.0]
+- name: seamount_2d_merged_173
+  ref_coord: NED
+  type: box
+  position: [2075.0, -25.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.37, 0.45, 0.48, 1.0]
+- name: seamount_2d_merged_174
+  ref_coord: NED
+  type: box
+  position: [2125.0, -25.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.29, 0.35, 0.37, 1.0]
+- name: seamount_2d_merged_175
+  ref_coord: NED
+  type: box
+  position: [2175.0, 50.0, 275.0]
+  scale: [50.0, 200.0, 50.0]
+  color: [0.25, 0.3, 0.32, 1.0]
+- name: seamount_2d_merged_176
+  ref_coord: NED
+  type: box
+  position: [2325.0, -25.0, 275.0]
+  scale: [50.0, 50.0, 50.0]
+  color: [0.25, 0.3, 0.32, 1.0]
+- name: seamount_2d_merged_177
+  ref_coord: NED
+  type: box
+  position: [2375.0, -25.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.27, 0.33, 0.35, 1.0]
+- name: seamount_2d_merged_178
+  ref_coord: NED
+  type: box
+  position: [2450.0, -25.0, 200.0]
+  scale: [100.0, 50.0, 200.0]
+  color: [0.33, 0.4, 0.43, 1.0]
+- name: seamount_2d_merged_179
+  ref_coord: NED
+  type: box
+  position: [2525.0, -25.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.27, 0.33, 0.35, 1.0]
+- name: seamount_2d_merged_180
+  ref_coord: NED
+  type: box
+  position: [2575.0, -25.0, 275.0]
+  scale: [50.0, 50.0, 50.0]
+  color: [0.24, 0.29, 0.31, 1.0]
+- name: seamount_2d_merged_181
+  ref_coord: NED
+  type: box
+  position: [2725.0, 25.0, 275.0]
+  scale: [150.0, 150.0, 50.0]
+  color: [0.24, 0.29, 0.31, 1.0]
+- name: seamount_2d_merged_182
+  ref_coord: NED
+  type: box
+  position: [1850.0, 25.0, 225.0]
+  scale: [100.0, 50.0, 150.0]
+  color: [0.3, 0.37, 0.39, 1.0]
+- name: seamount_2d_merged_183
+  ref_coord: NED
+  type: box
+  position: [1975.0, 25.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.3, 0.36, 0.38, 1.0]
+- name: seamount_2d_merged_184
+  ref_coord: NED
+  type: box
+  position: [2025.0, 25.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.31, 0.38, 0.4, 1.0]
+- name: seamount_2d_merged_185
+  ref_coord: NED
+  type: box
+  position: [2075.0, 25.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.29, 0.36, 0.38, 1.0]
+- name: seamount_2d_merged_186
+  ref_coord: NED
+  type: box
+  position: [2125.0, 25.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.28, 0.34, 0.36, 1.0]
+- name: seamount_2d_merged_187
+  ref_coord: NED
+  type: box
+  position: [2325.0, 25.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.3, 0.36, 0.38, 1.0]
+- name: seamount_2d_merged_188
+  ref_coord: NED
+  type: box
+  position: [2375.0, 25.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.35, 0.43, 0.45, 1.0]
+- name: seamount_2d_merged_189
+  ref_coord: NED
+  type: box
+  position: [2450.0, 25.0, 150.0]
+  scale: [100.0, 50.0, 300.0]
+  color: [0.37, 0.44, 0.47, 1.0]
+- name: seamount_2d_merged_190
+  ref_coord: NED
+  type: box
+  position: [2525.0, 25.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.36, 0.43, 0.46, 1.0]
+- name: seamount_2d_merged_191
+  ref_coord: NED
+  type: box
+  position: [2575.0, 25.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.29, 0.35, 0.37, 1.0]
+- name: seamount_2d_merged_192
+  ref_coord: NED
+  type: box
+  position: [2625.0, 25.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.27, 0.32, 0.34, 1.0]
+- name: seamount_2d_merged_193
+  ref_coord: NED
+  type: box
+  position: [1775.0, 100.0, 200.0]
+  scale: [50.0, 100.0, 200.0]
+  color: [0.33, 0.4, 0.42, 1.0]
+- name: seamount_2d_merged_194
+  ref_coord: NED
+  type: box
+  position: [1825.0, 75.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.37, 0.45, 0.48, 1.0]
+- name: seamount_2d_merged_195
+  ref_coord: NED
+  type: box
+  position: [1875.0, 75.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.44, 0.54, 0.57, 1.0]
+- name: seamount_2d_merged_196
+  ref_coord: NED
+  type: box
+  position: [1925.0, 75.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.4, 0.49, 0.52, 1.0]
+- name: seamount_2d_merged_197
+  ref_coord: NED
+  type: box
+  position: [1975.0, 75.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.33, 0.4, 0.42, 1.0]
+- name: seamount_2d_merged_198
+  ref_coord: NED
+  type: box
+  position: [2025.0, 75.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.27, 0.33, 0.34, 1.0]
+- name: seamount_2d_merged_199
+  ref_coord: NED
+  type: box
+  position: [2100.0, 75.0, 275.0]
+  scale: [100.0, 50.0, 50.0]
+  color: [0.22, 0.27, 0.29, 1.0]
+- name: seamount_2d_merged_200
+  ref_coord: NED
+  type: box
+  position: [2275.0, 125.0, 225.0]
+  scale: [50.0, 150.0, 150.0]
+  color: [0.29, 0.36, 0.38, 1.0]
+- name: seamount_2d_merged_201
+  ref_coord: NED
+  type: box
+  position: [2325.0, 75.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.36, 0.44, 0.46, 1.0]
+- name: seamount_2d_merged_202
+  ref_coord: NED
+  type: box
+  position: [2375.0, 75.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.44, 0.54, 0.57, 1.0]
+- name: seamount_2d_merged_203
+  ref_coord: NED
+  type: box
+  position: [2425.0, 75.0, 50.0]
+  scale: [50.0, 50.0, 500.0]
+  color: [0.48, 0.58, 0.61, 1.0]
+- name: seamount_2d_merged_204
+  ref_coord: NED
+  type: box
+  position: [2475.0, 75.0, 25.0]
+  scale: [50.0, 50.0, 550.0]
+  color: [0.51, 0.62, 0.65, 1.0]
+- name: seamount_2d_merged_205
+  ref_coord: NED
+  type: box
+  position: [2525.0, 75.0, 75.0]
+  scale: [50.0, 50.0, 450.0]
+  color: [0.47, 0.57, 0.6, 1.0]
+- name: seamount_2d_merged_206
+  ref_coord: NED
+  type: box
+  position: [2575.0, 75.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.39, 0.47, 0.5, 1.0]
+- name: seamount_2d_merged_207
+  ref_coord: NED
+  type: box
+  position: [2625.0, 75.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.31, 0.37, 0.39, 1.0]
+- name: seamount_2d_merged_208
+  ref_coord: NED
+  type: box
+  position: [1650.0, 150.0, 275.0]
+  scale: [100.0, 100.0, 50.0]
+  color: [0.23, 0.28, 0.3, 1.0]
+- name: seamount_2d_merged_209
+  ref_coord: NED
+  type: box
+  position: [1725.0, 125.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.26, 0.32, 0.33, 1.0]
+- name: seamount_2d_merged_210
+  ref_coord: NED
+  type: box
+  position: [1825.0, 125.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.44, 0.53, 0.57, 1.0]
+- name: seamount_2d_merged_211
+  ref_coord: NED
+  type: box
+  position: [1875.0, 125.0, 50.0]
+  scale: [50.0, 50.0, 500.0]
+  color: [0.48, 0.58, 0.62, 1.0]
+- name: seamount_2d_merged_212
+  ref_coord: NED
+  type: box
+  position: [1925.0, 125.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.43, 0.52, 0.55, 1.0]
+- name: seamount_2d_merged_213
+  ref_coord: NED
+  type: box
+  position: [1975.0, 150.0, 175.0]
+  scale: [50.0, 100.0, 250.0]
+  color: [0.35, 0.42, 0.45, 1.0]
+- name: seamount_2d_merged_214
+  ref_coord: NED
+  type: box
+  position: [2025.0, 125.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_215
+  ref_coord: NED
+  type: box
+  position: [2075.0, 125.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.29, 0.35, 0.37, 1.0]
+- name: seamount_2d_merged_216
+  ref_coord: NED
+  type: box
+  position: [2125.0, 125.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.27, 0.33, 0.35, 1.0]
+- name: seamount_2d_merged_217
+  ref_coord: NED
+  type: box
+  position: [2325.0, 125.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.39, 0.47, 0.5, 1.0]
+- name: seamount_2d_merged_218
+  ref_coord: NED
+  type: box
+  position: [2375.0, 125.0, 75.0]
+  scale: [50.0, 50.0, 450.0]
+  color: [0.47, 0.57, 0.6, 1.0]
+- name: seamount_2d_merged_219
+  ref_coord: NED
+  type: box
+  position: [2425.0, 125.0, 0.0]
+  scale: [50.0, 50.0, 600.0]
+  color: [0.54, 0.66, 0.7, 1.0]
+- name: seamount_2d_merged_220
+  ref_coord: NED
+  type: box
+  position: [2475.0, 125.0, -25.0]
+  scale: [50.0, 50.0, 650.0]
+  color: [0.57, 0.69, 0.73, 1.0]
+- name: seamount_2d_merged_221
+  ref_coord: NED
+  type: box
+  position: [2525.0, 125.0, 50.0]
+  scale: [50.0, 50.0, 500.0]
+  color: [0.5, 0.61, 0.64, 1.0]
+- name: seamount_2d_merged_222
+  ref_coord: NED
+  type: box
+  position: [2575.0, 125.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.42, 0.51, 0.54, 1.0]
+- name: seamount_2d_merged_223
+  ref_coord: NED
+  type: box
+  position: [2625.0, 150.0, 200.0]
+  scale: [50.0, 100.0, 200.0]
+  color: [0.33, 0.4, 0.42, 1.0]
+- name: seamount_2d_merged_224
+  ref_coord: NED
+  type: box
+  position: [2700.0, 125.0, 250.0]
+  scale: [100.0, 50.0, 100.0]
+  color: [0.27, 0.32, 0.34, 1.0]
+- name: seamount_2d_merged_225
+  ref_coord: NED
+  type: box
+  position: [2775.0, 125.0, 275.0]
+  scale: [50.0, 50.0, 50.0]
+  color: [0.25, 0.3, 0.32, 1.0]
+- name: seamount_2d_merged_226
+  ref_coord: NED
+  type: box
+  position: [1725.0, 225.0, 275.0]
+  scale: [50.0, 150.0, 50.0]
+  color: [0.23, 0.28, 0.3, 1.0]
+- name: seamount_2d_merged_227
+  ref_coord: NED
+  type: box
+  position: [1775.0, 175.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.29, 0.35, 0.37, 1.0]
+- name: seamount_2d_merged_228
+  ref_coord: NED
+  type: box
+  position: [1825.0, 175.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.35, 0.43, 0.45, 1.0]
+- name: seamount_2d_merged_229
+  ref_coord: NED
+  type: box
+  position: [1875.0, 175.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.39, 0.47, 0.5, 1.0]
+- name: seamount_2d_merged_230
+  ref_coord: NED
+  type: box
+  position: [1925.0, 175.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.35, 0.42, 0.45, 1.0]
+- name: seamount_2d_merged_231
+  ref_coord: NED
+  type: box
+  position: [2025.0, 175.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.38, 0.46, 0.49, 1.0]
+- name: seamount_2d_merged_232
+  ref_coord: NED
+  type: box
+  position: [2075.0, 175.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.34, 0.42, 0.44, 1.0]
+- name: seamount_2d_merged_233
+  ref_coord: NED
+  type: box
+  position: [2125.0, 200.0, 225.0]
+  scale: [50.0, 100.0, 150.0]
+  color: [0.3, 0.37, 0.39, 1.0]
+- name: seamount_2d_merged_234
+  ref_coord: NED
+  type: box
+  position: [2175.0, 175.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.26, 0.32, 0.33, 1.0]
+- name: seamount_2d_merged_235
+  ref_coord: NED
+  type: box
+  position: [2225.0, 175.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.3, 0.36, 0.39, 1.0]
+- name: seamount_2d_merged_236
+  ref_coord: NED
+  type: box
+  position: [2325.0, 200.0, 175.0]
+  scale: [50.0, 100.0, 250.0]
+  color: [0.34, 0.42, 0.44, 1.0]
+- name: seamount_2d_merged_237
+  ref_coord: NED
+  type: box
+  position: [2375.0, 175.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.42, 0.51, 0.54, 1.0]
+- name: seamount_2d_merged_238
+  ref_coord: NED
+  type: box
+  position: [2450.0, 175.0, 50.0]
+  scale: [100.0, 50.0, 500.0]
+  color: [0.49, 0.6, 0.63, 1.0]
+- name: seamount_2d_merged_239
+  ref_coord: NED
+  type: box
+  position: [2525.0, 175.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.42, 0.51, 0.54, 1.0]
+- name: seamount_2d_merged_240
+  ref_coord: NED
+  type: box
+  position: [2575.0, 175.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.37, 0.44, 0.47, 1.0]
+- name: seamount_2d_merged_241
+  ref_coord: NED
+  type: box
+  position: [2700.0, 175.0, 200.0]
+  scale: [100.0, 50.0, 200.0]
+  color: [0.32, 0.38, 0.41, 1.0]
+- name: seamount_2d_merged_242
+  ref_coord: NED
+  type: box
+  position: [2775.0, 175.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.29, 0.35, 0.38, 1.0]
+- name: seamount_2d_merged_243
+  ref_coord: NED
+  type: box
+  position: [1675.0, 225.0, 275.0]
+  scale: [50.0, 50.0, 50.0]
+  color: [0.23, 0.28, 0.3, 1.0]
+- name: seamount_2d_merged_244
+  ref_coord: NED
+  type: box
+  position: [1775.0, 275.0, 275.0]
+  scale: [50.0, 150.0, 50.0]
+  color: [0.24, 0.29, 0.31, 1.0]
+- name: seamount_2d_merged_245
+  ref_coord: NED
+  type: box
+  position: [1850.0, 225.0, 250.0]
+  scale: [100.0, 50.0, 100.0]
+  color: [0.26, 0.31, 0.33, 1.0]
+- name: seamount_2d_merged_246
+  ref_coord: NED
+  type: box
+  position: [1925.0, 250.0, 200.0]
+  scale: [50.0, 100.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_247
+  ref_coord: NED
+  type: box
+  position: [1975.0, 250.0, 150.0]
+  scale: [50.0, 100.0, 300.0]
+  color: [0.36, 0.44, 0.47, 1.0]
+- name: seamount_2d_merged_248
+  ref_coord: NED
+  type: box
+  position: [2025.0, 225.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.39, 0.48, 0.51, 1.0]
+- name: seamount_2d_merged_249
+  ref_coord: NED
+  type: box
+  position: [2075.0, 250.0, 150.0]
+  scale: [50.0, 100.0, 300.0]
+  color: [0.38, 0.46, 0.49, 1.0]
+- name: seamount_2d_merged_250
+  ref_coord: NED
+  type: box
+  position: [2175.0, 225.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_251
+  ref_coord: NED
+  type: box
+  position: [2250.0, 225.0, 150.0]
+  scale: [100.0, 50.0, 300.0]
+  color: [0.38, 0.46, 0.48, 1.0]
+- name: seamount_2d_merged_252
+  ref_coord: NED
+  type: box
+  position: [2375.0, 225.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.33, 0.4, 0.42, 1.0]
+- name: seamount_2d_merged_253
+  ref_coord: NED
+  type: box
+  position: [2450.0, 225.0, 175.0]
+  scale: [100.0, 50.0, 250.0]
+  color: [0.35, 0.43, 0.46, 1.0]
+- name: seamount_2d_merged_254
+  ref_coord: NED
+  type: box
+  position: [2550.0, 225.0, 200.0]
+  scale: [100.0, 50.0, 200.0]
+  color: [0.33, 0.4, 0.42, 1.0]
+- name: seamount_2d_merged_255
+  ref_coord: NED
+  type: box
+  position: [2625.0, 225.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.38, 0.46, 0.49, 1.0]
+- name: seamount_2d_merged_256
+  ref_coord: NED
+  type: box
+  position: [2675.0, 225.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.44, 0.53, 0.56, 1.0]
+- name: seamount_2d_merged_257
+  ref_coord: NED
+  type: box
+  position: [2725.0, 225.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.4, 0.49, 0.52, 1.0]
+- name: seamount_2d_merged_258
+  ref_coord: NED
+  type: box
+  position: [2775.0, 225.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_259
+  ref_coord: NED
+  type: box
+  position: [1825.0, 375.0, 275.0]
+  scale: [50.0, 250.0, 50.0]
+  color: [0.24, 0.29, 0.3, 1.0]
+- name: seamount_2d_merged_260
+  ref_coord: NED
+  type: box
+  position: [1875.0, 275.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.27, 0.33, 0.35, 1.0]
+- name: seamount_2d_merged_261
+  ref_coord: NED
+  type: box
+  position: [2025.0, 275.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.43, 0.52, 0.55, 1.0]
+- name: seamount_2d_merged_262
+  ref_coord: NED
+  type: box
+  position: [2125.0, 300.0, 200.0]
+  scale: [50.0, 100.0, 200.0]
+  color: [0.33, 0.4, 0.42, 1.0]
+- name: seamount_2d_merged_263
+  ref_coord: NED
+  type: box
+  position: [2175.0, 300.0, 125.0]
+  scale: [50.0, 100.0, 350.0]
+  color: [0.41, 0.5, 0.53, 1.0]
+- name: seamount_2d_merged_264
+  ref_coord: NED
+  type: box
+  position: [2225.0, 275.0, 75.0]
+  scale: [50.0, 50.0, 450.0]
+  color: [0.46, 0.56, 0.59, 1.0]
+- name: seamount_2d_merged_265
+  ref_coord: NED
+  type: box
+  position: [2275.0, 275.0, 50.0]
+  scale: [50.0, 50.0, 500.0]
+  color: [0.48, 0.59, 0.62, 1.0]
+- name: seamount_2d_merged_266
+  ref_coord: NED
+  type: box
+  position: [2325.0, 275.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.43, 0.52, 0.55, 1.0]
+- name: seamount_2d_merged_267
+  ref_coord: NED
+  type: box
+  position: [2375.0, 300.0, 175.0]
+  scale: [50.0, 100.0, 250.0]
+  color: [0.35, 0.42, 0.44, 1.0]
+- name: seamount_2d_merged_268
+  ref_coord: NED
+  type: box
+  position: [2475.0, 275.0, 250.0]
+  scale: [150.0, 50.0, 100.0]
+  color: [0.28, 0.34, 0.36, 1.0]
+- name: seamount_2d_merged_269
+  ref_coord: NED
+  type: box
+  position: [2575.0, 275.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.34, 0.42, 0.44, 1.0]
+- name: seamount_2d_merged_270
+  ref_coord: NED
+  type: box
+  position: [2625.0, 275.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.43, 0.52, 0.55, 1.0]
+- name: seamount_2d_merged_271
+  ref_coord: NED
+  type: box
+  position: [2675.0, 275.0, 50.0]
+  scale: [50.0, 50.0, 500.0]
+  color: [0.49, 0.59, 0.62, 1.0]
+- name: seamount_2d_merged_272
+  ref_coord: NED
+  type: box
+  position: [2725.0, 275.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.44, 0.54, 0.57, 1.0]
+- name: seamount_2d_merged_273
+  ref_coord: NED
+  type: box
+  position: [2775.0, 275.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.38, 0.46, 0.49, 1.0]
+- name: seamount_2d_merged_274
+  ref_coord: NED
+  type: box
+  position: [1875.0, 425.0, 275.0]
+  scale: [50.0, 250.0, 50.0]
+  color: [0.24, 0.29, 0.31, 1.0]
+- name: seamount_2d_merged_275
+  ref_coord: NED
+  type: box
+  position: [1925.0, 325.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.3, 0.37, 0.39, 1.0]
+- name: seamount_2d_merged_276
+  ref_coord: NED
+  type: box
+  position: [1975.0, 325.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.35, 0.43, 0.46, 1.0]
+- name: seamount_2d_merged_277
+  ref_coord: NED
+  type: box
+  position: [2025.0, 325.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.37, 0.45, 0.48, 1.0]
+- name: seamount_2d_merged_278
+  ref_coord: NED
+  type: box
+  position: [2075.0, 325.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.36, 0.44, 0.46, 1.0]
+- name: seamount_2d_merged_279
+  ref_coord: NED
+  type: box
+  position: [2250.0, 325.0, 25.0]
+  scale: [100.0, 50.0, 550.0]
+  color: [0.51, 0.62, 0.66, 1.0]
+- name: seamount_2d_merged_280
+  ref_coord: NED
+  type: box
+  position: [2325.0, 325.0, 75.0]
+  scale: [50.0, 50.0, 450.0]
+  color: [0.46, 0.56, 0.59, 1.0]
+- name: seamount_2d_merged_281
+  ref_coord: NED
+  type: box
+  position: [2425.0, 325.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.3, 0.36, 0.39, 1.0]
+- name: seamount_2d_merged_282
+  ref_coord: NED
+  type: box
+  position: [2475.0, 325.0, 275.0]
+  scale: [50.0, 50.0, 50.0]
+  color: [0.25, 0.31, 0.32, 1.0]
+- name: seamount_2d_merged_283
+  ref_coord: NED
+  type: box
+  position: [2525.0, 325.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.26, 0.32, 0.34, 1.0]
+- name: seamount_2d_merged_284
+  ref_coord: NED
+  type: box
+  position: [2575.0, 325.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.38, 0.41, 1.0]
+- name: seamount_2d_merged_285
+  ref_coord: NED
+  type: box
+  position: [2625.0, 325.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.4, 0.49, 0.52, 1.0]
+- name: seamount_2d_merged_286
+  ref_coord: NED
+  type: box
+  position: [2675.0, 325.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.43, 0.52, 0.55, 1.0]
+- name: seamount_2d_merged_287
+  ref_coord: NED
+  type: box
+  position: [2725.0, 325.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.4, 0.49, 0.52, 1.0]
+- name: seamount_2d_merged_288
+  ref_coord: NED
+  type: box
+  position: [2775.0, 325.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.35, 0.42, 0.45, 1.0]
+- name: seamount_2d_merged_289
+  ref_coord: NED
+  type: box
+  position: [1925.0, 375.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.25, 0.31, 0.33, 1.0]
+- name: seamount_2d_merged_290
+  ref_coord: NED
+  type: box
+  position: [1975.0, 375.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.31, 0.37, 0.39, 1.0]
+- name: seamount_2d_merged_291
+  ref_coord: NED
+  type: box
+  position: [2025.0, 375.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.31, 0.38, 0.4, 1.0]
+- name: seamount_2d_merged_292
+  ref_coord: NED
+  type: box
+  position: [2100.0, 375.0, 225.0]
+  scale: [100.0, 50.0, 150.0]
+  color: [0.3, 0.37, 0.39, 1.0]
+- name: seamount_2d_merged_293
+  ref_coord: NED
+  type: box
+  position: [2175.0, 375.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.38, 0.47, 0.49, 1.0]
+- name: seamount_2d_merged_294
+  ref_coord: NED
+  type: box
+  position: [2225.0, 375.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.44, 0.54, 0.57, 1.0]
+- name: seamount_2d_merged_295
+  ref_coord: NED
+  type: box
+  position: [2275.0, 375.0, 75.0]
+  scale: [50.0, 50.0, 450.0]
+  color: [0.46, 0.56, 0.59, 1.0]
+- name: seamount_2d_merged_296
+  ref_coord: NED
+  type: box
+  position: [2325.0, 375.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.4, 0.49, 0.52, 1.0]
+- name: seamount_2d_merged_297
+  ref_coord: NED
+  type: box
+  position: [2375.0, 375.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_298
+  ref_coord: NED
+  type: box
+  position: [2450.0, 375.0, 250.0]
+  scale: [100.0, 50.0, 100.0]
+  color: [0.27, 0.33, 0.35, 1.0]
+- name: seamount_2d_merged_299
+  ref_coord: NED
+  type: box
+  position: [2525.0, 375.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_300
+  ref_coord: NED
+  type: box
+  position: [2650.0, 375.0, 175.0]
+  scale: [200.0, 50.0, 250.0]
+  color: [0.34, 0.41, 0.44, 1.0]
+- name: seamount_2d_merged_301
+  ref_coord: NED
+  type: box
+  position: [2775.0, 450.0, 225.0]
+  scale: [50.0, 200.0, 150.0]
+  color: [0.29, 0.35, 0.37, 1.0]
+- name: seamount_2d_merged_302
+  ref_coord: NED
+  type: box
+  position: [1925.0, 475.0, 275.0]
+  scale: [50.0, 150.0, 50.0]
+  color: [0.23, 0.27, 0.29, 1.0]
+- name: seamount_2d_merged_303
+  ref_coord: NED
+  type: box
+  position: [2050.0, 425.0, 250.0]
+  scale: [200.0, 50.0, 100.0]
+  color: [0.28, 0.34, 0.36, 1.0]
+- name: seamount_2d_merged_304
+  ref_coord: NED
+  type: box
+  position: [2175.0, 425.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.28, 0.34, 0.36, 1.0]
+- name: seamount_2d_merged_305
+  ref_coord: NED
+  type: box
+  position: [2225.0, 425.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_306
+  ref_coord: NED
+  type: box
+  position: [2275.0, 425.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.34, 0.41, 0.43, 1.0]
+- name: seamount_2d_merged_307
+  ref_coord: NED
+  type: box
+  position: [2325.0, 425.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_308
+  ref_coord: NED
+  type: box
+  position: [2400.0, 425.0, 250.0]
+  scale: [100.0, 50.0, 100.0]
+  color: [0.28, 0.34, 0.35, 1.0]
+- name: seamount_2d_merged_309
+  ref_coord: NED
+  type: box
+  position: [2475.0, 425.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.28, 0.34, 0.36, 1.0]
+- name: seamount_2d_merged_310
+  ref_coord: NED
+  type: box
+  position: [2525.0, 425.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.35, 0.42, 0.45, 1.0]
+- name: seamount_2d_merged_311
+  ref_coord: NED
+  type: box
+  position: [2575.0, 425.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.41, 0.49, 0.52, 1.0]
+- name: seamount_2d_merged_312
+  ref_coord: NED
+  type: box
+  position: [2625.0, 425.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.42, 0.51, 0.54, 1.0]
+- name: seamount_2d_merged_313
+  ref_coord: NED
+  type: box
+  position: [2675.0, 425.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.4, 0.48, 0.51, 1.0]
+- name: seamount_2d_merged_314
+  ref_coord: NED
+  type: box
+  position: [2725.0, 475.0, 175.0]
+  scale: [50.0, 150.0, 250.0]
+  color: [0.36, 0.44, 0.47, 1.0]
+- name: seamount_2d_merged_315
+  ref_coord: NED
+  type: box
+  position: [2075.0, 500.0, 275.0]
+  scale: [250.0, 100.0, 50.0]
+  color: [0.23, 0.28, 0.29, 1.0]
+- name: seamount_2d_merged_316
+  ref_coord: NED
+  type: box
+  position: [2250.0, 475.0, 250.0]
+  scale: [100.0, 50.0, 100.0]
+  color: [0.26, 0.32, 0.34, 1.0]
+- name: seamount_2d_merged_317
+  ref_coord: NED
+  type: box
+  position: [2350.0, 525.0, 275.0]
+  scale: [100.0, 150.0, 50.0]
+  color: [0.23, 0.28, 0.3, 1.0]
+- name: seamount_2d_merged_318
+  ref_coord: NED
+  type: box
+  position: [2425.0, 500.0, 250.0]
+  scale: [50.0, 100.0, 100.0]
+  color: [0.28, 0.34, 0.36, 1.0]
+- name: seamount_2d_merged_319
+  ref_coord: NED
+  type: box
+  position: [2475.0, 475.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.38, 0.41, 1.0]
+- name: seamount_2d_merged_320
+  ref_coord: NED
+  type: box
+  position: [2525.0, 475.0, 150.0]
+  scale: [50.0, 50.0, 300.0]
+  color: [0.36, 0.44, 0.47, 1.0]
+- name: seamount_2d_merged_321
+  ref_coord: NED
+  type: box
+  position: [2575.0, 475.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.42, 0.51, 0.54, 1.0]
+- name: seamount_2d_merged_322
+  ref_coord: NED
+  type: box
+  position: [2625.0, 475.0, 75.0]
+  scale: [50.0, 50.0, 450.0]
+  color: [0.46, 0.55, 0.59, 1.0]
+- name: seamount_2d_merged_323
+  ref_coord: NED
+  type: box
+  position: [2675.0, 475.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.43, 0.53, 0.56, 1.0]
+- name: seamount_2d_merged_324
+  ref_coord: NED
+  type: box
+  position: [2250.0, 550.0, 275.0]
+  scale: [100.0, 100.0, 50.0]
+  color: [0.23, 0.28, 0.29, 1.0]
+- name: seamount_2d_merged_325
+  ref_coord: NED
+  type: box
+  position: [2475.0, 525.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.3, 0.37, 0.39, 1.0]
+- name: seamount_2d_merged_326
+  ref_coord: NED
+  type: box
+  position: [2525.0, 525.0, 175.0]
+  scale: [50.0, 50.0, 250.0]
+  color: [0.36, 0.44, 0.47, 1.0]
+- name: seamount_2d_merged_327
+  ref_coord: NED
+  type: box
+  position: [2575.0, 525.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.41, 0.5, 0.53, 1.0]
+- name: seamount_2d_merged_328
+  ref_coord: NED
+  type: box
+  position: [2625.0, 525.0, 100.0]
+  scale: [50.0, 50.0, 400.0]
+  color: [0.44, 0.53, 0.56, 1.0]
+- name: seamount_2d_merged_329
+  ref_coord: NED
+  type: box
+  position: [2675.0, 525.0, 125.0]
+  scale: [50.0, 50.0, 350.0]
+  color: [0.39, 0.48, 0.5, 1.0]
+- name: seamount_2d_merged_330
+  ref_coord: NED
+  type: box
+  position: [2025.0, 575.0, 275.0]
+  scale: [150.0, 50.0, 50.0]
+  color: [0.25, 0.31, 0.32, 1.0]
+- name: seamount_2d_merged_331
+  ref_coord: NED
+  type: box
+  position: [2175.0, 575.0, 275.0]
+  scale: [50.0, 50.0, 50.0]
+  color: [0.24, 0.29, 0.3, 1.0]
+- name: seamount_2d_merged_332
+  ref_coord: NED
+  type: box
+  position: [2425.0, 575.0, 275.0]
+  scale: [50.0, 50.0, 50.0]
+  color: [0.23, 0.28, 0.29, 1.0]
+- name: seamount_2d_merged_333
+  ref_coord: NED
+  type: box
+  position: [2475.0, 575.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.26, 0.32, 0.33, 1.0]
+- name: seamount_2d_merged_334
+  ref_coord: NED
+  type: box
+  position: [2525.0, 575.0, 200.0]
+  scale: [50.0, 50.0, 200.0]
+  color: [0.32, 0.39, 0.41, 1.0]
+- name: seamount_2d_merged_335
+  ref_coord: NED
+  type: box
+  position: [2625.0, 575.0, 175.0]
+  scale: [150.0, 50.0, 250.0]
+  color: [0.34, 0.41, 0.43, 1.0]
+- name: seamount_2d_merged_336
+  ref_coord: NED
+  type: box
+  position: [2725.0, 575.0, 225.0]
+  scale: [50.0, 50.0, 150.0]
+  color: [0.29, 0.36, 0.38, 1.0]
+- name: seamount_2d_merged_337
+  ref_coord: NED
+  type: box
+  position: [2775.0, 575.0, 250.0]
+  scale: [50.0, 50.0, 100.0]
+  color: [0.27, 0.33, 0.35, 1.0]

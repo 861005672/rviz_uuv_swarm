@@ -26,10 +26,10 @@ class SwarmNavScenario(ScenarioBase):
         # 1. 从参数服务器获取目标点列表，如果没有配置则使用默认值
         # 格式为: [[n1, e1, d1], [n2, e2, d2], ...]
         # default_targets = [[800.0, 0.0, 0.0], [500.0, -500.0, 100.0], [0.0, 0.0, 0.0]]
-        default_targets = [[5000.0, 0.0, 0.0]]
+        default_targets = [[800.0, 0.0, 100.0], [3000.0, 0.0, 100.0]]
         # default_targets = [[5000.0, 200.0, 0.0]]
         target_list_param = rospy.get_param("~target_list", default_targets)
-        self.tolerance = rospy.get_param("~arrival_tolerance", 15.0) # 到达判定半径 (米)
+        self.tolerance = rospy.get_param("~arrival_tolerance", 50.0) # 到达判定半径 (米)
         
         self.original_targets = []
         for i, pt in enumerate(target_list_param):
@@ -57,7 +57,7 @@ class SwarmNavScenario(ScenarioBase):
     def update(self, current_time, manager):
         # 确保标记点被发布
         reached_count = len(self.original_targets) - len(self.active_targets)
-        self.director.publish_target_markers(self.original_targets, reached_count=reached_count, scale=5.0)
+        self.director.publish_target_markers(self.original_targets, reached_count=reached_count, scale=30.0)
 
 
         # Phase 0: 等待至 20 秒
