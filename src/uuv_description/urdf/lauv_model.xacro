@@ -38,16 +38,18 @@
   </xacro:if>
 
 
-    <xacro:if value="${'$(arg guidance_type)' == 'spacial_flocking'}">
-      <xacro:insert_spacial_flocking_guidance update_rate="10.0" publish_debug="true" publish_debug_rate="10.0" 
-          min_speed="1.0" cruise_speed="6.0" max_speed="10.0" max_pitch_deg="30.0" t_ftotal="0.1" forward_tendency="0.0" speed_map_scale="30.0" 
-          zeta_p="0.4" zeta_v="10.0" nav_force_limit="30.0"
-          zeta_n="0.01" delta_n="120.0" k_pull="1.0" r_comm="150" force_lp_gain="0.2" flock_force_limit="500.0"
-          delay_tau="0.0" max_delta_n="300.0" k_delay="0.0" est_window_size="50"
-          d_sense="200.0" d_inflation="10.0" zeta_obs="0.01" delta_obs="140.0" num_sectors="10" range_zeta_norm="0.4 1.0" range_zeta_tan="0.4 60.0"
-      />
-    </xacro:if>
+  <xacro:if value="${'$(arg guidance_type)' == 'spacial_flocking'}">
+    <xacro:insert_spacial_flocking_guidance update_rate="10.0" publish_debug="true" publish_debug_rate="10.0" 
+        min_speed="1.0" cruise_speed="6.0" max_speed="10.0" max_pitch_deg="30.0" t_ftotal="0.1" forward_tendency="0.0" speed_map_scale="30.0" 
+        zeta_p="0.4" zeta_v="10.0" nav_force_limit="30.0"
+        zeta_n="0.01" delta_n="120.0" k_pull="1.0" r_comm="150" force_lp_gain="0.2" flock_force_limit="500.0"
+        delay_tau="0.0" max_delta_n="400.0" k_delay="0.0" est_window_size="50"
+        d_sense="200.0" d_inflation="10.0" zeta_obs="0.01" delta_obs="140.0" num_sectors="10" range_zeta_norm="0.4 1.0" range_zeta_tan="0.4 60.0"
+    />
+  </xacro:if>
 
+
+    <!-- delay_tau="0.0" max_delta_n="300.0" k_delay="5.0" est_window_size="50" -->
     <!-- d_sense="180.0" d_inflation="10.0" zeta_obs="0.001" delta_obs="180" num_sectors="10" range_zeta_norm="0.4 2.0" range_zeta_tan="0.4 20.0" -->
     <!--这是好的 内力参数 zeta_n="0.02" delta_n="120.0" k_pull="1.0" r_comm="150" force_lp_gain="0.2" flock_force_limit="2020" -->
 
@@ -67,7 +69,7 @@
   
   <xacro:insert_simple_2d_sonar name="forward_looking_sonar" update_rate="10.0" beams="30" fov="120.0" max_range="200.0" 
   noise_std_base="0.0" noise_vel_factor="0.0" noise_dist_factor="0.0" miss_prob="0.0" false_prob="0.0" sonar_delay="0.0"
-  max_patch_error_size="10" max_patch_error_time="10" />
+  max_patch_error_size="6" max_patch_error_time="6" />
 
   <!-- noise_std_base="0.0" noise_vel_factor="0.0" noise_dist_factor="0.0" miss_prob="0.0" false_prob="0.0" sonar_delay="0.0" -->
   <!-- noise_std_base="0.35" noise_vel_factor="0.03" noise_dist_factor="0.018" miss_prob="0.1" false_prob="0.04" sonar_delay="0.4"  -->

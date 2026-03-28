@@ -73,7 +73,7 @@ private:
     uuv_interface::State3D current_state_;
 
     visualization_msgs::Marker traj_marker_;
-    int max_trajectory_length_ =1000;
+    int max_trajectory_length_ =5000;
     double trajectory_seg_length_ = 1;
     std::vector<geometry_msgs::Point> traj_points_;
 
@@ -109,8 +109,8 @@ public:
         gnh_.param("init_y", init_y, 0.0);
         gnh_.param("init_z", init_z, 0.0);
         gnh_.param("init_yaw", init_yaw, 0.0);
-        gnh_.param("max_trajectory_length", max_trajectory_length_, 1000);
-        gnh_.param("trajectory_seg_length", trajectory_seg_length_, 1.0);
+        gnh_.param("max_trajectory_length", max_trajectory_length_, 2000);
+        gnh_.param("trajectory_seg_length", trajectory_seg_length_, 3.0);
         gnh_.param<double>("visual_rate", visual_rate_, 20.0);
         // 组合UUV的命名空间
         // 自动推导该 UUV 的基座标系
@@ -146,7 +146,7 @@ public:
         // traj_marker_.color.g = 0.0;
         // traj_marker_.color.b = 0.0;
         traj_marker_.color.a = 1.0;
-        traj_marker_.scale.x = 1.0;
+        traj_marker_.scale.x = 2.0;
 
         loadPluginsFromXML();
 

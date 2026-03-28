@@ -6,7 +6,7 @@
 definitions:
   - &GLOBAL_COLOR  [0.5, 0.5, 0.5, 1.0]  # 障碍物统一颜色 (R, G, B, A)
   - &GLOBAL_DEPTH  100.0                 # 统一深度坐标 (NED下的Z轴)
-  - &GLOBAL_HEIGHT 400.0                 # 统一物理高度
+  - &GLOBAL_HEIGHT 200.0                 # 统一物理高度
 
 # === 【障碍物列表】 ===
 obstacles:

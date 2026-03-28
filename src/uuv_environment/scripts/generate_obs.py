@@ -16,7 +16,7 @@ font = pygame.font.SysFont("consolas", 16)
 large_font = pygame.font.SysFont("consolas", 20, bold=True)
 
 # 🌟 在这里设置你想要默认载入的 YAML 文件路径
-DEFAULT_LOAD_YAML_PATH = "/home/zx567/rvizuuv3d/src/uuv_environment/env/test2还行.yaml"
+DEFAULT_LOAD_YAML_PATH = "/home/zx567/rvizuuv3d/src/uuv_environment/env/miji.yaml"
 
 # ================= 视图与坐标系控制 =================
 zoom = 1.0          # 缩放比例 (像素/米)

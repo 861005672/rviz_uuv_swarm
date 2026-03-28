@@ -43,33 +43,38 @@ def smooth_data(y_values, window_size):
 
 def align_angles_to_consensus(all_series_data):
     """
-    [修改版] 锚点对齐算法
+    [全局中位数归位算法]
+    利用中位数(Median)代表曲线的“大部分”分布区间。
+    将所有曲线强制归位到 [0, 2pi) 范围内，并实现相互对齐。
     """
-    if not all_series_data:
+    valid_series = [item for item in all_series_data if len(item['val']) > 10]
+    if not valid_series: 
         return
 
-    # 1. 寻找一个有效的“锚点” (Anchor)
-    anchor_ref = None
+    # 1. 找基准：取数据点最多的那条线
+    anchor = max(valid_series, key=lambda x: len(x['val']))
+    anchor_median = np.median(anchor['val'])
+    
+    # 2. 算目标：计算基准线的主体需要平移几个 2pi 才能落入 [0, 2pi) 之间
+    k_anchor = -int(np.floor(anchor_median / (2 * np.pi)))
+    target_median = anchor_median + k_anchor * 2 * np.pi
+    
+    # 3. 强行拉回：遍历所有曲线，把它们的中位数全都强行吸附到 target_median 附近
     for item in all_series_data:
-        if len(item['val']) > 0:
-            anchor_ref = item['val'][-1] # 取末端值作为基准
-            break
-            
-    if anchor_ref is None:
-        return
-
-    # 2. 强制所有其他曲线向锚点对齐
-    for item in all_series_data:
-        if len(item['val']) == 0:
+        if len(item['val']) == 0: 
             continue
-
-        current_final = item['val'][-1]
-        diff = current_final - anchor_ref
+            
+        curr_median = np.median(item['val'])
+        
+        # 计算当前曲线中位数与目标中位数的差值
+        diff = target_median - curr_median
+        
+        # 四舍五入，算出相差了几个完整的 2pi
         k = int(np.round(diff / (2 * np.pi)))
         
         if k != 0:
-            shift = k * 2 * np.pi
-            item['val'] -= shift
+            item['val'] += k * 2 * np.pi
+            print(f"  [\033[92m自动归位\033[0m] {item['topic']} 曲线整体平移了 {k} 个 2pi，已归位！")
 
 def calculate_average_curve(field_series_list):
     """
@@ -121,8 +126,14 @@ def main():
     parser.add_argument('-b', '--begintime', type=float, default=0.0, help='从bag的第几秒开始读取数据 (默认: 0.0)')
     parser.add_argument('-d', '--duringtime', type=float, default=-1.0, help='读取的时间段长度(秒), -1表示读到bag末尾 (默认: -1.0)')
     parser.add_argument('--title', type=str, default="Swarm Analysis", help='标题')
-    parser.add_argument('-o', '--output', action='store_true', help='开启后，将图表自动保存为图片到本 Python 脚本所在的目录')
-    
+    parser.add_argument('-o', '--output', nargs='?', const='AUTO', default=None, 
+                        help='指定保存的图片文件名(例如: result.png)。如果只输入 -o 不加文件名，则自动生成名字并保存。')
+    # === [新增] 图表尺寸控制参数 ===
+    parser.add_argument('--width', type=float, default=12.0, help='图表的整体宽度(英寸), 默认: 12.0。论文双栏推荐设为 6.0 或 7.0')
+    parser.add_argument('--height', type=float, default=5.0, help='每个子图的高度(英寸), 默认: 5.0。')
+
+    parser.add_argument('-k', '--k_2pi', type=int, default=0, help='将所有角度曲线整体平移 k 个 2pi (例如输入 -1 将 6.28 拉回 0)')
+
     args = parser.parse_args()
 
     if args.ylabel == "none":
@@ -176,7 +187,7 @@ def main():
     # --- 2. 处理与绘图 ---
     print("正在处理与绘图...")
     num_fields = len(args.fields)
-    fig, axes = plt.subplots(num_fields, 1, figsize=(12, 5 * num_fields), sharex=True)
+    fig, axes = plt.subplots(num_fields, 1, figsize=(args.width, args.height * num_fields), sharex=True)
     if num_fields == 1: axes = [axes]
 
     # 生成颜色表 (仅在非平均模式下用于区分Agent)
@@ -210,10 +221,16 @@ def main():
                 item['val'] = np.unwrap(item['val'])
 
         # 2. 共识对齐 (Alignment)
-        if is_angle and len(field_series_list) > 1:
+        if is_angle and len(field_series_list) > 0:
             align_angles_to_consensus(field_series_list)
 
-        # 3. 平滑 (Smooth)
+        # [新增] 3. 手动 2pi 平移
+        if is_angle and args.k_2pi != 0:
+            for item in field_series_list:
+                item['val'] += args.k_2pi * 2 * np.pi
+                print(f"  [\033[93m手动调整\033[0m] {item['topic']} 曲线已平移 {args.k_2pi} 个 2pi。")
+
+        # 4. 平滑 (Smooth)
         for item in field_series_list:
             if args.smooth > 2 and len(item['val']) > args.smooth:
                 item['val'] = smooth_data(item['val'], args.smooth)
@@ -226,13 +243,41 @@ def main():
             c_t, c_mean, c_std = calculate_average_curve(field_series_list)
             
             if c_t is not None:
-                # 绘制平均线
-                ax.plot(c_t, c_mean, color='blue', linewidth=2.5, label=f'Mean {field}')
-                # 绘制标准差阴影 (Mean ± Std)
-                ax.fill_between(c_t, c_mean - c_std, c_mean + c_std, color='blue', alpha=0.2, label='Std Dev')
+                # 绘制平均线 (修改了更加清晰的 label)
+                ax.plot(c_t, c_mean, color='blue', linewidth=2.5, label='Mean value')
+                # 绘制标准差阴影 (修改了更加清晰的 label)
+                ax.fill_between(c_t, c_mean - c_std, c_mean + c_std, color='blue', alpha=0.2, label='±1 Std Dev')
                 
                 final_val = c_mean[-1]
-                ax.text(c_t[-1], final_val, f" {final_val:.2f}", verticalalignment='center')
+                # 计算y轴偏移量（基于当前轴的y范围，取5%作为偏移，避免硬编码）
+                y_range = ax.get_ylim()
+                y_offset = (y_range[1] - y_range[0]) * 0.02  # 向下偏移5%的y轴范围（可调整比例）
+                # 文字放在曲线末端下方，垂直对齐顶部（保证文字整体在偏移后的位置下方）
+                ax.text(c_t[-1], final_val - y_offset, f" {final_val:.2f}", 
+                        verticalalignment='top',  # 文字顶部对齐偏移后的y坐标（避免文字再往下掉）
+                        horizontalalignment='right')  # 文字右对齐x坐标（贴合曲线末端）
+                
+                # === [修改：放弃不靠谱的 'best'，使用基于终点位置的智能规避算法] ===
+                # 获取当前图表的 Y 轴上下边界
+                y_min, y_max = ax.get_ylim()
+                # 计算 Y 轴的中线
+                y_mid = (y_min + y_max) / 2.0
+                
+                # 核心逻辑：判断曲线最终收敛在图表的上半区还是下半区
+                if final_val > y_mid:
+                    # 如果曲线最终跑到上方去了，那我们就把图例稳稳地放在右下角
+                    smart_loc = 'lower right'
+                else:
+                    # 如果曲线最终停在下方，那图例就放在右上角
+                    smart_loc = 'upper right'
+
+                ax.legend(
+                    loc=smart_loc,       # 使用我们智能计算出的绝对安全角落
+                    fontsize=14,        
+                    framealpha=0.9,      # 背景半透明，增加一点呼吸感
+                    edgecolor='none',    # 隐藏外边框线，符合顶级期刊极简审美
+                    borderaxespad=1.0    # 离坐标轴边缘稍微留出 1.0 的边距，不要贴太死
+                )
             else:
                 print(f"  [Warning] No valid data to average for {field}")
 
@@ -260,30 +305,35 @@ def main():
         # ax.legend(loc='upper right')
 
     axes[-1].set_xlabel('Time (s)')
-    fig.suptitle(f"{args.title} {'(Average View)' if args.average else ''}", fontsize=14)
+    
+    # === [新增：强制锁定 X 轴范围，保证多图对比绝对公平] ===
+    if args.duringtime > 0:
+        axes[-1].set_xlim(args.begintime, args.begintime + args.duringtime)
+
+    fig.suptitle(f"{args.title} {'' if args.average else ''}", fontsize=14)
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 
 
     # 自动保存图片
     if args.output:
-        # 获取当前 Python 脚本所在的绝对目录路径
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        
-        # 将 title 中的空格或斜杠替换为下划线，防止作为文件名时报错
-        safe_title = args.title.replace(' ', '_').replace('/', '_')
-        mode_suffix = "_average" if args.average else "_raw"
-        
-        # 拼接最终的保存路径 (例如: Swarm_Analysis_average.png)
-        save_filename = f"{safe_title}{mode_suffix}.png"
-        save_path = os.path.join(script_dir, save_filename)
-        
+        if args.output == 'AUTO':
+            # 模式 A: 用户只输入了 -o，保持原来的自动生成名字逻辑
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            safe_title = args.title.replace(' ', '_').replace('/', '_')
+            mode_suffix = "_average" if args.average else "_raw"
+            save_filename = f"{safe_title}{mode_suffix}.png"
+            save_path = os.path.join(script_dir, save_filename)
+        else:
+            # 模式 B: 用户指定了具体的文件名或路径 (例如: -o my_plot.png)
+            save_path = args.output
+            
         # 保存高分辨率图片 (dpi=300)
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"\n[\033[92mSuccess\033[0m] 图表已成功保存至: {save_path}")
-
 
 
     plt.show()
 
 if __name__ == "__main__":
     main()
+print_bag.py

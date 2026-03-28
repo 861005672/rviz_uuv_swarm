@@ -408,8 +408,8 @@ class UUVManager:
         
         # 初始化每个 UUV 的专属空邻居列表和最近障碍物距离、最近邻居距离统计量
         neighborhoods = {uuv: Neighborhood3D() for uuv in uuvs}
-        min_nb_dists = {uuv: 9999.0 for uuv in uuvs}
-        min_obs_dists = {uuv: 50.0 for uuv in uuvs}
+        min_nb_dists = {uuv: self.nb_sense_radius for uuv in uuvs}
+        min_obs_dists = {uuv: 200.0 for uuv in uuvs}
 
         collision_msg_array = CollisionInfoArray()
         collision_msg_array.header.stamp = rospy.Time.now()
@@ -450,8 +450,14 @@ class UUVManager:
                     dz = state_j.z - state_i.z
                     dist = math.sqrt(dx*dx + dy*dy + dz*dz)
 
-                    if dist < min_nb_dists[uuv_i]: min_nb_dists[uuv_i] = dist
-                    if dist < min_nb_dists[uuv_j]: min_nb_dists[uuv_j] = dist
+                    if dist < min_nb_dists[uuv_i]: 
+                        min_nb_dists[uuv_i] = dist
+                        if min_nb_dists[uuv_i] > self.nb_sense_radius:
+                            min_nb_dists[uuv_i] = self.nb_sense_radius
+                    if dist < min_nb_dists[uuv_j]: 
+                        min_nb_dists[uuv_j] = dist
+                        if min_nb_dists[uuv_i] > self.nb_sense_radius:
+                            min_nb_dists[uuv_i] = self.nb_sense_radius
 
                     # 若在感知半径内，则互相加为邻居
                     if dist <= self.nb_sense_radius and self.check_los(uuv_data[uuv_i]['pos'], uuv_data[uuv_j]['pos']):
@@ -688,7 +694,7 @@ class UUVManager:
         lines.type = Marker.LINE_LIST
         lines.action = Marker.ADD
         lines.pose.orientation.w = 1.0
-        lines.scale.x = 0.05  # 线宽
+        lines.scale.x = 0.5  # 线宽
         
         from geometry_msgs.msg import Point
         from std_msgs.msg import ColorRGBA
@@ -722,7 +728,7 @@ class UUVManager:
                 lines.points.append(p2)
                 
                 # 直接复用邻居数据里已经算好的 distance
-                alpha = 1.0 - 0.6 * (n_j.distance / self.nb_sense_radius)
+                alpha = 1.0 - 0.5 * (n_j.distance / self.nb_sense_radius)
                 alpha = max(0.1, alpha ** 1.5) 
                 
                 color = ColorRGBA(r=0.49, g=1.0, b=0.66, a=alpha)

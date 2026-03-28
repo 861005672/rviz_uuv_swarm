@@ -5,10 +5,10 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /TF1/Frames1
+        - /TF1
         - /Swarm_Sonars1/uuv_01/SonarScan1
-      Splitter Ratio: 0.5088235139846802
-    Tree Height: 232
+      Splitter Ratio: 0.5147058963775635
+    Tree Height: 345
   - Class: rviz/Views
     Expanded:
       - /Current View1
@@ -44,7 +44,7 @@ Visualization Manager:
       Marker Topic: /env_markers
       Name: Environment Obstacles (MarkerArray)
       Namespaces:
-        {}
+        environment_obstacles: true
       Queue Size: 100
       Value: true
     - Class: rviz/TF
@@ -216,126 +216,6 @@ Visualization Manager:
           Value: false
         uuv_2/thruster_0:
           Value: false
-        uuv_20/base_link:
-          Value: false
-        uuv_20/fin_0:
-          Value: false
-        uuv_20/fin_1:
-          Value: false
-        uuv_20/fin_2:
-          Value: false
-        uuv_20/fin_3:
-          Value: false
-        uuv_20/thruster_0:
-          Value: false
-        uuv_21/base_link:
-          Value: false
-        uuv_21/fin_0:
-          Value: false
-        uuv_21/fin_1:
-          Value: false
-        uuv_21/fin_2:
-          Value: false
-        uuv_21/fin_3:
-          Value: false
-        uuv_21/thruster_0:
-          Value: false
-        uuv_22/base_link:
-          Value: false
-        uuv_22/fin_0:
-          Value: false
-        uuv_22/fin_1:
-          Value: false
-        uuv_22/fin_2:
-          Value: false
-        uuv_22/fin_3:
-          Value: false
-        uuv_22/thruster_0:
-          Value: false
-        uuv_23/base_link:
-          Value: false
-        uuv_23/fin_0:
-          Value: false
-        uuv_23/fin_1:
-          Value: false
-        uuv_23/fin_2:
-          Value: false
-        uuv_23/fin_3:
-          Value: false
-        uuv_23/thruster_0:
-          Value: false
-        uuv_24/base_link:
-          Value: false
-        uuv_24/fin_0:
-          Value: false
-        uuv_24/fin_1:
-          Value: false
-        uuv_24/fin_2:
-          Value: false
-        uuv_24/fin_3:
-          Value: false
-        uuv_24/thruster_0:
-          Value: false
-        uuv_25/base_link:
-          Value: false
-        uuv_25/fin_0:
-          Value: false
-        uuv_25/fin_1:
-          Value: false
-        uuv_25/fin_2:
-          Value: false
-        uuv_25/fin_3:
-          Value: false
-        uuv_25/thruster_0:
-          Value: false
-        uuv_26/base_link:
-          Value: false
-        uuv_26/fin_0:
-          Value: false
-        uuv_26/fin_1:
-          Value: false
-        uuv_26/fin_2:
-          Value: false
-        uuv_26/fin_3:
-          Value: false
-        uuv_26/thruster_0:
-          Value: false
-        uuv_27/base_link:
-          Value: false
-        uuv_27/fin_0:
-          Value: false
-        uuv_27/fin_1:
-          Value: false
-        uuv_27/fin_2:
-          Value: false
-        uuv_27/fin_3:
-          Value: false
-        uuv_27/thruster_0:
-          Value: false
-        uuv_28/base_link:
-          Value: false
-        uuv_28/fin_0:
-          Value: false
-        uuv_28/fin_1:
-          Value: false
-        uuv_28/fin_2:
-          Value: false
-        uuv_28/fin_3:
-          Value: false
-        uuv_28/thruster_0:
-          Value: false
-        uuv_29/base_link:
-          Value: false
-        uuv_29/fin_0:
-          Value: false
-        uuv_29/fin_1:
-          Value: false
-        uuv_29/fin_2:
-          Value: false
-        uuv_29/fin_3:
-          Value: false
-        uuv_29/thruster_0:
-          Value: false
         uuv_3/base_link:
           Value: false
         uuv_3/fin_0:
@@ -420,12 +300,12 @@ Visualization Manager:
           Value: false
         uuv_9/thruster_0:
           Value: false
-      Marker Alpha: 1
-      Marker Scale: 30
+      Marker Alpha: 0.10000000149011612
+      Marker Scale: 3000
       Name: TF
       Show Arrows: false
       Show Axes: true
-      Show Names: true
+      Show Names: false
       Tree:
         map:
           ned:
@@ -572,116 +452,6 @@ Visualization Manager:
                 {}
               uuv_2/thruster_0:
                 {}
-            uuv_20/base_link:
-              uuv_20/fin_0:
-                {}
-              uuv_20/fin_1:
-                {}
-              uuv_20/fin_2:
-                {}
-              uuv_20/fin_3:
-                {}
-              uuv_20/thruster_0:
-                {}
-            uuv_21/base_link:
-              uuv_21/fin_0:
-                {}
-              uuv_21/fin_1:
-                {}
-              uuv_21/fin_2:
-                {}
-              uuv_21/fin_3:
-                {}
-              uuv_21/thruster_0:
-                {}
-            uuv_22/base_link:
-              uuv_22/fin_0:
-                {}
-              uuv_22/fin_1:
-                {}
-              uuv_22/fin_2:
-                {}
-              uuv_22/fin_3:
-                {}
-              uuv_22/thruster_0:
-                {}
-            uuv_23/base_link:
-              uuv_23/fin_0:
-                {}
-              uuv_23/fin_1:
-                {}
-              uuv_23/fin_2:
-                {}
-              uuv_23/fin_3:
-                {}
-              uuv_23/thruster_0:
-                {}
-            uuv_24/base_link:
-              uuv_24/fin_0:
-                {}
-              uuv_24/fin_1:
-                {}
-              uuv_24/fin_2:
-                {}
-              uuv_24/fin_3:
-                {}
-              uuv_24/thruster_0:
-                {}
-            uuv_25/base_link:
-              uuv_25/fin_0:
-                {}
-              uuv_25/fin_1:
-                {}
-              uuv_25/fin_2:
-                {}
-              uuv_25/fin_3:
-                {}
-              uuv_25/thruster_0:
-                {}
-            uuv_26/base_link:
-              uuv_26/fin_0:
-                {}
-              uuv_26/fin_1:
-                {}
-              uuv_26/fin_2:
-                {}
-              uuv_26/fin_3:
-                {}
-              uuv_26/thruster_0:
-                {}
-            uuv_27/base_link:
-              uuv_27/fin_0:
-                {}
-              uuv_27/fin_1:
-                {}
-              uuv_27/fin_2:
-                {}
-              uuv_27/fin_3:
-                {}
-              uuv_27/thruster_0:
-                {}
-            uuv_28/base_link:
-              uuv_28/fin_0:
-                {}
-              uuv_28/fin_1:
-                {}
-              uuv_28/fin_2:
-                {}
-              uuv_28/fin_3:
-                {}
-              uuv_28/thruster_0:
-                {}
-            uuv_29/base_link:
-              uuv_29/fin_0:
-                {}
-              uuv_29/fin_1:
-                {}
-              uuv_29/fin_2:
-                {}
-              uuv_29/fin_3:
-                {}
-              uuv_29/thruster_0:
-                {}
             uuv_3/base_link:
               uuv_3/fin_0:
                 {}
@@ -772,10 +542,7 @@ Visualization Manager:
               Marker Topic: /uuv_0/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -787,10 +554,7 @@ Visualization Manager:
               Marker Topic: /uuv_1/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -802,10 +566,7 @@ Visualization Manager:
               Marker Topic: /uuv_2/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -817,10 +578,7 @@ Visualization Manager:
               Marker Topic: /uuv_3/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -832,10 +590,7 @@ Visualization Manager:
               Marker Topic: /uuv_4/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -847,10 +602,7 @@ Visualization Manager:
               Marker Topic: /uuv_5/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -862,10 +614,7 @@ Visualization Manager:
               Marker Topic: /uuv_6/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -877,10 +626,7 @@ Visualization Manager:
               Marker Topic: /uuv_7/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -892,10 +638,7 @@ Visualization Manager:
               Marker Topic: /uuv_8/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -907,10 +650,7 @@ Visualization Manager:
               Marker Topic: /uuv_9/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -922,10 +662,7 @@ Visualization Manager:
               Marker Topic: /uuv_10/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -937,10 +674,7 @@ Visualization Manager:
               Marker Topic: /uuv_11/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -952,10 +686,7 @@ Visualization Manager:
               Marker Topic: /uuv_12/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -967,10 +698,7 @@ Visualization Manager:
               Marker Topic: /uuv_13/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -982,10 +710,7 @@ Visualization Manager:
               Marker Topic: /uuv_14/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -997,10 +722,7 @@ Visualization Manager:
               Marker Topic: /uuv_15/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -1012,10 +734,7 @@ Visualization Manager:
               Marker Topic: /uuv_16/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -1027,10 +746,7 @@ Visualization Manager:
               Marker Topic: /uuv_17/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -1042,10 +758,7 @@ Visualization Manager:
               Marker Topic: /uuv_18/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -1057,10 +770,7 @@ Visualization Manager:
               Marker Topic: /uuv_19/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -1072,10 +782,7 @@ Visualization Manager:
               Marker Topic: /uuv_20/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -1087,10 +794,7 @@ Visualization Manager:
               Marker Topic: /uuv_21/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -1102,10 +806,7 @@ Visualization Manager:
               Marker Topic: /uuv_22/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -1117,10 +818,7 @@ Visualization Manager:
               Marker Topic: /uuv_23/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -1132,10 +830,7 @@ Visualization Manager:
               Marker Topic: /uuv_24/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -1147,10 +842,7 @@ Visualization Manager:
               Marker Topic: /uuv_25/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -1162,10 +854,7 @@ Visualization Manager:
               Marker Topic: /uuv_26/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -1177,10 +866,7 @@ Visualization Manager:
               Marker Topic: /uuv_27/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -1192,10 +878,7 @@ Visualization Manager:
               Marker Topic: /uuv_28/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -1207,10 +890,7 @@ Visualization Manager:
               Marker Topic: /uuv_29/guidance_debug_markers
               Name: Debug_Markers
               Namespaces:
-                Force_Flock: true
-                Force_Nav: true
-                Force_Total: true
-                Virtual_Target: true
+                {}
               Queue Size: 100
               Value: true
           Enabled: true
@@ -1455,7 +1135,7 @@ Visualization Manager:
               Value: true
           Enabled: true
           Name: uuv_49
-      Enabled: true
+      Enabled: false
       Name: Swarm_Guidance_Forces
     - Class: rviz/Group
       Displays:
@@ -2471,43 +2151,13 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_20/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_20/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_20/robot_description
               TF Prefix: ""
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_20
         - Class: rviz/Group
           Displays:
@@ -2521,43 +2171,13 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_21/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_21/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_21/robot_description
               TF Prefix: ""
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_21
         - Class: rviz/Group
           Displays:
@@ -2571,43 +2191,13 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_22/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_22/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_22/robot_description
               TF Prefix: ""
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_22
         - Class: rviz/Group
           Displays:
@@ -2621,43 +2211,13 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_23/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_23/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_23/robot_description
               TF Prefix: ""
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_23
         - Class: rviz/Group
           Displays:
@@ -2671,43 +2231,13 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_24/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_24/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_24/robot_description
               TF Prefix: ""
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_24
         - Class: rviz/Group
           Displays:
@@ -2721,43 +2251,13 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_25/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_25/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_25/robot_description
               TF Prefix: ""
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_25
         - Class: rviz/Group
           Displays:
@@ -2771,43 +2271,13 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_26/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_26/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_26/robot_description
               TF Prefix: ""
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_26
         - Class: rviz/Group
           Displays:
@@ -2821,43 +2291,13 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_27/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_27/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_27/robot_description
               TF Prefix: ""
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_27
         - Class: rviz/Group
           Displays:
@@ -2871,43 +2311,13 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_28/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_28/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_28/robot_description
               TF Prefix: ""
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_28
         - Class: rviz/Group
           Displays:
@@ -2921,43 +2331,13 @@ Visualization Manager:
                 Expand Link Details: false
                 Expand Tree: false
                 Link Tree Style: Links in Alphabetic Order
-                uuv_29/base_link:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_1:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_2:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/fin_3:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
-                uuv_29/thruster_0:
-                  Alpha: 1
-                  Show Axes: false
-                  Show Trail: false
-                  Value: true
               Name: RobotModel
               Robot Description: /uuv_29/robot_description
               TF Prefix: ""
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_29
         - Class: rviz/Group
           Displays:
@@ -2977,7 +2357,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_30
         - Class: rviz/Group
           Displays:
@@ -2997,7 +2377,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_31
         - Class: rviz/Group
           Displays:
@@ -3017,7 +2397,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_32
         - Class: rviz/Group
           Displays:
@@ -3037,7 +2417,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_33
         - Class: rviz/Group
           Displays:
@@ -3057,7 +2437,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_34
         - Class: rviz/Group
           Displays:
@@ -3077,7 +2457,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_35
         - Class: rviz/Group
           Displays:
@@ -3097,7 +2477,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_36
         - Class: rviz/Group
           Displays:
@@ -3117,7 +2497,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_37
         - Class: rviz/Group
           Displays:
@@ -3137,7 +2517,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_38
         - Class: rviz/Group
           Displays:
@@ -3157,7 +2537,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_39
         - Class: rviz/Group
           Displays:
@@ -3177,7 +2557,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_40
         - Class: rviz/Group
           Displays:
@@ -3197,7 +2577,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_41
         - Class: rviz/Group
           Displays:
@@ -3217,7 +2597,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_42
         - Class: rviz/Group
           Displays:
@@ -3237,7 +2617,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_43
         - Class: rviz/Group
           Displays:
@@ -3257,7 +2637,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_44
         - Class: rviz/Group
           Displays:
@@ -3277,7 +2657,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_45
         - Class: rviz/Group
           Displays:
@@ -3297,7 +2677,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_46
         - Class: rviz/Group
           Displays:
@@ -3317,7 +2697,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_47
         - Class: rviz/Group
           Displays:
@@ -3337,7 +2717,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_48
         - Class: rviz/Group
           Displays:
@@ -3357,7 +2737,7 @@ Visualization Manager:
               Update Interval: 0
               Value: true
               Visual Enabled: true
-          Enabled: true
+          Enabled: false
           Name: uuv_49
       Enabled: true
       Name: Swarm_Models
@@ -3610,7 +2990,7 @@ Visualization Manager:
               Marker Topic: /uuv_20/trajectory
               Name: Trajectory_uuv_19
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3622,7 +3002,7 @@ Visualization Manager:
               Marker Topic: /uuv_21/trajectory
               Name: Trajectory_uuv_20
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3634,7 +3014,7 @@ Visualization Manager:
               Marker Topic: /uuv_22/trajectory
               Name: Trajectory_uuv_21
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3646,7 +3026,7 @@ Visualization Manager:
               Marker Topic: /uuv_23/trajectory
               Name: Trajectory_uuv_22
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3658,7 +3038,7 @@ Visualization Manager:
               Marker Topic: /uuv_24/trajectory
               Name: Trajectory_uuv_23
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3670,7 +3050,7 @@ Visualization Manager:
               Marker Topic: /uuv_25/trajectory
               Name: Trajectory_uuv_24
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3682,7 +3062,7 @@ Visualization Manager:
               Marker Topic: /uuv_26/trajectory
               Name: Trajectory_uuv_25
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3694,7 +3074,7 @@ Visualization Manager:
               Marker Topic: /uuv_27/trajectory
               Name: Trajectory_uuv_26
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3706,7 +3086,7 @@ Visualization Manager:
               Marker Topic: /uuv_28/trajectory
               Name: Trajectory_uuv_27
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3718,7 +3098,7 @@ Visualization Manager:
               Marker Topic: /uuv_29/trajectory
               Name: Trajectory_uuv_28
               Namespaces:
-                uuv_trajectory: true
+                {}
               Queue Size: 10
               Value: true
           Enabled: true
@@ -3997,7 +3377,7 @@ Visualization Manager:
               Use Fixed Frame: true
               Use rainbow: true
               Value: true
-          Enabled: true
+          Enabled: false
           Name: uuv_0
         - Class: rviz/Group
           Displays:
@@ -5638,7 +5018,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/ThirdPersonFollower
-      Distance: 210.17556762695312
+      Distance: 880.6589965820312
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -5646,17 +5026,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7850000262260437
       Focal Point:
-        X: -13.97973346710205
-        Y: -9.463494300842285
+        X: 0
+        Y: 0
         Z: 0
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: -0.044999901205301285
+      Pitch: 0.22000016272068024
       Target Frame: uuv_0/base_link
-      Yaw: 0.10501054674386978
+      Yaw: 0.8649935722351074
     Saved:
       - Class: rviz/Orbit
         Distance: 0.0010000000474974513
@@ -6695,12 +6075,12 @@ Visualization Manager:
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 827
+  Height: 1043
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd000000010000000000000156000002e1fc0200000002fb000000100044006900730070006c006100790073010000003d0000016b000000c900fffffffb0000000a0056006900650077007301000001ae00000170000000a400ffffff0000041d000002e100000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd000000010000000000000156000003b9fc0200000002fb000000100044006900730070006c006100790073010000003d000001dc000000c900fffffffb0000000a00560069006500770073010000021f000001d7000000a400ffffff00000624000003b900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: false
-  Width: 1401
-  X: 532
-  Y: 74
+  Width: 1920
+  X: 1920
+  Y: 0

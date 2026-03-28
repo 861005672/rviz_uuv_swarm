@@ -1,0 +1,50 @@
+N:1015    E:1000    scale:0.30
+
+
+# 航速图
+python3 print_bag.py ./bags/testnew.bag -t "(.*)/state" --width 6 --height 5 -f u -b 10 -d 480 --title "" -y "Surge speed (m/s)" -o 航速图 -s 0
+
+# 航向图
+python3 print_bag.py ./bags/testnew.bag -t "(.*)/state" --width 6 --height 5 -f yaw -b 10 -d 480 --title "" -y "Yaw (rad)" -o 航向图 -s 0 -k -1
+
+# 俯仰角图
+python3 print_bag.py ./bags/testnew.bag -t "(.*)/state" --width 6 --height 5 -f pitch -b 10 -d 480 --title "" -y "Pitch (rad)" -o 俯仰角图 -s 0 -k -1
+
+# 横滚角图
+python3 print_bag.py ./bags/testnew.bag -t "(.*)/state" --width 6 --height 5 -f roll -b 10 -d 480 --title "" -y "Roll (rad)" -o 横滚角图 -s 0 -k -1
+
+# n坐标曲线
+python3 print_bag.py ./bags/testnew.bag -t "(.*)/state" --width 6 --height 5 -f x -b 10 -d 480 --title "" -y "N" -o N坐标 -s 0
+
+# e坐标曲线
+python3 print_bag.py ./bags/testnew.bag -t "(.*)/state" --width 6 --height 5 -f y -b 10 -d 480 --title "" -y "E" -o E坐标 -s 0
+
+# d坐标曲线
+python3 print_bag.py ./bags/testnew.bag -t "(.*)/state" --width 6 --height 5 -f z -b 10 -d 480 --title "" -y "D" -o D坐标 -s 0
+
+# 平均航向图
+python3 print_bag.py ./bags/testnew.bag -t "(.*)/state" --width 6 --height 5 -f yaw -b 10 -d 480 --title "" -y "Yaw (rad)" -o 平均航向图 -a
+
+# 平均航速图
+python3 print_bag.py ./bags/testnew.bag -t "(.*)/state" --width 6 --height 5 -f u -b 10 -d 480 --title "" -y "Surge speed (m/s)" -o 平均航速图 -a
+
+# 平均俯仰角图
+python3 print_bag.py ./bags/testnew.bag -t "(.*)/state" --width 6 --height 5 -f pitch -b 10 -d 480 --title "" -y "Pitch (rad)" -o 平均俯仰角图 -a -k -1
+
+# 最近邻居距离
+python3 print_bag.py ./bags/testnew.bag -t "(.*)/metrics" --width 6 --height 5 -f min_nb_dist -b 10 -d 480 --title "" -y "Nearest neighbor distance" -s 0 -o 最近邻居距离 
+
+# 最近障碍距离
+python3 print_bag.py ./bags/testnew.bag -t "(.*)/metrics" --width 6 --height 5 -f min_obs_dist -b 10 -d 480 --title "" -y "Nearest obstacle distance" -s 0 -o 最近障碍距离 
+
+# 代数连通度
+python3 print_bag.py ./bags/testnew.bag -t "/uuv_manager/swarm_state" --width 6 --height 5 -f connectivity -b 10 -d 480 --title "" -y "Algebraic connectivity" -s 0 -o 代数连通度
+
+# 连通分量
+python3 print_bag.py ./bags/testnew.bag -t "/uuv_manager/swarm_state" --width 6 --height 5 -f num_connected -b 10 -d 480 --title "" -y "Connected component" -s 0 -o 连通分量
+
+# 平均最近障碍距离
+python3 print_bag.py ./bags/testnew.bag -t "(.*)/metrics" --width 6 --height 5 -f min_obs_dist -b 10 -d 480 --title "" -y "Nearest obstacle distance" -s 0 -o 平均最近障碍距离 -a
+
+# 平均最近邻居距离
+python3 print_bag.py ./bags/testnew.bag -t "(.*)/metrics" --width 6 --height 5 -f min_nb_dist -b 10 -d 480 --title "" -y "Nearest neighbor distance" -s 0 -o 平均最近邻居距离 -a

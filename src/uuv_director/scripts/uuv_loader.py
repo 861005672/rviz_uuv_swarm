@@ -52,6 +52,8 @@ class UUVLoader:
                 # 在正方形底面上随机生成 X 和 Y
                 x = center[0] + random.uniform(-half_a, half_a)
                 y = center[1] + random.uniform(-half_a, half_a)
+                if math.hypot(x - center[0], y - center[1]) < half_a/3.0:
+                    continue
                 
                 # 高度逻辑：如果是0，严格锁定在中心平面；否则在指定高度内随机
                 if height_c <= 1e-5: # 使用极小值判断浮点数 0
